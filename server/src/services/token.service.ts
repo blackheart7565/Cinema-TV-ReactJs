@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import { DeleteResult } from "mongodb";
+
 import tokenModule from "../modules/token.model";
 import { IObjectIdType, ITokenScheme } from "../types/db-module/user.types";
 import { IDtoUser } from "../types/token/dto.use.type";
