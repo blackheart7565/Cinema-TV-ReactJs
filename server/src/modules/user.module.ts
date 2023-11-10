@@ -1,14 +1,15 @@
 import mongoose from "mongoose";
-// import crypto from "crypto"
 import { schemaConfig } from "../configs/scheme.config";
 import {
-	IUser
+	IUserScheme
 } from "../types/db-module/user.types";
 
-const nameModel = "Users";
-
-const usersSchema = new mongoose.Schema<IUser>({
+const userScheme = new mongoose.Schema<IUserScheme>({
 	username: {
+		type: String,
+		require: true
+	},
+	email: {
 		type: String,
 		require: true,
 		unique: true
@@ -17,14 +18,19 @@ const usersSchema = new mongoose.Schema<IUser>({
 		type: String,
 		require: true,
 	},
-	salt: {
-		type: String,
-		require: true,
-	}
 }, schemaConfig);
 
-// usersSchema.methods.setPassword = function (password: string) {
-// 	const byte = crypto.randomBytes(16).toString("hex");
+// userScheme.methods.validPassword = function (password: string) {
+// 	const hash = crypto.pbkdf2Sync(
+// 		password,
+// 		this.salt,
+// 		1000,
+// 		64,
+// 		"sha512"
+// 	).toString("hex");
+
+// 	return this.password === hash;
 // }
 
-export default mongoose.model<IUser>(nameModel, usersSchema);
+export default mongoose.model<IUserScheme>("User", userScheme);
+

@@ -1,3 +1,4 @@
+import cookieParser from "cookie-parser";
 import cors from "cors";
 import "dotenv/config";
 import express from "express";
@@ -9,12 +10,16 @@ const app = express();
 const server = http.createServer(app);
 
 app.use(express.json());
-app.use(cors());
-app.use("/api/v1", router)
+app.use(cors({
+	credentials: true,
+	origin: process.env.CLIENT_URL
+}));
+app.use(cookieParser());
+app.use("/api/v1", router);
 
 const port = process.env.PORT || 5000;
 
-mongoose.connect(`${process.env.BASE_URL_GLOBAL_DB}`).then(() => {
+mongoose.connect(`${process.env.BASE_URL_DB}`).then(() => {
 	console.log("Connection to Mongo Database");
 	server.listen(port, () => {
 		console.log(`Server listen on port ${port}`);

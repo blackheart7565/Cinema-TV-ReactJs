@@ -7,8 +7,8 @@ class ResponseHandlers implements IResponseHandlers {
 	#responseWithData = (res: Response, statusCode: number, data: IResponseDataType): Response<any> =>
 		res.status(statusCode).json(data);
 
-	errors = (res: Response): Response<IResponseData> =>
-		this.#responseWithData(res, 500, { status: 500, message: "Oops! Something wrong, Internal Server Error" })
+	errors = (res: Response, data?: IResponseDataType): Response<IResponseData> =>
+		this.#responseWithData(res, 500, { status: 500, data: data || "Oops! Something wrong, Internal Server Error" })
 
 	// Плохой запрос
 	badRequest = (res: Response, data: IResponseDataType): Response<IResponseData> =>
@@ -26,11 +26,11 @@ class ResponseHandlers implements IResponseHandlers {
 		this.#responseWithData(res, 201, { status: 201, data })
 
 	// Неавторизованно
-	unauthorized = (res: Response, data: IResponseDataType): Response<IResponseData> =>
+	unauthorized = (res: Response, data?: IResponseDataType): Response<IResponseData> =>
 		this.#responseWithData(res, 401, { status: 401, data: data || "Unauthorized" })
 
 	// Не найден
-	notFound = (res: Response, data: IResponseDataType): Response<IResponseData> =>
+	notFound = (res: Response, data?: IResponseDataType): Response<IResponseData> =>
 		this.#responseWithData(res, 404, { status: 404, data: data || "Resource not found" })
 }
 

@@ -25,7 +25,7 @@ class TokenService {
 
 		if (tokenExist) {
 			tokenExist.refreshToken = refreshToken;
-			await tokenExist.save();
+			return await tokenExist.save();
 		}
 
 		const token = tokenModule.create({

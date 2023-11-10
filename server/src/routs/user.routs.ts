@@ -1,11 +1,11 @@
 import express from "express";
-import userController from "../controllers/user.controller";
+import UserController from "../controllers/user.controller";
 
 const userRouts = express.Router();
 
-userRouts.post("registration", userController.registration)
-userRouts.post("/login", userController.login)
-userRouts.post("/logout", userController.logout)
-userRouts.post("/refresh", userController.refresh)
+userRouts.post("/registration", UserController.registration)
+userRouts.post("/login", UserController.login)
+userRouts.post("/logout", UserController.logout)
+userRouts.get("/refresh", UserController.refresh)
 
 export default userRouts;
