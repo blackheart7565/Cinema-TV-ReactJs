@@ -1,4 +1,5 @@
 import express from "express";
+<<<<<<< HEAD
 import { body } from "express-validator";
 
 import userController from "../controllers/user.controller";
@@ -49,5 +50,15 @@ userRouts.delete(
 	requestHandler.validate,
 	userController.delete
 );
+=======
+import UserController from "../controllers/user.controller";
+
+const userRouts = express.Router();
+
+userRouts.post("/registration", UserController.registration)
+userRouts.post("/login", UserController.login)
+userRouts.post("/logout", UserController.logout)
+userRouts.get("/refresh", UserController.refresh)
+>>>>>>> e062a41 (Created user controller and created token service)
 
 export default userRouts;

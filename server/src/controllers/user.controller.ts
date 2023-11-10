@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
 import { Request, Response } from "express";
+
 import responseHandler from "../handlers/response.handler";
 import userModel from "../modules/user.model";
 import tokenService from "../services/token.service";

@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { HydratedDocument } from "mongoose";
 
 export type IObjectIdType = typeof mongoose.Types.ObjectId;
 

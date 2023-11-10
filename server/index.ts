@@ -29,7 +29,7 @@ app.use("/api/v1", router);
 // const port = process.env.PORT || 5000;
 const port = 8000;
 
-mongoose.connect(`${process.env.BASE_URL_GLOBAL_DB}`).then(() => {
+mongoose.connect(`${process.env.BASE_URL_DB}`).then(() => {
 	console.log("Connection to Mongo Database");
 	server.listen(port, () => {
 		console.log(`Server listen on port ${port}`);
