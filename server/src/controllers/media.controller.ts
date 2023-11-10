@@ -13,8 +13,6 @@ class MediaController implements IMediaController {
 
 	async getMediaList(req: Request, res: Response): Promise<void> {
 		try {
-			console.log(req.query);
-
 			let { page } = req.query;
 			const { mediaType, mediaCategory } = req.params;
 
