@@ -1,13 +1,14 @@
 import mongoose from "mongoose";
+import { IObjectIdType } from "./user.types";
 
 export interface IFavorite {
 	userId: {
-		type: mongoose.Types.ObjectId,
+		type: IObjectIdType,
 		ref: string,
 		require: boolean,
 	},
 	mediaId: {
-		type: mongoose.Types.ObjectId,
+		type: IObjectIdType,
 		require: boolean,
 	},
 	mediaType: string,

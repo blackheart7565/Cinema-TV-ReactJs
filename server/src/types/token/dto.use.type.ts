@@ -1,7 +1,7 @@
-import mongoose from "mongoose";
+import { IObjectIdType } from "../db-module/user.types";
 
 export interface IDtoUser {
-	id: typeof mongoose.Types.ObjectId;
+	id: IObjectIdType;
 	username: string;
 	email: string;
 }

@@ -15,7 +15,7 @@ class ResponseHandlers implements IResponseHandlers {
 		this.#responseWithData(res, 400, { status: 400, data })
 
 	// OK
-	ok = (res: Response, data: IResponseDataType): Response<IResponseData> =>
+	ok = (res: Response, data?: IResponseDataType): Response<IResponseData> =>
 		this.#responseWithData(res, 200, { status: 200, data })
 
 	/**

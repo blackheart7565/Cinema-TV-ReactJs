@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import { DeleteResult } from "mongodb";
-import tokenModule from "../modules/token.module";
+import tokenModule from "../modules/token.model";
 import { IObjectIdType, ITokenScheme } from "../types/db-module/user.types";
 import { IDtoUser } from "../types/token/dto.use.type";
 import { ITokens } from "../types/token/token.type";
@@ -53,7 +53,7 @@ class TokenService {
 		}
 	}
 
-	validateRefreshToken(token: string) {
+	validateRefreshToken(token: string): IDtoUser | null {
 		try {
 			const refreshSecret = process.env.TOKEN_REFRESH_SECRET || "";
 

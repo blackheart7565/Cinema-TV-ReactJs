@@ -1,5 +1,4 @@
 
-
 export interface IResponseHandlers { }
 
 export interface IResponseData {
@@ -8,3 +7,4 @@ export interface IResponseData {
 }
 
 export type IResponseDataType = IResponseData | object | string
+
