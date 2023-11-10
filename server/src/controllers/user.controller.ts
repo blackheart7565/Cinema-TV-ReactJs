@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import { Request, Response } from "express";
 import responseHandler from "../handlers/response.handler";
-import userModel from "../modules/user.module";
+import userModel from "../modules/user.model";
 import tokenService from "../services/token.service";
 
 class UserController {
@@ -139,6 +139,22 @@ class UserController {
 					}
 				});
 			}
+		} catch (error: any) {
+			responseHandler.errors(res, error.message);
+		}
+	}
+
+	async delete(req: Request, res: Response) {
+		try {
+			const { email } = req.body;
+
+			const userExist = await userModel.findOne({ email });
+
+			if (!userExist) responseHandler.badRequest(res, "User not found");
+
+			await userModel.deleteOne({ email });
+
+			return responseHandler.ok(res, "Deleted successfully user!");
 		} catch (error: any) {
 			responseHandler.errors(res, error.message);
 		}
