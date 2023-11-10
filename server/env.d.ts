@@ -9,6 +9,7 @@ declare global {
 			TMDB_BASE_URL: string;
 			TMDB_API_KEY: string;
 			TMDB_API_TOKEN: string;
+			TOKEN_CINEMA_TV_SECRET_KEY: string;
 		}
 	}
 }
