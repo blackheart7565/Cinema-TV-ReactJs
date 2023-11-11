@@ -40,7 +40,7 @@ userRouts.post("/logout", userController.logout);
 userRouts.get("/refresh", userController.refresh);
 
 userRouts.delete(
-	"/delete/:userId",
+	"/delete",
 	requestHandler.authMiddleware,
 	body("userId")
 		.exists().withMessage("userId is required")
