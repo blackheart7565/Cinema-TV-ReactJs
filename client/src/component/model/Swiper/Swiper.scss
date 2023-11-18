@@ -1,0 +1,23 @@
+//~~
+
+.swiper {
+	width: 100%;
+	padding-bottom: 200px;
+	// position: absolute;
+	// bottom: 0;
+	z-index: 1;
+
+	&-slide {
+		background-position: center;
+		background-size: cover;
+		width: 350px;
+		height: 550px;
+	}
+
+	&-img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		-webkit-box-reflect: below 1px linear-gradient(transparent, transparent, #0002, #0004);
+	}
+}

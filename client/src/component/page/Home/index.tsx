@@ -1,4 +1,3 @@
-
 import { mediaConfig } from "../../../api/config/media.config";
 import HomeModelContent from "../../model/HomeModelContent";
 import { PopularMediaSwiper } from "../../model/Swiper";
