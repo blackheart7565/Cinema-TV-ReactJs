@@ -21,7 +21,7 @@ const Menu = () => {
 						<Link className="menu__link" to="/">Home</Link>
 					</li>
 					<li className="menu__item">
-						<Link className="menu__link" to="/сartoons">Cartoons</Link>
+						<Link className="menu__link" to="/cartoons">Cartoons</Link>
 					</li>
 					<li className="menu__item">
 						<Link className="menu__link" to="/anime">Anime</Link>

@@ -31,6 +31,9 @@ export const PopularTVSwiper = () => {
 					slideShadows: true,
 				}}
 				modules={[EffectCoverflow, FreeMode]}
+				breakpoints={{
+
+				}}
 			>
 				<SwiperSlide>
 					<img className="swiper-img" src="/path/header/slide-1.jpg" alt="" />
