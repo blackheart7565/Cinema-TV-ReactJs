@@ -21,7 +21,11 @@ const Menu = () => {
 						<Link className="menu__link" to="/">Home</Link>
 					</li>
 					<li className="menu__item">
+<<<<<<< HEAD
 						<Link className="menu__link" to="/cartoons">Cartoons</Link>
+=======
+						<Link className="menu__link" to="/сartoons">Cartoons</Link>
+>>>>>>> 9c494ad (The site navigation menu has been created.)
 					</li>
 					<li className="menu__item">
 						<Link className="menu__link" to="/anime">Anime</Link>

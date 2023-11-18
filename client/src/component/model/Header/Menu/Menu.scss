@@ -11,7 +11,11 @@
 	padding: 10px 0;
 	background: $secondary-color;
 	color: $white;
+<<<<<<< HEAD
 	z-index: 1000;
+=======
+	z-index: 500;
+>>>>>>> 9c494ad (The site navigation menu has been created.)
 
 	&__wrapper {
 		display: flex;
@@ -49,10 +53,13 @@
 
 	&__list {
 		display: flex;
+<<<<<<< HEAD
 
 		@media screen and (max-width: 1200px) {
 			display: none;
 		}
+=======
+>>>>>>> 9c494ad (The site navigation menu has been created.)
 	}
 
 	&__item {
