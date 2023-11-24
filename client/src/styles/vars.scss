@@ -1,5 +1,9 @@
 // ======================= Colors ======================= //
 
+:root {
+	--index: calc(1vh + 1vw);
+}
+
 $main-color: #13141F;
 $accent-color: #DA0027;
 $secondary-color: #01000c;

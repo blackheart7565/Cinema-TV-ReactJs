@@ -1,0 +1,49 @@
+//~~
+
+@import "../../../../styles/vars.scss";
+
+.footer {
+
+	// .footer__model
+	&__model {
+		display: flex;
+		flex-direction: column;
+		height: 390px;
+		border: 1px solid #FFF;
+		width: 100%;
+		max-width: 350px;
+	}
+
+	// .footer__model-title
+	&__model-title {
+		text-align: center;
+		color: $white;
+		padding: 15px 0;
+		font-size: 23px;
+		letter-spacing: 5px;
+		text-shadow: 0 0 30px #DA0027;
+		border-bottom: 1px solid $white;
+	}
+
+	// .footer__model-list
+	&__model-list {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		height: 100%;
+		padding-top: 10px;
+	}
+
+	// .footer__model-link
+	&__model-link {
+		text-align: center;
+		font-size: 20px;
+		color: $accent-color;
+		padding: 2px;
+		transition: color 0.1s ease-in-out;
+
+		&:hover {
+			color: $white;
+		}
+	}
+}
