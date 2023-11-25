@@ -8,8 +8,11 @@
 	display: flex;
 	flex-direction: column;
 	min-height: 100vh;
-	padding-top: 120px;
 	padding-bottom: 20px;
+
+	@media screen and (min-width: 1400px) {
+		padding-top: 120px;
+	}
 
 	&-title {
 		width: 100%;
@@ -136,7 +139,6 @@
 		top: 50%;
 		left: 100px;
 		transform: translateY(-50%);
-		z-index: 20;
 
 		&>#{$self-a}-img {
 			width: 100%;

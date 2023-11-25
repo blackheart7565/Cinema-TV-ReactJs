@@ -2,9 +2,10 @@ import { mediaConfig } from "../../../api/config/media.config";
 import HomeModelContent from "../../model/HomeModelContent";
 import { PopularMediaSwiper } from "../../model/Swiper";
 
-import "./HomeAnime.scss";
-import "./HomeSerials.scss";
 import "./Home.scss";
+import "./HomeAnime.scss";
+import "./HomeFilms.scss";
+import "./HomeSerials.scss";
 
 export interface ICard {
 	pathImg: "",
