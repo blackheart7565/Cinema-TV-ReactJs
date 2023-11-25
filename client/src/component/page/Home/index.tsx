@@ -2,7 +2,13 @@ import { mediaConfig } from "../../../api/config/media.config";
 import HomeModelContent from "../../model/HomeModelContent";
 import { PopularMediaSwiper } from "../../model/Swiper";
 
+import "./HomeAnime.scss";
+import "./HomeSerials.scss";
 import "./Home.scss";
+
+export interface ICard {
+	pathImg: "",
+}
 
 const Home = () => {
 	const postersAnime = [
