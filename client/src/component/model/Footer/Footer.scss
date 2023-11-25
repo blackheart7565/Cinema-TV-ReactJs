@@ -5,7 +5,12 @@
 	display: flex;
 	justify-content: space-evenly;
 	align-items: center;
+	flex-wrap: wrap;
 	color: #fff;
 	padding: 100px 30px;
 	background: #101011;
+
+	@media screen and (max-width: 1400px) {
+		row-gap: 40px;
+	}
 }
