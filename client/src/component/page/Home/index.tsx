@@ -3,12 +3,11 @@ import HomeModelContent from "../../model/HomeModelContent";
 import { PopularMediaSwiper } from "../../model/Swiper";
 
 import "./Home.scss";
-import "./HomeAnime.scss";
-import "./HomeFilms.scss";
-import "./HomeSerials.scss";
+import "./HomeModel.scss";
 
 export interface ICard {
-	pathImg: "",
+	id: number;
+	pathImg: string,
 }
 
 const Home = () => {
