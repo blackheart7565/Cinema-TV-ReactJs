@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import responseHandler from "../handlers/response.handler";
 import { tmdbApi } from "../tmdb/tmdb.api";
 
 interface IMediaController {
@@ -15,6 +16,13 @@ class MediaController implements IMediaController {
 		try {
 			let { page } = req.query;
 			const { mediaType, mediaCategory } = req.params;
+			
+			console.log('1111');
+			console.log({
+				page,
+				mediaType,
+				mediaCategory,
+			});
 
 			page = page?.toString();
 			if (!page) throw new Error("Отсутствует параметр page!")
@@ -24,8 +32,8 @@ class MediaController implements IMediaController {
 			if (response) {
 				res.status(200).json(response)
 			}
-		} catch (error) {
-
+		} catch (error: any) {
+			responseHandler.errors(res, error.message);
 		}
 	}
 	async getMediaDetails(req: Request, res: Response): Promise<void> {
@@ -42,8 +50,8 @@ class MediaController implements IMediaController {
 			if (media) {
 				res.status(200).json(media);
 			}
-		} catch (error) {
-			res.status(500).json('Error server!')
+		} catch (error: any) {
+			responseHandler.errors(res, error.message);
 		}
 	}
 	async getMediaGenre(req: Request, res: Response): Promise<void> {
@@ -55,8 +63,8 @@ class MediaController implements IMediaController {
 			if (response) {
 				res.status(200).json(response);
 			}
-		} catch (error) {
-
+		} catch (error: any) {
+			responseHandler.errors(res, error.message);
 		}
 	}
 	async getMediaSearch(req: Request, res: Response): Promise<void> {
@@ -78,8 +86,8 @@ class MediaController implements IMediaController {
 			if (response) {
 				res.status(200).json(response);
 			}
-		} catch (error) {
-
+		} catch (error: any) {
+			responseHandler.errors(res, error.message);
 		}
 	}
 }
