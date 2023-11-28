@@ -13,6 +13,7 @@ export interface IMediaDetails extends IMedia {
 	mediaId: string;
 }
 export interface IMediaGenre extends IMedia { }
+
 export interface IMediaSearch extends IMedia, IMediaPage {
 	query: string;
 }
