@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
+import MediaApi from "../../../api/modules/media.api";
 import { PopularTVSwiper } from "../../model/Swiper";
 import HomeModelContent from "./HomeModelContent";
 
+import { mediaConfig } from "../../../api/config/media.config";
 import "./Home.scss";
 import "./HomeModel.scss";
 
@@ -50,6 +52,17 @@ const Home = () => {
 		'/path/home/serials_1.png',
 		'/path/home/serials_2.png'
 	];
+
+	useEffect(() => {
+		async function getMediaList() {
+			const mediaList = await MediaApi.getList({
+				mediaType: mediaConfig.types.movie,
+				mediaCategory: mediaConfig.category.popular,
+				page: "1",
+			});
+		}
+		getMediaList();
+	}, [])
 
 	return (
 		<div className="home">
