@@ -1,0 +1,16 @@
+import axios from "axios";
+
+import { axiosConfig } from "./client.config";
+
+const publicAxios = axios.create({
+	...axiosConfig,
+});
+
+publicAxios.interceptors.response.use(res => {
+	if (res && res.data) return res.data;
+	return res;
+}, (err) => {
+	throw err.response.data;
+})
+
+export default publicAxios;
