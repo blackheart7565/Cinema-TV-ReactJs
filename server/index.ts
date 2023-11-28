@@ -27,7 +27,7 @@ app.use(cookieParser());
 app.use("/api/v1", router);
 
 // const port = process.env.PORT || 5000;
-const port = 6000;
+const port = 7000;
 
 mongoose.connect(`${process.env.BASE_URL_DB}`).then(() => {
 	console.log("Connection to Mongo Database");
