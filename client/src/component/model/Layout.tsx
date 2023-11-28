@@ -5,6 +5,8 @@ import Header from "./Header";
 import Main from "./Main";
 
 const Layout = () => {
+	const isLoad = false;
+
 	return (
 		<div className="wrapper">
 			<Header />
