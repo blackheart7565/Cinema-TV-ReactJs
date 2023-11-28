@@ -15,18 +15,19 @@ const AppRouters = () => {
 			<Routes>
 				<Route path={"/"} element={<Layout />}>
 					<Route index element={<Home />} />
-					<Route path="/signin" element={<Authorization />} />
-					<Route path="/signup" element={<Registration />} />
-					<Route path="/cartoons" element={<Cartoons />} />
-					<Route path="/anime" element={<Anime />} />
-					<Route path="/films" element={<Films />} />
-					<Route path="/serials" element={<Serials />} />
+					<Route path={"/signin"} element={<Authorization />} />
+					<Route path={"/signup"} element={<Registration />} />
+					<Route path={"/cartoons"} element={<Cartoons />} />
+					<Route path={"/anime"} element={<Anime />} />
+					<Route path={"/films"} element={<Films />} />
+					<Route path={"/serials"} element={<Serials />} />
 				</Route>
-				<Route path="*" element={
+				<Route path="/*" element={
 					<div style={{
 						display: "flex",
 						justifyContent: "center",
-						alignItems: "center"
+						alignItems: "center",
+						color: "#FFF",
 					}}>
 						<h1>
 							Такой страницы не существует
