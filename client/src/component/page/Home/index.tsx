@@ -1,9 +1,11 @@
+import { useEffect } from "react";
 import { mediaConfig } from "../../../api/config/media.config";
 import HomeModelContent from "../../model/HomeModelContent";
 import { PopularMediaSwiper } from "../../model/Swiper";
 
 import "./Home.scss";
 import "./HomeModel.scss";
+import mediaApi from "../../../api/modules/media.api";
 
 export interface ICard {
 	id: number;
@@ -23,6 +25,17 @@ const Home = () => {
 		'/path/home/serials_1.png',
 		'/path/home/serials_2.png'
 	];
+
+	useEffect(() => {
+		async function getMediaList() {
+			const mediaList = await mediaApi.getList({
+				mediaType: mediaConfig.types.movie,
+				mediaCategory: mediaConfig.category.popular,
+				page: "1",
+			});
+		}
+		getMediaList();
+	}, [])
 
 	return (
 		<div className="home">
