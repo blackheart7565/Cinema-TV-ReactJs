@@ -1,12 +1,13 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
 
-import { ICard } from "..";
+import { mediaConfig } from "../../../../api/config/media.config";
+import { IResponseMediasListResult } from "../../../../types/media.types";
 
 interface IHomeModelContent {
 	title: string;
 	classPrefix: string;
-	cards: ICard[];
+	cards: IResponseMediasListResult[];
 	posters: string[];
 }
 
@@ -30,7 +31,7 @@ const HomeModelContent: FC<IHomeModelContent> = ({
 				<div className={`${className}-section`}>
 					<ul className={`${className}-cards`}>
 						{
-							cards.map(item => (
+							cards.slice(0, 6).map((item) => (
 								<Link
 									className={`${className}-card`}
 									key={item.id}
@@ -38,8 +39,8 @@ const HomeModelContent: FC<IHomeModelContent> = ({
 								>
 									<img
 										className={`${className}-card-img`}
-										src={item.pathImg}
-										alt={`${titleLow}-card-image`}
+										src={mediaConfig.methods.poster_path(item.poster_path || item.backdrop_path)}
+										alt={`${titleLow}-card-img`}
 									/>
 								</Link>
 							))
@@ -49,7 +50,7 @@ const HomeModelContent: FC<IHomeModelContent> = ({
 						<img
 							className={`${className}-poster-img`}
 							src={posters[0]}
-							alt={`${titleLow}-poster-image`}
+							alt={`${titleLow}-poster-img`}
 						/>
 					</div>
 				</div>
@@ -57,7 +58,7 @@ const HomeModelContent: FC<IHomeModelContent> = ({
 				<div className={`${className}-section ${className}-content-right`}>
 					<ul className={`${className}-cards`}>
 						{
-							cards.map(item => (
+							cards.slice(6, 12).map(item => (
 								<Link
 									className={`${className}-card`}
 									key={item.id}
@@ -65,8 +66,8 @@ const HomeModelContent: FC<IHomeModelContent> = ({
 								>
 									<img
 										className={`${className}-card-img`}
-										src={item.pathImg}
-										alt={`${titleLow}-card-image`}
+										src={mediaConfig.methods.poster_path(item.poster_path || item.backdrop_path)}
+										alt={`${titleLow}-card-img`}
 									/>
 								</Link>
 							))
@@ -76,7 +77,7 @@ const HomeModelContent: FC<IHomeModelContent> = ({
 						<img
 							className={`${className}-poster-img`}
 							src={posters[1]}
-							alt={`${titleLow}-poster-image`}
+							alt={`${titleLow}-poster-img`}
 						/>
 					</div>
 				</div>

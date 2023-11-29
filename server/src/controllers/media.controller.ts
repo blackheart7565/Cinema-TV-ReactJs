@@ -16,13 +16,6 @@ class MediaController implements IMediaController {
 		try {
 			let { page } = req.query;
 			const { mediaType, mediaCategory } = req.params;
-			
-			console.log('1111');
-			console.log({
-				page,
-				mediaType,
-				mediaCategory,
-			});
 
 			page = page?.toString();
 			if (!page) throw new Error("Отсутствует параметр page!")

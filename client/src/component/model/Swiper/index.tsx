@@ -1,14 +1,25 @@
-import { EffectCoverflow, FreeMode } from 'swiper/modules';
-import { Swiper, SwiperSlide, } from "swiper/react";
+import { FC, ReactNode } from "react";
+import { EffectCoverflow } from 'swiper/modules';
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import { IResponseMediasListResult } from "../../../types/media.types";
 
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-
+import { mediaConfig } from "../../../api/config/media.config";
 import "./Swiper.scss";
 
-export const PopularTVSwiper = () => {
+interface IPopularTVSwiper {
+	children?: ReactNode;
+	slides?: IResponseMediasListResult[];
+}
+
+export const PopularTVSwiper: FC<IPopularTVSwiper> = ({
+	slides,
+	children
+}) => {
 	return (
 		<div className="home__header-swiper">
 			<Swiper
@@ -17,7 +28,7 @@ export const PopularTVSwiper = () => {
 				centeredSlides={true}
 				lazyPreloadPrevNext={5}
 				loopAdditionalSlides={5}
-				// slidesPerView={5}
+				loopAddBlankSlides={true}
 				effect={'coverflow'}
 				loop={true}
 				// freeMode={true}
@@ -30,7 +41,7 @@ export const PopularTVSwiper = () => {
 					modifier: 1,
 					slideShadows: true,
 				}}
-				modules={[EffectCoverflow, FreeMode]}
+				modules={[EffectCoverflow]}
 				breakpoints={{
 					1400: {
 						slidesPerView: 5,
@@ -49,51 +60,85 @@ export const PopularTVSwiper = () => {
 					},
 				}}
 			>
-				<SwiperSlide>
-					<img className="swiper-img" src="/path/header/slide-1.jpg" alt="" />
-				</SwiperSlide>
-				<SwiperSlide>
-					<img className="swiper-img" src="/path/header/slide-2.jpg" alt="" />
-				</SwiperSlide>
-				<SwiperSlide>
-					<img className="swiper-img" src="/path/header/slide-3.jpg" alt="" />
-				</SwiperSlide>
-				<SwiperSlide>
-					<img className="swiper-img" src="/path/header/slide-4.jpg" alt="" />
-				</SwiperSlide>
-				<SwiperSlide>
-					<img className="swiper-img" src="/path/header/slide-5.jpg" alt="" />
-				</SwiperSlide>
-				<SwiperSlide>
-					<img className="swiper-img" src="/path/header/slide-1.jpg" alt="" />
-				</SwiperSlide>
-				<SwiperSlide>
-					<img className="swiper-img" src="/path/header/slide-2.jpg" alt="" />
-				</SwiperSlide>
-				<SwiperSlide>
-					<img className="swiper-img" src="/path/header/slide-3.jpg" alt="" />
-				</SwiperSlide>
-				<SwiperSlide>
-					<img className="swiper-img" src="/path/header/slide-4.jpg" alt="" />
-				</SwiperSlide>
-				<SwiperSlide>
-					<img className="swiper-img" src="/path/header/slide-5.jpg" alt="" />
-				</SwiperSlide>
-				<SwiperSlide>
-					<img className="swiper-img" src="/path/header/slide-1.jpg" alt="" />
-				</SwiperSlide>
-				<SwiperSlide>
-					<img className="swiper-img" src="/path/header/slide-2.jpg" alt="" />
-				</SwiperSlide>
-				<SwiperSlide>
-					<img className="swiper-img" src="/path/header/slide-3.jpg" alt="" />
-				</SwiperSlide>
-				<SwiperSlide>
-					<img className="swiper-img" src="/path/header/slide-4.jpg" alt="" />
-				</SwiperSlide>
-				<SwiperSlide>
-					<img className="swiper-img" src="/path/header/slide-5.jpg" alt="" />
-				</SwiperSlide>
+				{slides && (
+					slides.map((slide) =>
+						<SwiperSlide key={slide.id}>
+							<img
+								className="swiper-img"
+								src={mediaConfig.methods.poster_path(slide.poster_path || slide.backdrop_path)}
+								alt="media-popular-img"
+							/>
+						</SwiperSlide>
+					)
+				)
+				}
+				{children && children}
+				{
+					(!slides || !children) && (
+						<>
+							<SwiperSlide>
+								<img className="swiper-img" src="/path/header/slide-1.jpg" alt="" />
+							</SwiperSlide>
+							<SwiperSlide>
+								<img className="swiper-img" src="/path/header/slide-2.jpg" alt="" />
+							</SwiperSlide>
+							<SwiperSlide>
+								<img className="swiper-img" src="/path/header/slide-3.jpg" alt="" />
+							</SwiperSlide>
+							<SwiperSlide>
+								<img className="swiper-img" src="/path/header/slide-4.jpg" alt="" />
+							</SwiperSlide>
+							<SwiperSlide>
+								<img className="swiper-img" src="/path/header/slide-5.jpg" alt="" />
+							</SwiperSlide>
+							<SwiperSlide>
+								<img className="swiper-img" src="/path/header/slide-1.jpg" alt="" />
+							</SwiperSlide>
+							<SwiperSlide>
+								<img className="swiper-img" src="/path/header/slide-2.jpg" alt="" />
+							</SwiperSlide>
+							<SwiperSlide>
+								<img className="swiper-img" src="/path/header/slide-3.jpg" alt="" />
+							</SwiperSlide>
+							<SwiperSlide>
+								<img className="swiper-img" src="/path/header/slide-4.jpg" alt="" />
+							</SwiperSlide>
+							<SwiperSlide>
+								<img className="swiper-img" src="/path/header/slide-5.jpg" alt="" />
+							</SwiperSlide>
+							<SwiperSlide>
+								<img className="swiper-img" src="/path/header/slide-1.jpg" alt="" />
+							</SwiperSlide>
+							<SwiperSlide>
+								<img className="swiper-img" src="/path/header/slide-2.jpg" alt="" />
+							</SwiperSlide>
+							<SwiperSlide>
+								<img className="swiper-img" src="/path/header/slide-3.jpg" alt="" />
+							</SwiperSlide>
+							<SwiperSlide>
+								<img className="swiper-img" src="/path/header/slide-4.jpg" alt="" />
+							</SwiperSlide>
+							<SwiperSlide>
+								<img className="swiper-img" src="/path/header/slide-5.jpg" alt="" />
+							</SwiperSlide>
+							<SwiperSlide>
+								<img className="swiper-img" src="/path/header/slide-1.jpg" alt="" />
+							</SwiperSlide>
+							<SwiperSlide>
+								<img className="swiper-img" src="/path/header/slide-2.jpg" alt="" />
+							</SwiperSlide>
+							<SwiperSlide>
+								<img className="swiper-img" src="/path/header/slide-3.jpg" alt="" />
+							</SwiperSlide>
+							<SwiperSlide>
+								<img className="swiper-img" src="/path/header/slide-4.jpg" alt="" />
+							</SwiperSlide>
+							<SwiperSlide>
+								<img className="swiper-img" src="/path/header/slide-5.jpg" alt="" />
+							</SwiperSlide>
+						</>
+					)
+				}
 			</Swiper>
 		</div>
 	);
