@@ -2,7 +2,9 @@ import {
 	IMediaDetails,
 	IMediaGenre,
 	IMediaList,
-	IMediaSearch
+	IMediaSearch,
+	IResponseMediasList,
+	IResponseMediasListPlayingNow
 } from "../../types/media.types";
 import publicAxios from "../client/public.client";
 
@@ -21,7 +23,7 @@ const mediaEndpoints = {
 }
 
 class MediaApi {
-	async getList({ mediaType, mediaCategory, page }: IMediaList): Promise<any> {
+	async getList({ mediaType, mediaCategory, page }: IMediaList): Promise<IResponseMediasList | any | IResponseMediasListPlayingNow> {
 		try {
 			const response = await publicAxios.get(
 				mediaEndpoints.list({ mediaType, mediaCategory, page })
@@ -32,9 +34,12 @@ class MediaApi {
 		}
 	}
 
-	async getDetails(mediaType: string, mediaId: string): Promise<any> {
+	async getDetails({ mediaType, mediaId }: IMediaDetails): Promise<any> {
 		try {
-
+			const response = await publicAxios.get(
+				mediaEndpoints.details({ mediaType, mediaId })
+			);
+			return response;
 		} catch (error) {
 			return { error }
 		}
@@ -48,5 +53,5 @@ class MediaApi {
 		}
 	}
 }
-
-export default new MediaApi();
+const mediaApi = new MediaApi();
+export default mediaApi;
