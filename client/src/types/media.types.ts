@@ -51,7 +51,6 @@ export interface IResponseMediasListResultSerials extends IResponseMediasListRes
 }
 export type IResponseMediasListType = IResponseMediasListResultMovie | IResponseMediasListResultSerials;
 
-
 export interface Dates {
 	maximum: string
 	minimum: string
