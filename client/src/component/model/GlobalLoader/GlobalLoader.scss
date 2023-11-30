@@ -1,14 +1,25 @@
 //~~
 
+@import "../../../styles/vars.scss";
+
 .global-loader {
 	display: flex;
-	flex-direction: column;
-	gap: 10px;
-	position: absolute;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	position: fixed;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	z-index: 1000;
+	z-index: 900;
+	background-color: $secondary-color;
+
+	&__wrapper {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
 
 	&__spinner {
 		justify-content: center;
@@ -19,5 +30,10 @@
 		color: #FFF;
 		font-size: 1.2vw;
 		user-select: none;
+		text-align: center;
+
+		@media screen and (max-width: 960px) {
+			font-size: 2.5vw;
+		}
 	}
 }
