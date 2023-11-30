@@ -61,6 +61,17 @@ class MediaApi {
 		}
 	}
 
+	async getGenre({ mediaType }: IMediaGenre): Promise<any> {
+		try {
+			const response = await publicAxios.get(
+				mediaEndpoints.genre({ mediaType })
+			);
+			return response;
+		} catch (error) {
+			return { error }
+		}
+	}
+
 	async search(mediaType: string, query: string, page: string): Promise<any> {
 		try {
 
