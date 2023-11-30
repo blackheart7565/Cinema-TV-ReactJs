@@ -1,14 +1,9 @@
-import { useEffect, useState } from "react";
 
 import { mediaConfig } from "../../../api/config/media.config";
-import MediaApi from "../../../api/modules/media.api";
-import HomeModelContent from "./HomeModelContent";
+import HomeModelContent from "../../model/HomeModelContent";
+import { PopularMediaSwiper } from "../../model/Swiper";
 
-import { IResponseMediasListResult } from "../../../types/media.types";
-import { PopularTVSwiper } from "../../model/Swiper";
 import "./Home.scss";
-import "./HomeModel.scss";
-
 
 const Home = () => {
 	const postersAnime = [
@@ -24,71 +19,30 @@ const Home = () => {
 		'/path/home/serials_2.png'
 	];
 
-	const [popularMedia, setPopularMedia] = useState<IResponseMediasListResult[]>([]);
-	const [playingNowMovie, setPlayingNowMovie] = useState<IResponseMediasListResult[]>([]);
-	const [playingNowSerials, setPlayingNowSerials] = useState<IResponseMediasListResult[]>([]);
-	// const { dispatch, state, actions } = useReducer();
-
-	useEffect(() => {
-		(async function () {
-			const responseMovie = await MediaApi.getList({
-				mediaType: mediaConfig.types.movie,
-				mediaCategory: mediaConfig.category.popular,
-				page: "1",
-			});
-			const responseSerials = await MediaApi.getList({
-				mediaType: mediaConfig.types.tv,
-				mediaCategory: mediaConfig.category.popular,
-				page: "1",
-			});
-
-			setPopularMedia([
-				...responseMovie.results,
-				...responseSerials.results
-			]);
-			console.log(popularMedia);
-		})();
-	}, [popularMedia]);
-
-	useEffect(() => {
-		(async function () {
-			const responseMovie = await MediaApi.getList({
-				mediaType: mediaConfig.types.movie,
-				mediaCategory: mediaConfig.category.now_playing_movie,
-				page: "1"
-			});
-			const responseSerials = await MediaApi.getList({
-				mediaType: mediaConfig.types.tv,
-				mediaCategory: mediaConfig.category.airing_today_tv,
-				page: "1"
-			});
-
-			setPlayingNowMovie(responseMovie.results);
-			setPlayingNowSerials(responseSerials.results);
-		})()
-	}, []);
 
 	return (
 		<div className="home">
-			{/* <PopularTVSwiper slides={popularMedia} /> */}
-			<PopularTVSwiper />
+			<PopularMediaSwiper variant="DYNAMIC_LIST" />
 			<HomeModelContent
 				title="Anime"
 				classPrefix="home"
-				cards={playingNowMovie}
 				posters={postersAnime}
+				mediaType={mediaConfig.types.movie}
+				mediaCategory={mediaConfig.category.now_playing_movie}
 			/>
 			<HomeModelContent
 				title="Films"
 				classPrefix="home"
-				cards={playingNowMovie}
 				posters={postersFilms}
+				mediaType={mediaConfig.types.movie}
+				mediaCategory={mediaConfig.category.now_playing_movie}
 			/>
 			<HomeModelContent
 				title="Serials"
 				classPrefix="home"
-				cards={playingNowSerials}
 				posters={postersSerials}
+				mediaType={mediaConfig.types.tv}
+				mediaCategory={mediaConfig.category.airing_today_tv}
 			/>
 		</div>
 	);

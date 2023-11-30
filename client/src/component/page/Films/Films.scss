@@ -1,0 +1,32 @@
+//~~
+
+.films {
+	padding-top: 90px;
+	padding-bottom: 30px;
+
+	&__list {
+		display: grid;
+		grid-template-columns: repeat(6, 1fr);
+		padding: 0 50px;
+	}
+
+	&__link {
+		position: relative;
+		margin: 0 10px;
+		margin-bottom: 20px;
+
+		&-details {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(19, 20, 31, 0.50);
+		}
+	}
+
+	&__img {
+		width: 100%;
+		height: 100%;
+	}
+}
