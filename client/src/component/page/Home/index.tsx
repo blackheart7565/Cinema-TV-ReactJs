@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
+
 import { mediaConfig } from "../../../api/config/media.config";
+import mediaApi from "../../../api/modules/media.api";
+import { IResponseMediasListResult } from "../../../types/media.types";
 import HomeModelContent from "../../model/HomeModelContent";
 import { PopularMediaSwiper } from "../../model/Swiper";
 
-import mediaApi from "../../../api/modules/media.api";
-import { IResponseMediasListResult } from "../../../types/media.types";
 import "./Home.scss";
-import "./HomeModel.scss";
-
 
 const Home = () => {
 	const postersAnime = [
