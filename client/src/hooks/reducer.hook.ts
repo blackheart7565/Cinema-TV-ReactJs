@@ -3,7 +3,8 @@ import {
 	useDispatch,
 	useSelector
 } from "react-redux";
-import loaderErrorSlice from "../store/reducer/loaderError.slice";
+import errorSlice from "../store/reducer/error.slice";
+import loaderSlice from "../store/reducer/loader.slice";
 import mediaSlice from "../store/reducer/media.slice";
 import {
 	IDispatchType,
@@ -16,17 +17,20 @@ export const useReducer = () => {
 	const useAppDispatch = () => useDispatch<IDispatchType>();
 
 	const dispatch = useAppDispatch();
-	const loaderError = useAppSelector(state => state.loaderError);
+	const loader = useAppSelector(state => state.loader);
+	const error = useAppSelector(state => state.error);
 	const media = useAppSelector(state => state.media);
 
 	return {
 		dispatch,
 		state: {
-			loaderError,
+			loader,
+			error,
 			media,
 		},
 		actions: {
-			...loaderErrorSlice.actions,
+			...loaderSlice.actions,
+			...errorSlice.actions,
 			...mediaSlice.actions,
 		},
 	};
