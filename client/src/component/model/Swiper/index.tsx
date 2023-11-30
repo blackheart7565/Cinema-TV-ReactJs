@@ -1,25 +1,59 @@
-import { FC, ReactNode } from "react";
+import { FC, ReactNode, useEffect, useState } from "react";
 import { EffectCoverflow } from 'swiper/modules';
 import { Swiper, SwiperSlide } from "swiper/react";
 
+import { mediaConfig } from "../../../api/config/media.config";
+import mediaApi from "../../../api/modules/media.api";
+import { useReducer } from "../../../hooks/reducer.hook";
 import { IResponseMediasListResult } from "../../../types/media.types";
+import { IVariant, VariantSlideEnum } from "../../../types/component.types";
 
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-import { mediaConfig } from "../../../api/config/media.config";
 import "./Swiper.scss";
 
-interface IPopularTVSwiper {
+interface IPopularMediaSwiper {
 	children?: ReactNode;
-	slides?: IResponseMediasListResult[];
+	variant?: IVariant;
 }
 
-export const PopularTVSwiper: FC<IPopularTVSwiper> = ({
-	slides,
+export const PopularMediaSwiper: FC<IPopularMediaSwiper> = ({
+	variant,
 	children
 }) => {
+	const [popularMedia, setPopularMedia] = useState<IResponseMediasListResult[]>([]);
+	const { dispatch, actions } = useReducer();
+
+	const fetchData = async () => {
+		dispatch(actions.setIsLoading(true));
+		const responseMovie = await mediaApi.getList({
+			mediaType: mediaConfig.types.movie,
+			mediaCategory: mediaConfig.category.popular,
+			page: "1",
+		});
+		const responseSerials = await mediaApi.getList({
+			mediaType: mediaConfig.types.tv,
+			mediaCategory: mediaConfig.category.popular,
+			page: "1",
+		});
+		dispatch(actions.setIsLoading(false));
+
+		if (responseMovie.results || responseSerials.results) {
+			setPopularMedia([
+				...responseMovie.results,
+				...responseSerials.results,
+			]);
+		}
+	}
+
+	useEffect(() => {
+		fetchData();
+	}, [mediaConfig.types.movie, mediaConfig.category.popular, dispatch]);
+
+	if (!variant) variant = VariantSlideEnum.TEST;
+
 	return (
 		<div className="home__header-swiper">
 			<Swiper
@@ -60,8 +94,8 @@ export const PopularTVSwiper: FC<IPopularTVSwiper> = ({
 					},
 				}}
 			>
-				{slides && (
-					slides.map((slide) =>
+				{(variant === VariantSlideEnum.DYNAMIC_LIST) && (
+					popularMedia?.map((slide) =>
 						<SwiperSlide key={slide.id}>
 							<img
 								className="swiper-img"
@@ -70,75 +104,72 @@ export const PopularTVSwiper: FC<IPopularTVSwiper> = ({
 							/>
 						</SwiperSlide>
 					)
-				)
-				}
-				{children && children}
-				{
-					(!slides || !children) && (
-						<>
-							<SwiperSlide>
-								<img className="swiper-img" src="/path/header/slide-1.jpg" alt="" />
-							</SwiperSlide>
-							<SwiperSlide>
-								<img className="swiper-img" src="/path/header/slide-2.jpg" alt="" />
-							</SwiperSlide>
-							<SwiperSlide>
-								<img className="swiper-img" src="/path/header/slide-3.jpg" alt="" />
-							</SwiperSlide>
-							<SwiperSlide>
-								<img className="swiper-img" src="/path/header/slide-4.jpg" alt="" />
-							</SwiperSlide>
-							<SwiperSlide>
-								<img className="swiper-img" src="/path/header/slide-5.jpg" alt="" />
-							</SwiperSlide>
-							<SwiperSlide>
-								<img className="swiper-img" src="/path/header/slide-1.jpg" alt="" />
-							</SwiperSlide>
-							<SwiperSlide>
-								<img className="swiper-img" src="/path/header/slide-2.jpg" alt="" />
-							</SwiperSlide>
-							<SwiperSlide>
-								<img className="swiper-img" src="/path/header/slide-3.jpg" alt="" />
-							</SwiperSlide>
-							<SwiperSlide>
-								<img className="swiper-img" src="/path/header/slide-4.jpg" alt="" />
-							</SwiperSlide>
-							<SwiperSlide>
-								<img className="swiper-img" src="/path/header/slide-5.jpg" alt="" />
-							</SwiperSlide>
-							<SwiperSlide>
-								<img className="swiper-img" src="/path/header/slide-1.jpg" alt="" />
-							</SwiperSlide>
-							<SwiperSlide>
-								<img className="swiper-img" src="/path/header/slide-2.jpg" alt="" />
-							</SwiperSlide>
-							<SwiperSlide>
-								<img className="swiper-img" src="/path/header/slide-3.jpg" alt="" />
-							</SwiperSlide>
-							<SwiperSlide>
-								<img className="swiper-img" src="/path/header/slide-4.jpg" alt="" />
-							</SwiperSlide>
-							<SwiperSlide>
-								<img className="swiper-img" src="/path/header/slide-5.jpg" alt="" />
-							</SwiperSlide>
-							<SwiperSlide>
-								<img className="swiper-img" src="/path/header/slide-1.jpg" alt="" />
-							</SwiperSlide>
-							<SwiperSlide>
-								<img className="swiper-img" src="/path/header/slide-2.jpg" alt="" />
-							</SwiperSlide>
-							<SwiperSlide>
-								<img className="swiper-img" src="/path/header/slide-3.jpg" alt="" />
-							</SwiperSlide>
-							<SwiperSlide>
-								<img className="swiper-img" src="/path/header/slide-4.jpg" alt="" />
-							</SwiperSlide>
-							<SwiperSlide>
-								<img className="swiper-img" src="/path/header/slide-5.jpg" alt="" />
-							</SwiperSlide>
-						</>
-					)
-				}
+				)}
+				{(variant === VariantSlideEnum.CHILDREN) && children}
+				{(variant === VariantSlideEnum.TEST) && (
+					<>
+						<SwiperSlide>
+							<img className="swiper-img" src="/path/header/slide-1.jpg" alt="" />
+						</SwiperSlide>
+						<SwiperSlide>
+							<img className="swiper-img" src="/path/header/slide-2.jpg" alt="" />
+						</SwiperSlide>
+						<SwiperSlide>
+							<img className="swiper-img" src="/path/header/slide-3.jpg" alt="" />
+						</SwiperSlide>
+						<SwiperSlide>
+							<img className="swiper-img" src="/path/header/slide-4.jpg" alt="" />
+						</SwiperSlide>
+						<SwiperSlide>
+							<img className="swiper-img" src="/path/header/slide-5.jpg" alt="" />
+						</SwiperSlide>
+						<SwiperSlide>
+							<img className="swiper-img" src="/path/header/slide-1.jpg" alt="" />
+						</SwiperSlide>
+						<SwiperSlide>
+							<img className="swiper-img" src="/path/header/slide-2.jpg" alt="" />
+						</SwiperSlide>
+						<SwiperSlide>
+							<img className="swiper-img" src="/path/header/slide-3.jpg" alt="" />
+						</SwiperSlide>
+						<SwiperSlide>
+							<img className="swiper-img" src="/path/header/slide-4.jpg" alt="" />
+						</SwiperSlide>
+						<SwiperSlide>
+							<img className="swiper-img" src="/path/header/slide-5.jpg" alt="" />
+						</SwiperSlide>
+						<SwiperSlide>
+							<img className="swiper-img" src="/path/header/slide-1.jpg" alt="" />
+						</SwiperSlide>
+						<SwiperSlide>
+							<img className="swiper-img" src="/path/header/slide-2.jpg" alt="" />
+						</SwiperSlide>
+						<SwiperSlide>
+							<img className="swiper-img" src="/path/header/slide-3.jpg" alt="" />
+						</SwiperSlide>
+						<SwiperSlide>
+							<img className="swiper-img" src="/path/header/slide-4.jpg" alt="" />
+						</SwiperSlide>
+						<SwiperSlide>
+							<img className="swiper-img" src="/path/header/slide-5.jpg" alt="" />
+						</SwiperSlide>
+						<SwiperSlide>
+							<img className="swiper-img" src="/path/header/slide-1.jpg" alt="" />
+						</SwiperSlide>
+						<SwiperSlide>
+							<img className="swiper-img" src="/path/header/slide-2.jpg" alt="" />
+						</SwiperSlide>
+						<SwiperSlide>
+							<img className="swiper-img" src="/path/header/slide-3.jpg" alt="" />
+						</SwiperSlide>
+						<SwiperSlide>
+							<img className="swiper-img" src="/path/header/slide-4.jpg" alt="" />
+						</SwiperSlide>
+						<SwiperSlide>
+							<img className="swiper-img" src="/path/header/slide-5.jpg" alt="" />
+						</SwiperSlide>
+					</>
+				)}
 			</Swiper>
 		</div>
 	);
