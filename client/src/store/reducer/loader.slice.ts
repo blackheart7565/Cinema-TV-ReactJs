@@ -2,15 +2,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface IInitialState {
 	isLoading: boolean,
-	error: null,
 }
 
 const initialState: IInitialState = {
 	isLoading: false,
-	error: null,
 }
 
-const loaderErrorSlice = createSlice({
+const loaderSlice = createSlice({
 	name: "loaderError",
 	initialState,
 	reducers: {
@@ -20,9 +18,9 @@ const loaderErrorSlice = createSlice({
 	},
 });
 
-const loaderError = {
-	actions: loaderErrorSlice.actions,
-	reducer: loaderErrorSlice.reducer,
+const loader = {
+	actions: loaderSlice.actions,
+	reducer: loaderSlice.reducer,
 }
 
-export default loaderError;
+export default loader;
