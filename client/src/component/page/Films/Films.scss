@@ -1,5 +1,8 @@
 //~~
 
+@import "../../../styles/vars.scss";
+@import "../../../styles/mixin.scss";
+
 .films {
 	padding-top: 90px;
 	padding-bottom: 30px;
@@ -11,22 +14,89 @@
 	}
 
 	&__link {
+		$self: &;
+
 		position: relative;
 		margin: 0 10px;
 		margin-bottom: 20px;
+		overflow: hidden;
 
-		&-details {
+		&:hover {
+			#{$self}-details {
+				bottom: 20px;
+				opacity: 1;
+			}
+
+			#{$self}-info,
+			#{$self}-play {
+				opacity: 1;
+			}
+
+			#{$self}-img {
+				transform: scale(1.1);
+			}
+		}
+
+		&-info {
 			position: absolute;
 			top: 0;
 			left: 0;
 			width: 100%;
 			height: 100%;
-			background: rgba(19, 20, 31, 0.50);
+			opacity: 0;
+			background: rgba(19, 20, 31, 0.7);
+			transition: itemTransitionHover(opacity);
 		}
-	}
 
-	&__img {
-		width: 100%;
-		height: 100%;
+		&-img {
+			width: 100%;
+			height: 100%;
+			transition: itemTransitionHover(transform);
+		}
+
+		&-play {
+			width: 70px;
+			height: 70px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			opacity: 0;
+			transform: translate(-50%, -50%);
+			transition: itemTransitionHover(opacity);
+
+			&>img {
+				width: 100%;
+				height: 100%;
+			}
+		}
+
+		&-details {
+			position: absolute;
+			bottom: -5px;
+			left: 0;
+			opacity: 0;
+			transition: itemTransitionHover(bottom), itemTransitionHover(opacity);
+		}
+
+		&-rating {
+			font-size: calc(var(--index) * 0.6);
+			padding: 5px 15px;
+		}
+
+		&-title {
+			font-size: calc(var(--index) * 0.6);
+			padding: 5px 15px;
+			letter-spacing: 2px;
+			font-weight: 700;
+		}
+
+		&-year {
+			font-size: calc(var(--index) * 0.8);
+			color: $white;
+			font-weight: 700;
+			letter-spacing: 4px;
+			padding: 5px 15px;
+		}
+
 	}
 }

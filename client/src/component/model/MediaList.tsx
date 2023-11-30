@@ -28,6 +28,8 @@ const MediaList: FC<IMediaList> = ({
 		})
 		dispatch(actions.setIsLoading(false));
 
+		console.log(response.results);
+
 		setFilms(response.results);
 	}
 
@@ -41,6 +43,9 @@ const MediaList: FC<IMediaList> = ({
 				<MediaItem
 					key={item.id}
 					posterImage={item.poster_path || item.backdrop_path}
+					name={item.title || item.original_title}
+					year={item.release_date.split("-")[0]}
+					rating={item.vote_average}
 				/>
 			))}
 		</ul>

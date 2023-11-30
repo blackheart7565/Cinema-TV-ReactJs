@@ -5,8 +5,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { mediaConfig } from "../../../api/config/media.config";
 import mediaApi from "../../../api/modules/media.api";
 import { useReducer } from "../../../hooks/reducer.hook";
-import { IResponseMediasListResult } from "../../../types/media.types";
 import { IVariant, VariantSlideEnum } from "../../../types/component.types";
+import { IResponseMediasListResult } from "../../../types/media.types";
 
 import 'swiper/css';
 import 'swiper/css/navigation';
