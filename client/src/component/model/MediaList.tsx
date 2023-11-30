@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from "react";
 
 import mediaApi from "../../api/modules/media.api";
 import { useReducer } from "../../hooks/reducer.hook";
-import { IResponseMediasListResult } from "../../types/media.types";
+import { IResponseMediasListResult, IResponseMediasListResultMovie, IResponseMediasListResultSerials } from "../../types/media.types";
 import MediaItem from "./MediaItem";
 
 interface IMediaList {
@@ -28,6 +28,8 @@ const MediaList: FC<IMediaList> = ({
 		})
 		dispatch(actions.setIsLoading(false));
 
+		console.log(response.results);
+
 		setFilms(response.results);
 	}
 
@@ -41,6 +43,27 @@ const MediaList: FC<IMediaList> = ({
 				<MediaItem
 					key={item.id}
 					posterImage={item.poster_path || item.backdrop_path}
+					name={
+						mediaType === "movie"
+						? (
+							(item as IResponseMediasListResultMovie).title
+							|| (item as IResponseMediasListResultMovie).original_title
+						)
+						: (
+							(item as IResponseMediasListResultSerials).name
+							|| (item as IResponseMediasListResultSerials).original_name
+						)
+					}
+					year={(
+						mediaType === "movie"
+						? (
+							(item as IResponseMediasListResultMovie).release_date.split("-")[0]
+						)
+						: (
+							(item as IResponseMediasListResultSerials).first_air_date.split("-")[0]
+						)
+					)}
+					rating={item.vote_average}
 				/>
 			))}
 		</ul>
