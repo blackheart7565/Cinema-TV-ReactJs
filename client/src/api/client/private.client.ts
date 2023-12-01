@@ -5,7 +5,7 @@ import { axiosConfig } from "./client.config";
 import publicAxios from "./public.client";
 
 const privateAxios = axios.create({
-	...axiosConfig
+	...axiosConfig,
 });
 
 privateAxios.interceptors.request.use(config => {
