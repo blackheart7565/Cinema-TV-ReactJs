@@ -1,11 +1,11 @@
 import { FC } from 'react';
-import { EmptyStar, FullStar, HalfStar } from "../RatingIcon";
+import { EmptyStar, FullStar, HalfStar } from "../../Icon/RatingIcon";
 
 interface IRatingStar {
 	rating?: string | number;
 }
 
-const RatingStar: FC<IRatingStar> = ({
+const Rating: FC<IRatingStar> = ({
 	rating
 }) => {
 	rating = Number(rating);
@@ -31,4 +31,4 @@ const RatingStar: FC<IRatingStar> = ({
 	);
 };
 
-export default RatingStar;
+export default Rating;

@@ -37,6 +37,21 @@
 			}
 		}
 
+		&-favorite {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 30px;
+			height: 30px;
+			z-index: 101;
+
+			&-icon {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+		}
+
 		&-info {
 			position: absolute;
 			top: 0;
@@ -46,6 +61,7 @@
 			opacity: 0;
 			background: rgba(19, 20, 31, 0.7);
 			transition: itemTransitionHover(opacity);
+			z-index: 100;
 		}
 
 		&-img {
