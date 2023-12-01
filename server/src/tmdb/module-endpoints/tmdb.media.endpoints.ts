@@ -12,7 +12,7 @@ import {
 
 export const tmdbMediaEndpoints = {
 	mediaList: ({ mediaType, mediaCategory, page }: IMediaList): Promise<string> => tmdbConfig.getTmdbBaseUrl(
-		`/${mediaType}/${mediaCategory}`, page
+		`/${mediaType}/${mediaCategory}`, { page }
 	),
 	mediaDetails: ({ mediaType, mediaId }: IMediaDetails): Promise<string> => tmdbConfig.getTmdbBaseUrl(
 		`/${mediaType}/${mediaId}` // 	/movie/{movie_id}
