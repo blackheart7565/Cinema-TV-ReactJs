@@ -25,7 +25,7 @@ const Rating: FC<IRatingStar> = ({
 				<HalfStar />
 			}
 			{[...emptyStarArr].map((_, index) => (
-				<EmptyStar />
+				<EmptyStar  key={index}  />
 			))}
 		</>
 	);
