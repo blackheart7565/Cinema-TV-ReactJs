@@ -4,8 +4,10 @@ import { mediaConfig } from "../../../api/config/media.config";
 import mediaApi from "../../../api/modules/media.api";
 import { useReducer } from "../../../hooks/reducer.hook";
 import { IResponseMediasListResultMovie } from "../../../types/media.types";
+import Button from "../../UI/Button";
 import MediaItem from "../../model/MediaItem";
 import MediaList from "../../model/MediaList";
+import MediaLoader from "../../model/MediaLoader";
 
 import "./Films.scss";
 
@@ -62,17 +64,19 @@ const Films: FC<IFilms> = () => {
 					/>
 				))}
 			</MediaList>
-
-			<button
-				style={{
-					width: "100px",
-					height: "50px",
-					textAlign: "center",
-				}}
+			<Button
+				className="films__show-more"
 				onClick={showMore}
 			>
-				Show more
-			</button>
+				{isMediaLoading && (
+					<MediaLoader
+						isLoading
+						width="30"
+						height="30"
+					/>
+				)}
+				{!isMediaLoading && "Show more"}
+			</Button>
 		</div>
 	);
 };
