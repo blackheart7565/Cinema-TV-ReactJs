@@ -23,16 +23,26 @@ const Films: FC<IFilms> = () => {
 
 	const fetchFilms = async () => {
 		if (page === 1) dispatch(actions.setIsLoading(true));
+		setIsMediaLoading(true);
 
 		const response = await mediaApi.getList({
 			mediaType,
 			mediaCategory,
 			page: page
-		})
+		});
 
 		dispatch(actions.setIsLoading(false));
+		setIsMediaLoading(false);
 
-		setFilms(prev => [...prev, ...response.results]);
+		if (page === 1) {
+			setFilms(response.results);
+		} else {
+			setFilms(prev => [...prev, ...response.results]);
+		}
+	}
+
+	const showMore = () => {
+		setPage(prev => prev + 1);
 	}
 
 	useEffect(() => {
@@ -59,9 +69,9 @@ const Films: FC<IFilms> = () => {
 					height: "50px",
 					textAlign: "center",
 				}}
-				onClick={(e) => setPage(prev => prev + 1)}
+				onClick={showMore}
 			>
-				NEXT
+				Show more
 			</button>
 		</div>
 	);
