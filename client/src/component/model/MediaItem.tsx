@@ -1,6 +1,7 @@
-import { FC } from "react";
+import { FC, forwardRef } from "react";
 import { Link } from "react-router-dom";
 
+import { motion } from "framer-motion";
 import { mediaConfig } from "../../api/config/media.config";
 import Rating from "./Rating";
 
@@ -13,16 +14,16 @@ interface IMediaItem {
 	episode?: string | number;
 }
 
-const MediaItem: FC<IMediaItem> = ({
+export const MediaItem: FC<IMediaItem> = forwardRef<HTMLAnchorElement, IMediaItem>(({
 	posterImage,
 	name,
 	year,
 	rating,
 	season,
 	episode
-}) => {
+}, ref) => {
 	return (
-		<Link to={""} className="films__link">
+		<Link to={""} className="films__link" ref={ref}>
 			<img
 				className="films__link-img"
 				src={mediaConfig.methods.poster_path(posterImage)}
@@ -47,6 +48,6 @@ const MediaItem: FC<IMediaItem> = ({
 			</div>
 		</Link>
 	);
-}
+});
 
-export default MediaItem;
+export const MMediaItem = motion(MediaItem);

@@ -5,7 +5,7 @@ import mediaApi from "../../../api/modules/media.api";
 import { useReducer } from "../../../hooks/reducer.hook";
 import { IResponseMediasListResultMovie } from "../../../types/media.types";
 import Button from "../../UI/Button";
-import MediaItem from "../../model/MediaItem";
+import { MMediaItem } from "../../model/MediaItem";
 import MediaList from "../../model/MediaList";
 import MediaLoader from "../../model/MediaLoader";
 
@@ -33,8 +33,8 @@ const Films: FC<IFilms> = () => {
 			page: page
 		});
 
-		dispatch(actions.setIsLoading(false));
 		setIsMediaLoading(false);
+		dispatch(actions.setIsLoading(false));
 
 		if (page === 1) {
 			setFilms(response.results);
@@ -55,7 +55,7 @@ const Films: FC<IFilms> = () => {
 		<div className="films">
 			<MediaList>
 				{films.map(item => (
-					<MediaItem
+					<MMediaItem
 						key={item.id}
 						posterImage={item.poster_path || item.backdrop_path}
 						name={item.title || item.original_title}
