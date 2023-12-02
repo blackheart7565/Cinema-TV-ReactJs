@@ -1,0 +1,19 @@
+.button-default {
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	max-width: 20rem;
+	height: 2.3rem;
+	background-color: transparent;
+	outline: none;
+	border: 1px solid #DA0027;
+	color: #FFF;
+	transition: background-color 0.3s ease-in-out;
+	letter-spacing: 0.2rem;
+
+	&:hover {
+		background-color: #DA0027;
+	}
+}

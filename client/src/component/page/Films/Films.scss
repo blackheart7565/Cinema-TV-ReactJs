@@ -4,6 +4,9 @@
 @import "../../../styles/mixin.scss";
 
 .films {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	padding-top: 90px;
 	padding-bottom: 30px;
 
@@ -11,6 +14,20 @@
 		display: grid;
 		grid-template-columns: repeat(6, 1fr);
 		padding: 0 50px;
+	}
+
+	&__show-more {
+		.media-loader {
+			&__spinner polygon {
+				transition: stroke 0.3s ease-in-out;
+			}
+		}
+
+		&:hover .media-loader {
+			&__spinner polygon {
+				stroke: $secondary-color;
+			}
+		}
 	}
 
 	&__link {
