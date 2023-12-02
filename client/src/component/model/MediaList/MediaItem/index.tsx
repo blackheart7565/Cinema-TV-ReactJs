@@ -2,8 +2,8 @@ import { FC, forwardRef } from "react";
 import { Link } from "react-router-dom";
 
 import { motion } from "framer-motion";
-import { mediaConfig } from "../../api/config/media.config";
-import Rating from "./Rating";
+import { mediaConfig } from "../../../../api/config/media.config";
+import Rating from "../../Rating";
 
 interface IMediaItem {
 	posterImage: string | undefined;
@@ -23,27 +23,27 @@ export const MediaItem: FC<IMediaItem> = forwardRef<HTMLAnchorElement, IMediaIte
 	episode
 }, ref) => {
 	return (
-		<Link to={""} className="films__link" ref={ref}>
+		<Link to={""} className="media-list__link" ref={ref}>
 			<img
-				className="films__link-img"
+				className="media-list__link-img"
 				src={mediaConfig.methods.poster_path(posterImage)}
-				alt="films-poster"
+				alt="media-list-poster"
 			/>
 			{/* <FavoriteIcon /> */}
-			<div className="films__link-info">
-				<div className="films__link-media-content">
+			<div className="media-list__link-info">
+				<div className="media-list__link-media-content">
 					<div className="films__link-season">{season}</div>
 					<div className="films__link-episode">{episode}</div>
 				</div>
-				<div className="films__link-play">
-					<img className="films__link-play-icon" src="/path/films/play-icon.png" alt="play-icon" />
+				<div className="media-list__link-play">
+					<img className="media-list__link-play-icon" src="/path/films/play-icon.png" alt="play-icon" />
 				</div>
-				<div className="films__link-details">
-					<div className="films__link-rating">
+				<div className="media-list__link-details">
+					<div className="media-list__link-rating">
 						<Rating rating={rating} />
 					</div>
-					<p className="films__link-title">{name}</p>
-					<p className="films__link-year">{year}</p>
+					<p className="media-list__link-title">{name}</p>
+					<p className="media-list__link-year">{year}</p>
 				</div>
 			</div>
 		</Link>

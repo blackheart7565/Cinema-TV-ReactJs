@@ -1,5 +1,7 @@
 import { FC, ReactNode } from "react";
 
+import "./MediaList.scss";
+
 interface IMediaList {
 	children: ReactNode;
 }
@@ -8,7 +10,7 @@ const MediaList: FC<IMediaList> = ({
 	children
 }) => {
 	return (
-		<ul className="films__list">
+		<ul className="media-list">
 			{children}
 		</ul>
 	);

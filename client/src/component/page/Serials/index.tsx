@@ -1,26 +1,26 @@
 import { FC, useEffect, useState } from "react";
+import Button from "../../UI/Button";
 
 import { mediaConfig } from "../../../api/config/media.config";
 import mediaApi from "../../../api/modules/media.api";
 import { useReducer } from "../../../hooks/reducer.hook";
-import { IResponseMediasListResultMovie } from "../../../types/media.types";
-import Button from "../../UI/Button";
+import { IResponseMediasListResultSerials } from "../../../types/media.types";
 import MediaList from "../../model/MediaList";
 import { MMediaItem } from "../../model/MediaList/MediaItem";
 import MediaLoader from "../../model/MediaLoader";
 
-import "./Films.scss";
+import "./Serials.scss";
 
-interface IFilms { }
+interface ISerials { }
 
-const Films: FC<IFilms> = () => {
-	const [films, setFilms] = useState<IResponseMediasListResultMovie[]>([]);
+const Serials: FC<ISerials> = () => {
+	const [films, setFilms] = useState<IResponseMediasListResultSerials[]>([]);
 	const [page, setPage] = useState<number>(1);
 	const [isMediaLoading, setIsMediaLoading] = useState<boolean>(false);
 
 	const { dispatch, actions } = useReducer();
 
-	const mediaType = mediaConfig.types.movie;
+	const mediaType = mediaConfig.types.tv;
 	const mediaCategory = mediaConfig.category.popular;
 
 	const fetchFilms = async () => {
@@ -52,14 +52,14 @@ const Films: FC<IFilms> = () => {
 	}, [mediaType, mediaCategory, page, dispatch]);
 
 	return (
-		<div className="films">
+		<div className="serials">
 			<MediaList>
 				{films.map(item => (
 					<MMediaItem
 						key={item.id}
 						posterImage={item.poster_path || item.backdrop_path}
-						name={item.title || item.original_title}
-						year={item.release_date.split("-")[0]}
+						name={item.name || item.original_name}
+						year={item.first_air_date.split("-")[0]}
 						rating={item.vote_average}
 					/>
 				))}
@@ -81,4 +81,4 @@ const Films: FC<IFilms> = () => {
 	);
 };
 
-export default Films;
+export default Serials;
