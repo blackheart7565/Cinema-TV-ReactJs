@@ -16,6 +16,7 @@ interface IFilms { }
 const Films: FC<IFilms> = () => {
 	const [films, setFilms] = useState<IResponseMediasListResultMovie[]>([]);
 	const [page, setPage] = useState<number>(1);
+	const [totalResults, setTotalResults] = useState<number>(0);
 	const [isMediaLoading, setIsMediaLoading] = useState<boolean>(false);
 
 	const { dispatch, actions } = useReducer();
@@ -38,13 +39,16 @@ const Films: FC<IFilms> = () => {
 
 		if (page === 1) {
 			setFilms(response.results);
+			setTotalResults(response.total_results);
 		} else {
 			setFilms(prev => [...prev, ...response.results]);
 		}
 	}
 
 	const showMore = () => {
-		setPage(prev => prev + 1);
+		if (films.length < totalResults) {
+			setPage(prev => prev + 1);
+		}
 	}
 
 	useEffect(() => {
@@ -54,9 +58,9 @@ const Films: FC<IFilms> = () => {
 	return (
 		<div className="films">
 			<MediaList mediaType={""} mediaCategory={""}>
-				{films.map(item => (
+				{films.map((item, index) => (
 					<MMediaItem
-						key={item.id}
+						key={item.id + index}
 						posterImage={item.poster_path || item.backdrop_path}
 						name={item.title || item.original_title}
 						year={item.release_date.split("-")[0]}
@@ -64,19 +68,21 @@ const Films: FC<IFilms> = () => {
 					/>
 				))}
 			</MediaList>
-			<Button
-				className="films__show-more"
-				onClick={showMore}
-			>
-				{isMediaLoading && (
-					<MediaLoader
-						isLoading
-						width="30"
-						height="30"
-					/>
-				)}
-				{!isMediaLoading && "Show more"}
-			</Button>
+			{(films.length < totalResults) && (
+				<Button
+					className="films__show-more"
+					onClick={showMore}
+				>
+					{isMediaLoading && (
+						<MediaLoader
+							isLoading
+							width="30"
+							height="30"
+						/>
+					)}
+					{!isMediaLoading && "Show more"}
+				</Button>
+			)}
 		</div>
 	);
 };
