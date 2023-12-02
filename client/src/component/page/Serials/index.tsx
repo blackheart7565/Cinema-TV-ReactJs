@@ -1,10 +1,10 @@
 import { FC, useEffect, useState } from "react";
-import Button from "../../UI/Button";
 
 import { mediaConfig } from "../../../api/config/media.config";
 import mediaApi from "../../../api/modules/media.api";
 import { useReducer } from "../../../hooks/reducer.hook";
 import { IResponseMediasListResultSerials } from "../../../types/media.types";
+import Button from "../../UI/Button";
 import MediaList from "../../model/MediaList";
 import { MMediaItem } from "../../model/MediaList/MediaItem";
 import MediaLoader from "../../model/MediaLoader";

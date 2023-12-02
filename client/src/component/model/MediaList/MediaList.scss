@@ -8,6 +8,19 @@
 	grid-template-columns: repeat(6, 1fr);
 	padding: 0 50px;
 
+	@media screen and (max-width: 960px) {
+		padding: 0 30px;
+		grid-template-columns: repeat(4, 1fr);
+	}
+
+	@media screen and (max-width: 660px) {
+		grid-template-columns: repeat(3, 1fr);
+	}
+
+	@media screen and (max-width: 480px) {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
 	&__link {
 		$self: &;
 
@@ -18,7 +31,7 @@
 
 		&:hover {
 			#{$self}-details {
-				bottom: 20px;
+				bottom: 4%;
 				opacity: 1;
 			}
 
@@ -57,6 +70,16 @@
 			background: rgba(19, 20, 31, 0.7);
 			transition: itemTransitionHover(opacity);
 			z-index: 100;
+
+			@media screen and (max-width: 960px) {
+				opacity: 1;
+				background: rgba(19, 20, 31, 0.3);
+
+				& #{$self}-details {
+					opacity: 1;
+					bottom: 5%;
+				}
+			}
 		}
 
 		&-img {
@@ -66,14 +89,18 @@
 		}
 
 		&-play {
-			width: 70px;
-			height: 70px;
+			width: 4vw;
+			height: 4vw;
 			position: absolute;
 			top: 50%;
 			left: 50%;
 			opacity: 0;
 			transform: translate(-50%, -50%);
 			transition: itemTransitionHover(opacity);
+
+			@media screen and (max-width: 960px) {
+				display: none;
+			}
 
 			&>img {
 				width: 100%;
@@ -89,25 +116,43 @@
 			transition: itemTransitionHover(bottom), itemTransitionHover(opacity);
 		}
 
+		&-rating,
+		&-title,
+		&-year {
+			// padding: 5px 15px;
+			padding: 1% 7%;
+		}
+
 		&-rating {
 			display: flex;
 			font-size: calc(var(--index) * 0.6);
-			padding: 5px 15px;
 		}
 
 		&-title {
-			font-size: calc(var(--index) * 0.6);
-			padding: 5px 15px;
+			font-size: 1vw;
 			letter-spacing: 2px;
 			font-weight: 700;
+
+			@media screen and (max-width: 960px) {
+				font-size: 1.5vw;
+				font-weight: 700;
+			}
+
+			@media screen and (max-width: 660px) {
+				font-size: 2.5vw;
+				font-weight: 700;
+			}
 		}
 
 		&-year {
-			font-size: calc(var(--index) * 0.8);
+			font-size: 1vw;
 			color: $white;
 			font-weight: 700;
 			letter-spacing: 4px;
-			padding: 5px 15px;
+
+			@media screen and (max-width: 960px) {
+				display: none;
+			}
 		}
 	}
 }

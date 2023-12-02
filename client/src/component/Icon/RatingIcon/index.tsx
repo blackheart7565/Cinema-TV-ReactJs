@@ -1,5 +1,7 @@
 import { FC } from "react";
 
+import "./RatingIcon.scss";
+
 export const FullStar: FC = () => {
 	return (
 		<div className="full-star">

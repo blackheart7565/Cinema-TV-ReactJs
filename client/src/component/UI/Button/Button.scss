@@ -13,6 +13,16 @@
 	transition: background-color 0.3s ease-in-out;
 	letter-spacing: 0.2rem;
 
+	@media screen and (max-width: 960px) {
+		max-width: 15rem;
+	}
+
+	@media screen and (max-width: 480px) {
+		max-width: 10rem;
+		height: 2rem;
+		font-size: 12px;
+	}
+
 	&:hover {
 		background-color: #DA0027;
 	}
