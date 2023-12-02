@@ -5,8 +5,8 @@ import mediaApi from "../../../api/modules/media.api";
 import { useReducer } from "../../../hooks/reducer.hook";
 import { IResponseMediasListResultMovie } from "../../../types/media.types";
 import Button from "../../UI/Button";
-import { MMediaItem } from "../../model/MediaItem";
 import MediaList from "../../model/MediaList";
+import { MMediaItem } from "../../model/MediaList/MediaItem";
 import MediaLoader from "../../model/MediaLoader";
 
 import "./Films.scss";
@@ -53,7 +53,7 @@ const Films: FC<IFilms> = () => {
 
 	return (
 		<div className="films">
-			<MediaList>
+			<MediaList mediaType={""} mediaCategory={""}>
 				{films.map(item => (
 					<MMediaItem
 						key={item.id}
