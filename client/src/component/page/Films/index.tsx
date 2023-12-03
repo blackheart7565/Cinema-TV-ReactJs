@@ -68,18 +68,18 @@ const Films: FC<IFilms> = () => {
 					/>
 				))}
 			</MediaList>
+			{isMediaLoading && (
+				<MediaLoader
+					isLoading
+					width="50"
+					height="50"
+				/>
+			)}
 			{(films.length < totalResults) && (
 				<Button
 					className="films__show-more"
 					onClick={showMore}
 				>
-					{isMediaLoading && (
-						<MediaLoader
-							isLoading
-							width="30"
-							height="30"
-						/>
-					)}
 					{!isMediaLoading && "Show more"}
 				</Button>
 			)}

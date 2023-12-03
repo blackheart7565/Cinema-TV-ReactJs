@@ -7,20 +7,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	gap: 20px;
 	padding-top: 90px;
 	padding-bottom: 30px;
-
-	&__show-more {
-		.media-loader {
-			&__spinner polygon {
-				transition: stroke 0.3s ease-in-out;
-			}
-		}
-
-		&:hover .media-loader {
-			&__spinner polygon {
-				stroke: $secondary-color;
-			}
-		}
-	}
 }
