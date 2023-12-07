@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { EmptyStar, FullStar, HalfStar } from "../../Icon/RatingIcon";
 
 interface IRatingStar {
-	rating?: string | number;
+	rating: string | number;
 }
 
 const Rating: FC<IRatingStar> = ({
@@ -25,7 +25,7 @@ const Rating: FC<IRatingStar> = ({
 				<HalfStar />
 			}
 			{[...emptyStarArr].map((_, index) => (
-				<EmptyStar  key={index}  />
+				<EmptyStar key={index} />
 			))}
 		</>
 	);

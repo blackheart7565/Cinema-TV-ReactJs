@@ -7,11 +7,11 @@ import Rating from "../../Rating";
 
 interface IMediaItem {
 	posterImage: string | undefined;
-	name?: string;
-	year?: string | number;
-	rating?: string | number;
-	season?: string | number;
-	episode?: string | number;
+	name?: string | undefined | null;
+	year?: string | number | undefined | null;
+	rating?: string | number | undefined | null;
+	season?: string | number | undefined | null;
+	episode?: string | number | undefined | null;
 }
 
 export const MediaItem: FC<IMediaItem> = forwardRef<HTMLAnchorElement, IMediaItem>(({
@@ -40,7 +40,9 @@ export const MediaItem: FC<IMediaItem> = forwardRef<HTMLAnchorElement, IMediaIte
 				</div>
 				<div className="media-list__link-details">
 					<div className="media-list__link-rating">
-						<Rating rating={rating} />
+						{rating && (
+							<Rating rating={rating} />
+						)}
 					</div>
 					<p className="media-list__link-title">{name}</p>
 					<p className="media-list__link-year">{year}</p>
