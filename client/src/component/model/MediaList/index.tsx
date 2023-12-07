@@ -50,7 +50,7 @@ const MediaList: FC<IMediaList> = ({
 		}
 
 		fetchMedia();
-	}, [mediaType, mediaCategory, page, dispatch, actions]);
+	}, [mediaType, mediaCategory, page, dispatch]);
 
 	return (
 		<>

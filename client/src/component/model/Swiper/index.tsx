@@ -29,7 +29,6 @@ export const PopularMediaSwiper: FC<IPopularMediaSwiper> = ({
 	const [popularMedia, setPopularMedia] = useState<IResponseMediasListResult[]>([]);
 	const { dispatch, actions } = useReducer();
 
-
 	useEffect(() => {
 		const fetchData = async () => {
 			dispatch(actions.setIsLoading(true));
@@ -54,7 +53,7 @@ export const PopularMediaSwiper: FC<IPopularMediaSwiper> = ({
 		}
 
 		fetchData();
-	}, [dispatch, actions]);
+	}, [dispatch]);
 
 	const memoizedPopularMedia = useMemo(() => popularMedia, [popularMedia]);
 

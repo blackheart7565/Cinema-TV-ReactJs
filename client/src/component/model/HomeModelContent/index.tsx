@@ -36,6 +36,7 @@ const HomeModelContent: FC<IHomeModelContent> = ({
 	useEffect(() => {
 		const fetchData = async () => {
 			dispatch(actions.setIsLoading(true));
+
 			const { data } = await mediaApi.getList<IResponseMediasListValidationType<typeof mediaType>>({
 				mediaType,
 				mediaCategory,
@@ -47,7 +48,7 @@ const HomeModelContent: FC<IHomeModelContent> = ({
 		}
 
 		fetchData();
-	}, [mediaType, mediaCategory, dispatch, actions]);
+	}, [mediaType, mediaCategory, page, dispatch]);
 
 	return (
 		<div className={`${className}`}>
