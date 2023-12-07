@@ -3,8 +3,7 @@ import { FC, ReactNode, useEffect, useState } from "react";
 import mediaApi from "../../../api/modules/media.api";
 import { useReducer } from "../../../hooks/reducer.hook";
 import { IResponseMediasListResultMovie, IResponseMediasListResultSerials, IResponseMediasListValidationType } from "../../../types/media.types";
-import Button from "../../UI/Button";
-import MediaLoader from "../MediaLoader";
+import LoadMore from "../LoadMore";
 import { MMediaItem } from "./MediaItem";
 import "./MediaList.scss";
 
@@ -48,12 +47,6 @@ const MediaList: FC<IMediaList> = ({
 		}
 	}
 
-	const showMore = () => {
-		if (media.length < totalResults) {
-			setPage(prev => prev + 1);
-		}
-	}
-
 	useEffect(() => {
 		fetchFilms();
 	}, [mediaType, mediaCategory, page, dispatch]);
@@ -93,21 +86,12 @@ const MediaList: FC<IMediaList> = ({
 					/>
 				))}
 			</ul>
-			{isMediaLoading && (
-				<MediaLoader
-					isLoading
-					width="50"
-					height="50"
-				/>
-			)}
-			{(media.length < totalResults) && (
-				<Button
-					className="films__show-more"
-					onClick={showMore}
-				>
-					{!isMediaLoading && "Show more"}
-				</Button>
-			)}
+			<LoadMore
+				currentLengthMedia={media.length}
+				totalResultsMedia={totalResults}
+				isMediaLoading={isMediaLoading}
+				setPage={setPage}
+			/>
 		</>
 	);
 }
