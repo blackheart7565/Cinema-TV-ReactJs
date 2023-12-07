@@ -6,7 +6,7 @@ import { mediaConfig } from "../../../api/config/media.config";
 import mediaApi from "../../../api/modules/media.api";
 import { useReducer } from "../../../hooks/reducer.hook";
 import { IVariant, VariantSlideEnum } from "../../../types/component.types";
-import { IResponseMediasListResult } from "../../../types/media.types";
+import { IResponseMediasListResult, IResponseMediasListResultMovie, IResponseMediasListResultSerials } from "../../../types/media.types";
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -15,8 +15,8 @@ import 'swiper/css/scrollbar';
 import "./Swiper.scss";
 
 interface IPopularMediaSwiper {
-	children?: ReactNode;
 	variant?: IVariant;
+	children?: ReactNode;
 }
 
 export const PopularMediaSwiper: FC<IPopularMediaSwiper> = ({
@@ -28,12 +28,12 @@ export const PopularMediaSwiper: FC<IPopularMediaSwiper> = ({
 
 	const fetchData = async () => {
 		dispatch(actions.setIsLoading(true));
-		const responseMovie = await mediaApi.getList({
+		const { data: responseMovie } = await mediaApi.getList<IResponseMediasListResultMovie>({
 			mediaType: mediaConfig.types.movie,
 			mediaCategory: mediaConfig.category.popular,
 			page: "1",
 		});
-		const responseSerials = await mediaApi.getList({
+		const { data: responseSerials } = await mediaApi.getList<IResponseMediasListResultSerials>({
 			mediaType: mediaConfig.types.tv,
 			mediaCategory: mediaConfig.category.popular,
 			page: "1",

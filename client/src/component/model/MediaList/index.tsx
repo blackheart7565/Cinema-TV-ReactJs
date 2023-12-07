@@ -4,6 +4,9 @@ import "./MediaList.scss";
 
 interface IMediaList {
 	children: ReactNode;
+	// mediaType: string;
+	// mediaCategory: string;
+	// page: number;
 }
 
 const MediaList: FC<IMediaList> = ({

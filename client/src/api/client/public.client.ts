@@ -7,7 +7,9 @@ const publicAxios = axios.create({
 });
 
 publicAxios.interceptors.response.use(res => {
-	if (res && res.data) return res.data;
+	if (res && res.data) {
+		return res
+	};
 	return res;
 }, (err) => {
 	throw err.response.data;

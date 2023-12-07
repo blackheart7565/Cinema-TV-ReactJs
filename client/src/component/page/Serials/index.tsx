@@ -14,7 +14,7 @@ import "./Serials.scss";
 interface ISerials { }
 
 const Serials: FC<ISerials> = () => {
-	const [films, setFilms] = useState<IResponseMediasListResultSerials[]>([]);
+	const [serials, setSerials] = useState<IResponseMediasListResultSerials[]>([]);
 	const [page, setPage] = useState<number>(1);
 	const [totalResults, setTotalResults] = useState<number>(0);
 	const [isMediaLoading, setIsMediaLoading] = useState<boolean>(false);
@@ -28,7 +28,7 @@ const Serials: FC<ISerials> = () => {
 		if (page === 1) dispatch(actions.setIsLoading(true));
 		setIsMediaLoading(true);
 
-		const response = await mediaApi.getList({
+		const { data } = await mediaApi.getList<IResponseMediasListResultSerials>({
 			mediaType,
 			mediaCategory,
 			page: page
@@ -38,15 +38,15 @@ const Serials: FC<ISerials> = () => {
 		dispatch(actions.setIsLoading(false));
 
 		if (page === 1) {
-			setFilms(response.results);
-			setTotalResults(response.total_results);
+			setSerials(data.results);
+			setTotalResults(data.total_results);
 		} else {
-			setFilms(prev => [...prev, ...response.results]);
+			setSerials(prev => [...prev, ...data.results]);
 		}
 	}
 
 	const showMore = () => {
-		if (films.length < totalResults) {
+		if (serials.length < totalResults) {
 			setPage(prev => prev + 1);
 		}
 	}
@@ -58,7 +58,7 @@ const Serials: FC<ISerials> = () => {
 	return (
 		<div className="serials">
 			<MediaList>
-				{films.map((item, index) => (
+				{serials.map((item, index) => (
 					<MMediaItem
 						key={item.id + index}
 						posterImage={item.poster_path || item.backdrop_path}
@@ -75,7 +75,7 @@ const Serials: FC<ISerials> = () => {
 					height="50"
 				/>
 			)}
-			{(films.length < totalResults) && (
+			{(serials.length < totalResults) && (
 				<Button
 					className="films__show-more"
 					onClick={showMore}

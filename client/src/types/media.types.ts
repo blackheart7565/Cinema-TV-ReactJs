@@ -16,9 +16,9 @@ export interface IMediaSearch extends IMedia, IMediaPage {
 	query: string;
 }
 
-export interface IResponseMediasList {
+export interface IResponseMediasList<T extends IResponseMediasListResult> {
 	page: number
-	results: IResponseMediasListResult[]
+	results: T[];
 	total_pages: number
 	total_results: number
 }
@@ -72,6 +72,6 @@ export interface Dates {
 	minimum: string
 }
 
-export interface IResponseMediasListPlayingNow extends IResponseMediasList {
+export interface IResponseMediasListPlayingNow<T extends IResponseMediasListResult> extends IResponseMediasList<T> {
 	dates: Dates;
 }

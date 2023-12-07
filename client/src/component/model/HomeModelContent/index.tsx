@@ -32,14 +32,14 @@ const HomeModelContent: FC<IHomeModelContent> = ({
 
 	const fetchData = async () => {
 		dispatch(actions.setIsLoading(true));
-		const response = await MediaApi.getList({
+		const { data } = await MediaApi.getList({
 			mediaType,
 			mediaCategory,
 			page: "1",
 		});
 		dispatch(actions.setIsLoading(false));
 
-		if (response && response.results) setMediaList(response.results);
+		if (data && data.results) setMediaList(data.results);
 	}
 
 	useEffect(() => {

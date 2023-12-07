@@ -28,7 +28,7 @@ const Films: FC<IFilms> = () => {
 		if (page === 1) dispatch(actions.setIsLoading(true));
 		setIsMediaLoading(true);
 
-		const response = await mediaApi.getList({
+		const { data } = await mediaApi.getList<IResponseMediasListResultMovie>({
 			mediaType,
 			mediaCategory,
 			page: page
@@ -38,10 +38,10 @@ const Films: FC<IFilms> = () => {
 		dispatch(actions.setIsLoading(false));
 
 		if (page === 1) {
-			setFilms(response.results);
-			setTotalResults(response.total_results);
+			setFilms(data.results);
+			setTotalResults(data.total_results);
 		} else {
-			setFilms(prev => [...prev, ...response.results]);
+			setFilms(prev => [...prev, ...data.results]);
 		}
 	}
 

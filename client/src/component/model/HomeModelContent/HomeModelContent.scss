@@ -68,7 +68,7 @@
 
 		&-card {
 			display: block;
-			width: calc(var(--index) * 8);
+			width: calc(var(--index) * 7);
 			background-color: $white;
 			transform: rotate(5deg);
 			transition: all 0.3s ease-in-out;
