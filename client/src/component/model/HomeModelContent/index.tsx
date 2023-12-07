@@ -2,9 +2,9 @@ import { FC, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { mediaConfig } from "../../../api/config/media.config";
-import MediaApi from "../../../api/modules/media.api";
+import mediaApi from "../../../api/modules/media.api";
 import { useReducer } from "../../../hooks/reducer.hook";
-import { IResponseMediasListResult } from "../../../types/media.types";
+import { IResponseMediasListResult, IResponseMediasListValidationType } from "../../../types/media.types";
 
 import "./HomeModelContent.scss";
 
@@ -15,6 +15,8 @@ interface IHomeModelContent {
 	mediaType: string;
 	mediaCategory: string;
 }
+
+const page: number = 1;
 
 const HomeModelContent: FC<IHomeModelContent> = ({
 	title,
@@ -30,21 +32,22 @@ const HomeModelContent: FC<IHomeModelContent> = ({
 	const classPrefixLow = classPrefix.toLowerCase();
 	const className = `${classPrefixLow}__model`;
 
-	const fetchData = async () => {
-		dispatch(actions.setIsLoading(true));
-		const { data } = await MediaApi.getList({
-			mediaType,
-			mediaCategory,
-			page: "1",
-		});
-		dispatch(actions.setIsLoading(false));
-
-		if (data && data.results) setMediaList(data.results);
-	}
 
 	useEffect(() => {
+		const fetchData = async () => {
+			dispatch(actions.setIsLoading(true));
+			const { data } = await mediaApi.getList<IResponseMediasListValidationType<typeof mediaType>>({
+				mediaType,
+				mediaCategory,
+				page: page,
+			});
+			dispatch(actions.setIsLoading(false));
+
+			if (data && data.results) setMediaList(data.results);
+		}
+
 		fetchData();
-	}, [mediaType, mediaCategory, dispatch]);
+	}, [mediaType, mediaCategory, dispatch, actions]);
 
 	return (
 		<div className={`${className}`}>

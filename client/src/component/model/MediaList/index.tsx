@@ -26,30 +26,31 @@ const MediaList: FC<IMediaList> = ({
 	const { dispatch, actions } = useReducer();
 
 	// =========>Function<=========
-	const fetchFilms = async () => {
-		if (page === 1) dispatch(actions.setIsLoading(true));
-		setIsMediaLoading(true);
-
-		const { data } = await mediaApi.getList<IResponseMediasListValidationType<typeof type>>({
-			mediaType,
-			mediaCategory,
-			page: page
-		});
-
-		setIsMediaLoading(false);
-		dispatch(actions.setIsLoading(false));
-
-		if (page === 1) {
-			setMedia(data.results);
-			setTotalResults(data.total_results);
-		} else {
-			setMedia(prev => [...prev, ...data.results]);
-		}
-	}
 
 	useEffect(() => {
-		fetchFilms();
-	}, [mediaType, mediaCategory, page, dispatch]);
+		const fetchMedia = async () => {
+			if (page === 1) dispatch(actions.setIsLoading(true));
+			setIsMediaLoading(true);
+
+			const { data } = await mediaApi.getList<IResponseMediasListValidationType<typeof type>>({
+				mediaType,
+				mediaCategory,
+				page: page
+			});
+
+			setIsMediaLoading(false);
+			dispatch(actions.setIsLoading(false));
+
+			if (page === 1) {
+				setMedia(data.results);
+				setTotalResults(data.total_results);
+			} else {
+				setMedia(prev => [...prev, ...data.results]);
+			}
+		}
+
+		fetchMedia();
+	}, [mediaType, mediaCategory, page, dispatch, actions]);
 
 	return (
 		<>

@@ -1,4 +1,4 @@
-import { FC, ReactNode, useEffect, useState } from "react";
+import { FC, ReactNode, useEffect, useMemo, useState } from "react";
 import { EffectCoverflow } from 'swiper/modules';
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -14,45 +14,49 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import "./Swiper.scss";
 
+
 interface IPopularMediaSwiper {
 	variant?: IVariant;
 	children?: ReactNode;
 }
 
+const page: number = 1;
+
 export const PopularMediaSwiper: FC<IPopularMediaSwiper> = ({
-	variant,
+	variant = VariantSlideEnum.TEST,
 	children
 }) => {
 	const [popularMedia, setPopularMedia] = useState<IResponseMediasListResult[]>([]);
 	const { dispatch, actions } = useReducer();
 
-	const fetchData = async () => {
-		dispatch(actions.setIsLoading(true));
-		const { data: responseMovie } = await mediaApi.getList<IResponseMediasListResultMovie>({
-			mediaType: mediaConfig.types.movie,
-			mediaCategory: mediaConfig.category.popular,
-			page: "1",
-		});
-		const { data: responseSerials } = await mediaApi.getList<IResponseMediasListResultSerials>({
-			mediaType: mediaConfig.types.tv,
-			mediaCategory: mediaConfig.category.popular,
-			page: "1",
-		});
-		dispatch(actions.setIsLoading(false));
-
-		if (responseMovie.results || responseSerials.results) {
-			setPopularMedia([
-				...responseMovie.results,
-				...responseSerials.results,
-			]);
-		}
-	}
 
 	useEffect(() => {
-		fetchData();
-	}, [mediaConfig.types.movie, mediaConfig.category.popular, dispatch]);
+		const fetchData = async () => {
+			dispatch(actions.setIsLoading(true));
 
-	if (!variant) variant = VariantSlideEnum.TEST;
+			const { data: responseMovie } = await mediaApi.getList<IResponseMediasListResultMovie>({
+				mediaType: mediaConfig.types.movie,
+				mediaCategory: mediaConfig.category.popular,
+				page: page,
+			});
+			const { data: responseSerials } = await mediaApi.getList<IResponseMediasListResultSerials>({
+				mediaType: mediaConfig.types.tv,
+				mediaCategory: mediaConfig.category.popular,
+				page: page,
+			});
+
+			dispatch(actions.setIsLoading(false));
+
+			setPopularMedia([
+				...responseMovie?.results,
+				...responseSerials?.results,
+			]);
+		}
+
+		fetchData();
+	}, [dispatch, actions]);
+
+	const memoizedPopularMedia = useMemo(() => popularMedia, [popularMedia]);
 
 	return (
 		<div className="home__header-swiper">
@@ -65,7 +69,6 @@ export const PopularMediaSwiper: FC<IPopularMediaSwiper> = ({
 				loopAddBlankSlides={true}
 				effect={'coverflow'}
 				loop={true}
-				// freeMode={true}
 				spaceBetween={40}
 				speed={600}
 				coverflowEffect={{
@@ -95,7 +98,7 @@ export const PopularMediaSwiper: FC<IPopularMediaSwiper> = ({
 				}}
 			>
 				{(variant === VariantSlideEnum.DYNAMIC_LIST) && (
-					popularMedia?.map((slide) =>
+					memoizedPopularMedia?.map((slide) =>
 						<SwiperSlide key={slide.id}>
 							<img
 								className="swiper-img"
