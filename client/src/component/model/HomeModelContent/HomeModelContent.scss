@@ -85,6 +85,18 @@
 				width: calc(var(--index) * 11);
 			}
 
+			&:hover {
+				.media-card__details {
+					bottom: 4%;
+					opacity: 1;
+				}
+
+				.media-card__info,
+				.media-card__play {
+					opacity: 1;
+				}
+			}
+
 			&-img {
 				width: 100%;
 				height: 100%;

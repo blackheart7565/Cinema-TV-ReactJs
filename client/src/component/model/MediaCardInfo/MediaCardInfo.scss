@@ -1,0 +1,104 @@
+//~~
+
+@import "../../../styles/vars.scss";
+@import "../../../styles/mixin.scss";
+
+.media-card {
+	$self: &;
+
+	&__info {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		opacity: 0;
+		background: rgba(19, 20, 31, 0.7);
+		transition: itemTransitionHover(opacity);
+		z-index: 100;
+
+		@media screen and (max-width: 960px) {
+			opacity: 1;
+			background: rgba(19, 20, 31, 0.3);
+
+			#{$self}__details {
+				opacity: 1;
+				bottom: 4%;
+			}
+		}
+	}
+
+	&__content {}
+
+	&__season {}
+
+	&__episode {}
+
+	&__play {
+		width: 4vw;
+		height: 4vw;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		opacity: 0;
+		transform: translate(-50%, -50%);
+		transition: itemTransitionHover(opacity);
+
+		@media screen and (max-width: 960px) {
+			display: none;
+		}
+
+		&>img {
+			width: 100%;
+			height: 100%;
+		}
+
+		&-icon {}
+	}
+
+	&__details {
+		position: absolute;
+		bottom: -5px;
+		left: 0;
+		opacity: 0;
+		transition: itemTransitionHover(bottom), itemTransitionHover(opacity);
+	}
+
+	&__rating,
+	&__title,
+	&__year {
+		padding: 1% 7%;
+	}
+
+	&__rating {
+		display: flex;
+		font-size: calc(var(--index) * 0.6);
+	}
+
+	&__title {
+		font-size: 0.9vw;
+		letter-spacing: 2px;
+		font-weight: 700;
+
+		@media screen and (max-width: 960px) {
+			font-size: 1.5vw;
+			font-weight: 700;
+		}
+
+		@media screen and (max-width: 660px) {
+			font-size: 2.5vw;
+			font-weight: 700;
+		}
+	}
+
+	&__year {
+		font-size: 1vw;
+		color: $white;
+		font-weight: 700;
+		letter-spacing: 4px;
+
+		@media screen and (max-width: 960px) {
+			display: none;
+		}
+	}
+}

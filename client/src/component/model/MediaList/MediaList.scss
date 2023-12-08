@@ -30,13 +30,13 @@
 		overflow: hidden;
 
 		&:hover {
-			#{$self}-details {
+			.media-card__details {
 				bottom: 4%;
 				opacity: 1;
 			}
 
-			#{$self}-info,
-			#{$self}-play {
+			.media-card__info,
+			.media-card__play {
 				opacity: 1;
 			}
 
@@ -60,98 +60,10 @@
 			}
 		}
 
-		&-info {
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			opacity: 0;
-			background: rgba(19, 20, 31, 0.7);
-			transition: itemTransitionHover(opacity);
-			z-index: 100;
-
-			@media screen and (max-width: 960px) {
-				opacity: 1;
-				background: rgba(19, 20, 31, 0.3);
-
-				& #{$self}-details {
-					opacity: 1;
-					bottom: 5%;
-				}
-			}
-		}
-
 		&-img {
 			width: 100%;
 			height: 100%;
 			transition: itemTransitionHover(transform);
-		}
-
-		&-play {
-			width: 4vw;
-			height: 4vw;
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			opacity: 0;
-			transform: translate(-50%, -50%);
-			transition: itemTransitionHover(opacity);
-
-			@media screen and (max-width: 960px) {
-				display: none;
-			}
-
-			&>img {
-				width: 100%;
-				height: 100%;
-			}
-		}
-
-		&-details {
-			position: absolute;
-			bottom: -5px;
-			left: 0;
-			opacity: 0;
-			transition: itemTransitionHover(bottom), itemTransitionHover(opacity);
-		}
-
-		&-rating,
-		&-title,
-		&-year {
-			padding: 1% 7%;
-		}
-
-		&-rating {
-			display: flex;
-			font-size: calc(var(--index) * 0.6);
-		}
-
-		&-title {
-			font-size: 1vw;
-			letter-spacing: 2px;
-			font-weight: 700;
-
-			@media screen and (max-width: 960px) {
-				font-size: 1.5vw;
-				font-weight: 700;
-			}
-
-			@media screen and (max-width: 660px) {
-				font-size: 2.5vw;
-				font-weight: 700;
-			}
-		}
-
-		&-year {
-			font-size: 1vw;
-			color: $white;
-			font-weight: 700;
-			letter-spacing: 4px;
-
-			@media screen and (max-width: 960px) {
-				display: none;
-			}
 		}
 	}
 }

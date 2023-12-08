@@ -1,4 +1,5 @@
 import { FC, ReactNode, useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import { SwiperSlide } from "swiper/react";
 
 import { mediaConfig } from "../../../api/config/media.config";
@@ -65,11 +66,13 @@ export const PopularMediaSwiper: FC<IPopularMediaSwiper> = ({
 				{(variant === VariantSlideEnum.DYNAMIC_LIST) && (
 					memoizedPopularMedia?.map((slide) =>
 						<SwiperSlide key={slide.id}>
-							<img
-								className="swiper-img"
-								src={mediaConfig.methods.poster_path(slide.poster_path || slide.backdrop_path)}
-								alt="media-popular-img"
-							/>
+							<Link to={"/"} className="swiper__link">
+								<img
+									className="swiper-img"
+									src={mediaConfig.methods.poster_path(slide.poster_path || slide.backdrop_path)}
+									alt="media-popular-img"
+								/>
+							</Link>
 						</SwiperSlide>
 					)
 				)}

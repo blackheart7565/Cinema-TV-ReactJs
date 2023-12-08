@@ -4,8 +4,9 @@ import { Link } from "react-router-dom";
 import { mediaConfig } from "../../../api/config/media.config";
 import mediaApi from "../../../api/modules/media.api";
 import { useReducer } from "../../../hooks/reducer.hook";
-import { IResponseMediasListResult, IResponseMediasListValidationType } from "../../../types/media.types";
+import { IResponseMediasListResultMovie, IResponseMediasListResultSerials, IResponseMediasListValidationType } from "../../../types/media.types";
 
+import MediaCardInfo from "../MediaCardInfo";
 import "./HomeModelContent.scss";
 
 interface IHomeModelContent {
@@ -25,7 +26,8 @@ const HomeModelContent: FC<IHomeModelContent> = ({
 	mediaType,
 	mediaCategory,
 }) => {
-	const [mediaList, setMediaList] = useState<IResponseMediasListResult[]>([]);
+	const type = mediaType === "movie" ? "movie" : "tv";
+	const [mediaList, setMediaList] = useState<IResponseMediasListValidationType<typeof type>[]>([]);
 	const { dispatch, actions } = useReducer();
 
 	const titleLow = title.toLowerCase();
@@ -37,7 +39,7 @@ const HomeModelContent: FC<IHomeModelContent> = ({
 		const fetchData = async () => {
 			dispatch(actions.setIsLoading(true));
 
-			const { data } = await mediaApi.getList<IResponseMediasListValidationType<typeof mediaType>>({
+			const { data } = await mediaApi.getList<IResponseMediasListValidationType<typeof type>>({
 				mediaType,
 				mediaCategory,
 				page: page,
@@ -60,7 +62,7 @@ const HomeModelContent: FC<IHomeModelContent> = ({
 				<div className={`${className}-section`}>
 					<ul className={`${className}-cards`}>
 						{
-							mediaList.slice(0, 6).map((item) => (
+							mediaList.slice(0, 6).map((item: IResponseMediasListValidationType<typeof type>) => (
 								<Link
 									className={`${className}-card`}
 									key={item.id}
@@ -70,6 +72,23 @@ const HomeModelContent: FC<IHomeModelContent> = ({
 										className={`${className}-card-img`}
 										src={mediaConfig.methods.poster_path(item.poster_path || item.backdrop_path)}
 										alt={`${titleLow}-card-img`}
+									/>
+									<MediaCardInfo
+										isIconPlay={false}
+										name={
+											mediaType === 'movie'
+												? (
+													(item as IResponseMediasListResultMovie).title
+													|| (item as IResponseMediasListResultMovie).original_title
+												)
+												: mediaType === "tv"
+													? (
+														(item as IResponseMediasListResultSerials).name
+														|| (item as IResponseMediasListResultSerials).original_name
+													)
+													: null
+										}
+										rating={item.vote_average}
 									/>
 								</Link>
 							))
@@ -97,6 +116,23 @@ const HomeModelContent: FC<IHomeModelContent> = ({
 										className={`${className}-card-img`}
 										src={mediaConfig.methods.poster_path(item.poster_path || item.backdrop_path)}
 										alt={`${titleLow}-card-img`}
+									/>
+									<MediaCardInfo
+										isIconPlay={false}
+										name={
+											mediaType === 'movie'
+												? (
+													(item as IResponseMediasListResultMovie).title
+													|| (item as IResponseMediasListResultMovie).original_title
+												)
+												: mediaType === "tv"
+													? (
+														(item as IResponseMediasListResultSerials).name
+														|| (item as IResponseMediasListResultSerials).original_name
+													)
+													: null
+										}
+										rating={item.vote_average}
 									/>
 								</Link>
 							))

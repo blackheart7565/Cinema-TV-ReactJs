@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { motion } from "framer-motion";
 import { mediaConfig } from "../../../../api/config/media.config";
-import Rating from "../../Rating";
+import MediaCardInfo from "../../MediaCardInfo";
 
 interface IMediaItem {
 	posterImage: string | undefined;
@@ -30,24 +30,14 @@ export const MediaItem: FC<IMediaItem> = forwardRef<HTMLAnchorElement, IMediaIte
 				alt="media-list-poster"
 			/>
 			{/* <FavoriteIcon /> */}
-			<div className="media-list__link-info">
-				<div className="media-list__link-media-content">
-					<div className="films__link-season">{season}</div>
-					<div className="films__link-episode">{episode}</div>
-				</div>
-				<div className="media-list__link-play">
-					<img className="media-list__link-play-icon" src="/path/films/play-icon.png" alt="play-icon" />
-				</div>
-				<div className="media-list__link-details">
-					<div className="media-list__link-rating">
-						{rating && (
-							<Rating rating={rating} />
-						)}
-					</div>
-					<p className="media-list__link-title">{name}</p>
-					<p className="media-list__link-year">{year}</p>
-				</div>
-			</div>
+			<MediaCardInfo
+				isIconPlay
+				name={name}
+				rating={rating}
+				year={year}
+				season={season}
+				episode={episode}
+			/>
 		</Link>
 	);
 });
