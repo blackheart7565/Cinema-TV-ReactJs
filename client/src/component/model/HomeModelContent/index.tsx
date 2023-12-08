@@ -116,7 +116,6 @@ const HomeModelContent: FC<IHomeModelContent> = ({
 										src={mediaConfig.methods.poster_path(item.poster_path || item.backdrop_path)}
 										alt={`${titleLow}-card-img`}
 									/>
-
 									<MediaCardInfo
 										isIconPlay={false}
 										name={
