@@ -67,27 +67,32 @@ export interface Genre {
 	id: number
 	name: string
 }
+
 export interface ProductionCompany {
 	id: number
 	logo_path: string
 	name: string
 	origin_country: string
 }
+
 export interface ProductionCountry {
 	iso_3166_1: string
 	name: string
 }
+
 export interface SpokenLanguage {
 	english_name: string
 	iso_639_1: string
 	name: string
 }
+
 export interface Images {
 	backdrops: Backdrop[]
 	id: number
 	logos: Logo[]
 	posters: Poster[]
 }
+
 export interface Backdrop {
 	aspect_ratio: number
 	height: number
@@ -97,6 +102,7 @@ export interface Backdrop {
 	vote_count: number
 	width: number
 }
+
 export interface Logo {
 	aspect_ratio: number
 	height: number
@@ -106,6 +112,7 @@ export interface Logo {
 	vote_count: number
 	width: number
 }
+
 export interface Poster {
 	aspect_ratio: number
 	height: number
@@ -115,11 +122,13 @@ export interface Poster {
 	vote_count: number
 	width: number
 }
+
 export interface Credits {
 	id: number
 	cast: Cast[]
 	crew: Crew[]
 }
+
 export interface Cast {
 	adult: boolean
 	gender: number
@@ -134,6 +143,7 @@ export interface Cast {
 	credit_id: string
 	order: number
 }
+
 export interface Crew {
 	adult: boolean
 	gender: number
@@ -147,10 +157,12 @@ export interface Crew {
 	department: string
 	job: string
 }
+
 export interface Videos {
 	id: number
 	results: IMediaDetailsVideoResult[]
 }
+
 export interface IMediaDetailsVideoResult {
 	iso_639_1: string
 	iso_3166_1: string
@@ -163,6 +175,7 @@ export interface IMediaDetailsVideoResult {
 	published_at: string
 	id: string
 }
+
 export interface CreatedBy {
 	id: number
 	credit_id: string
