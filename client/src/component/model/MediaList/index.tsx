@@ -58,6 +58,7 @@ const MediaList: FC<IMediaList> = ({
 				{media.map((item: IResponseMediasListValidationType<typeof type>, index: number) => (
 					<MMediaItem
 						key={item.id + index}
+						path={`${mediaType}/${item.id}`}
 						posterImage={item.poster_path || item.backdrop_path}
 						name={
 							mediaType === 'movie'

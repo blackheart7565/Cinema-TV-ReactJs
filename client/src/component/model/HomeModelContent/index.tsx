@@ -66,7 +66,7 @@ const HomeModelContent: FC<IHomeModelContent> = ({
 								<Link
 									className={`${className}-card`}
 									key={item.id}
-									to={""}
+									to={`${mediaType}/${item.id}`}
 								>
 									<img
 										className={`${className}-card-img`}
@@ -110,7 +110,7 @@ const HomeModelContent: FC<IHomeModelContent> = ({
 								<Link
 									className={`${className}-card`}
 									key={item.id}
-									to={""}
+									to={`${mediaType}/${item.id}`}
 								>
 									<img
 										className={`${className}-card-img`}

@@ -12,6 +12,7 @@ interface IMediaItem {
 	rating?: string | number | undefined | null;
 	season?: string | number | undefined | null;
 	episode?: string | number | undefined | null;
+	path?: string | undefined
 }
 
 export const MediaItem: FC<IMediaItem> = forwardRef<HTMLAnchorElement, IMediaItem>(({
@@ -20,10 +21,15 @@ export const MediaItem: FC<IMediaItem> = forwardRef<HTMLAnchorElement, IMediaIte
 	year,
 	rating,
 	season,
-	episode
+	episode,
+	path
 }, ref) => {
 	return (
-		<Link to={""} className="media-list__link" ref={ref}>
+		<Link
+			className="media-list__link"
+			ref={ref}
+			to={path || ""}
+		>
 			<img
 				className="media-list__link-img"
 				src={mediaConfig.methods.poster_path(posterImage)}

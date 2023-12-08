@@ -4,9 +4,9 @@ import { useParams } from "react-router-dom";
 import { mediaConfig } from "../../../api/config/media.config";
 import mediaApi from "../../../api/modules/media.api";
 import { useReducer } from "../../../hooks/reducer.hook";
-import { IMediaDetailsHeaderProps } from "../../../types/media-types/details.type";
-import { IMediaDetailsRoot } from "../../../types/media.types";
+import { IMediaDetailsRoot } from "../../../types/media-types/details.type";
 import { IParams } from "../../../types/other.type";
+import MediaDetailsHeader from "../../Details/MediaDetailsHeader";
 
 import "./Details.scss";
 
@@ -50,17 +50,5 @@ const DetailsMedia: FC<IDetailsMediaProps> = ({
 		</>
 	);
 };
-
-
-const MediaDetailsHeader: FC<IMediaDetailsHeaderProps> = ({
-	src
-}) => {
-	return (
-		<div className="media-details__header" style={{
-			backgroundImage: `url(${src})`
-		}}>
-		</div>
-	);
-}
 
 export default DetailsMedia;
