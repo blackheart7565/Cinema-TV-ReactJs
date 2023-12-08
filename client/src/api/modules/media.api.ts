@@ -44,7 +44,7 @@ class MediaApi {
 			const response = await publicAxios.get(
 				mediaEndpoints.details({ mediaType, mediaId })
 			);
-			return response;
+			return { data: response.data };
 		} catch (error) {
 			return { error }
 		}
