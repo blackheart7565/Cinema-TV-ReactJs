@@ -65,7 +65,6 @@ const Home = () => {
 			setPlayingNowSerials(responseSerials.results);
 		})()
 	}, []);
-
 	return (
 		<div className="home">
 			<PopularMediaSwiper />
