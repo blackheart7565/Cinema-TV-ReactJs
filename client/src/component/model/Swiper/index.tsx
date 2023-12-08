@@ -1,19 +1,18 @@
 import { FC, ReactNode, useEffect, useMemo, useState } from "react";
-import { EffectCoverflow } from 'swiper/modules';
-import { Swiper, SwiperSlide } from "swiper/react";
+import { SwiperSlide } from "swiper/react";
 
 import { mediaConfig } from "../../../api/config/media.config";
 import mediaApi from "../../../api/modules/media.api";
 import { useReducer } from "../../../hooks/reducer.hook";
 import { IVariant, VariantSlideEnum } from "../../../types/component.types";
 import { IResponseMediasListResult, IResponseMediasListResultMovie, IResponseMediasListResultSerials } from "../../../types/media.types";
+import SwiperModel from "./SwiperModel";
 
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import "./Swiper.scss";
-
 
 interface IPopularMediaSwiper {
 	variant?: IVariant;
@@ -59,42 +58,9 @@ export const PopularMediaSwiper: FC<IPopularMediaSwiper> = ({
 
 	return (
 		<div className="home__header-swiper">
-			<Swiper
-				className="swiper"
-				grabCursor={true}
-				centeredSlides={true}
-				lazyPreloadPrevNext={5}
-				loopAdditionalSlides={5}
-				loopAddBlankSlides={true}
-				effect={'coverflow'}
-				loop={true}
+			<SwiperModel
 				spaceBetween={40}
 				speed={600}
-				coverflowEffect={{
-					rotate: 20,
-					stretch: 0,
-					depth: 200,
-					modifier: 1,
-					slideShadows: true,
-				}}
-				modules={[EffectCoverflow]}
-				breakpoints={{
-					1400: {
-						slidesPerView: 5,
-					},
-					1100: {
-						slidesPerView: 4,
-					},
-					900: {
-						slidesPerView: 3,
-					},
-					500: {
-						slidesPerView: 2,
-					},
-					320: {
-						slidesPerView: 1,
-					},
-				}}
 			>
 				{(variant === VariantSlideEnum.DYNAMIC_LIST) && (
 					memoizedPopularMedia?.map((slide) =>
@@ -107,7 +73,6 @@ export const PopularMediaSwiper: FC<IPopularMediaSwiper> = ({
 						</SwiperSlide>
 					)
 				)}
-				{(variant === VariantSlideEnum.CHILDREN) && children}
 				{(variant === VariantSlideEnum.TEST) && (
 					<>
 						<SwiperSlide>
@@ -172,7 +137,7 @@ export const PopularMediaSwiper: FC<IPopularMediaSwiper> = ({
 						</SwiperSlide>
 					</>
 				)}
-			</Swiper>
+			</SwiperModel>
 		</div>
 	);
 };

@@ -50,7 +50,7 @@
 			display: grid;
 			grid-template-columns: repeat(3, 1fr);
 			column-gap: 40px;
-			row-gap: 170px;
+			row-gap: 150px;
 
 			@media screen and (max-width: 1250px) {
 				row-gap: 130px;

@@ -19,7 +19,6 @@ const Home = () => {
 		'/path/home/serials_2.png'
 	];
 
-
 	return (
 		<div className="home">
 			<PopularMediaSwiper variant="DYNAMIC_LIST" />
