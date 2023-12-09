@@ -1,4 +1,5 @@
 import { FC } from "react";
+
 import { IMediaDetailsHeaderProps } from "../../../types/media-types/details.type";
 
 const MediaDetailsHeader: FC<IMediaDetailsHeaderProps> = ({
