@@ -10,6 +10,7 @@ import Registration from "../page/Registration";
 import Serials from "../page/Serials";
 import FilmsLayout from "./FilmsLayout";
 import Layout from "./Layout";
+import PageNotFound from "./PageNotFound";
 import SerialsLayout from "./SerialsLayout";
 
 const AppRouters = () => {
@@ -32,19 +33,7 @@ const AppRouters = () => {
 					</Route>
 					<Route path={":mediaType/:mediaId"} element={<DetailsMedia />} />
 				</Route>
-				<Route path="/*" element={
-					<div style={{
-						display: "flex",
-						justifyContent: "center",
-						alignItems: "center",
-						height: "100vh",
-						color: "#FFF",
-					}}>
-						<h1>
-							Такой страницы не существует
-						</h1>
-					</div>
-				} />
+				<Route path="/*" element={<PageNotFound />} />
 			</Routes>
 		</>
 	);
