@@ -1,0 +1,36 @@
+//~~
+
+[class*="-row"] {
+	display: flex;
+	align-items: center;
+	color: #FFF;
+	font-weight: 700;
+	letter-spacing: 2px;
+}
+
+[class*="-title"] {
+	margin-right: 10px;
+	align-self: flex-start;
+}
+
+[class*="-title-padding"] {
+	padding-top: 5px;
+}
+
+[class*="-text"] {
+	color: #DA0027;
+}
+
+[class*="-list"] {
+	display: flex;
+	gap: 10px;
+	flex-wrap: wrap;
+}
+
+[class*="-item"] {
+	font-size: 12px;
+	border-radius: 50px;
+	background-color: #DA0027;
+	padding: 7px 25px;
+	text-wrap: nowrap;
+}
