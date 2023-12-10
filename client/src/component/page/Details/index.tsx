@@ -20,6 +20,10 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 	const { dispatch, actions } = useReducer();
 
 	useEffect(() => {
+		window.scrollTo(0, 0)
+	}, [])
+
+	useEffect(() => {
 		const getDetails = async () => {
 			if (!mediaType || !mediaId) return;
 
@@ -35,7 +39,7 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 		getDetails();
 	}, [mediaType, mediaId]);
 
-	// console.log(details);
+	console.log(details);
 
 	return (
 		<>
@@ -84,6 +88,9 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 											)
 											: null
 								)}
+								genres={(
+									details.genres.map(item => item.name)
+								)}
 								countries={details?.production_countries.map(item => item.name)}
 								rating={details.vote_average}
 								voteCount={details.vote_count}
@@ -101,6 +108,23 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 											: null
 								)}
 							/>
+
+							<div className="media-details__actors">
+								<p className="media-details__actors-title" style={{
+									color: "#FFF",
+								}}>Actors:</p>
+								<div className="media-details__actors-list">
+									<div style={{ width: "150px", height: "200px", background: "#FFF" }}></div>
+									<div style={{ width: "150px", height: "200px", background: "#FFF" }}></div>
+									<div style={{ width: "150px", height: "200px", background: "#FFF" }}></div>
+									<div style={{ width: "150px", height: "200px", background: "#FFF" }}></div>
+									<div style={{ width: "150px", height: "200px", background: "#FFF" }}></div>
+									<div style={{ width: "150px", height: "200px", background: "#FFF" }}></div>
+									<div style={{ width: "150px", height: "200px", background: "#FFF" }}></div>
+									<div style={{ width: "150px", height: "200px", background: "#FFF" }}></div>
+								</div>
+							</div>
+
 						</div>
 					</div>
 				)

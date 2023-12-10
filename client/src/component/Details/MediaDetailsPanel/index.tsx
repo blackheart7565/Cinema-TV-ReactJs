@@ -17,6 +17,7 @@ interface IMediaDetailsPanelProps {
 	voteCount?: number | undefined | null;
 	description?: string | undefined | null;
 	status?: string | undefined | null;
+	genres?: string[] | undefined | null;
 }
 
 const MediaDetailsPanel: FC<IMediaDetailsPanelProps> = ({
@@ -30,16 +31,22 @@ const MediaDetailsPanel: FC<IMediaDetailsPanelProps> = ({
 	duration,
 	voteCount,
 	description,
-	status
+	status,
+	genres,
 }) => {
 	return (
 		<>
 			<div className="media-details__film-panel">
 				<MediaDetailsPost src={src} />
-
 				<section className="media-details__info">
 					<h2 className="media-details__title">{title}</h2>
 					<h3 className="media-details__original-title">{originalTitle}</h3>
+
+					<MediaDetailsInfoRow
+						className="media-details__genres"
+						value={genres}
+						title={"Genre"}
+					/>
 
 					<div className="media-details__content">
 						<div className="media-details__content-left">
@@ -87,21 +94,22 @@ const MediaDetailsPanel: FC<IMediaDetailsPanelProps> = ({
 
 						</div>
 						<div className="media-details__content-right">
-							<div className="media-details__rating">
-								{rating && (
-									<Rating rating={rating} />
-								)}
+							<div className="media-details__rating-container">
+								<div className="media-details__rating">
+									{rating && (
+										<Rating rating={rating} />
+									)}
+								</div>
+								<div className="media-details__rating-number">
+									<span className="media-details__rating-selector-1">{Number(rating).toFixed(1)}</span>
+									<span className="media-details__rating-selector-2">/10</span>
+								</div>
 							</div>
 							<MediaDetailsInfoRow
 								className={"media-details__status"}
 								value={status}
 								title={"Status"} />
 						</div>
-					</div>
-
-					<div className="media-details__actors">
-						<p className="media-details__actors-title"></p>
-						<div className="media-details__actors-list"></div>
 					</div>
 
 				</section>
