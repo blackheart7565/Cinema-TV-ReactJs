@@ -4,14 +4,12 @@ import { useParams } from "react-router-dom";
 import { mediaConfig } from "../../../api/config/media.config";
 import mediaApi from "../../../api/modules/media.api";
 import { useReducer } from "../../../hooks/reducer.hook";
-import { Crew, IActor, IMediaDetailsPanelProps, IResponseMediaDetailsValidationRoot, ProductionCountry } from "../../../types/media-types/details.type";
+import { IActor, IResponseMediaDetailsValidationRoot } from "../../../types/media-types/details.type";
 import { IParams } from "../../../types/other.type";
 import MediaDetailsHeader from "../../Details/MediaDetailsHeader";
 import MediaDetailsPanel from "../../Details/MediaDetailsPanel";
 
-import TimeFormat from "../../../utils/TimeFormat";
 import MediaDetailsSwiperListActors from "../../Details/MediaDetailsSwiperListActors/inidex";
-import Rating from "../../model/Rating";
 import "./Details.scss";
 
 interface IDetailsMediaProps { }
@@ -42,7 +40,7 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 		getDetails();
 	}, [mediaType, mediaId]);
 
-	// console.log(details);
+	console.log(details);
 
 	return (
 		<>
