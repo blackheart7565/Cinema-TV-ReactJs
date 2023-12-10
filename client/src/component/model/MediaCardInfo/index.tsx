@@ -34,7 +34,7 @@ const MediaCardInfo: FC<IMediaCardInfoProps> = ({
 				)}
 				<div className="media-card__details">
 					<div className="media-card__rating">
-						{rating && (
+						{rating !== undefined && rating !== null && (
 							<Rating rating={rating} />
 						)}
 					</div>

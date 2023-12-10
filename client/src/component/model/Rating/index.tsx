@@ -13,6 +13,7 @@ const Rating: FC<IRatingStar> = ({
 	const fullStar = Math.floor(rating);
 	const halfStar = rating % 1 !== 0;
 
+	const maxSizeArray = Array(maxSize);
 	const fullStarArr = Array(fullStar);
 	const emptyStarArr = Array(maxSize - fullStar - (halfStar ? 1 : 0));
 

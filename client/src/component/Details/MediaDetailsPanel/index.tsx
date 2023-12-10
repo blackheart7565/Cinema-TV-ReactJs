@@ -84,7 +84,13 @@ const MediaDetailsPanel: FC<IMediaDetailsPanelProps> = ({
 
 							<MediaDetailsInfoRow
 								className={"media-details__vote-count"}
-								value={`${voteCount} голосов`}
+								value={(
+									voteCount === 1
+										? `${voteCount} голос`
+										: (voteCount && (voteCount > 1 || voteCount <= 4))
+											? `${voteCount} голосa`
+											: `${voteCount} голосов`
+								)}
 								title={"Vote count"} />
 
 							<MediaDetailsInfoRow
@@ -96,7 +102,7 @@ const MediaDetailsPanel: FC<IMediaDetailsPanelProps> = ({
 						<div className="media-details__content-right">
 							<div className="media-details__rating-container">
 								<div className="media-details__rating">
-									{rating && (
+									{rating !== undefined && rating !== null && (
 										<Rating rating={rating} />
 									)}
 								</div>
