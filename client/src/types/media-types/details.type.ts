@@ -18,7 +18,6 @@ export interface IMediaDetailsPanelProps {
 	rating?: string | number | undefined | null;
 	duration?: number | number[] | undefined | null;
 }
-
 // ====================> Media Details API<====================
 
 export interface IMediaDetailsRoot<TDetails extends string> {
