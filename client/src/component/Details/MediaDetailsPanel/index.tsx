@@ -63,20 +63,23 @@ const MediaDetailsPanel: FC<IMediaDetailsPanelProps> = ({
 												: null
 								)}
 								title={"Duration"} />
+							{
+								directors && directors?.length > 0 && (
+									<MediaDetailsInfoRow
+										className={"media-details__director"}
+										value={directors}
+										title={"Director"} />
+								)
+							}
 
-							{directors && directors?.length > 0 && (
-								<MediaDetailsInfoRow
-									className={"media-details__director"}
-									value={directors}
-									title={"Director"} />
-							)}
-
-							{countries && countries.length > 0 && (
-								<MediaDetailsInfoRow
-									className={"media-details__countries"}
-									value={countries}
-									title={"Country"} />
-							)}
+							{
+								countries && countries.length > 0 && (
+									<MediaDetailsInfoRow
+										className={"media-details__countries"}
+										value={countries}
+										title={"Country"} />
+								)
+							}
 
 							<MediaDetailsInfoRow
 								className={"media-details__status"}
@@ -88,7 +91,7 @@ const MediaDetailsPanel: FC<IMediaDetailsPanelProps> = ({
 								value={description}
 								title={"Description"} />
 
-						</div>
+						</div >
 						<div className="media-details__content-right">
 							<div className="media-details__rating-container">
 								<div className="media-details__rating">
@@ -116,11 +119,10 @@ const MediaDetailsPanel: FC<IMediaDetailsPanelProps> = ({
 								className={"media-details__released"}
 								value={released}
 								title={"Released"} />
-						</div>
-					</div>
-
-				</section>
-			</div>
+						</div >
+					</div >
+				</section >
+			</div >
 		</>
 	)
 }
