@@ -1,21 +1,6 @@
 import { IResponseMediasListResult, IResponseMediasListResultMovie, IResponseMediasListResultSerials } from "../media.types";
 
 
-export interface IMediaDetailsHeaderProps {
-	src: string;
-}
-
-export interface IMediaDetailsPanelProps {
-	src: string;
-	title: string | null;
-	originalTitle: string | null;
-	directors?: Crew[] | undefined | null;
-	released?: string | undefined | null;
-	countries?: ProductionCountry[] | undefined | null;
-	rating?: string | number | undefined | null;
-	duration?: number | number[] | undefined | null;
-}
-
 // ====================> Media Details API<====================
 
 export interface IMediaDetailsRoot<TDetails extends string> {

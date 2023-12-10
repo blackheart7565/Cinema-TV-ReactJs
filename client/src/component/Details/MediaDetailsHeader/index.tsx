@@ -1,6 +1,8 @@
 import { FC } from "react";
 
-import { IMediaDetailsHeaderProps } from "../../../types/media-types/details.type";
+interface IMediaDetailsHeaderProps {
+	src: string;
+}
 
 const MediaDetailsHeader: FC<IMediaDetailsHeaderProps> = ({
 	src
