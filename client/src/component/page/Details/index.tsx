@@ -4,11 +4,12 @@ import { useParams } from "react-router-dom";
 import { mediaConfig } from "../../../api/config/media.config";
 import mediaApi from "../../../api/modules/media.api";
 import { useReducer } from "../../../hooks/reducer.hook";
-import { IResponseMediaDetailsValidationRoot } from "../../../types/media-types/details.type";
+import { IActor, IResponseMediaDetailsValidationRoot } from "../../../types/media-types/details.type";
 import { IParams } from "../../../types/other.type";
 import MediaDetailsHeader from "../../Details/MediaDetailsHeader";
-
 import MediaDetailsPanel from "../../Details/MediaDetailsPanel";
+
+import MediaDetailsSwiperListActors from "../../Details/MediaDetailsSwiperListActors/inidex";
 import "./Details.scss";
 
 interface IDetailsMediaProps { }
@@ -50,6 +51,12 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 						<div className="media-details__body">
 							<MediaDetailsPanel
 								src={mediaConfig.methods.poster_path(details.poster_path) || ""}
+								genres={details.genres.map(item => item.name)}
+								countries={details?.production_countries.map(item => item.name)}
+								rating={details.vote_average}
+								voteCount={details.vote_count}
+								status={details.status}
+								description={details.overview}
 								title={(
 									mediaType === "movie"
 										? (
@@ -88,14 +95,6 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 											)
 											: null
 								)}
-								genres={(
-									details.genres.map(item => item.name)
-								)}
-								countries={details?.production_countries.map(item => item.name)}
-								rating={details.vote_average}
-								voteCount={details.vote_count}
-								status={details.status}
-								description={details.overview}
 								duration={(
 									mediaType === "movie"
 										? (
@@ -109,21 +108,19 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 								)}
 							/>
 
-							<div className="media-details__actors">
-								<p className="media-details__actors-title" style={{
-									color: "#FFF",
-								}}>Actors:</p>
-								<div className="media-details__actors-list">
-									<div style={{ width: "150px", height: "200px", background: "#FFF" }}></div>
-									<div style={{ width: "150px", height: "200px", background: "#FFF" }}></div>
-									<div style={{ width: "150px", height: "200px", background: "#FFF" }}></div>
-									<div style={{ width: "150px", height: "200px", background: "#FFF" }}></div>
-									<div style={{ width: "150px", height: "200px", background: "#FFF" }}></div>
-									<div style={{ width: "150px", height: "200px", background: "#FFF" }}></div>
-									<div style={{ width: "150px", height: "200px", background: "#FFF" }}></div>
-									<div style={{ width: "150px", height: "200px", background: "#FFF" }}></div>
-								</div>
-							</div>
+							<MediaDetailsSwiperListActors
+								className="media-details__actors"
+								title="Actors:"
+								actors={
+									details.credits.cast.map(item => {
+										return {
+											id: item.id,
+											name: item.name,
+											pathImage: mediaConfig.methods.poster_path(item.profile_path),
+										} as IActor
+									})
+								}
+							/>
 
 						</div>
 					</div>
@@ -132,7 +129,5 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 		</>
 	);
 };
-
-
 
 export default DetailsMedia;

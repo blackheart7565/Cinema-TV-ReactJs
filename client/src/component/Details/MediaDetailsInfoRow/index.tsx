@@ -24,16 +24,16 @@ const MediaDetailsInfoRow: FC<IMediaDetailsInfoRowProps> = ({
 				(typeof value === "string")
 					? `${className}-title-r`
 					: (value instanceof Array)
-						? `${className}-title-r ${className}-title-padding`
+						? `${className}-title-r ${className}-title-padding-r`
 						: ""
 			}>
 				{title && title}:
 			</div>
 			<div className={
 				(typeof value === "string")
-					? `${className}-text`
+					? `${className}-text-r`
 					: (value instanceof Array)
-						? `${className}-list`
+						? `${className}-list-r`
 						: ""
 			}>
 				{
@@ -44,12 +44,12 @@ const MediaDetailsInfoRow: FC<IMediaDetailsInfoRowProps> = ({
 								value.map((item: string, index: number) => (
 									isLink
 										? (
-											<Link to={path || ""} key={index} className={`${className}-item`}>
+											<Link to={path || ""} key={index} className={`${className}-item-r`}>
 												{item}
 											</Link>
 										)
 										: (
-											<div key={index} className={`${className}-item`}>
+											<div key={index} className={`${className}-item-r`}>
 												{item}
 											</div>
 										)

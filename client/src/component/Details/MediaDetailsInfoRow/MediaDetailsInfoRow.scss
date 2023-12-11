@@ -21,11 +21,11 @@
 	}
 }
 
-[class*="-title-padding"] {
+[class*="-title-padding-r"] {
 	padding-top: 5px;
 }
 
-[class*="-text"] {
+[class*="-text-r"] {
 	color: #DA0027;
 
 	@media screen and (max-width: 480px) {
@@ -33,13 +33,13 @@
 	}
 }
 
-[class*="-list"] {
+[class*="-list-r"] {
 	display: flex;
 	gap: 10px;
 	flex-wrap: wrap;
 }
 
-[class*="-item"] {
+[class*="-item-r"] {
 	font-size: 12px;
 	border-radius: 50px;
 	background-color: #DA0027;

@@ -1,5 +1,12 @@
 import { IResponseMediasListResult, IResponseMediasListResultMovie, IResponseMediasListResultSerials } from "../media.types";
 
+// ====================> Media Details  All <====================
+
+export interface IActor {
+	id: number | string;
+	pathImage: string;
+	name: string;
+}
 
 // ====================> Media Details API<====================
 
