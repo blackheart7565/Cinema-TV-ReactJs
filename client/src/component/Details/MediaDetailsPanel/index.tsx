@@ -50,24 +50,6 @@ const MediaDetailsPanel: FC<IMediaDetailsPanelProps> = ({
 
 					<div className="media-details__content">
 						<div className="media-details__content-left">
-							{directors && directors?.length > 0 && (
-								<MediaDetailsInfoRow
-									className={"media-details__director"}
-									value={directors}
-									title={"Director"} />
-							)}
-
-							<MediaDetailsInfoRow
-								className={"media-details__released"}
-								value={released}
-								title={"Released"} />
-
-							{countries && countries.length > 0 && (
-								<MediaDetailsInfoRow
-									className={"media-details__countries"}
-									value={countries}
-									title={"Country"} />
-							)}
 
 							<MediaDetailsInfoRow
 								className={"media-details__duration"}
@@ -82,16 +64,24 @@ const MediaDetailsPanel: FC<IMediaDetailsPanelProps> = ({
 								)}
 								title={"Duration"} />
 
+							{directors && directors?.length > 0 && (
+								<MediaDetailsInfoRow
+									className={"media-details__director"}
+									value={directors}
+									title={"Director"} />
+							)}
+
+							{countries && countries.length > 0 && (
+								<MediaDetailsInfoRow
+									className={"media-details__countries"}
+									value={countries}
+									title={"Country"} />
+							)}
+
 							<MediaDetailsInfoRow
-								className={"media-details__vote-count"}
-								value={(
-									voteCount === 1
-										? `${voteCount} голос`
-										: (voteCount && (voteCount > 1 || voteCount <= 4))
-											? `${voteCount} голосa`
-											: `${voteCount} голосов`
-								)}
-								title={"Vote count"} />
+								className={"media-details__status"}
+								value={status}
+								title={"Status"} />
 
 							<MediaDetailsInfoRow
 								className={"media-details__description"}
@@ -112,9 +102,20 @@ const MediaDetailsPanel: FC<IMediaDetailsPanelProps> = ({
 								</div>
 							</div>
 							<MediaDetailsInfoRow
-								className={"media-details__status"}
-								value={status}
-								title={"Status"} />
+								className={"media-details__vote-count"}
+								value={(
+									voteCount === 1
+										? `${voteCount} голос`
+										: (voteCount && (voteCount > 1 || voteCount <= 4))
+											? `${voteCount} голосa`
+											: `${voteCount} голосов`
+								)}
+								title={"Vote count"} />
+
+							<MediaDetailsInfoRow
+								className={"media-details__released"}
+								value={released}
+								title={"Released"} />
 						</div>
 					</div>
 
