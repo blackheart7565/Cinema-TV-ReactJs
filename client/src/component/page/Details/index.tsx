@@ -130,6 +130,4 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 	);
 };
 
-
-
 export default DetailsMedia;

@@ -47,6 +47,7 @@
 		max-width: 1440px;
 		margin-inline: auto;
 		padding: 0 30px;
+		transition: itemTransitionHover(all);
 
 		@media screen and (max-width: 480px) {
 			padding: 0 20px;
@@ -296,46 +297,139 @@
 	&-list {
 		display: flex;
 		align-items: center;
-	}
+		// ===> Actors <===
 
-	&-swiper {
-		width: 100%;
-		height: max-content;
+		&__actors {
+			padding-top: 50px;
 
-		.swiper-wrapper {
-			padding: 10px 0;
+			&-header {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				// padding-right: 20px;
+			}
+
+			&-title {
+				font-size: 1.6vw;
+				font-weight: 400;
+				color: $accent-color;
+				padding: 7px 0;
+				letter-spacing: 5px;
+				font-family: $fontFamilyCyrillic;
+			}
+
+			&-navigation {
+				display: flex;
+				gap: 10px;
+				align-items: center;
+			}
+
+			&-btn-prev,
+			&-btn-next {
+				cursor: pointer;
+				position: relative;
+				background-color: $accent-color;
+				width: 50px;
+				height: 30px;
+				border-radius: 8px;
+				z-index: 3;
+			}
+
+			&-btn-prev {
+				span {
+					position: absolute;
+					width: 100%;
+				}
+			}
+
+			&-btn-next {}
+
+			&-list {
+				display: flex;
+				align-items: center;
+			}
+
+			&-swiper {
+				width: 100%;
+				height: max-content;
+
+				.swiper-wrapper {
+					padding: 10px 0;
+				}
+			}
+
+			&-swiper-item {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				width: 15% !important;
+			}
+
+			&-item {
+				display: flex;
+				width: 100%;
+				height: 100%;
+				border-radius: 8px;
+				overflow: hidden;
+				position: relative;
+
+				img {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+				}
+			}
+
+			&-img {}
+
+			&-info {
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+
+			&-name {}
 		}
-	}
 
-	&-swiper-item {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		width: 15% !important;
-	}
+		&-swiper {
+			width: 100%;
+			height: max-content;
 
-	&-item {
-		display: flex;
-		width: 100%;
-		height: 100%;
-		border-radius: 8px;
-		overflow: hidden;
-		position: relative;
+			.swiper-wrapper {
+				padding: 10px 0;
+			}
+		}
 
-		img {
+		&-swiper-item {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 15% !important;
+		}
+
+		&-item {
+			display: flex;
 			width: 100%;
 			height: 100%;
-			object-fit: cover;
+			border-radius: 8px;
+			overflow: hidden;
+			position: relative;
+
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
 		}
+
+		&-img {}
+
+		&-info {
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+
+		&-name {}
 	}
-
-	&-img {}
-
-	&-info {
-		position: absolute;
-		top: 0;
-		left: 0;
-	}
-
-	&-name {}
 }
