@@ -21,7 +21,7 @@ const Home = () => {
 
 	return (
 		<div className="home">
-			<PopularMediaSwiper variant="DYNAMIC_LIST" />
+			<PopularMediaSwiper />
 			<HomeModelContent
 				title="Anime"
 				classPrefix="home"

@@ -3,19 +3,21 @@ import { EffectCoverflow } from "swiper/modules";
 import { Swiper } from "swiper/react";
 
 interface ISwiperModelProps {
+	className?: string;
 	children?: ReactNode;
 	speed?: number;
 	spaceBetween?: number;
 }
 
 const SwiperModel: FC<ISwiperModelProps> = ({
+	className,
 	children,
 	speed,
 	spaceBetween,
 }) => {
 	return (
 		<Swiper
-			className="swiper"
+			className={`swiper ${className || ""}`}
 			grabCursor={true}
 			centeredSlides={true}
 			lazyPreloadPrevNext={5}

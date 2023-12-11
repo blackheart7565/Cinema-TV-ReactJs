@@ -5,7 +5,6 @@ import { SwiperSlide } from "swiper/react";
 import { mediaConfig } from "../../../api/config/media.config";
 import mediaApi from "../../../api/modules/media.api";
 import { useReducer } from "../../../hooks/reducer.hook";
-import { IVariant, VariantSlideEnum } from "../../../types/component.types";
 import { IResponseMediasListResult, IResponseMediasListResultMovie, IResponseMediasListResultSerials } from "../../../types/media.types";
 import SwiperModel from "./SwiperModel";
 
@@ -16,14 +15,12 @@ import 'swiper/css/scrollbar';
 import "./Swiper.scss";
 
 interface IPopularMediaSwiper {
-	variant?: IVariant;
 	children?: ReactNode;
 }
 
 const page: number = 1;
 
 export const PopularMediaSwiper: FC<IPopularMediaSwiper> = ({
-	variant = VariantSlideEnum.TEST,
 	children
 }) => {
 	const [popularMedia, setPopularMedia] = useState<IResponseMediasListResult[]>([]);
@@ -58,88 +55,23 @@ export const PopularMediaSwiper: FC<IPopularMediaSwiper> = ({
 	const memoizedPopularMedia = useMemo(() => popularMedia, [popularMedia]);
 
 	return (
-		<div className="home__header-swiper">
+		<div className="home__header">
 			<SwiperModel
+				className={"home__header-swiper"}
 				spaceBetween={40}
 				speed={600}
 			>
-				{(variant === VariantSlideEnum.DYNAMIC_LIST) && (
-					memoizedPopularMedia?.map((slide) =>
-						<SwiperSlide key={slide.id}>
-							<Link to={"/"} className="swiper__link">
-								<img
-									className="swiper-img"
-									src={mediaConfig.methods.poster_path(slide.poster_path || slide.backdrop_path)}
-									alt="media-popular-img"
-								/>
-							</Link>
-						</SwiperSlide>
-					)
-				)}
-				{(variant === VariantSlideEnum.TEST) && (
-					<>
-						<SwiperSlide>
-							<img className="swiper-img" src="/path/header/slide-1.jpg" alt="" />
-						</SwiperSlide>
-						<SwiperSlide>
-							<img className="swiper-img" src="/path/header/slide-2.jpg" alt="" />
-						</SwiperSlide>
-						<SwiperSlide>
-							<img className="swiper-img" src="/path/header/slide-3.jpg" alt="" />
-						</SwiperSlide>
-						<SwiperSlide>
-							<img className="swiper-img" src="/path/header/slide-4.jpg" alt="" />
-						</SwiperSlide>
-						<SwiperSlide>
-							<img className="swiper-img" src="/path/header/slide-5.jpg" alt="" />
-						</SwiperSlide>
-						<SwiperSlide>
-							<img className="swiper-img" src="/path/header/slide-1.jpg" alt="" />
-						</SwiperSlide>
-						<SwiperSlide>
-							<img className="swiper-img" src="/path/header/slide-2.jpg" alt="" />
-						</SwiperSlide>
-						<SwiperSlide>
-							<img className="swiper-img" src="/path/header/slide-3.jpg" alt="" />
-						</SwiperSlide>
-						<SwiperSlide>
-							<img className="swiper-img" src="/path/header/slide-4.jpg" alt="" />
-						</SwiperSlide>
-						<SwiperSlide>
-							<img className="swiper-img" src="/path/header/slide-5.jpg" alt="" />
-						</SwiperSlide>
-						<SwiperSlide>
-							<img className="swiper-img" src="/path/header/slide-1.jpg" alt="" />
-						</SwiperSlide>
-						<SwiperSlide>
-							<img className="swiper-img" src="/path/header/slide-2.jpg" alt="" />
-						</SwiperSlide>
-						<SwiperSlide>
-							<img className="swiper-img" src="/path/header/slide-3.jpg" alt="" />
-						</SwiperSlide>
-						<SwiperSlide>
-							<img className="swiper-img" src="/path/header/slide-4.jpg" alt="" />
-						</SwiperSlide>
-						<SwiperSlide>
-							<img className="swiper-img" src="/path/header/slide-5.jpg" alt="" />
-						</SwiperSlide>
-						<SwiperSlide>
-							<img className="swiper-img" src="/path/header/slide-1.jpg" alt="" />
-						</SwiperSlide>
-						<SwiperSlide>
-							<img className="swiper-img" src="/path/header/slide-2.jpg" alt="" />
-						</SwiperSlide>
-						<SwiperSlide>
-							<img className="swiper-img" src="/path/header/slide-3.jpg" alt="" />
-						</SwiperSlide>
-						<SwiperSlide>
-							<img className="swiper-img" src="/path/header/slide-4.jpg" alt="" />
-						</SwiperSlide>
-						<SwiperSlide>
-							<img className="swiper-img" src="/path/header/slide-5.jpg" alt="" />
-						</SwiperSlide>
-					</>
-				)}
+				{memoizedPopularMedia?.map((slide) => (
+					<SwiperSlide key={slide.id} className={"home__header-slide"}>
+						<Link to={"/"} className="home__header-link">
+							<img
+								className="home__header-img"
+								src={mediaConfig.methods.poster_path(slide.poster_path || slide.backdrop_path)}
+								alt="media-popular-img"
+							/>
+						</Link>
+					</SwiperSlide>
+				))}
 			</SwiperModel>
 		</div>
 	);
