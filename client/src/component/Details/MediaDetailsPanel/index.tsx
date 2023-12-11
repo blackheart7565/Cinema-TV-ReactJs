@@ -81,6 +81,20 @@ const MediaDetailsPanel: FC<IMediaDetailsPanelProps> = ({
 								)
 							}
 
+							{directors && directors?.length > 0 && (
+								<MediaDetailsInfoRow
+									className={"media-details__director"}
+									value={directors}
+									title={"Director"} />
+							)}
+
+							{countries && countries.length > 0 && (
+								<MediaDetailsInfoRow
+									className={"media-details__countries"}
+									value={countries}
+									title={"Country"} />
+							)}
+
 							<MediaDetailsInfoRow
 								className={"media-details__status"}
 								value={status}
