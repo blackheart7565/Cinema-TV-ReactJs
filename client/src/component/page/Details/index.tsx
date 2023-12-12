@@ -10,6 +10,7 @@ import MediaDetailsHeader from "../../Details/MediaDetailsHeader";
 import MediaDetailsPanel from "../../Details/MediaDetailsPanel";
 
 import { ActorDto } from "../../../dtos/actor.dto";
+import MediaDetailsSwiperGallery from "../../Details/MediaDetailsSwiperGallery";
 import MediaDetailsSwiperListActors from "../../Details/MediaDetailsSwiperListActors/inidex";
 import "./Details.scss";
 
@@ -41,7 +42,9 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 		getDetails();
 	}, [mediaType, mediaId]);
 
-	console.log(details);
+	if (details) {
+		console.log(details);
+	}
 
 	return (
 		<>
@@ -108,7 +111,6 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 											: null
 								)}
 							/>
-
 							<MediaDetailsSwiperListActors
 								className="media-details__actors"
 								title="Actors:"
@@ -122,6 +124,15 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 												mediaConfig.methods.poster_path(item.profile_path)
 											)
 										))
+								)}
+							/>
+
+							<MediaDetailsSwiperGallery
+								className={"media-details__gallery"}
+								images={(
+									[
+										...details.images.backdrops.map((item) => mediaConfig.methods.poster_path(item.file_path))
+									]
 								)}
 							/>
 

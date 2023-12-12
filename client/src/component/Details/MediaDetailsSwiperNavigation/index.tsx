@@ -2,6 +2,7 @@ import { FC } from "react";
 
 interface IMediaDetailsSwiperNavigationProps {
 	className?: string;
+	checkActive?: string;
 	onPrev?: () => void;
 	onNext?: () => void;
 }
@@ -16,7 +17,7 @@ const MediaDetailsSwiperNavigation: FC<IMediaDetailsSwiperNavigationProps> = ({
 			<div className={`${className}-btn-prev`} onClick={onPrev}>
 				<span></span>
 			</div>
-			<div className={` ${className}-btn-next`} onClick={onNext}>
+			<div className={` ${className}-btn-next`} onClick={onNext} >
 				<span></span>
 			</div>
 		</div>
@@ -24,4 +25,4 @@ const MediaDetailsSwiperNavigation: FC<IMediaDetailsSwiperNavigationProps> = ({
 }
 
 
-export default MediaDetailsSwiperNavigation;
+export default MediaDetailsSwiperNavigation; 
