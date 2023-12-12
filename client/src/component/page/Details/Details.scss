@@ -473,16 +473,6 @@
 		&-swiper {
 			width: 100%;
 			height: max-content;
-
-			.swiper-button-prev {
-				// width: initial !important;
-				// height: initial !important;
-			}
-
-			.swiper-button-next {
-				// width: initial !important;
-				// height: initial !important;
-			}
 		}
 
 		&-slide {
@@ -491,9 +481,14 @@
 			width: 100% !important;
 			height: auto !important;
 			max-height: 700px;
-			padding-left: 3rem;
-			padding-right: 3rem;
+			padding-left: 4rem;
+			padding-right: 4rem;
 			padding-bottom: 2rem;
+
+			@media screen and (max-width: 960px) {
+				padding-left: 0;
+				padding-right: 0;
+			}
 
 			img {
 				width: 100%;
@@ -502,11 +497,35 @@
 			}
 		}
 
+		&-pagination {
+			.swiper-pagination-bullet {
+				background-color: #fff;
+			}
+
+			&.swiper-pagination-bullets-dynamic {
+				@media screen and (min-width: 480px) {
+					font-size: initial;
+				}
+			}
+
+			.swiper-pagination-bullet-active {
+				background-color: $accent-color;
+
+				@media screen and (min-width: 480px) {
+					transform: scale(1.5) !important;
+				}
+			}
+		}
+
 		&-btn-prev {
 			background-color: $accent-color;
 			width: 40px !important;
 			height: 40px !important;
 			border-radius: 50%;
+
+			@media screen and (max-width: 960px) {
+				display: none !important;
+			}
 
 			&::after {
 				content: "" !important;
@@ -551,6 +570,10 @@
 			width: 40px !important;
 			height: 40px !important;
 			border-radius: 50%;
+
+			@media screen and (max-width: 960px) {
+				display: none !important;
+			}
 
 			&::after {
 				content: "" !important;

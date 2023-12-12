@@ -21,8 +21,8 @@ const MediaDetailsSwiperGallery: FC<IMediaDetailsSwiperGalleryProps> = ({
 		<div className={className || undefined}>
 			<Swiper
 				className={checkClass(className, "swiper")}
+				grabCursor={true}
 				slidesPerView={"auto"}
-				spaceBetween={10}
 				centeredSlides={true}
 				zoom={true}
 				navigation={{
@@ -30,7 +30,9 @@ const MediaDetailsSwiperGallery: FC<IMediaDetailsSwiperGalleryProps> = ({
 					prevEl: ".swiper-button-prev",
 				}}
 				pagination={{
+					dynamicBullets: true,
 					clickable: true,
+					el: ".swiper-pagination",
 				}}
 				modules={[
 					FreeMode,
@@ -38,6 +40,14 @@ const MediaDetailsSwiperGallery: FC<IMediaDetailsSwiperGalleryProps> = ({
 					Navigation,
 					Zoom
 				]}
+				breakpoints={{
+					480: {
+						spaceBetween: 0
+					},
+					320: {
+						spaceBetween: 10
+					}
+				}}
 			>
 				{images && (
 					images.map((img: string, index: number) => (
@@ -60,8 +70,8 @@ const MediaDetailsSwiperGallery: FC<IMediaDetailsSwiperGalleryProps> = ({
 				<div className={`swiper-button-next ${checkClass(className, "btn-next")}`}>
 					<span></span>
 				</div>
+				<div className={`swiper-pagination ${checkClass(className, "pagination")}`}></div>
 			</Swiper>
-
 		</div>
 	);
 };
