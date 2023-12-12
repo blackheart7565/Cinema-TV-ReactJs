@@ -4,11 +4,12 @@ import { useParams } from "react-router-dom";
 import { mediaConfig } from "../../../api/config/media.config";
 import mediaApi from "../../../api/modules/media.api";
 import { useReducer } from "../../../hooks/reducer.hook";
-import { IActor, IResponseMediaDetailsValidationRoot } from "../../../types/media-types/details.type";
+import { IResponseMediaDetailsValidationRoot } from "../../../types/media-types/details.type";
 import { IParams } from "../../../types/other.type";
 import MediaDetailsHeader from "../../Details/MediaDetailsHeader";
 import MediaDetailsPanel from "../../Details/MediaDetailsPanel";
 
+import { ActorDto } from "../../../dtos/actor.dto";
 import MediaDetailsSwiperListActors from "../../Details/MediaDetailsSwiperListActors/inidex";
 import "./Details.scss";
 
@@ -111,15 +112,17 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 							<MediaDetailsSwiperListActors
 								className="media-details__actors"
 								title="Actors:"
-								actors={
-									details.credits.cast.map(item => {
-										return {
-											id: item.id,
-											name: item.name,
-											pathImage: mediaConfig.methods.poster_path(item.profile_path),
-										} as IActor
-									})
-								}
+								actors={(
+									details.credits.cast
+										.filter(actor => actor.profile_path && actor.profile_path)
+										.map(item => (
+											new ActorDto(
+												item.id,
+												item.name,
+												mediaConfig.methods.poster_path(item.profile_path)
+											)
+										))
+								)}
 							/>
 
 						</div>
