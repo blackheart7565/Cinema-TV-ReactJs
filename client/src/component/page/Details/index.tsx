@@ -8,10 +8,8 @@ import { IResponseMediaDetailsValidationRoot } from "../../../types/media-types/
 import { IParams } from "../../../types/other.type";
 import MediaDetailsHeader from "../../Details/MediaDetailsHeader";
 import MediaDetailsPanel from "../../Details/MediaDetailsPanel";
+import MediaDetailsTabsVideo from "../../Details/MediaDetailsVideo";
 
-import { ActorDto } from "../../../dtos/actor.dto";
-import MediaDetailsSwiperGallery from "../../Details/MediaDetailsSwiperGallery";
-import MediaDetailsSwiperListActors from "../../Details/MediaDetailsSwiperListActors/inidex";
 import "./Details.scss";
 
 interface IDetailsMediaProps { }
@@ -52,6 +50,7 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 				? (
 					<div className="media-details">
 						<MediaDetailsHeader src={mediaConfig.methods.poster_path(details?.backdrop_path || details?.poster_path)} />
+
 						<div className="media-details__body">
 							<MediaDetailsPanel
 								src={mediaConfig.methods.poster_path(details.poster_path) || ""}
@@ -111,6 +110,26 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 											: null
 								)}
 							/>
+
+							<MediaDetailsTabsVideo
+								className="media-details__videos"
+								mediaType={mediaType === "movie" ? "movie" : "tv"}
+								mediaName={(
+									mediaType === "movie"
+										? (
+											(details as IResponseMediaDetailsValidationRoot<"movie">).title
+											|| (details as IResponseMediaDetailsValidationRoot<"movie">).original_title
+										)
+										: mediaType === "tv"
+											? (
+												(details as IResponseMediaDetailsValidationRoot<"tv">).name
+												|| (details as IResponseMediaDetailsValidationRoot<"tv">).original_name
+											)
+											: null
+								)}
+							/>
+
+							{/*
 							<MediaDetailsSwiperListActors
 								className="media-details__actors"
 								title="Actors:"
@@ -135,6 +154,7 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 									]
 								)}
 							/>
+							 */}
 
 						</div>
 					</div>
