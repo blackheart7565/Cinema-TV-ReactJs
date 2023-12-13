@@ -15,7 +15,7 @@ const MediaDetailsSwiperGallery: FC<IMediaDetailsSwiperGalleryProps> = ({
 	images,
 }) => {
 	const checkClass = (className: string | undefined, classNameSelector: string): string | undefined =>
-		className ? `${className}-${classNameSelector}` : undefined
+		className ? `${className}-${classNameSelector}` : undefined;
 
 	return (
 		<div className={className || undefined}>
