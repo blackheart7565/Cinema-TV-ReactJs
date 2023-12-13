@@ -6,8 +6,6 @@ import { IActor } from "../../../types/media-types/details.type";
 import MediaDetailsSwiperListItemActors from "../MediaDetailsSwiperListItemActors";
 import MediaDetailsSwiperNavigation from "../MediaDetailsSwiperNavigation";
 
-
-
 interface IMediaDetailsSwiperListActorsProps {
 	title?: string;
 	actors: IActor[];
