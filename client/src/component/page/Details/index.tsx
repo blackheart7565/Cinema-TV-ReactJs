@@ -114,6 +114,7 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 							<MediaDetailsTabsVideo
 								className="media-details__videos"
 								mediaType={mediaType === "movie" ? "movie" : "tv"}
+								trailerUtlKey={details.videos.results.filter(video => video.type === "Trailer")[0].key}
 								mediaName={(
 									mediaType === "movie"
 										? (

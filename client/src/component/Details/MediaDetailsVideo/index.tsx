@@ -1,6 +1,8 @@
 import { FC } from "react";
+import { mediaConfig } from "../../../api/config/media.config";
 import concatClasses from "../../../utils/ClassNames";
 import { CinemaPlayer } from "../../UI/CinemaPlayer/CinemaPlayer";
+import CinemaPlayerFrameYT from "../../UI/CinemaPlayerFrameYT/CinemaPlayerFrameYT";
 import TabBar from "../../UI/TabBar/TabBar";
 
 type IMediaTypeEnums = "movie" | "tv" | "";
@@ -9,6 +11,7 @@ interface IMediaDetailsVideoProps {
 	className?: string | undefined;
 	mediaType?: IMediaTypeEnums | undefined | null;
 	mediaName?: string | undefined | null;
+	trailerUtlKey?: string | undefined;
 }
 
 /**
@@ -21,6 +24,7 @@ const MediaDetailsVideo: FC<IMediaDetailsVideoProps> = ({
 	className,
 	mediaType,
 	mediaName,
+	trailerUtlKey,
 }) => {
 	return (
 		<div className={className} style={{
@@ -36,15 +40,11 @@ const MediaDetailsVideo: FC<IMediaDetailsVideoProps> = ({
 					navigation={[
 						{
 							id: "1",
-							label: "№1"
+							label: "Watch online"
 						},
 						{
 							id: "2",
-							label: "№2"
-						},
-						{
-							id: "3",
-							label: "№3"
+							label: "Trailer"
 						},
 					]}
 					content={[
@@ -55,7 +55,8 @@ const MediaDetailsVideo: FC<IMediaDetailsVideoProps> = ({
 								// url="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
 								// url="//vjs.zencdn.net/v/oceans.mp4"
 								// url="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-720p.mp4"
-								url={"/movie.mp4"}
+								// url={"/movie.mp4"}
+								url={"/86.mp4"}
 								options={{
 									width: "100%",
 									height: "650px",
@@ -63,30 +64,17 @@ const MediaDetailsVideo: FC<IMediaDetailsVideoProps> = ({
 						},
 						{
 							id: "2",
-							node: <Image src="https://wallpaperwaifu.com/wp-content/uploads/2019/09/underwater-anime-girl-thumb.jpg" />,
-						},
-						{
-							id: "3",
-							node: <Image src="https://moewalls.com/wp-content/uploads/2022/06/anime-girl-playing-underwater-thumb.jpg" />,
+							node: <CinemaPlayerFrameYT url={mediaConfig.methods.youtube_path(trailerUtlKey)}
+								options={{
+									width: "100%",
+									height: "650px"
+								}}
+							/>,
 						},
 					]}
 				/>
 			</div>
 		</div>
-	);
-}
-
-const Image: FC<{ src?: string }> = ({
-	src
-}) => {
-	return (
-		<>
-			<img style={{
-				width: "100%",
-				// height: "100%",
-				objectFit: "cover"
-			}} src={src} alt="" />
-		</>
 	);
 }
 
