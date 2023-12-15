@@ -4,12 +4,14 @@ import { useParams } from "react-router-dom";
 import { mediaConfig } from "../../../api/config/media.config";
 import mediaApi from "../../../api/modules/media.api";
 import { useReducer } from "../../../hooks/reducer.hook";
-import { IResponseMediaDetailsValidationRoot } from "../../../types/media-types/details.type";
+import { IMediaTop, IResponseMediaDetailsValidationRoot } from "../../../types/media-types/details.type";
 import { IParams } from "../../../types/other.type";
 import MediaDetailsHeader from "../../Details/MediaDetailsHeader";
 import MediaDetailsPanel from "../../Details/MediaDetailsPanel";
 import MediaDetailsTabsVideo from "../../Details/MediaDetailsVideo";
 
+import { MediaTopDto } from "../../../dtos/top-media.dto";
+import { IResponseMediasList, IResponseMediasListResultMovie, IResponseMediasListResultSerials, IResponseMediasListValidationType } from "../../../types/media.types";
 import "./Details.scss";
 
 interface IDetailsMediaProps { }
@@ -18,11 +20,13 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 	const { mediaType, mediaId } = useParams<keyof IParams>();
 	const type = mediaType === "movie" ? "movie" : "tv";
 	const [details, setDetails] = useState<IResponseMediaDetailsValidationRoot<typeof type>>();
+	// const [topMedia, setTopMedia] = useState<IResponseMediasListValidationType<typeof type>[]>([]);
+	const [topMedia, setTopMedia] = useState<IMediaTop[]>([]);
 	const { dispatch, actions } = useReducer();
 
 	useEffect(() => {
 		window.scrollTo(0, 0)
-	}, [])
+	}, [mediaType, mediaId]);
 
 	useEffect(() => {
 		const getDetails = async () => {
@@ -40,8 +44,34 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 		getDetails();
 	}, [mediaType, mediaId]);
 
+	useEffect(() => {
+		if (!mediaType) return;
+
+		const fetchData = async () => {
+			const { data } = await mediaApi.getList<IResponseMediasListValidationType<typeof mediaType>>({
+				mediaType,
+				mediaCategory: mediaConfig.category.top_rated,
+				page: 1
+			});
+
+			setTopMedia(
+				(data as IResponseMediasList<IResponseMediasListValidationType<typeof type>>).results
+					.map(item => new MediaTopDto({
+						id: item.id,
+						name: mediaType === "movie"
+							? (item as IResponseMediasListResultMovie).title || (item as IResponseMediasListResultMovie).original_title
+							: (item as IResponseMediasListResultSerials).name || (item as IResponseMediasListResultSerials).original_name,
+						pathImage: mediaConfig.methods.poster_path(item.poster_path || item.backdrop_path)
+					}))
+			);
+		}
+
+		fetchData();
+	}, [mediaType]);
+
 	if (details) {
 		console.log(details);
+		console.log(topMedia, "top");
 	}
 
 	return (
@@ -115,6 +145,7 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 								className="media-details__videos"
 								mediaType={mediaType === "movie" ? "movie" : "tv"}
 								trailerUtlKey={details.videos.results.filter(video => video.type === "Trailer")[0].key}
+								topMedia={topMedia}
 								mediaName={(
 									mediaType === "movie"
 										? (

@@ -1,12 +1,9 @@
+import classNames from "classnames";
 import { FC } from 'react';
 
-import classNames from "classnames";
-import "./CinemaPlayerFrameYT.scss";
+import { IOptionPlayer } from "./interface";
 
-interface IOptionPlayer {
-	width?: string | number;
-	height?: string | number;
-}
+import "./CinemaPlayerFrameYT.scss";
 
 interface ICinemaPlayerFrameYTProps {
 	className?: string;

@@ -39,7 +39,7 @@
 	&__body {
 		height: 100%;
 		position: relative;
-		max-width: 1440px;
+		max-width: 1400px;
 		margin-inline: auto;
 		padding: 0 30px;
 		transition: itemTransitionHover(all);
@@ -624,7 +624,6 @@
 			font-size: 30px;
 			letter-spacing: 4px;
 			font-weight: 700;
-			// font-family: $fontFamilyCyrillic;
 			font-family: $fontFamilyPoppins;
 
 			@media screen and (max-width: 660px) {
@@ -636,7 +635,21 @@
 			}
 		}
 
-		&-content {}
+		&-content {
+			display: flex;
+			gap: 20px;
+		}
+
+		&-top-ten {
+			height: 100%;
+		}
+
+		&-top-ten-card {
+			background-color: #fff;
+			width: 200px;
+			height: 300px;
+			margin-bottom: 1px;
+		}
 	}
 
 }

@@ -1,9 +1,11 @@
 import { FC } from "react";
 import { mediaConfig } from "../../../api/config/media.config";
+import { IMediaTop } from "../../../types/media-types/details.type";
 import concatClasses from "../../../utils/ClassNames";
 import { CinemaPlayer } from "../../UI/CinemaPlayer/CinemaPlayer";
 import CinemaPlayerFrameYT from "../../UI/CinemaPlayerFrameYT/CinemaPlayerFrameYT";
 import TabBar from "../../UI/TabBar/TabBar";
+import MediaDetailsTop from "../MediaDetailsTop";
 
 type IMediaTypeEnums = "movie" | "tv" | "";
 
@@ -12,6 +14,7 @@ interface IMediaDetailsVideoProps {
 	mediaType?: IMediaTypeEnums | undefined | null;
 	mediaName?: string | undefined | null;
 	trailerUtlKey?: string | undefined;
+	topMedia?: IMediaTop[];
 }
 
 /**
@@ -25,6 +28,7 @@ const MediaDetailsVideo: FC<IMediaDetailsVideoProps> = ({
 	mediaType,
 	mediaName,
 	trailerUtlKey,
+	topMedia,
 }) => {
 	return (
 		<div className={className} style={{
@@ -55,8 +59,8 @@ const MediaDetailsVideo: FC<IMediaDetailsVideoProps> = ({
 								// url="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
 								// url="//vjs.zencdn.net/v/oceans.mp4"
 								// url="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-720p.mp4"
-								// url={"/movie.mp4"}
-								url={"/86.mp4"}
+								url={"/movie.mp4"}
+								// url={"/86.mp4"}
 								options={{
 									width: "100%",
 									height: "650px",
@@ -73,6 +77,24 @@ const MediaDetailsVideo: FC<IMediaDetailsVideoProps> = ({
 						},
 					]}
 				/>
+
+				<MediaDetailsTop
+					mediaType={
+						mediaType === "movie"
+							? "movie"
+							: mediaType === "tv"
+								? "tv"
+								: ""
+					}
+					className={className}
+					title={(
+						<>
+							Top <span>10</span>
+						</>
+					)}
+					topList={topMedia && topMedia}
+				/>
+
 			</div>
 		</div>
 	);
