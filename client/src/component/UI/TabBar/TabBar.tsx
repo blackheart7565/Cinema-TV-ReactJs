@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 import TabBarNavigation from "./TabBarNavigation";
 import { IContent, INavigation, StringNumber } from "./types";
@@ -11,18 +11,24 @@ interface ITabBarProps {
 	className?: string | undefined;
 	navigation: INavigation[];
 	content: IContent[];
+	dependencies?: any[];
 }
 
 const TabBar: FC<ITabBarProps> = ({
 	className,
 	navigation,
 	content,
+	dependencies,
 }) => {
 	const [selectedId, setSelectedId] = useState<StringNumber>(1);
 
 	const onClickActive = (id: StringNumber) => {
 		setSelectedId(id);
 	};
+
+	useEffect(() => {
+		setSelectedId(1);
+	}, dependencies || []);
 
 	return (
 		<>

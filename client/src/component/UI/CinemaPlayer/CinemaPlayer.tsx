@@ -20,6 +20,7 @@ import './CinemaPlayer.scss';
 export const CinemaPlayer: FC<ICinemaPlayer> = ({
 	url,
 	isFastRewindForwardBtn,
+	dependencies,
 	options = {},
 }) => {
 	// -------------------------------- References --------------------------------
@@ -44,11 +45,17 @@ export const CinemaPlayer: FC<ICinemaPlayer> = ({
 			const videoEl = videoRef.current
 			if (!videoEl) return;
 
-			videoEl.play().then(() => {
-				videoEl.pause();
-			}).catch((error) => {
-				toast.error(error.message);
-			})
+			// videoEl.play().then(() => {
+			// 	videoEl.pause();
+			// }).catch((error) => {
+			// 	toast.error(error.message);
+			// })
+
+			videoEl.paused
+				? videoEl.play().catch((error) => {
+					toast.error(error.message);
+				})
+				: videoEl.pause();
 
 		} catch (error: any) {
 			toast.error(error.message);
@@ -165,6 +172,14 @@ export const CinemaPlayer: FC<ICinemaPlayer> = ({
 			video.removeEventListener("leavepictureinpicture", onLeavePIP);
 		};
 	}, [videoRef?.current]);
+
+	useEffect(() => {
+		const video = videoRef.current;
+		if (!video) return;
+
+		if (!dependencies) return;
+		defaultProperties(video);
+	}, dependencies);
 
 	return (
 		<>

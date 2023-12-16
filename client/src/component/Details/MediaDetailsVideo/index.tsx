@@ -12,6 +12,7 @@ type IMediaTypeEnums = "movie" | "tv" | "";
 interface IMediaDetailsVideoProps {
 	className?: string | undefined;
 	mediaType?: IMediaTypeEnums | undefined | null;
+	mediaId?: string | undefined | null;
 	mediaName?: string | undefined | null;
 	trailerUtlKey?: string | undefined;
 	topMedia?: IMediaTop[];
@@ -26,6 +27,7 @@ interface IMediaDetailsVideoProps {
 const MediaDetailsVideo: FC<IMediaDetailsVideoProps> = ({
 	className,
 	mediaType,
+	mediaId,
 	mediaName,
 	trailerUtlKey,
 	topMedia,
@@ -40,6 +42,7 @@ const MediaDetailsVideo: FC<IMediaDetailsVideoProps> = ({
 
 			<div className={className && concatClasses(className, "-content")}>
 				<TabBar
+					dependencies={[mediaType, mediaId]}
 					className={className}
 					navigation={[
 						{
@@ -55,6 +58,7 @@ const MediaDetailsVideo: FC<IMediaDetailsVideoProps> = ({
 						{
 							id: "1",
 							node: <CinemaPlayer
+								dependencies={[mediaType, mediaId]}
 								// url="https://www.youtube.com/watch?v=5_4TKRgEr9U&list=RDMM5_4TKRgEr9U&start_radio=1" 
 								// url="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
 								// url="//vjs.zencdn.net/v/oceans.mp4"

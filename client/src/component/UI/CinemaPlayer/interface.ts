@@ -8,6 +8,7 @@ export type StringNumber = string | number;
 export interface ICinemaPlayer {
 	url: string;
 	isFastRewindForwardBtn?: boolean;
+	dependencies?: any[];
 	options?: IOptionPlayer;
 }
 export interface IVideoElement extends HTMLVideoElement {

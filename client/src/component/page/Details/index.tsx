@@ -72,8 +72,8 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 	}, [mediaType]);
 
 	if (details) {
-		console.log(details);
-		console.log(topMedia, "top");
+		// console.log(details);
+		// console.log(topMedia, "top");
 	}
 
 	return (
@@ -146,6 +146,7 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 							<MediaDetailsTabsVideo
 								className="media-details__videos"
 								mediaType={mediaType === "movie" ? "movie" : "tv"}
+								mediaId={mediaId}
 								trailerUtlKey={
 									details.videos.results.filter(video => video.type === "Trailer" || video.type === "Opening Credits" || "")[0]?.key
 								}
@@ -164,7 +165,6 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 											: null
 								)}
 							/>
-
 
 							<MediaDetailsSwiperListActors
 								className="media-details__actors"
@@ -190,7 +190,6 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 									]
 								)}
 							/>
-
 
 						</div>
 					</div>
