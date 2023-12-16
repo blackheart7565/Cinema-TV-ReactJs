@@ -469,6 +469,33 @@
 	&__gallery {
 		display: flex;
 		flex-wrap: wrap;
+		padding-top: 5rem;
+
+		@media screen and (max-width: 660px) {
+			padding-top: 3rem;
+		}
+
+		@media screen and (max-width: 480px) {
+			padding-top: 2rem;
+		}
+
+		&-header {
+			display: flex;
+			align-items: center;
+		}
+
+		&-title {
+			font-size: 31px;
+			font-weight: 400;
+			color: #DA0027;
+			padding: 7px 0;
+			letter-spacing: 5px;
+			font-family: AmericanCaptainCyrillic sans-serif;
+
+			@media screen and (max-width: 660px) {
+				font-size: 25px;
+			}
+		}
 
 		&-swiper {
 			width: 100%;
@@ -617,6 +644,16 @@
 	// ===> Videos <===
 
 	&__videos {
+		padding-top: 5rem;
+
+		@media screen and (max-width: 660px) {
+			padding-top: 3rem;
+		}
+
+		@media screen and (max-width: 480px) {
+			padding-top: 1rem;
+		}
+
 		&-header {
 			width: 100%;
 			padding: 10px;
@@ -628,6 +665,7 @@
 
 			@media screen and (max-width: 660px) {
 				font-size: 25px;
+				padding: 20px 0;
 			}
 
 			@media screen and (max-width: 480px) {
@@ -651,5 +689,4 @@
 			margin-bottom: 1px;
 		}
 	}
-
 }
