@@ -1,17 +1,22 @@
+import classNames from "classnames";
 import { FC } from 'react';
 import { FreeMode, Navigation, Pagination, Zoom } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+
+import concatClasses from "../../../utils/ClassNames";
 import MediaDetailsSwiperSlideImage from "../MediaDetailsSwiperSlideImage";
 
 import 'swiper/css/zoom';
 
 interface IMediaDetailsSwiperGalleryProps {
 	className?: string;
+	titleBlock?: string | undefined;
 	images: string[];
 }
 
 const MediaDetailsSwiperGallery: FC<IMediaDetailsSwiperGalleryProps> = ({
 	className,
+	titleBlock,
 	images,
 }) => {
 	const checkClass = (className: string | undefined, classNameSelector: string): string | undefined =>
@@ -19,6 +24,13 @@ const MediaDetailsSwiperGallery: FC<IMediaDetailsSwiperGalleryProps> = ({
 
 	return (
 		<div className={className || undefined}>
+			{titleBlock && (
+				<div className={className && classNames(concatClasses(className, "-header"))}>
+					<div className={className && classNames(concatClasses(className, "-title"))}>
+						{titleBlock}
+					</div>
+				</div>
+			)}
 			<Swiper
 				className={checkClass(className, "swiper")}
 				grabCursor={true}
