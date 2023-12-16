@@ -36,7 +36,6 @@ export const CinemaPlayer: FC<ICinemaPlayer> = ({
 	const [isVideoLoading, setIsVideoLoading] = useState<boolean>(false);
 	const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
 	const [isPictureInPicture, setIsPictureInPicture] = useState<boolean>(false);
-	const [playerError, setPlayerError] = useState<MediaError | null>(null);
 
 	// -------------------------------- Functions --------------------------------
 
@@ -45,23 +44,14 @@ export const CinemaPlayer: FC<ICinemaPlayer> = ({
 			const videoEl = videoRef.current
 			if (!videoEl) return;
 
-			// videoEl.play().then(() => {
-			// 	videoEl.pause();
-			// }).catch((error) => {
-			// 	toast.error(error.message);
-			// 	setPlayerError(error.message);
-			// })
-
-			videoEl.paused
-				? videoEl.play().catch((error) => {
-					toast.error(error.message);
-					setPlayerError(error.message);
-				})
-				: videoEl.pause();
+			videoEl.play().then(() => {
+				videoEl.pause();
+			}).catch((error) => {
+				toast.error(error.message);
+			})
 
 		} catch (error: any) {
 			toast.error(error.message);
-			setPlayerError(error.message);
 		}
 	}, [videoRef.current])
 
@@ -144,7 +134,6 @@ export const CinemaPlayer: FC<ICinemaPlayer> = ({
 		}
 	}
 	const onPlayerError = (e: SyntheticEvent<HTMLVideoElement>) => {
-		setPlayerError(e.currentTarget.error);
 		toast.error(e.currentTarget.error?.message);
 	}
 	// -------------------------------- Hooks --------------------------------
@@ -186,7 +175,6 @@ export const CinemaPlayer: FC<ICinemaPlayer> = ({
 					onTimeUpdate={onVideoTimeUpdate}
 					onLoadedData={onVideoLoadedData}
 					onError={onPlayerError}
-				// src={url || ""}
 				>
 					<source src={`${url}`} type='video/mp4' />
 					{/* <source src={`${url}#t=2`} type='video/mp4' /> */}
