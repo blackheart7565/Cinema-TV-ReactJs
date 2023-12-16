@@ -3,15 +3,18 @@ import { useParams } from "react-router-dom";
 
 import { mediaConfig } from "../../../api/config/media.config";
 import mediaApi from "../../../api/modules/media.api";
+import { MediaTopDto } from "../../../dtos/top-media.dto";
 import { useReducer } from "../../../hooks/reducer.hook";
 import { IMediaTop, IResponseMediaDetailsValidationRoot } from "../../../types/media-types/details.type";
+import { IResponseMediasList, IResponseMediasListResultMovie, IResponseMediasListResultSerials, IResponseMediasListValidationType } from "../../../types/media.types";
 import { IParams } from "../../../types/other.type";
 import MediaDetailsHeader from "../../Details/MediaDetailsHeader";
 import MediaDetailsPanel from "../../Details/MediaDetailsPanel";
 import MediaDetailsTabsVideo from "../../Details/MediaDetailsVideo";
 
-import { MediaTopDto } from "../../../dtos/top-media.dto";
-import { IResponseMediasList, IResponseMediasListResultMovie, IResponseMediasListResultSerials, IResponseMediasListValidationType } from "../../../types/media.types";
+import { ActorDto } from "../../../dtos/actor.dto";
+import MediaDetailsSwiperGallery from "../../Details/MediaDetailsSwiperGallery";
+import MediaDetailsSwiperListActors from "../../Details/MediaDetailsSwiperListActors";
 import "./Details.scss";
 
 interface IDetailsMediaProps { }
@@ -20,7 +23,6 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 	const { mediaType, mediaId } = useParams<keyof IParams>();
 	const type = mediaType === "movie" ? "movie" : "tv";
 	const [details, setDetails] = useState<IResponseMediaDetailsValidationRoot<typeof type>>();
-	// const [topMedia, setTopMedia] = useState<IResponseMediasListValidationType<typeof type>[]>([]);
 	const [topMedia, setTopMedia] = useState<IMediaTop[]>([]);
 	const { dispatch, actions } = useReducer();
 
@@ -144,7 +146,9 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 							<MediaDetailsTabsVideo
 								className="media-details__videos"
 								mediaType={mediaType === "movie" ? "movie" : "tv"}
-								trailerUtlKey={details.videos.results.filter(video => video.type === "Trailer")[0].key}
+								trailerUtlKey={
+									details.videos.results.filter(video => video.type === "Trailer" || video.type === "Opening Credits" || "")[0]?.key
+								}
 								topMedia={topMedia}
 								mediaName={(
 									mediaType === "movie"
@@ -161,7 +165,7 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 								)}
 							/>
 
-							{/*
+
 							<MediaDetailsSwiperListActors
 								className="media-details__actors"
 								title="Actors:"
@@ -186,7 +190,7 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 									]
 								)}
 							/>
-							 */}
+
 
 						</div>
 					</div>
