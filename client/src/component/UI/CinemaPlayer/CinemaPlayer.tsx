@@ -136,6 +136,19 @@ export const CinemaPlayer: FC<ICinemaPlayer> = ({
 	const onPlayerError = (e: SyntheticEvent<HTMLVideoElement>) => {
 		toast.error(e.currentTarget.error?.message);
 	}
+
+	/**
+	 * @param video HTML Element Tag Video
+	 * @m Reset player defaults.
+	 * @m Сброс значений плеера  по умолчанию.
+	 * @see https://w3schoolsua.github.io/html/html5_video.html
+	 * @see https://developer.mozilla.org/ru/docs/Web/HTML/Element/video
+	 */
+	const defaultProperties = (video: HTMLVideoElement): void => {
+		video.pause();
+		video.currentTime = 0;
+	}
+
 	// -------------------------------- Hooks --------------------------------
 
 	useEffect(() => {
