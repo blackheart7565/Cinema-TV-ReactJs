@@ -59,21 +59,13 @@ const MediaDetailsVideo: FC<IMediaDetailsVideoProps> = ({
 								// url="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
 								// url="//vjs.zencdn.net/v/oceans.mp4"
 								// url="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-720p.mp4"
-								url={"/movie.mp4"}
 								// url={"/86.mp4"}
-								options={{
-									width: "100%",
-									height: "650px",
-								}} />,
+								url={"/movie.mp4"}
+							/>,
 						},
 						{
 							id: "2",
-							node: <CinemaPlayerFrameYT url={mediaConfig.methods.youtube_path(trailerUtlKey)}
-								options={{
-									width: "100%",
-									height: "650px"
-								}}
-							/>,
+							node: <CinemaPlayerFrameYT url={mediaConfig.methods.youtube_path(trailerUtlKey)} />,
 						},
 					]}
 				/>
@@ -92,7 +84,7 @@ const MediaDetailsVideo: FC<IMediaDetailsVideoProps> = ({
 							Top <span>10</span>
 						</>
 					)}
-					topList={topMedia && topMedia}
+					topList={topMedia && topMedia.slice(0, 10)}
 				/>
 
 			</div>

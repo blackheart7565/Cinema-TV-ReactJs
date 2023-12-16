@@ -37,7 +37,6 @@ const MediaDetailsTop: FC<IMediaDetailsTopProps> = ({
 							className={classNames("swiper", "section-top__list")}
 							direction="vertical"
 							grabCursor={true}
-							// spaceBetween={10}
 							slidesPerView={"auto"}
 							freeMode={true}
 							modules={[Mousewheel, FreeMode]}
@@ -62,18 +61,6 @@ const MediaDetailsTop: FC<IMediaDetailsTopProps> = ({
 								</SwiperSlide>
 							))}
 						</Swiper>
-
-						{/* <div className={classNames("section-top__list")}>
-							{topList.map((item: IMediaTop) => (
-								<div
-									key={item.id}
-									className={classNames("section-top__item")}
-								>
-
-								</div>
-							))}
-						</div> */}
-
 					</div>
 				</div >
 			)}

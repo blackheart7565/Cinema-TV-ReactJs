@@ -4,8 +4,10 @@
 
 #cinema_player {
 	display: flex;
+	height: 100%;
+	width: 100%;
+	min-height: 200px;
 	position: relative;
-	border-radius: 10px;
 	overflow: hidden;
 	box-shadow: 0 0 5px rgba(255, 255, 255, 0.24);
 	font-family: 'Poppins', sans-serif;
@@ -32,6 +34,10 @@
 		height: 70px;
 		background: rgba(0, 0, 0, 0.7);
 		z-index: 20;
+
+		@media screen and (max-width: 480px) {
+			height: 55px;
+		}
 
 		#{$self}__progress {
 			cursor: pointer;
@@ -96,11 +102,20 @@
 				align-items: center;
 				gap: 20px;
 
+				@media screen and (max-width: 480px) {
+					gap: 5px;
+				}
+
 				#{$self}__toggle-play {
 					background: #DA0027;
 					border-radius: 50%;
 					width: 45px;
 					height: 45px;
+
+					@media screen and (max-width: 480px) {
+						width: 30px;
+						height: 30px;
+					}
 
 					&>* {
 						width: calc(100% - 10px);
@@ -119,6 +134,10 @@
 				#{$self}__timer {
 					color: #ffffff;
 
+					@media screen and (max-width: 480px) {
+						font-size: 12px;
+					}
+
 					&>* {
 						pointer-events: none;
 					}
@@ -135,6 +154,10 @@
 				display: flex;
 				align-items: center;
 				gap: 15px;
+
+				@media screen and (max-width: 480px) {
+					gap: 5px;
+				}
 			}
 		}
 
@@ -150,6 +173,11 @@
 	outline: none;
 	width: 40px;
 	height: 40px;
+
+	@media screen and (max-width: 480px) {
+		width: 30px;
+		height: 30px;
+	}
 
 	&>* {
 		fill: #fff;

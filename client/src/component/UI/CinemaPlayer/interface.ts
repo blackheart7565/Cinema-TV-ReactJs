@@ -19,4 +19,5 @@ export interface IVideoElement extends HTMLVideoElement {
 export interface IOptionPlayer {
 	width?: StringNumber;
 	height?: StringNumber;
+	borderRadius?: StringNumber;
 }

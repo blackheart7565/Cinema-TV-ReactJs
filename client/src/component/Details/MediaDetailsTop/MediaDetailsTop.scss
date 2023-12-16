@@ -7,6 +7,10 @@
 	display: grid;
 	grid-template-rows: 50px 1fr;
 
+	@media screen and (max-width: 1200px) {
+		display: none;
+	}
+
 	&__header {
 		display: flex;
 		align-items: center;
@@ -28,14 +32,12 @@
 	}
 
 	&__content {
-		height: 100%;
+		max-height: 600px;
 	}
 
 	&__list {
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		gap: 1px;
-		height: 650px;
+		height: 100%;
+		width: 100%;
 	}
 
 	&__slide {
