@@ -23,50 +23,52 @@ const MediaDetailsSwiperListActors: FC<IMediaDetailsSwiperListActorsProps> = ({
 
 	return (
 		<>
-			<div className={`${className}`}>
-				<div className={`${className}-header`}>
-					<p className={`${className}-title`}>{title}</p>
-					<MediaDetailsSwiperNavigation
-						className={className}
-						onPrev={onHandlerPrev}
-						onNext={onHandlerNext}
-					/>
-				</div>
+			{actors && actors.length > 0 && (
+				<div className={`${className}`}>
+					<div className={`${className}-header`}>
+						<p className={`${className}-title`}>{title}</p>
+						<MediaDetailsSwiperNavigation
+							className={className}
+							onPrev={onHandlerPrev}
+							onNext={onHandlerNext}
+						/>
+					</div>
 
-				<Swiper
-					className={`swiper ${className}-swiper`}
-					ref={swiperRef}
-					grabCursor={true}
-					slidesPerView={"auto"}
-					spaceBetween={10}
-					freeMode={true}
-					navigation={{
-						nextEl: `${className}-btn-next`,
-						prevEl: `${className}-btn-prev`,
-					}}
-					speed={600}
-					modules={[Navigation, FreeMode, A11y]}
-				>
-					{actors && actors.length > 0
-						? (
-							actors.map((item: IActor) => (
-								<SwiperSlide
-									key={item.id}
-									className={`${className}-swiper-item`}
-								>
-									<MediaDetailsSwiperListItemActors
-										className={className}
-										actorName={item.name}
-										pathImage={item.pathImage}
-									/>
-								</SwiperSlide>
-							))
-						)
-						: (
-							children
-						)}
-				</Swiper>
-			</div >
+					<Swiper
+						className={`swiper ${className}-swiper`}
+						ref={swiperRef}
+						grabCursor={true}
+						slidesPerView={"auto"}
+						spaceBetween={10}
+						freeMode={true}
+						navigation={{
+							nextEl: `${className}-btn-next`,
+							prevEl: `${className}-btn-prev`,
+						}}
+						speed={600}
+						modules={[Navigation, FreeMode, A11y]}
+					>
+						{actors && actors.length > 0
+							? (
+								actors.map((item: IActor) => (
+									<SwiperSlide
+										key={item.id}
+										className={`${className}-swiper-item`}
+									>
+										<MediaDetailsSwiperListItemActors
+											className={className}
+											actorName={item.name}
+											pathImage={item.pathImage}
+										/>
+									</SwiperSlide>
+								))
+							)
+							: (
+								children
+							)}
+					</Swiper>
+				</div>
+			)}
 		</>
 	);
 };
