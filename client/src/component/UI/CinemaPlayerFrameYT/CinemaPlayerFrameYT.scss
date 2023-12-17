@@ -6,5 +6,7 @@
 	height: 100%;
 	min-height: 200px;
 
-	&__video {}
+	&__video {
+		aspect-ratio: 16 / 9;
+	}
 }
