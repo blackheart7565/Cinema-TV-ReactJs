@@ -184,6 +184,7 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 
 							<MediaDetailsSwiperGallery
 								className={"media-details__gallery"}
+								titleBlock="Gallery:"
 								images={(
 									[
 										...details.images.backdrops.map((item) => mediaConfig.methods.poster_path(item.file_path))
