@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import {
 	ChangeEvent,
 	FC,
@@ -9,6 +10,7 @@ import {
 } from 'react';
 import { toast } from "react-toastify";
 
+import { useHCSM } from "./HideCursorOnStopMove/useHCSM";
 import { usePiP } from './PiP/hook/usePiP';
 import { ICinemaPlayer, IVideoElement } from './interface';
 import { CinemaPlayerLoader } from './module/CinemaPlayerLoader/CinemaPlayerLoader';
@@ -26,7 +28,10 @@ export const CinemaPlayer: FC<ICinemaPlayer> = ({
 	// -------------------------------- References --------------------------------
 	const videoRef = useRef<IVideoElement>(null)
 	const cinemaPlayerContainerRef = useRef<HTMLDivElement>(null)
-	const { togglePiP, disablePiP } = usePiP(videoRef, { autoPIP: false })
+
+	// -------------------------------- Custom Hook --------------------------------
+	const { togglePiP, disablePiP } = usePiP(videoRef, { autoPIP: false });
+	const { isVisibleMenuControl } = useHCSM<HTMLDivElement>(cinemaPlayerContainerRef);
 
 	// -------------------------------- States --------------------------------
 	const [isPlay, setIsPlay] = useState<boolean>(true);
@@ -184,7 +189,10 @@ export const CinemaPlayer: FC<ICinemaPlayer> = ({
 	return (
 		<>
 			<div
-				className='cinema-player'
+				className={classNames("cinema-player", {
+					"cpy-visible": isPlay || isVisibleMenuControl,
+					"cpy-user-inactive": !isVisibleMenuControl,
+				})}
 				id={'cinema_player'}
 				ref={cinemaPlayerContainerRef}
 				style={options}
@@ -207,7 +215,6 @@ export const CinemaPlayer: FC<ICinemaPlayer> = ({
 					<source src={`${url}`} type='video/mp4' />
 					{/* <source src={`${url}#t=2`} type='video/mp4' /> */}
 				</video>
-
 				<div className={'cinema-player__controls'}>
 					<Progress
 						setProgressBar={setProgressBar}

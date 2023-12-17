@@ -13,9 +13,17 @@
 	font-family: 'Poppins', sans-serif;
 }
 
-
 .cinema-player {
 	$self: &;
+
+	.cpy-visible &__controls {
+		opacity: 1;
+		pointer-events: auto;
+	}
+
+	&.cpy-user-inactive {
+		cursor: none;
+	}
 
 	#main-video,
 	&__main-video {
@@ -34,6 +42,9 @@
 		height: 70px;
 		background: rgba(0, 0, 0, 0.7);
 		z-index: 20;
+		transition: opacity 0.5s ease-in-out;
+		opacity: 0;
+		pointer-events: none;
 
 		@media screen and (max-width: 480px) {
 			height: 55px;

@@ -7,6 +7,9 @@ export type StringNumber = string | number;
 
 export interface ICinemaPlayer {
 	url: string;
+	/**
+	 * @deprecated на даный момент свойство не будет работать
+	 */
 	isFastRewindForwardBtn?: boolean;
 	dependencies?: any[];
 	options?: IOptionPlayer;
