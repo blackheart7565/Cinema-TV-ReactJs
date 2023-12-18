@@ -14,7 +14,7 @@ const MediaDetailsSwiperSlideImage: FC<IMediaDetailsSwiperSlideImageProps> = ({
 			<img
 				className={className}
 				src={pathImage || ""}
-				alt={`${className}-image`}
+				alt={`${className}-img`}
 			/>
 		</>
 	);
