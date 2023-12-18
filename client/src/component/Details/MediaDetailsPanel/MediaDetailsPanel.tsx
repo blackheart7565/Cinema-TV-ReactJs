@@ -2,8 +2,8 @@ import { FC } from "react"
 
 import TimeFormat from "../../../utils/TimeFormat"
 import Rating from "../../model/Rating"
-import MediaDetailsInfoRow from "../MediaDetailsInfoRow"
-import MediaDetailsPost from "../MediaDetailsPost"
+import MediaDetailsInfoRow from "../MediaDetailsInfoRow/MediaDetailsInfoRow"
+import MediaDetailsPost from "../MediaDetailsPost/MediaDetailsPost"
 
 interface IMediaDetailsPanelProps {
 	src: string;

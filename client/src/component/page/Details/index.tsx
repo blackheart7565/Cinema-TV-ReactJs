@@ -3,20 +3,20 @@ import { useParams } from "react-router-dom";
 
 import { mediaConfig } from "../../../api/config/media.config";
 import mediaApi from "../../../api/modules/media.api";
+import { ActorDto } from "../../../dtos/actor.dto";
+import { RecommendationsDto } from "../../../dtos/recommendations.dto";
 import { MediaTopDto } from "../../../dtos/top-media.dto";
 import { useReducer } from "../../../hooks/reducer.hook";
 import { IMediaTop, IResponseMediaDetailsValidationRoot } from "../../../types/media-types/details.type";
 import { IResponseMediasList, IResponseMediasListResultMovie, IResponseMediasListResultSerials, IResponseMediasListValidationType } from "../../../types/media.types";
 import { IParams } from "../../../types/other.type";
-import MediaDetailsHeader from "../../Details/MediaDetailsHeader";
-import MediaDetailsPanel from "../../Details/MediaDetailsPanel";
-import MediaDetailsTabsVideo from "../../Details/MediaDetailsVideo";
-
-import { ActorDto } from "../../../dtos/actor.dto";
-import { RecommendationsDto } from "../../../dtos/recommendations.dto";
+import MediaDetailsHeader from "../../Details/MediaDetailsHeader/MediaDetailsHeader";
+import MediaDetailsPanel from "../../Details/MediaDetailsPanel/MediaDetailsPanel";
 import MediaDetailsRecommendation from "../../Details/MediaDetailsRecommendation/MediaDetailsRecommendation";
-import MediaDetailsSwiperGallery from "../../Details/MediaDetailsSwiperGallery";
-import MediaDetailsSwiperListActors from "../../Details/MediaDetailsSwiperListActors";
+import MediaDetailsSwiperGallery from "../../Details/MediaDetailsSwiperGallery/MediaDetailsSwiperGallery";
+import MediaDetailsSwiperListActors from "../../Details/MediaDetailsSwiperListActors/MediaDetailsSwiperListActors";
+import MediaDetailsTabsVideo from "../../Details/MediaDetailsVideo/MediaDetailsVideo";
+
 import "./Details.scss";
 
 interface IDetailsMediaProps { }

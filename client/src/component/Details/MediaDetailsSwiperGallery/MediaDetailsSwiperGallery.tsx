@@ -4,7 +4,7 @@ import { FreeMode, Navigation, Pagination, Zoom } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import concatClasses from "../../../utils/ClassNames";
-import MediaDetailsSwiperSlideImage from "../MediaDetailsSwiperSlideImage";
+import MediaDetailsSwiperSlideImage from "../MediaDetailsSwiperSlideImage/MediaDetailsSwiperSlideImage";
 
 import 'swiper/css/zoom';
 

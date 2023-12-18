@@ -3,8 +3,8 @@ import { A11y, FreeMode, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useSwiperNavigation } from "../../../hooks/swiper.hook";
 import { IActor } from "../../../types/media-types/details.type";
-import MediaDetailsSwiperListItemActors from "../MediaDetailsSwiperListItemActors";
-import MediaDetailsSwiperNavigation from "../MediaDetailsSwiperNavigation";
+import MediaDetailsSwiperListItemActors from "../MediaDetailsSwiperListItemActors/MediaDetailsSwiperListItemActors";
+import MediaDetailsSwiperNavigation from "../MediaDetailsSwiperNavigation/MediaDetailsSwiperNavigation";
 
 interface IMediaDetailsSwiperListActorsProps {
 	title?: string;

@@ -5,7 +5,7 @@ import concatClasses from "../../../utils/ClassNames";
 import { CinemaPlayer } from "../../UI/CinemaPlayer/CinemaPlayer";
 import CinemaPlayerFrameYT from "../../UI/CinemaPlayerFrameYT/CinemaPlayerFrameYT";
 import TabBar from "../../UI/TabBar/TabBar";
-import MediaDetailsTop from "../MediaDetailsTop";
+import MediaDetailsTop from "../MediaDetailsTop/MediaDetailsTop";
 
 type IMediaTypeEnums = "movie" | "tv" | "";
 
