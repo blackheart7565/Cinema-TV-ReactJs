@@ -26,7 +26,7 @@ const MediaDetailsRecommendation: React.FC<IMediaDetailsRecommendationProps> = (
 }) => {
 	return (
 		<>
-			{recommendations && (
+			{recommendations && recommendations.length > 0 && (
 				<div className={classNames(className)}>
 					{titleBlock && (
 						<div className={classNames(className && concatClasses(className, "-header"))}>

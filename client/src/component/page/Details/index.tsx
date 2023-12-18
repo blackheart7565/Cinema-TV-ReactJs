@@ -148,6 +148,7 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 							<MediaDetailsTabsVideo
 								className="media-details__videos"
 								mediaType={mediaType === "movie" ? "movie" : "tv"}
+								posterVideoPath={mediaConfig.methods.poster_path(details.poster_path || details.backdrop_path)}
 								mediaId={mediaId}
 								trailerUtlKey={(
 									details.videos.results.filter(video => video.type === "Trailer"

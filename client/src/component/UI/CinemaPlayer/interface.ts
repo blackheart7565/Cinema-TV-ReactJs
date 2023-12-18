@@ -7,6 +7,7 @@ export type StringNumber = string | number;
 
 export interface ICinemaPlayer {
 	url: string;
+	poster?: string | undefined;
 	/**
 	 * @deprecated на даный момент свойство не будет работать
 	 */

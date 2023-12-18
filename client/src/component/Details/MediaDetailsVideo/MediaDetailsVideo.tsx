@@ -16,6 +16,7 @@ interface IMediaDetailsVideoProps {
 	mediaName?: string | undefined | null;
 	trailerUtlKey?: string | undefined;
 	topMedia?: IMediaTop[];
+	posterVideoPath?: string | undefined;
 }
 
 /**
@@ -30,6 +31,7 @@ const MediaDetailsVideo: FC<IMediaDetailsVideoProps> = ({
 	mediaId,
 	mediaName,
 	trailerUtlKey,
+	posterVideoPath,
 	topMedia,
 }) => {
 	return (
@@ -58,6 +60,7 @@ const MediaDetailsVideo: FC<IMediaDetailsVideoProps> = ({
 						{
 							id: "1",
 							node: <CinemaPlayer
+								poster={posterVideoPath}
 								dependencies={[mediaType, mediaId]}
 								// url={"https://www.youtube.com/watch?v=5_4TKRgEr9U&list=RDMM5_4TKRgEr9U&start_radio=1"}
 								// url="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"

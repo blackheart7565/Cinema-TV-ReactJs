@@ -21,6 +21,7 @@ import './CinemaPlayer.scss';
 
 export const CinemaPlayer: FC<ICinemaPlayer> = ({
 	url,
+	poster,
 	isFastRewindForwardBtn,
 	dependencies,
 	options = {},
@@ -184,7 +185,7 @@ export const CinemaPlayer: FC<ICinemaPlayer> = ({
 
 		if (!dependencies) return;
 		defaultProperties(video);
-	}, dependencies);
+	}, dependencies || []);
 
 	return (
 		<>
