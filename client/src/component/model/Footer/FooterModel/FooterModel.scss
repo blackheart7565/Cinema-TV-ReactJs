@@ -6,7 +6,7 @@
 	&__model {
 		display: flex;
 		flex-direction: column;
-		height: 390px;
+		height: 300px;
 		border: 1px solid #FFF;
 		width: 100%;
 		max-width: 350px;
@@ -17,7 +17,7 @@
 		color: $white;
 		padding: 15px 0;
 		font-size: 23px;
-		letter-spacing: 5px;
+		letter-spacing: 3px;
 		text-shadow: 0 0 30px #DA0027;
 		border-bottom: 1px solid $white;
 	}
@@ -25,9 +25,16 @@
 	&__model-list {
 		display: flex;
 		flex-direction: column;
-		gap: 10px;
+		flex-wrap: wrap;
+		gap: 2px;
 		height: 100%;
-		padding-top: 10px;
+		padding: 10px;
+		overflow-y: hidden;
+		overflow-x: auto;
+
+		&::-webkit-scrollbar {
+			height: 5px;
+		}
 	}
 
 	&__model-link {
