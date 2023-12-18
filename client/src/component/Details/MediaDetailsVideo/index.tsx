@@ -59,12 +59,12 @@ const MediaDetailsVideo: FC<IMediaDetailsVideoProps> = ({
 							id: "1",
 							node: <CinemaPlayer
 								dependencies={[mediaType, mediaId]}
-								// url="https://www.youtube.com/watch?v=5_4TKRgEr9U&list=RDMM5_4TKRgEr9U&start_radio=1" 
+								// url={"https://www.youtube.com/watch?v=5_4TKRgEr9U&list=RDMM5_4TKRgEr9U&start_radio=1"}
 								// url="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
 								// url="//vjs.zencdn.net/v/oceans.mp4"
 								// url="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-720p.mp4"
-								// url={"/86.mp4"}
-								url={"/movie.mp4"}
+								url={"/86.mp4"}
+							// url={"/movie.mp4"}
 							/>,
 						},
 						{

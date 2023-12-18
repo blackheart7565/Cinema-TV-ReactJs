@@ -13,6 +13,8 @@ import MediaDetailsPanel from "../../Details/MediaDetailsPanel";
 import MediaDetailsTabsVideo from "../../Details/MediaDetailsVideo";
 
 import { ActorDto } from "../../../dtos/actor.dto";
+import { RecommendationsDto } from "../../../dtos/recommendations.dto";
+import MediaDetailsRecommendation from "../../Details/MediaDetailsRecommendation/MediaDetailsRecommendation";
 import MediaDetailsSwiperGallery from "../../Details/MediaDetailsSwiperGallery";
 import MediaDetailsSwiperListActors from "../../Details/MediaDetailsSwiperListActors";
 import "./Details.scss";
@@ -72,8 +74,8 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 	}, [mediaType]);
 
 	if (details) {
-		// console.log(details);
-		// console.log(topMedia, "top");
+		console.log(details);
+		console.log(topMedia, "top");
 	}
 
 	return (
@@ -148,7 +150,10 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 								mediaType={mediaType === "movie" ? "movie" : "tv"}
 								mediaId={mediaId}
 								trailerUtlKey={(
-									details.videos.results.filter(video => video.type === "Trailer" || video.type === "Opening Credits" || "")[0]?.key
+									details.videos.results.filter(video => video.type === "Trailer"
+										|| video.type === "Opening Credits"
+										|| video.type === "Featurette"
+										|| "")[0]?.key
 								)}
 								topMedia={topMedia}
 								mediaName={(
@@ -189,6 +194,27 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 									[
 										...details.images.backdrops.map((item) => mediaConfig.methods.poster_path(item.file_path))
 									]
+								)}
+							/>
+
+							<MediaDetailsRecommendation
+								titleBlock={"Recommendations:"}
+								mediaType={mediaType}
+								className={"media-details__recommendations"}
+								recommendations={(
+									details.recommendation.results.map((item) => new RecommendationsDto({
+										id: item.id,
+										name: (
+											mediaType === "movie" ? (
+												(item as IResponseMediasListResultMovie).title
+												|| (item as IResponseMediasListResultMovie).original_title
+											) : mediaType === "tv" ? (
+												(item as IResponseMediasListResultSerials).name
+												|| (item as IResponseMediasListResultSerials).original_name
+											) : ""
+										),
+										poster: mediaConfig.methods.poster_path(item.poster_path || item.backdrop_path)
+									}))
 								)}
 							/>
 
