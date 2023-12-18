@@ -10,6 +10,8 @@
 
 # production
 /build
+client/public/**/*.mp4
+client/public/*.mp4
 
 # misc
 .DS_Store
