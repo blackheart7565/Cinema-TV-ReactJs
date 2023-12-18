@@ -57,7 +57,7 @@ const MediaList: FC<IMediaList> = ({
 			<ul className="media-list">
 				{media.map((item: IResponseMediasListValidationType<typeof type>, index: number) => (
 					<MMediaItem
-						key={item.id + index}
+						key={item.id + index * 2}
 						path={`${mediaType}/${item.id}`}
 						posterImage={item.poster_path || item.backdrop_path}
 						name={
