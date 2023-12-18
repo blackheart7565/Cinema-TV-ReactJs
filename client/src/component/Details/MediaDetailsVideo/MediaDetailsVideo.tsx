@@ -66,8 +66,8 @@ const MediaDetailsVideo: FC<IMediaDetailsVideoProps> = ({
 								// url="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
 								// url="//vjs.zencdn.net/v/oceans.mp4"
 								// url="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-720p.mp4"
-								url={"/86.mp4"}
-							// url={"/movie.mp4"}
+								// url={"/86.mp4"}
+								url={"/movie.mp4"}
 							/>,
 						},
 						{
