@@ -1,3 +1,4 @@
+
 export interface IResponseHandlers { }
 
 export interface IResponseData {
@@ -5,4 +6,4 @@ export interface IResponseData {
 	message: string;
 }
 
-export type IResponseDataType = IResponseData | object | string;
+export type IResponseDataType = IResponseData | object | string

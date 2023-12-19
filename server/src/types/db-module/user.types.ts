@@ -16,4 +16,3 @@ export interface ITokenScheme {
 	userId: IObjectIdType,
 	refreshToken: string,
 }
-

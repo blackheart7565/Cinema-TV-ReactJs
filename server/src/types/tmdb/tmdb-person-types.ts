@@ -4,4 +4,3 @@ interface IPerson {
 }
 export interface IPersonDetails extends IPerson { }
 export interface IPersonCredits extends IPerson { }
-
