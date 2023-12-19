@@ -13,7 +13,6 @@ export interface IMediaDetails extends IMedia {
 	mediaId: string;
 }
 export interface IMediaGenre extends IMedia { }
-
 export interface IMediaSearch extends IMedia, IMediaPage {
 	query: string;
 }
@@ -51,6 +50,7 @@ export interface IResponseMediasListResultSerials extends IResponseMediasListRes
 }
 export type IResponseMediasListType = IResponseMediasListResultMovie | IResponseMediasListResultSerials;
 
+
 export interface Dates {
 	maximum: string
 	minimum: string
@@ -65,4 +65,3 @@ export type IResponseMediasListValidationType<T extends string> = T extends "mov
 	: T extends "tv"
 	? IResponseMediasListResultSerials
 	: never;
-

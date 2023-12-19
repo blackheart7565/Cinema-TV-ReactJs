@@ -8,15 +8,10 @@ export interface IActor {
 	name: string;
 }
 
-export interface IMediaDetailsPanelProps {
-	src: string;
-	title: string | null;
-	originalTitle: string | null;
-	directors?: Crew[] | undefined | null;
-	released?: string | undefined | null;
-	countries?: ProductionCountry[] | undefined | null;
-	rating?: string | number | undefined | null;
-	duration?: number | number[] | undefined | null;
+export interface IMediaTop {
+	id: string | number;
+	pathImage: string;
+	name: string;
 }
 // ====================> Media Details API<====================
 
@@ -157,7 +152,6 @@ export interface Crew {
 	department: string
 	job: string
 }
-
 export interface Videos {
 	id: number
 	results: IMediaDetailsVideoResult[]
@@ -174,7 +168,6 @@ export interface IMediaDetailsVideoResult {
 	published_at: string
 	id: string
 }
-
 export interface CreatedBy {
 	id: number
 	credit_id: string
