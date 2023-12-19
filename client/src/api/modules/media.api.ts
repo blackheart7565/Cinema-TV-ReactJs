@@ -69,6 +69,5 @@ class MediaApi {
 		}
 	}
 }
-
 const mediaApi = new MediaApi();
 export default mediaApi;
