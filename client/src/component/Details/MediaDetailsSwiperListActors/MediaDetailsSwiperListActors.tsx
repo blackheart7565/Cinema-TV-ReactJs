@@ -74,4 +74,3 @@ const MediaDetailsSwiperListActors: FC<IMediaDetailsSwiperListActorsProps> = ({
 };
 
 export default MediaDetailsSwiperListActors;
-
