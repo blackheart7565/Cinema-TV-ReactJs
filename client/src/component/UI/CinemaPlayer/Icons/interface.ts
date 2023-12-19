@@ -1,3 +1,3 @@
 export interface ICinemaIcon {
-    className?: string
+	className?: string
 }
