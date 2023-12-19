@@ -219,8 +219,8 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 								)}
 							/>
 
-						</div>
-					</div>
+						</div >
+					</div >
 				)
 				: null}
 		</>
