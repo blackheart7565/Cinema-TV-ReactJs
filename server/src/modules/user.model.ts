@@ -22,4 +22,3 @@ export default mongoose.model<IUserScheme>(
 		},
 	}, schemaConfig)
 );
-
