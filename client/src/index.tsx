@@ -8,8 +8,8 @@ import store from "./store";
 
 import "./styles/font.scss";
 import "./styles/reset.scss";
-import "./styles/mixin.scss";
 import "./styles/base.scss";
+import "./styles/mixin.scss";
 import "./styles/index.scss";
 
 const root = ReactDOM.createRoot(
