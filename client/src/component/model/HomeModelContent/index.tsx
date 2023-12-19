@@ -34,6 +34,7 @@ const HomeModelContent: FC<IHomeModelContent> = ({
 	const classPrefixLow = classPrefix.toLowerCase();
 	const className = `${classPrefixLow}__model`;
 
+
 	useEffect(() => {
 		const fetchData = async () => {
 			dispatch(actions.setIsLoading(true));
@@ -133,10 +134,10 @@ const HomeModelContent: FC<IHomeModelContent> = ({
 										}
 										rating={item.vote_average}
 									/>
-								</Link >
+								</Link>
 							))
 						}
-					</ul >
+					</ul>
 					<div className={`${className}-poster`}>
 						<img
 							className={`${className}-poster-img`}
@@ -144,11 +145,11 @@ const HomeModelContent: FC<IHomeModelContent> = ({
 							alt={`${titleLow}-poster-img`}
 						/>
 					</div>
-				</div >
+				</div>
 
-			</div >
+			</div>
 
-		</div >
+		</div>
 	);
 };
 
