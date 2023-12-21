@@ -1,8 +1,8 @@
 import { FC, ReactNode } from "react";
-import { A11y, FreeMode, Navigation } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { FreeMode, Navigation } from "swiper/modules";
 import { useSwiperNavigation } from "../../../hooks/swiper.hook";
 import { IActor } from "../../../types/media-types/details.type";
+import LinearSwiper from "../../UI/LinearSwiper/LinearSwiper";
 import MediaDetailsSwiperListItemActors from "../MediaDetailsSwiperListItemActors/MediaDetailsSwiperListItemActors";
 import MediaDetailsSwiperNavigation from "../MediaDetailsSwiperNavigation/MediaDetailsSwiperNavigation";
 
@@ -34,39 +34,35 @@ const MediaDetailsSwiperListActors: FC<IMediaDetailsSwiperListActorsProps> = ({
 						/>
 					</div>
 
-					<Swiper
-						className={`swiper ${className}-swiper`}
-						ref={swiperRef}
-						grabCursor={true}
-						slidesPerView={"auto"}
-						spaceBetween={10}
-						freeMode={true}
-						navigation={{
-							nextEl: `${className}-btn-next`,
-							prevEl: `${className}-btn-prev`,
-						}}
-						speed={600}
-						modules={[Navigation, FreeMode, A11y]}
-					>
-						{actors && actors.length > 0
-							? (
-								actors.map((item: IActor) => (
-									<SwiperSlide
-										key={item.id}
-										className={`${className}-swiper-item`}
-									>
-										<MediaDetailsSwiperListItemActors
-											className={className}
-											actorName={item.name}
-											pathImage={item.pathImage}
-										/>
-									</SwiperSlide>
-								))
-							)
-							: (
-								children
-							)}
-					</Swiper>
+					{actors && actors.length > 0 && (
+						<LinearSwiper
+							wrapperClassName={`${className}-swiper`}
+							slideClassName={`${className}-swiper-item`}
+							ref={swiperRef}
+							options={{
+								grabCursor: true,
+								slidesPerView: "auto",
+								spaceBetween: 10,
+								freeMode: true,
+								navigation: {
+									nextEl: `${className}-btn-next`,
+									prevEl: `${className}-btn-prev`,
+								},
+								speed: 600,
+								modules: [Navigation, FreeMode]
+							}}
+							collection={actors.map((item: IActor) => ({
+								id: item.id,
+								element: (
+									<MediaDetailsSwiperListItemActors
+										className={className}
+										actorName={item.name}
+										pathImage={item.pathImage}
+									/>
+								)
+							}))}
+						/>
+					)}
 				</div>
 			)}
 		</>
