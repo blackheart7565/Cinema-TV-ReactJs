@@ -2,8 +2,8 @@ import classNames from "classnames";
 import React from 'react';
 import { Link } from "react-router-dom";
 import { FreeMode } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
 import concatClasses from "../../../utils/ClassNames";
+import LinearSwiper from "../../UI/LinearSwiper/LinearSwiper";
 
 interface IRecommendations {
 	id: string | number;
@@ -36,21 +36,20 @@ const MediaDetailsRecommendation: React.FC<IMediaDetailsRecommendationProps> = (
 						</div>
 					)}
 					<div className={classNames(className && concatClasses(className, "-content"))}>
-						<Swiper
-							className={classNames("swiper", className && concatClasses(className, "-list"))}
-							// ref={swiperRef}
-							grabCursor={true}
-							slidesPerView={"auto"}
-							spaceBetween={10}
-							freeMode={true}
-							speed={600}
-							modules={[FreeMode]}
-						>
-							{recommendations.map(item => (
-								<SwiperSlide
-									key={item.id}
-									className={classNames("swiper-slide", className && concatClasses(className, "-item"))}
-								>
+						<LinearSwiper
+							wrapperClassName={className && concatClasses(className, "-list")}
+							slideClassName={className && concatClasses(className, "-item")}
+							options={{
+								grabCursor: true,
+								slidesPerView: "auto",
+								spaceBetween: 10,
+								freeMode: true,
+								speed: 600,
+								modules: [FreeMode]
+							}}
+							collection={recommendations.map((item: IRecommendations) => ({
+								id: item.id,
+								element: (
 									<Link
 										to={`/${mediaType}/${item.id}`}
 										className={classNames(className && concatClasses(className, "-link"))}
@@ -66,9 +65,9 @@ const MediaDetailsRecommendation: React.FC<IMediaDetailsRecommendationProps> = (
 											</div>
 										</div>
 									</Link>
-								</SwiperSlide>
-							))}
-						</Swiper>
+								)
+							}))}
+						/>
 					</div>
 				</div>
 			)}
