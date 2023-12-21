@@ -57,6 +57,7 @@ const MediaDetailsSwiperListActors: FC<IMediaDetailsSwiperListActorsProps> = ({
 									<MediaDetailsSwiperListItemActors
 										className={className}
 										actorName={item.name}
+										characterName={item.characterName}
 										pathImage={item.pathImage}
 									/>
 								)

@@ -179,11 +179,12 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 									details.credits.cast
 										.filter(actor => actor.profile_path && actor.profile_path)
 										.map(item => (
-											new ActorDto(
-												item.id,
-												item.name,
-												mediaConfig.methods.poster_path(item.profile_path)
-											)
+											new ActorDto({
+												id: item.id,
+												name: item.name,
+												characterName: item.character,
+												pathImage: mediaConfig.methods.poster_path(item.profile_path)
+											})
 										))
 								)}
 							/>

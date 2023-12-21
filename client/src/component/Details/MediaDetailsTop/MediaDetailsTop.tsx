@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import { IMediaTop } from "../../../types/media-types/details.type";
 
+import { mediaConfig } from "../../../api/config/media.config";
 import "./MediaDetailsTop.scss";
 
 interface IMediaDetailsTopProps {
@@ -48,7 +49,7 @@ const MediaDetailsTop: FC<IMediaDetailsTopProps> = ({
 									className={classNames("swiper-slide", "section-top__slide")}
 								>
 									<Link
-										to={`/${mediaType}/${item.id}`}
+										to={`/${mediaType && mediaConfig.methods.replaceMovieAndTv_To_FilmsAndSerials(mediaType)}/${mediaType}/${item.id}`}
 										className={classNames("section-top__item")}
 									>
 										<div className="section-top__image">

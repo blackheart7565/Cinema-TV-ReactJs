@@ -5,6 +5,7 @@ interface IMediaDetailsListItemActorsProps {
 	className?: string;
 	pathImage?: string;
 	actorName?: string;
+	characterName?: string;
 	children?: ReactNode;
 }
 
@@ -12,6 +13,7 @@ const MediaDetailsSwiperListItemActors: FC<IMediaDetailsListItemActorsProps> = (
 	className,
 	pathImage,
 	actorName,
+	characterName,
 	children,
 }) => {
 	return (
@@ -30,6 +32,10 @@ const MediaDetailsSwiperListItemActors: FC<IMediaDetailsListItemActorsProps> = (
 							<div className={className ? `${className}-info` : ""}>
 								<div className={className ? `${className}-name` : ""}>
 									{actorName}
+								</div>
+								<hr />
+								<div className={className ? `${className}-character-name` : ""}>
+									( {characterName} )
 								</div>
 							</div>
 						</Link>

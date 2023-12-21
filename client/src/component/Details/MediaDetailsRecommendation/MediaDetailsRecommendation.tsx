@@ -2,6 +2,7 @@ import classNames from "classnames";
 import React from 'react';
 import { Link } from "react-router-dom";
 import { FreeMode } from "swiper/modules";
+import { mediaConfig } from "../../../api/config/media.config";
 import concatClasses from "../../../utils/ClassNames";
 import LinearSwiper from "../../UI/LinearSwiper/LinearSwiper";
 
@@ -51,7 +52,7 @@ const MediaDetailsRecommendation: React.FC<IMediaDetailsRecommendationProps> = (
 								id: item.id,
 								element: (
 									<Link
-										to={`/${mediaType}/${item.id}`}
+										to={`/${mediaType && mediaConfig.methods.replaceMovieAndTv_To_FilmsAndSerials(mediaType)}/${mediaType}/${item.id}`}
 										className={classNames(className && concatClasses(className, "-link"))}
 									>
 										<img

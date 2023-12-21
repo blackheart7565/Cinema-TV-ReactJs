@@ -6,6 +6,7 @@ export interface IActor {
 	id: number | string;
 	pathImage: string;
 	name: string;
+	characterName: string;
 }
 
 export interface IMediaTop {

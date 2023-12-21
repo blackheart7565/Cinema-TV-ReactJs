@@ -26,14 +26,11 @@ const AppRouters = () => {
 					<Route path={"/films"} element={<FilmsLayout />} >
 						<Route index element={<Films />} />
 						<Route path={":mediaType/:mediaId"} element={<DetailsMedia />} />
-						<Route path="*" element={<PageNotFound />} />
 					</Route>
 					<Route path={"/serials"} element={<SerialsLayout />} >
 						<Route index element={<Serials />} />
 						<Route path={":mediaType/:mediaId"} element={<DetailsMedia />} />
-						<Route path="*" element={<PageNotFound />} />
 					</Route>
-					<Route path={":mediaType/:mediaId"} element={<DetailsMedia />} />
 				</Route>
 				<Route path="/*" element={<PageNotFound />} />
 			</Routes>

@@ -433,19 +433,27 @@
 
 		&-info {
 			display: flex;
-			align-items: center;
+			flex-direction: column;
+			justify-content: center;
+			gap: 5px;
 			width: 100%;
 			position: absolute;
 			bottom: 0;
 			left: 0;
 			padding: 10px;
-			background-color: #01000ca0;
+			background-color: #01000cd6;
 		}
 
+		&-character-name,
 		&-name {
-			font-weight: 400;
-			font-size: 14px;
+			font-weight: 700;
+			font-size: 12px;
 			letter-spacing: 2px;
+		}
+
+		&-character-name {
+			font-size: 12px;
+			color: rgb(249, 108, 0);
 		}
 	}
 
