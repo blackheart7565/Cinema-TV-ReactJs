@@ -4,10 +4,9 @@ import { useParams } from "react-router-dom";
 import { mediaConfig } from "../../../api/config/media.config";
 import mediaApi from "../../../api/modules/media.api";
 import { ActorDto } from "../../../dtos/actor.dto";
-import { RecommendationsDto } from "../../../dtos/recommendations.dto";
 import { MediaTopDto } from "../../../dtos/top-media.dto";
 import { useReducer } from "../../../hooks/reducer.hook";
-import { IMediaTop, IResponseMediaDetailsValidationRoot } from "../../../types/media-types/details.type";
+import { IMediaTop, IResponseMediaDetailsValidationRoot, IResponseMediasDetailsValidationType } from "../../../types/media-types/details.type";
 import { IResponseMediasList, IResponseMediasListResultMovie, IResponseMediasListResultSerials, IResponseMediasListValidationType } from "../../../types/media.types";
 import { IParams } from "../../../types/other.type";
 import MediaDetailsHeader from "../../Details/MediaDetailsHeader/MediaDetailsHeader";
@@ -17,6 +16,7 @@ import MediaDetailsSwiperGallery from "../../Details/MediaDetailsSwiperGallery/M
 import MediaDetailsSwiperListActors from "../../Details/MediaDetailsSwiperListActors/MediaDetailsSwiperListActors";
 import MediaDetailsTabsVideo from "../../Details/MediaDetailsVideo/MediaDetailsVideo";
 
+import { RecommendationsDto } from "../../../dtos/recommendations.dto";
 import "./Details.scss";
 
 interface IDetailsMediaProps { }
@@ -204,19 +204,23 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 								mediaType={mediaType}
 								className={"media-details__recommendations"}
 								recommendations={(
-									details.recommendation.results.map((item) => new RecommendationsDto({
-										id: item.id,
-										name: (
-											mediaType === "movie" ? (
-												(item as IResponseMediasListResultMovie).title
-												|| (item as IResponseMediasListResultMovie).original_title
-											) : mediaType === "tv" ? (
-												(item as IResponseMediasListResultSerials).name
-												|| (item as IResponseMediasListResultSerials).original_name
-											) : ""
-										),
-										poster: mediaConfig.methods.poster_path(item.poster_path || item.backdrop_path)
-									}))
+									(details.recommendation.results as IResponseMediasDetailsValidationType<typeof type>[])
+										.filter((item) => item.poster_path && item.poster_path)
+										.map((item): RecommendationsDto => (
+											new RecommendationsDto({
+												id: item.id,
+												name: (
+													mediaType === "movie" ? (
+														(item as IResponseMediasListResultMovie).title
+														|| (item as IResponseMediasListResultMovie).original_title
+													) : mediaType === "tv" ? (
+														(item as IResponseMediasListResultSerials).name
+														|| (item as IResponseMediasListResultSerials).original_name
+													) : ""
+												),
+												poster: mediaConfig.methods.poster_path(item.poster_path || item.backdrop_path)
+											})
+										))
 								)}
 							/>
 

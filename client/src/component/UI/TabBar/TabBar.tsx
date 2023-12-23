@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { FC, useEffect, useState } from 'react';
+import { FC, forwardRef, useEffect, useState } from 'react';
 
 import TabBarNavigation from "./TabBarNavigation";
 import { IContent, INavigation, StringNumber } from "./types";
@@ -14,12 +14,12 @@ interface ITabBarProps {
 	dependencies?: any[];
 }
 
-const TabBar: FC<ITabBarProps> = ({
+const TabBar: FC<ITabBarProps> = forwardRef<HTMLDivElement, ITabBarProps>(({
 	className,
 	navigation,
 	content,
 	dependencies,
-}) => {
+}, ref) => {
 	const [selectedId, setSelectedId] = useState<StringNumber>(1);
 
 	const onClickActive = (id: StringNumber) => {
@@ -33,7 +33,10 @@ const TabBar: FC<ITabBarProps> = ({
 	return (
 		<>
 			{content.length <= navigation.length && (
-				<div className={classNames("tab-bar")}>
+				<div
+					className={classNames("tab-bar")}
+					ref={ref}
+				>
 					<TabBarNavigation
 						navigation={navigation}
 						selectId={selectedId}
@@ -51,6 +54,6 @@ const TabBar: FC<ITabBarProps> = ({
 			)}
 		</>
 	);
-};
+});
 
 export default TabBar;

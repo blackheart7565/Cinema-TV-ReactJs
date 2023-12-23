@@ -3,7 +3,9 @@ import { FC } from 'react';
 import { FreeMode, Navigation, Pagination, Zoom } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
+import { motionOption, variantsMediaDetailsGallery } from "../../../motion/details.motion";
 import concatClasses from "../../../utils/ClassNames";
+import { MDiv } from "../../motion/motion.component";
 import MediaDetailsSwiperSlideImage from "../MediaDetailsSwiperSlideImage/MediaDetailsSwiperSlideImage";
 
 import 'swiper/css/zoom';
@@ -13,6 +15,8 @@ interface IMediaDetailsSwiperGalleryProps {
 	titleBlock?: string | undefined;
 	images: string[];
 }
+
+const isOnce: boolean = true;
 
 const MediaDetailsSwiperGallery: FC<IMediaDetailsSwiperGalleryProps> = ({
 	className,
@@ -25,7 +29,16 @@ const MediaDetailsSwiperGallery: FC<IMediaDetailsSwiperGalleryProps> = ({
 	return (
 		<>
 			{images && images.length > 0 && (
-				<div className={className || undefined}>
+				<MDiv
+					initial={motionOption.hidden}
+					whileInView={motionOption.visible}
+					exit={motionOption.exit}
+					viewport={motionOption.viewport({
+						isOnce: isOnce,
+					})}
+					variants={variantsMediaDetailsGallery}
+					className={className || undefined}
+				>
 					{titleBlock && (
 						<div className={className && classNames(concatClasses(className, "-header"))}>
 							<div className={className && classNames(concatClasses(className, "-title"))}>
@@ -52,7 +65,7 @@ const MediaDetailsSwiperGallery: FC<IMediaDetailsSwiperGalleryProps> = ({
 							FreeMode,
 							Pagination,
 							Navigation,
-							Zoom
+							Zoom,
 						]}
 						breakpoints={{
 							480: {
@@ -69,12 +82,12 @@ const MediaDetailsSwiperGallery: FC<IMediaDetailsSwiperGalleryProps> = ({
 									key={index}
 									className={checkClass(className, "slide")}
 								>
-									<div className="swiper-zoom-container">
-										<MediaDetailsSwiperSlideImage
-											className={checkClass(className, 'img')}
-											pathImage={img}
-										/>
-									</div>
+									{/* <div className="swiper-zoom-container"> */}
+									<MediaDetailsSwiperSlideImage
+										className={checkClass(className, 'img')}
+										pathImage={img}
+									/>
+									{/* </div> */}
 								</SwiperSlide>
 							))
 						)}
@@ -86,7 +99,7 @@ const MediaDetailsSwiperGallery: FC<IMediaDetailsSwiperGalleryProps> = ({
 						</div>
 						<div className={`swiper-pagination ${checkClass(className, "pagination")}`}></div>
 					</Swiper>
-				</div>
+				</MDiv>
 			)}
 		</>
 	);

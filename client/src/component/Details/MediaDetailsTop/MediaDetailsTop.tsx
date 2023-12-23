@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { FC, ReactNode } from "react";
+import { FC, ReactNode, forwardRef } from "react";
 import { Link } from "react-router-dom";
 import { FreeMode, Mousewheel } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -16,16 +16,19 @@ interface IMediaDetailsTopProps {
 	topList?: IMediaTop[];
 }
 
-const MediaDetailsTop: FC<IMediaDetailsTopProps> = ({
+const MediaDetailsTop: FC<IMediaDetailsTopProps> = forwardRef<HTMLDivElement, IMediaDetailsTopProps>(({
 	className,
 	title,
 	topList,
 	mediaType,
-}) => {
+}, ref) => {
 	return (
 		<>
 			{topList && (
-				<div className={classNames("section-top")}>
+				<div
+					className={classNames("section-top")}
+					ref={ref}
+				>
 					{title && (
 						<div className={classNames("section-top__header")}>
 							<div className={classNames("section-top__title")}>
@@ -67,6 +70,6 @@ const MediaDetailsTop: FC<IMediaDetailsTopProps> = ({
 			)}
 		</>
 	);
-};
+});
 
 export default MediaDetailsTop;

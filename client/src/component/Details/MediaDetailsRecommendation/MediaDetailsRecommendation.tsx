@@ -3,8 +3,10 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import { FreeMode } from "swiper/modules";
 import { mediaConfig } from "../../../api/config/media.config";
+import { motionOption, variantsMediaDetailsRecommendation } from "../../../motion/details.motion";
 import concatClasses from "../../../utils/ClassNames";
 import LinearSwiper from "../../UI/LinearSwiper/LinearSwiper";
+import { MDiv } from "../../motion/motion.component";
 
 interface IRecommendations {
 	id: string | number;
@@ -16,8 +18,10 @@ interface IMediaDetailsRecommendationProps {
 	className?: string | undefined;
 	titleBlock?: string | undefined;
 	mediaType?: string | undefined;
-	recommendations: IRecommendations[];
+	recommendations?: IRecommendations[];
 }
+
+const isOnce: boolean = true;
 
 const MediaDetailsRecommendation: React.FC<IMediaDetailsRecommendationProps> = ({
 	className,
@@ -28,7 +32,17 @@ const MediaDetailsRecommendation: React.FC<IMediaDetailsRecommendationProps> = (
 	return (
 		<>
 			{recommendations && recommendations.length > 0 && (
-				<div className={classNames(className)}>
+				<MDiv
+					initial={motionOption.hidden}
+					whileInView={motionOption.visible}
+					exit={motionOption.exit}
+					viewport={motionOption.viewport({
+						amount: "all",
+						isOnce: isOnce,
+					})}
+					variants={variantsMediaDetailsRecommendation}
+					className={classNames(className)}
+				>
 					{titleBlock && (
 						<div className={classNames(className && concatClasses(className, "-header"))}>
 							<div className={classNames(className && concatClasses(className, "-title"))}>
@@ -70,7 +84,7 @@ const MediaDetailsRecommendation: React.FC<IMediaDetailsRecommendationProps> = (
 							}))}
 						/>
 					</div>
-				</div>
+				</MDiv>
 			)}
 		</>
 	);

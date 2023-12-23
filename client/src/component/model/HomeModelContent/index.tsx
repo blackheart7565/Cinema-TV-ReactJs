@@ -34,7 +34,6 @@ const HomeModelContent: FC<IHomeModelContent> = ({
 	const classPrefixLow = classPrefix.toLowerCase();
 	const className = `${classPrefixLow}__model`;
 
-
 	useEffect(() => {
 		const fetchData = async () => {
 			dispatch(actions.setIsLoading(true));
@@ -66,7 +65,7 @@ const HomeModelContent: FC<IHomeModelContent> = ({
 								<Link
 									className={`${className}-card`}
 									key={item.id}
-									to={`${mediaType}/${item.id}`}
+									to={`/${mediaType && mediaConfig.methods.replaceMovieAndTv_To_FilmsAndSerials(mediaType)}/${mediaType}/${item.id}`}
 								>
 									<img
 										className={`${className}-card-img`}
@@ -110,7 +109,7 @@ const HomeModelContent: FC<IHomeModelContent> = ({
 								<Link
 									className={`${className}-card`}
 									key={item.id}
-									to={`${mediaType}/${item.id}`}
+									to={`/${mediaType && mediaConfig.methods.replaceMovieAndTv_To_FilmsAndSerials(mediaType)}/${mediaType}/${item.id}`}
 								>
 									<img
 										className={`${className}-card-img`}

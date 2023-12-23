@@ -52,5 +52,4 @@ const LinearSwiper: ILinearSwiperRefType = forwardRef(({
 	);
 });
 
-
 export default LinearSwiper;

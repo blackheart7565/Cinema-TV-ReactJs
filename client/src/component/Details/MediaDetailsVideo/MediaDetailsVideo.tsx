@@ -1,11 +1,11 @@
 import { FC } from "react";
 import { mediaConfig } from "../../../api/config/media.config";
+import { motionOption, variantsMediaDetailsTop, variantsMediaVideoTitle, variantsTabBar } from "../../../motion/details.motion";
 import { IMediaTop } from "../../../types/media-types/details.type";
 import concatClasses from "../../../utils/ClassNames";
 import { CinemaPlayer } from "../../UI/CinemaPlayer/CinemaPlayer";
 import CinemaPlayerFrameYT from "../../UI/CinemaPlayerFrameYT/CinemaPlayerFrameYT";
-import TabBar from "../../UI/TabBar/TabBar";
-import MediaDetailsTop from "../MediaDetailsTop/MediaDetailsTop";
+import { MDiv, MMediaDetailsTop, MTabBar } from "../../motion/motion.component";
 
 type IMediaTypeEnums = "movie" | "tv" | "";
 
@@ -18,6 +18,8 @@ interface IMediaDetailsVideoProps {
 	topMedia?: IMediaTop[];
 	posterVideoPath?: string | undefined;
 }
+
+const isOnce: boolean = true;
 
 /**
  *  @param mediaType type movies or series
@@ -38,12 +40,28 @@ const MediaDetailsVideo: FC<IMediaDetailsVideoProps> = ({
 		<div className={className} style={{
 			color: "#DDd"
 		}}>
-			<div className={className && concatClasses(className, "-header")}>
+			<MDiv
+				initial={motionOption.hidden}
+				whileInView={motionOption.visible}
+				exit={motionOption.exit}
+				viewport={motionOption.viewport({
+					isOnce: isOnce,
+				})}
+				variants={variantsMediaVideoTitle}
+				className={className && concatClasses(className, "-header")}
+			>
 				Watch {mediaType === "movie" ? "movie" : mediaType === "tv" ? "the series" : ""} {mediaName} online
-			</div>
+			</MDiv>
 
 			<div className={className && concatClasses(className, "-content")}>
-				<TabBar
+				<MTabBar
+					initial={motionOption.hidden}
+					whileInView={motionOption.visible}
+					exit={motionOption.exit}
+					viewport={motionOption.viewport({
+						isOnce: isOnce,
+					})}
+					variants={variantsTabBar}
 					dependencies={[mediaType, mediaId]}
 					className={className}
 					navigation={[
@@ -77,7 +95,14 @@ const MediaDetailsVideo: FC<IMediaDetailsVideoProps> = ({
 					]}
 				/>
 
-				<MediaDetailsTop
+				<MMediaDetailsTop
+					initial={motionOption.hidden}
+					whileInView={motionOption.visible}
+					exit={motionOption.exit}
+					viewport={motionOption.viewport({
+						isOnce: isOnce,
+					})}
+					variants={variantsMediaDetailsTop}
 					mediaType={
 						mediaType === "movie"
 							? "movie"

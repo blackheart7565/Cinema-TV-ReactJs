@@ -1,8 +1,10 @@
 import { FC, ReactNode } from "react";
 import { FreeMode, Navigation } from "swiper/modules";
 import { useSwiperNavigation } from "../../../hooks/swiper.hook";
+import { motionOption, variantsSectionActors } from "../../../motion/details.motion";
 import { IActor } from "../../../types/media-types/details.type";
 import LinearSwiper from "../../UI/LinearSwiper/LinearSwiper";
+import { MDiv } from "../../motion/motion.component";
 import MediaDetailsSwiperListItemActors from "../MediaDetailsSwiperListItemActors/MediaDetailsSwiperListItemActors";
 import MediaDetailsSwiperNavigation from "../MediaDetailsSwiperNavigation/MediaDetailsSwiperNavigation";
 
@@ -12,6 +14,7 @@ interface IMediaDetailsSwiperListActorsProps {
 	className?: string;
 	children?: ReactNode;
 }
+const isOnce: boolean = true;
 
 const MediaDetailsSwiperListActors: FC<IMediaDetailsSwiperListActorsProps> = ({
 	title,
@@ -24,7 +27,16 @@ const MediaDetailsSwiperListActors: FC<IMediaDetailsSwiperListActorsProps> = ({
 	return (
 		<>
 			{actors && actors.length > 0 && (
-				<div className={`${className}`}>
+				<MDiv
+					initial={motionOption.hidden}
+					whileInView={motionOption.visible}
+					exit={motionOption.exit}
+					viewport={motionOption.viewport({
+						isOnce: isOnce,
+					})}
+					variants={variantsSectionActors}
+					className={`${className}`}
+				>
 					<div className={`${className}-header`}>
 						<p className={`${className}-title`}>{title}</p>
 						<MediaDetailsSwiperNavigation
@@ -51,7 +63,7 @@ const MediaDetailsSwiperListActors: FC<IMediaDetailsSwiperListActorsProps> = ({
 								speed: 600,
 								modules: [Navigation, FreeMode]
 							}}
-							collection={actors.map((item: IActor) => ({
+							collection={actors.map((item: IActor, index: number) => ({
 								id: item.id,
 								element: (
 									<MediaDetailsSwiperListItemActors
@@ -64,7 +76,7 @@ const MediaDetailsSwiperListActors: FC<IMediaDetailsSwiperListActorsProps> = ({
 							}))}
 						/>
 					)}
-				</div>
+				</MDiv>
 			)}
 		</>
 	);

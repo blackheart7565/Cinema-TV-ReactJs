@@ -1,4 +1,4 @@
-import { FC, ReactNode } from "react";
+import { FC, ReactNode, forwardRef } from "react";
 import { Link } from "react-router-dom";
 
 interface IMediaDetailsListItemActorsProps {
@@ -9,20 +9,24 @@ interface IMediaDetailsListItemActorsProps {
 	children?: ReactNode;
 }
 
-const MediaDetailsSwiperListItemActors: FC<IMediaDetailsListItemActorsProps> = ({
+const MediaDetailsSwiperListItemActors: FC<IMediaDetailsListItemActorsProps> = forwardRef<HTMLAnchorElement, IMediaDetailsListItemActorsProps>(({
 	className,
 	pathImage,
 	actorName,
 	characterName,
 	children,
-}) => {
+}, ref) => {
 	return (
 		<>
 			{children
 				? (children)
 				: (
 					<>
-						<Link to={""} className={`${className}-item` || ""}>
+						<Link
+							to={""}
+							className={`${className}-item` || ""}
+							ref={ref}
+						>
 							<img
 								className={className ? `${className}-img` : ""}
 								src={pathImage || ""}
@@ -43,6 +47,6 @@ const MediaDetailsSwiperListItemActors: FC<IMediaDetailsListItemActorsProps> = (
 				)}
 		</>
 	);
-}
+});
 
 export default MediaDetailsSwiperListItemActors;

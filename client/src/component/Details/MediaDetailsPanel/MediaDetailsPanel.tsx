@@ -1,7 +1,10 @@
 import { FC } from "react"
 
+import { motion } from "framer-motion"
+import { motionOption, variantMediaDetailsPanelOriginTitle, variantMediaDetailsPanelTitle, variantsMediaDetailsRatingNumber } from "../../../motion/details.motion"
 import TimeFormat from "../../../utils/TimeFormat"
 import Rating from "../../model/Rating"
+import { MDiv } from "../../motion/motion.component"
 import MediaDetailsInfoRow from "../MediaDetailsInfoRow/MediaDetailsInfoRow"
 import MediaDetailsPost from "../MediaDetailsPost/MediaDetailsPost"
 
@@ -19,6 +22,8 @@ interface IMediaDetailsPanelProps {
 	status?: string | undefined | null;
 	genres?: string[] | undefined | null;
 }
+
+const isOnce: boolean = true;
 
 const MediaDetailsPanel: FC<IMediaDetailsPanelProps> = ({
 	src,
@@ -39,11 +44,36 @@ const MediaDetailsPanel: FC<IMediaDetailsPanelProps> = ({
 			<div className="media-details__film-panel">
 				<MediaDetailsPost src={src} />
 				<section className="media-details__info">
-					<h2 className="media-details__title">{title}</h2>
-					<h3 className="media-details__original-title">{originalTitle}</h3>
+					<motion.h2
+						custom={2}
+						initial={motionOption.hidden}
+						whileInView={motionOption.visible}
+						exit={motionOption.exit}
+						viewport={motionOption.viewport({
+							isOnce: isOnce,
+						})}
+						variants={variantMediaDetailsPanelTitle}
+						className="media-details__title"
+					>
+						{title}
+					</motion.h2>
+					<motion.h3
+						custom={2.3}
+						initial={motionOption.hidden}
+						whileInView={motionOption.visible}
+						exit={motionOption.exit}
+						viewport={motionOption.viewport({
+							isOnce: isOnce,
+						})}
+						variants={variantMediaDetailsPanelOriginTitle}
+						className="media-details__original-title"
+					>
+						{originalTitle}
+					</motion.h3>
 
 					<MediaDetailsInfoRow
 						className="media-details__genres"
+						isLink
 						value={genres}
 						title={"Genre"}
 					/>
@@ -96,10 +126,20 @@ const MediaDetailsPanel: FC<IMediaDetailsPanelProps> = ({
 										<Rating rating={rating} />
 									)}
 								</div>
-								<div className="media-details__rating-number">
+								<MDiv
+									custom={6}
+									initial={motionOption.hidden}
+									whileInView={motionOption.visible}
+									exit={motionOption.exit}
+									viewport={motionOption.viewport({
+										isOnce: true,
+									})}
+									variants={variantsMediaDetailsRatingNumber}
+									className="media-details__rating-number"
+								>
 									<span className="media-details__rating-selector-1">{Number(rating).toFixed(1)}</span>
 									<span className="media-details__rating-selector-2">/10</span>
-								</div>
+								</MDiv>
 							</div>
 							<MediaDetailsInfoRow
 								className={"media-details__vote-count"}

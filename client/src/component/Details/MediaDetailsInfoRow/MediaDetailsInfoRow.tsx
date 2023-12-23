@@ -1,6 +1,9 @@
 import { FC } from "react";
 
-import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { motionOption, variantMediaDetailsInfoRowList, variantMediaDetailsInfoRowText, variantsMediaDetailsInfoRowTitle } from "../../../motion/details.motion";
+import { MDiv, MLink } from "../../motion/motion.component";
+
 import "./MediaDetailsInfoRow.scss";
 
 interface IMediaDetailsInfoRowProps {
@@ -11,24 +14,36 @@ interface IMediaDetailsInfoRowProps {
 	path?: string | undefined | null;
 }
 
+const isOnce: boolean = true;
+
 const MediaDetailsInfoRow: FC<IMediaDetailsInfoRowProps> = ({
 	className,
 	title,
 	value,
 	isLink,
-	path
+	path,
 }) => {
 	return (
 		<div className={className && `${className}-row`}>
-			<div className={
-				(typeof value === "string")
-					? `${className}-title-r`
-					: (value instanceof Array)
-						? `${className}-title-r ${className}-title-padding-r`
-						: ""
-			}>
+			<MDiv
+				custom={3}
+				initial={motionOption.hidden}
+				whileInView={motionOption.visible}
+				exit={motionOption.exit}
+				viewport={motionOption.viewport({
+					isOnce: isOnce,
+				})}
+				variants={variantsMediaDetailsInfoRowTitle}
+				className={
+					(typeof value === "string")
+						? `${className}-title-r`
+						: (value instanceof Array)
+							? `${className}-title-r ${className}-title-padding-r`
+							: ""
+				}
+			>
 				{title && title}:
-			</div>
+			</MDiv>
 			<div className={
 				(typeof value === "string")
 					? `${className}-text-r`
@@ -38,20 +53,54 @@ const MediaDetailsInfoRow: FC<IMediaDetailsInfoRowProps> = ({
 			}>
 				{
 					typeof value === "string"
-						? (value)
+						? <motion.span
+							custom={6}
+							initial={motionOption.hidden}
+							whileInView={motionOption.visible}
+							exit={motionOption.exit}
+							viewport={motionOption.viewport({
+								isOnce: isOnce,
+							})}
+							variants={variantMediaDetailsInfoRowText}
+						>
+							{value}
+						</motion.span>
 						: (value instanceof Array)
 							? (
 								value.map((item: string, index: number) => (
 									isLink
 										? (
-											<Link to={path || ""} key={index} className={`${className}-item-r`}>
+											<MLink
+												to={path || ""}
+												key={index}
+												className={`${className}-item-r`}
+												custom={index + 3}
+												initial={motionOption.hidden}
+												exit={motionOption.exit}
+												whileInView={motionOption.visible}
+												viewport={motionOption.viewport({
+													isOnce: isOnce,
+												})}
+												variants={variantMediaDetailsInfoRowList}
+											>
 												{item}
-											</Link>
+											</MLink>
 										)
 										: (
-											<div key={index} className={`${className}-item-r`}>
+											<motion.div
+												key={index}
+												className={`${className}-item-r`}
+												custom={index + 3}
+												initial={motionOption.hidden}
+												exit={motionOption.exit}
+												whileInView={motionOption.visible}
+												viewport={motionOption.viewport({
+													isOnce: isOnce,
+												})}
+												variants={variantMediaDetailsInfoRowList}
+											>
 												{item}
-											</div>
+											</motion.div>
 										)
 								))
 							)
