@@ -28,6 +28,10 @@ const MediaList: FC<IMediaList> = ({
 	// =========>Function<=========
 
 	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, [mediaType, mediaCategory]);
+
+	useEffect(() => {
 		const fetchMedia = async () => {
 			if (page === 1) dispatch(actions.setIsLoading(true));
 			setIsMediaLoading(true);
