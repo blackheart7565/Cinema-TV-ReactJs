@@ -1,8 +1,16 @@
 import { Link } from "react-router-dom";
 
+import classNames from "classnames";
+import { useState } from "react";
 import "./Menu.scss";
 
 const Menu = () => {
+	const [isActiveMenu, setIsActiveMenu] = useState<boolean>(false);
+
+	function handleOpenMenu() {
+		setIsActiveMenu(!isActiveMenu);
+	}
+
 	return (
 		<div className="menu">
 			<div className="menu__wrapper container">
@@ -37,6 +45,14 @@ const Menu = () => {
 					</li>
 				</ul>
 
+				<button
+					onClick={handleOpenMenu}
+					className={classNames("menu__btn", {
+						"menu__btn-active": isActiveMenu
+					})}
+				>
+					<span></span>
+				</button>
 			</div>
 		</div>
 	);
