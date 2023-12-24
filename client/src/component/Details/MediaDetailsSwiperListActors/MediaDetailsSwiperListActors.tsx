@@ -1,7 +1,9 @@
 import { FC, ReactNode } from "react";
 import { FreeMode, Navigation } from "swiper/modules";
+import { useLoadingMotion } from "../../../hooks/motion.hook";
+import { useReducer } from "../../../hooks/reducer.hook";
 import { useSwiperNavigation } from "../../../hooks/swiper.hook";
-import { motionOption, propsMotionOption, variantsSectionActors } from "../../../motion/details.motion";
+import { motionOption, variantsSectionActors } from "../../../motion/details.motion";
 import { IActor } from "../../../types/media-types/details.type";
 import LinearSwiper from "../../UI/LinearSwiper/LinearSwiper";
 import { MDiv } from "../../motion/motion.component";
@@ -24,12 +26,17 @@ const MediaDetailsSwiperListActors: FC<IMediaDetailsSwiperListActorsProps> = ({
 	children,
 }) => {
 	const { swiperRef, onHandlerNext, onHandlerPrev } = useSwiperNavigation();
+	const { state } = useReducer();
+	const propsMotionOption = useLoadingMotion({
+		isLoading: state.loader.isLoading,
+		isViewport: isViewport,
+	});
 
 	return (
 		<>
 			{actors && actors.length > 0 && (
 				<MDiv
-					{...propsMotionOption({ isViewport: isViewport })}
+					{...propsMotionOption}
 					viewport={motionOption.viewport({
 						isOnce: isOnce,
 					})}

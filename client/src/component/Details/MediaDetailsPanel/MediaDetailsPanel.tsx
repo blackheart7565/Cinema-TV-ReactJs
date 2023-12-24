@@ -1,7 +1,9 @@
 import { FC } from "react"
 
 import { motion } from "framer-motion"
-import { motionOption, propsMotionOption, variantMediaDetailsPanelOriginTitle, variantMediaDetailsPanelTitle, variantsMediaDetailsRatingNumber } from "../../../motion/details.motion"
+import { useLoadingMotion } from "../../../hooks/motion.hook"
+import { useReducer } from "../../../hooks/reducer.hook"
+import { motionOption, variantMediaDetailsPanelOriginTitle, variantMediaDetailsPanelTitle, variantsMediaDetailsRatingNumber } from "../../../motion/details.motion"
 import TimeFormat from "../../../utils/TimeFormat"
 import Rating from "../../model/Rating"
 import { MDiv } from "../../motion/motion.component"
@@ -24,7 +26,7 @@ interface IMediaDetailsPanelProps {
 }
 
 const isOnce: boolean = true;
-const isViewport: boolean = true;
+const isViewport: boolean = false;
 
 const MediaDetailsPanel: FC<IMediaDetailsPanelProps> = ({
 	src,
@@ -40,6 +42,12 @@ const MediaDetailsPanel: FC<IMediaDetailsPanelProps> = ({
 	status,
 	genres,
 }) => {
+	const { state } = useReducer();
+	const propsMotionOption = useLoadingMotion({
+		isLoading: state.loader.isLoading,
+		isViewport: isViewport,
+	});
+
 	return (
 		<>
 			<div className="media-details__film-panel">
@@ -47,7 +55,7 @@ const MediaDetailsPanel: FC<IMediaDetailsPanelProps> = ({
 				<section className="media-details__info">
 					<motion.h2
 						custom={2}
-						{...propsMotionOption({ isViewport: isViewport })}
+						{...propsMotionOption}
 						viewport={motionOption.viewport({
 							isOnce: isOnce,
 						})}
@@ -58,7 +66,7 @@ const MediaDetailsPanel: FC<IMediaDetailsPanelProps> = ({
 					</motion.h2>
 					<motion.h3
 						custom={2.3}
-						{...propsMotionOption({ isViewport: isViewport })}
+						{...propsMotionOption}
 						viewport={motionOption.viewport({
 							isOnce: isOnce,
 						})}
@@ -91,19 +99,15 @@ const MediaDetailsPanel: FC<IMediaDetailsPanelProps> = ({
 								)}
 								title={"Duration"} />
 
-							{directors && directors?.length > 0 && (
-								<MediaDetailsInfoRow
-									className={"media-details__director"}
-									value={directors}
-									title={"Director"} />
-							)}
+							<MediaDetailsInfoRow
+								className={"media-details__director"}
+								value={directors}
+								title={"Director"} />
 
-							{countries && countries.length > 0 && (
-								<MediaDetailsInfoRow
-									className={"media-details__countries"}
-									value={countries}
-									title={"Country"} />
-							)}
+							<MediaDetailsInfoRow
+								className={"media-details__countries"}
+								value={countries}
+								title={"Country"} />
 
 							<MediaDetailsInfoRow
 								className={"media-details__status"}
@@ -125,7 +129,7 @@ const MediaDetailsPanel: FC<IMediaDetailsPanelProps> = ({
 								</div>
 								<MDiv
 									custom={6}
-									{...propsMotionOption({ isViewport: isViewport })}
+									{...propsMotionOption}
 									viewport={motionOption.viewport({
 										isOnce: true,
 									})}

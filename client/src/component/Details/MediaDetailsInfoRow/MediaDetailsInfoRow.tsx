@@ -1,7 +1,9 @@
+import { motion } from "framer-motion";
 import { FC } from "react";
 
-import { motion } from "framer-motion";
-import { motionOption, propsMotionOption, variantMediaDetailsInfoRowList, variantMediaDetailsInfoRowText, variantsMediaDetailsInfoRowTitle } from "../../../motion/details.motion";
+import { useLoadingMotion } from "../../../hooks/motion.hook";
+import { useReducer } from "../../../hooks/reducer.hook";
+import { motionOption, variantMediaDetailsInfoRowList, variantMediaDetailsInfoRowText, variantsMediaDetailsInfoRowTitle } from "../../../motion/details.motion";
 import { MDiv, MLink } from "../../motion/motion.component";
 
 import "./MediaDetailsInfoRow.scss";
@@ -15,7 +17,7 @@ interface IMediaDetailsInfoRowProps {
 }
 
 const isOnce: boolean = true;
-const isViewport: boolean = true;
+const isViewport: boolean = false;
 
 const MediaDetailsInfoRow: FC<IMediaDetailsInfoRowProps> = ({
 	className,
@@ -24,11 +26,17 @@ const MediaDetailsInfoRow: FC<IMediaDetailsInfoRowProps> = ({
 	isLink,
 	path,
 }) => {
+	const { state } = useReducer();
+	const propsMotionOption = useLoadingMotion({
+		isLoading: state.loader.isLoading,
+		isViewport: isViewport,
+	});
+
 	return (
 		<div className={className && `${className}-row`}>
 			<MDiv
 				custom={4.3}
-				{...propsMotionOption({ isViewport: isViewport })}
+				{...propsMotionOption}
 				viewport={motionOption.viewport({
 					isOnce: isOnce,
 				})}
@@ -54,48 +62,63 @@ const MediaDetailsInfoRow: FC<IMediaDetailsInfoRowProps> = ({
 					typeof value === "string"
 						? <motion.span
 							custom={4.5}
-							{...propsMotionOption({ isViewport: isViewport })}
+							{...propsMotionOption}
 							viewport={motionOption.viewport({
 								isOnce: isOnce,
 							})}
 							variants={variantMediaDetailsInfoRowText}
 						>
-							{value}
+							{value ? value : "not available"}
 						</motion.span>
 						: (value instanceof Array)
 							? (
-								value.map((item: string, index: number) => (
-									isLink
-										? (
-											<MLink
-												to={path || ""}
-												key={index}
-												className={`${className}-item-r`}
-												custom={(index + 7) * 0.7}
-												{...propsMotionOption({ isViewport: isViewport })}
-												viewport={motionOption.viewport({
-													isOnce: isOnce,
-												})}
-												variants={variantMediaDetailsInfoRowList}
-											>
-												{item}
-											</MLink>
-										)
-										: (
-											<motion.div
-												key={index}
-												className={`${className}-item-r`}
-												custom={(index + 7) * 0.7}
-												{...propsMotionOption({ isViewport: isViewport })}
-												viewport={motionOption.viewport({
-													isOnce: isOnce,
-												})}
-												variants={variantMediaDetailsInfoRowList}
-											>
-												{item}
-											</motion.div>
-										)
-								))
+								value && value.length > 0
+									?
+									value.map((item: string, index: number) => (
+										isLink
+											? (
+												<MLink
+													to={path || ""}
+													key={index}
+													className={`${className}-item-r`}
+													custom={(index + 7) * 0.7}
+													{...propsMotionOption}
+													viewport={motionOption.viewport({
+														isOnce: isOnce,
+													})}
+													variants={variantMediaDetailsInfoRowList}
+												>
+													{item}
+												</MLink>
+											)
+											: (
+												<motion.div
+													key={index}
+													className={`${className}-item-r`}
+													custom={(index + 7) * 0.7}
+													{...propsMotionOption}
+													viewport={motionOption.viewport({
+														isOnce: isOnce,
+													})}
+													variants={variantMediaDetailsInfoRowList}
+												>
+													{item}
+												</motion.div>
+											)
+									))
+									: (
+										<motion.span
+											className={`${className}-text-r`}
+											custom={4.5}
+											{...propsMotionOption}
+											viewport={motionOption.viewport({
+												isOnce: isOnce,
+											})}
+											variants={variantMediaDetailsInfoRowList}
+										>
+											not available
+										</motion.span>
+									)
 							)
 							: null
 				}

@@ -1,6 +1,8 @@
 import { FC } from "react";
 import { mediaConfig } from "../../../api/config/media.config";
-import { motionOption, propsMotionOption, variantsMediaDetailsTop, variantsMediaVideoTitle, variantsTabBar } from "../../../motion/details.motion";
+import { useLoadingMotion } from "../../../hooks/motion.hook";
+import { useReducer } from "../../../hooks/reducer.hook";
+import { motionOption, variantsMediaDetailsTop, variantsMediaVideoTitle, variantsTabBar } from "../../../motion/details.motion";
 import { IMediaTop } from "../../../types/media-types/details.type";
 import concatClasses from "../../../utils/ClassNames";
 import { CinemaPlayer } from "../../UI/CinemaPlayer/CinemaPlayer";
@@ -37,12 +39,18 @@ const MediaDetailsVideo: FC<IMediaDetailsVideoProps> = ({
 	posterVideoPath,
 	topMedia,
 }) => {
+	const { state } = useReducer();
+	const propsMotionOption = useLoadingMotion({
+		isLoading: state.loader.isLoading,
+		isViewport: isViewport,
+	});
+
 	return (
 		<div className={className} style={{
 			color: "#DDd"
 		}}>
 			<MDiv
-				{...propsMotionOption({ isViewport: isViewport })}
+				{...propsMotionOption}
 				viewport={motionOption.viewport({
 					isOnce: isOnce,
 				})}
@@ -54,7 +62,7 @@ const MediaDetailsVideo: FC<IMediaDetailsVideoProps> = ({
 
 			<div className={className && concatClasses(className, "-content")}>
 				<MTabBar
-					{...propsMotionOption({ isViewport: isViewport })}
+					{...propsMotionOption}
 					viewport={motionOption.viewport({
 						isOnce: isOnce,
 					})}
@@ -93,18 +101,18 @@ const MediaDetailsVideo: FC<IMediaDetailsVideoProps> = ({
 				/>
 
 				<MMediaDetailsTop
-					{...propsMotionOption({ isViewport: isViewport })}
+					{...propsMotionOption}
 					viewport={motionOption.viewport({
 						isOnce: isOnce,
 					})}
 					variants={variantsMediaDetailsTop}
-					mediaType={
+					mediaType={(
 						mediaType === "movie"
 							? "movie"
 							: mediaType === "tv"
 								? "tv"
 								: ""
-					}
+					)}
 					className={className}
 					title={(
 						<>

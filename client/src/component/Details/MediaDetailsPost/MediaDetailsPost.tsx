@@ -1,22 +1,30 @@
 import { motion } from "framer-motion";
 import { FC } from "react";
-import { motionOption, propsMotionOption, variantMediaDetailsPost } from "../../../motion/details.motion";
+import { useLoadingMotion } from "../../../hooks/motion.hook";
+import { useReducer } from "../../../hooks/reducer.hook";
+import { motionOption, variantMediaDetailsPost } from "../../../motion/details.motion";
 
 interface IMediaDetailsPostProps {
 	src: string;
 }
 
 const isOnce: boolean = true;
-const isViewport: boolean = true;
+const isViewport: boolean = false;
 
 const MediaDetailsPost: FC<IMediaDetailsPostProps> = ({
 	src
 }) => {
+	const { state } = useReducer();
+	const propsMotionOption = useLoadingMotion({
+		isLoading: state.loader.isLoading,
+		isViewport: isViewport,
+	});
+
 	return (
 		<>
 			<motion.div
 				custom={1.5}
-				{...propsMotionOption({ isViewport: isViewport })}
+				{...propsMotionOption}
 				viewport={motionOption.viewport({
 					isOnce: isOnce,
 				})}

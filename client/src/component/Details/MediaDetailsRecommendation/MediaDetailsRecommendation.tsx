@@ -3,7 +3,9 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import { FreeMode } from "swiper/modules";
 import { mediaConfig } from "../../../api/config/media.config";
-import { motionOption, propsMotionOption, variantsMediaDetailsRecommendation } from "../../../motion/details.motion";
+import { useLoadingMotion } from "../../../hooks/motion.hook";
+import { useReducer } from "../../../hooks/reducer.hook";
+import { motionOption, variantsMediaDetailsRecommendation } from "../../../motion/details.motion";
 import concatClasses from "../../../utils/ClassNames";
 import LinearSwiper from "../../UI/LinearSwiper/LinearSwiper";
 import { MDiv } from "../../motion/motion.component";
@@ -30,11 +32,17 @@ const MediaDetailsRecommendation: React.FC<IMediaDetailsRecommendationProps> = (
 	mediaType,
 	recommendations,
 }) => {
+	const { state } = useReducer();
+	const propsMotionOption = useLoadingMotion({
+		isLoading: state.loader.isLoading,
+		isViewport: isViewport,
+	});
+
 	return (
 		<>
 			{recommendations && recommendations.length > 0 && (
 				<MDiv
-					{...propsMotionOption({ isViewport: isViewport })}
+					{...propsMotionOption}
 					viewport={motionOption.viewport({
 						amount: "all",
 						isOnce: isOnce,

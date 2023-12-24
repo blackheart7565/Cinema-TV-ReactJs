@@ -3,12 +3,14 @@ import { FC } from 'react';
 import { FreeMode, Navigation, Pagination, Zoom } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import { motionOption, propsMotionOption, variantsMediaDetailsGallery } from "../../../motion/details.motion";
+import { motionOption, variantsMediaDetailsGallery } from "../../../motion/details.motion";
 import concatClasses from "../../../utils/ClassNames";
 import { MDiv } from "../../motion/motion.component";
 import MediaDetailsSwiperSlideImage from "../MediaDetailsSwiperSlideImage/MediaDetailsSwiperSlideImage";
 
 import 'swiper/css/zoom';
+import { useLoadingMotion } from "../../../hooks/motion.hook";
+import { useReducer } from "../../../hooks/reducer.hook";
 
 interface IMediaDetailsSwiperGalleryProps {
 	className?: string;
@@ -26,12 +28,17 @@ const MediaDetailsSwiperGallery: FC<IMediaDetailsSwiperGalleryProps> = ({
 }) => {
 	const checkClass = (className: string | undefined, classNameSelector: string): string | undefined =>
 		className ? `${className}-${classNameSelector}` : undefined;
+	const { state } = useReducer();
+	const propsMotionOption = useLoadingMotion({
+		isLoading: state.loader.isLoading,
+		isViewport: isViewport,
+	});
 
 	return (
 		<>
 			{images && images.length > 0 && (
 				<MDiv
-					{...propsMotionOption({ isViewport: isViewport })}
+					{...propsMotionOption}
 					viewport={motionOption.viewport({
 						isOnce: isOnce,
 					})}
