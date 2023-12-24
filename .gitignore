@@ -32,5 +32,7 @@ client/public/*.mp4
 client/public/testImage/
 client/public/testImage/**/*.jpg
 client/public/testImage/**/*.png
+client/public/testImage/**/*.svg
 client/public/testImage/*.jpg
 client/public/testImage/*.png
+client/public/testImage/*.svg
