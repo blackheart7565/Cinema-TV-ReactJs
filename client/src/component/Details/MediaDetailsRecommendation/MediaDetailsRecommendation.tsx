@@ -73,7 +73,7 @@ const MediaDetailsRecommendation: React.FC<IMediaDetailsRecommendationProps> = (
 								id: item.id,
 								element: (
 									<Link
-										to={`/${mediaType && mediaConfig.methods.replaceMovieAndTv_To_FilmsAndSerials(mediaType)}/${mediaType}/${item.id}`}
+										to={`/${mediaType && mediaConfig.methods.replaceMovieAndTv_To_FilmsAndSerials(mediaType)}/${mediaType}/${item.id}?name=${item.name}`}
 										className={classNames(className && concatClasses(className, "-link"))}
 									>
 										<img

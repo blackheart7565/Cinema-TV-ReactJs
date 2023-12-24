@@ -1,6 +1,7 @@
 export interface IParams {
 	mediaType: string;
 	mediaId: string;
+	name: string;
 }
 
 export interface IVideo {

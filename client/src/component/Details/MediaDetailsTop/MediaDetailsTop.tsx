@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import { FreeMode, Mousewheel } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
+import { mediaConfig } from "../../../api/config/media.config";
 import { IMediaTop } from "../../../types/media-types/details.type";
 
-import { mediaConfig } from "../../../api/config/media.config";
 import "./MediaDetailsTop.scss";
 
 interface IMediaDetailsTopProps {
@@ -52,7 +52,7 @@ const MediaDetailsTop: FC<IMediaDetailsTopProps> = forwardRef<HTMLDivElement, IM
 									className={classNames("swiper-slide", "section-top__slide")}
 								>
 									<Link
-										to={`/${mediaType && mediaConfig.methods.replaceMovieAndTv_To_FilmsAndSerials(mediaType)}/${mediaType}/${item.id}`}
+										to={`/${mediaType && mediaConfig.methods.replaceMovieAndTv_To_FilmsAndSerials(mediaType)}/${mediaType}/${item.id}?name=${item.name}`}
 										className={classNames("section-top__item")}
 									>
 										<div className="section-top__image">

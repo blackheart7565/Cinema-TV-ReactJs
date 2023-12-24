@@ -65,7 +65,18 @@ const HomeModelContent: FC<IHomeModelContent> = ({
 								<Link
 									className={`${className}-card`}
 									key={item.id}
-									to={`/${mediaType && mediaConfig.methods.replaceMovieAndTv_To_FilmsAndSerials(mediaType)}/${mediaType}/${item.id}`}
+									to={`/${mediaType && mediaConfig.methods.replaceMovieAndTv_To_FilmsAndSerials(mediaType)}/${mediaType}/${item.id}?name=${(
+										mediaType === 'movie'
+											? (
+												(item as IResponseMediasListResultMovie).title
+												|| (item as IResponseMediasListResultMovie).original_title
+											)
+											: mediaType === "tv"
+											&& (
+												(item as IResponseMediasListResultSerials).name
+												|| (item as IResponseMediasListResultSerials).original_name
+											)
+									)}`}
 								>
 									<img
 										className={`${className}-card-img`}
@@ -74,7 +85,7 @@ const HomeModelContent: FC<IHomeModelContent> = ({
 									/>
 									<MediaCardInfo
 										isIconPlay={false}
-										name={
+										name={(
 											mediaType === 'movie'
 												? (
 													(item as IResponseMediasListResultMovie).title
@@ -86,7 +97,7 @@ const HomeModelContent: FC<IHomeModelContent> = ({
 														|| (item as IResponseMediasListResultSerials).original_name
 													)
 													: null
-										}
+										)}
 										rating={item.vote_average}
 									/>
 								</Link>
@@ -109,7 +120,18 @@ const HomeModelContent: FC<IHomeModelContent> = ({
 								<Link
 									className={`${className}-card`}
 									key={item.id}
-									to={`/${mediaType && mediaConfig.methods.replaceMovieAndTv_To_FilmsAndSerials(mediaType)}/${mediaType}/${item.id}`}
+									to={`/${mediaType && mediaConfig.methods.replaceMovieAndTv_To_FilmsAndSerials(mediaType)}/${mediaType}/${item.id}?name=${(
+										mediaType === 'movie'
+											? (
+												(item as IResponseMediasListResultMovie).title
+												|| (item as IResponseMediasListResultMovie).original_title
+											)
+											: mediaType === "tv"
+											&& (
+												(item as IResponseMediasListResultSerials).name
+												|| (item as IResponseMediasListResultSerials).original_name
+											)
+									)}`}
 								>
 									<img
 										className={`${className}-card-img`}

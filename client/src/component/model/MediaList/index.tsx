@@ -62,7 +62,18 @@ const MediaList: FC<IMediaList> = ({
 				{media.map((item: IResponseMediasListValidationType<typeof type>, index: number) => (
 					<MMediaItem
 						key={item.id + index * 2}
-						path={`${mediaType}/${item.id}`}
+						path={`${mediaType}/${item.id}?name=${(
+							mediaType === 'movie'
+								? (
+									(item as IResponseMediasListResultMovie).title
+									|| (item as IResponseMediasListResultMovie).original_title
+								)
+								: mediaType === "tv"
+								&& (
+									(item as IResponseMediasListResultSerials).name
+									|| (item as IResponseMediasListResultSerials).original_name
+								)
+						)}`}
 						posterImage={item.poster_path || item.backdrop_path}
 						name={
 							mediaType === 'movie'

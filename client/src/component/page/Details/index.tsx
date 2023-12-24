@@ -15,8 +15,8 @@ import MediaDetailsRecommendation from "../../Details/MediaDetailsRecommendation
 import MediaDetailsSwiperGallery from "../../Details/MediaDetailsSwiperGallery/MediaDetailsSwiperGallery";
 import MediaDetailsSwiperListActors from "../../Details/MediaDetailsSwiperListActors/MediaDetailsSwiperListActors";
 import MediaDetailsTabsVideo from "../../Details/MediaDetailsVideo/MediaDetailsVideo";
-
 import { RecommendationsDto } from "../../../dtos/recommendations.dto";
+
 import "./Details.scss";
 
 interface IDetailsMediaProps { }
