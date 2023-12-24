@@ -1,7 +1,7 @@
 import { FC, ReactNode } from "react";
 import { FreeMode, Navigation } from "swiper/modules";
 import { useSwiperNavigation } from "../../../hooks/swiper.hook";
-import { motionOption, variantsSectionActors } from "../../../motion/details.motion";
+import { motionOption, propsMotionOption, variantsSectionActors } from "../../../motion/details.motion";
 import { IActor } from "../../../types/media-types/details.type";
 import LinearSwiper from "../../UI/LinearSwiper/LinearSwiper";
 import { MDiv } from "../../motion/motion.component";
@@ -15,6 +15,7 @@ interface IMediaDetailsSwiperListActorsProps {
 	children?: ReactNode;
 }
 const isOnce: boolean = true;
+const isViewport: boolean = true;
 
 const MediaDetailsSwiperListActors: FC<IMediaDetailsSwiperListActorsProps> = ({
 	title,
@@ -28,9 +29,7 @@ const MediaDetailsSwiperListActors: FC<IMediaDetailsSwiperListActorsProps> = ({
 		<>
 			{actors && actors.length > 0 && (
 				<MDiv
-					initial={motionOption.hidden}
-					whileInView={motionOption.visible}
-					exit={motionOption.exit}
+					{...propsMotionOption({ isViewport: isViewport })}
 					viewport={motionOption.viewport({
 						isOnce: isOnce,
 					})}

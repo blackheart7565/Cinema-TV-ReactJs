@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { mediaConfig } from "../../../api/config/media.config";
-import { motionOption, variantsMediaDetailsTop, variantsMediaVideoTitle, variantsTabBar } from "../../../motion/details.motion";
+import { motionOption, propsMotionOption, variantsMediaDetailsTop, variantsMediaVideoTitle, variantsTabBar } from "../../../motion/details.motion";
 import { IMediaTop } from "../../../types/media-types/details.type";
 import concatClasses from "../../../utils/ClassNames";
 import { CinemaPlayer } from "../../UI/CinemaPlayer/CinemaPlayer";
@@ -20,6 +20,7 @@ interface IMediaDetailsVideoProps {
 }
 
 const isOnce: boolean = true;
+const isViewport: boolean = true;
 
 /**
  *  @param mediaType type movies or series
@@ -41,9 +42,7 @@ const MediaDetailsVideo: FC<IMediaDetailsVideoProps> = ({
 			color: "#DDd"
 		}}>
 			<MDiv
-				initial={motionOption.hidden}
-				whileInView={motionOption.visible}
-				exit={motionOption.exit}
+				{...propsMotionOption({ isViewport: isViewport })}
 				viewport={motionOption.viewport({
 					isOnce: isOnce,
 				})}
@@ -55,9 +54,7 @@ const MediaDetailsVideo: FC<IMediaDetailsVideoProps> = ({
 
 			<div className={className && concatClasses(className, "-content")}>
 				<MTabBar
-					initial={motionOption.hidden}
-					whileInView={motionOption.visible}
-					exit={motionOption.exit}
+					{...propsMotionOption({ isViewport: isViewport })}
 					viewport={motionOption.viewport({
 						isOnce: isOnce,
 					})}
@@ -96,9 +93,7 @@ const MediaDetailsVideo: FC<IMediaDetailsVideoProps> = ({
 				/>
 
 				<MMediaDetailsTop
-					initial={motionOption.hidden}
-					whileInView={motionOption.visible}
-					exit={motionOption.exit}
+					{...propsMotionOption({ isViewport: isViewport })}
 					viewport={motionOption.viewport({
 						isOnce: isOnce,
 					})}

@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import { FreeMode } from "swiper/modules";
 import { mediaConfig } from "../../../api/config/media.config";
-import { motionOption, variantsMediaDetailsRecommendation } from "../../../motion/details.motion";
+import { motionOption, propsMotionOption, variantsMediaDetailsRecommendation } from "../../../motion/details.motion";
 import concatClasses from "../../../utils/ClassNames";
 import LinearSwiper from "../../UI/LinearSwiper/LinearSwiper";
 import { MDiv } from "../../motion/motion.component";
@@ -22,6 +22,7 @@ interface IMediaDetailsRecommendationProps {
 }
 
 const isOnce: boolean = true;
+const isViewport: boolean = true;
 
 const MediaDetailsRecommendation: React.FC<IMediaDetailsRecommendationProps> = ({
 	className,
@@ -33,9 +34,7 @@ const MediaDetailsRecommendation: React.FC<IMediaDetailsRecommendationProps> = (
 		<>
 			{recommendations && recommendations.length > 0 && (
 				<MDiv
-					initial={motionOption.hidden}
-					whileInView={motionOption.visible}
-					exit={motionOption.exit}
+					{...propsMotionOption({ isViewport: isViewport })}
 					viewport={motionOption.viewport({
 						amount: "all",
 						isOnce: isOnce,

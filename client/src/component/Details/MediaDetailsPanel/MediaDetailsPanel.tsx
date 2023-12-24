@@ -1,7 +1,7 @@
 import { FC } from "react"
 
 import { motion } from "framer-motion"
-import { motionOption, variantMediaDetailsPanelOriginTitle, variantMediaDetailsPanelTitle, variantsMediaDetailsRatingNumber } from "../../../motion/details.motion"
+import { motionOption, propsMotionOption, variantMediaDetailsPanelOriginTitle, variantMediaDetailsPanelTitle, variantsMediaDetailsRatingNumber } from "../../../motion/details.motion"
 import TimeFormat from "../../../utils/TimeFormat"
 import Rating from "../../model/Rating"
 import { MDiv } from "../../motion/motion.component"
@@ -24,6 +24,7 @@ interface IMediaDetailsPanelProps {
 }
 
 const isOnce: boolean = true;
+const isViewport: boolean = true;
 
 const MediaDetailsPanel: FC<IMediaDetailsPanelProps> = ({
 	src,
@@ -46,9 +47,7 @@ const MediaDetailsPanel: FC<IMediaDetailsPanelProps> = ({
 				<section className="media-details__info">
 					<motion.h2
 						custom={2}
-						initial={motionOption.hidden}
-						whileInView={motionOption.visible}
-						exit={motionOption.exit}
+						{...propsMotionOption({ isViewport: isViewport })}
 						viewport={motionOption.viewport({
 							isOnce: isOnce,
 						})}
@@ -59,9 +58,7 @@ const MediaDetailsPanel: FC<IMediaDetailsPanelProps> = ({
 					</motion.h2>
 					<motion.h3
 						custom={2.3}
-						initial={motionOption.hidden}
-						whileInView={motionOption.visible}
-						exit={motionOption.exit}
+						{...propsMotionOption({ isViewport: isViewport })}
 						viewport={motionOption.viewport({
 							isOnce: isOnce,
 						})}
@@ -128,9 +125,7 @@ const MediaDetailsPanel: FC<IMediaDetailsPanelProps> = ({
 								</div>
 								<MDiv
 									custom={6}
-									initial={motionOption.hidden}
-									whileInView={motionOption.visible}
-									exit={motionOption.exit}
+									{...propsMotionOption({ isViewport: isViewport })}
 									viewport={motionOption.viewport({
 										isOnce: true,
 									})}

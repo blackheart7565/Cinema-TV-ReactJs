@@ -1,12 +1,13 @@
 import { motion } from "framer-motion";
 import { FC } from "react";
-import { motionOption, variantMediaDetailsPost } from "../../../motion/details.motion";
+import { motionOption, propsMotionOption, variantMediaDetailsPost } from "../../../motion/details.motion";
 
 interface IMediaDetailsPostProps {
 	src: string;
 }
 
 const isOnce: boolean = true;
+const isViewport: boolean = true;
 
 const MediaDetailsPost: FC<IMediaDetailsPostProps> = ({
 	src
@@ -15,9 +16,7 @@ const MediaDetailsPost: FC<IMediaDetailsPostProps> = ({
 		<>
 			<motion.div
 				custom={1.5}
-				initial={motionOption.hidden}
-				whileInView={motionOption.visible}
-				exit={motionOption.exit}
+				{...propsMotionOption({ isViewport: isViewport })}
 				viewport={motionOption.viewport({
 					isOnce: isOnce,
 				})}

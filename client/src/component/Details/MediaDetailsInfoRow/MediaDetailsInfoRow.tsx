@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 import { motion } from "framer-motion";
-import { motionOption, variantMediaDetailsInfoRowList, variantMediaDetailsInfoRowText, variantsMediaDetailsInfoRowTitle } from "../../../motion/details.motion";
+import { motionOption, propsMotionOption, variantMediaDetailsInfoRowList, variantMediaDetailsInfoRowText, variantsMediaDetailsInfoRowTitle } from "../../../motion/details.motion";
 import { MDiv, MLink } from "../../motion/motion.component";
 
 import "./MediaDetailsInfoRow.scss";
@@ -15,6 +15,7 @@ interface IMediaDetailsInfoRowProps {
 }
 
 const isOnce: boolean = true;
+const isViewport: boolean = true;
 
 const MediaDetailsInfoRow: FC<IMediaDetailsInfoRowProps> = ({
 	className,
@@ -26,10 +27,8 @@ const MediaDetailsInfoRow: FC<IMediaDetailsInfoRowProps> = ({
 	return (
 		<div className={className && `${className}-row`}>
 			<MDiv
-				custom={3}
-				initial={motionOption.hidden}
-				whileInView={motionOption.visible}
-				exit={motionOption.exit}
+				custom={4.3}
+				{...propsMotionOption({ isViewport: isViewport })}
 				viewport={motionOption.viewport({
 					isOnce: isOnce,
 				})}
@@ -54,10 +53,8 @@ const MediaDetailsInfoRow: FC<IMediaDetailsInfoRowProps> = ({
 				{
 					typeof value === "string"
 						? <motion.span
-							custom={6}
-							initial={motionOption.hidden}
-							whileInView={motionOption.visible}
-							exit={motionOption.exit}
+							custom={4.5}
+							{...propsMotionOption({ isViewport: isViewport })}
 							viewport={motionOption.viewport({
 								isOnce: isOnce,
 							})}
@@ -74,10 +71,8 @@ const MediaDetailsInfoRow: FC<IMediaDetailsInfoRowProps> = ({
 												to={path || ""}
 												key={index}
 												className={`${className}-item-r`}
-												custom={index + 3}
-												initial={motionOption.hidden}
-												exit={motionOption.exit}
-												whileInView={motionOption.visible}
+												custom={(index + 7) * 0.7}
+												{...propsMotionOption({ isViewport: isViewport })}
 												viewport={motionOption.viewport({
 													isOnce: isOnce,
 												})}
@@ -90,10 +85,8 @@ const MediaDetailsInfoRow: FC<IMediaDetailsInfoRowProps> = ({
 											<motion.div
 												key={index}
 												className={`${className}-item-r`}
-												custom={index + 3}
-												initial={motionOption.hidden}
-												exit={motionOption.exit}
-												whileInView={motionOption.visible}
+												custom={(index + 7) * 0.7}
+												{...propsMotionOption({ isViewport: isViewport })}
 												viewport={motionOption.viewport({
 													isOnce: isOnce,
 												})}

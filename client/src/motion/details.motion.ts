@@ -5,6 +5,27 @@ interface IViewport {
 	isOnce?: boolean | undefined,
 }
 
+interface IMotionPropsReturn {
+	initial: string;
+	[property: string]: string;
+	exit: string;
+}
+interface IPropsMotionOption {
+	isViewport: boolean;
+}
+
+export const propsMotionOption = ({
+	isViewport
+}: IPropsMotionOption): IMotionPropsReturn => {
+	const viewport = isViewport ? "whileInView" : "animate";
+
+	return {
+		initial: "hidden",
+		[viewport]: "visible",
+		exit: "exit",
+	}
+};
+
 export const motionOption = {
 	hidden: "hidden",
 	visible: "visible",

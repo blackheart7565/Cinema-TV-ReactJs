@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { FreeMode, Navigation, Pagination, Zoom } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import { motionOption, variantsMediaDetailsGallery } from "../../../motion/details.motion";
+import { motionOption, propsMotionOption, variantsMediaDetailsGallery } from "../../../motion/details.motion";
 import concatClasses from "../../../utils/ClassNames";
 import { MDiv } from "../../motion/motion.component";
 import MediaDetailsSwiperSlideImage from "../MediaDetailsSwiperSlideImage/MediaDetailsSwiperSlideImage";
@@ -17,6 +17,7 @@ interface IMediaDetailsSwiperGalleryProps {
 }
 
 const isOnce: boolean = true;
+const isViewport: boolean = true;
 
 const MediaDetailsSwiperGallery: FC<IMediaDetailsSwiperGalleryProps> = ({
 	className,
@@ -30,9 +31,7 @@ const MediaDetailsSwiperGallery: FC<IMediaDetailsSwiperGalleryProps> = ({
 		<>
 			{images && images.length > 0 && (
 				<MDiv
-					initial={motionOption.hidden}
-					whileInView={motionOption.visible}
-					exit={motionOption.exit}
+					{...propsMotionOption({ isViewport: isViewport })}
 					viewport={motionOption.viewport({
 						isOnce: isOnce,
 					})}
