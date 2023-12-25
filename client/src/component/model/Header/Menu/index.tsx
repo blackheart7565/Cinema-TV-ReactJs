@@ -2,27 +2,24 @@ import { Link } from "react-router-dom";
 
 import classNames from "classnames";
 import { useState } from "react";
+import { useReducer } from "../../../../hooks/reducer.hook";
+import Logo from "../../Logo/Logo";
 import "./Menu.scss";
 
 const Menu = () => {
 	const [isActiveMenu, setIsActiveMenu] = useState<boolean>(false);
+	const { dispatch, actions } = useReducer();
 
 	function handleOpenMenu() {
 		setIsActiveMenu(!isActiveMenu);
+		dispatch(actions.setIsActiveMenu(true));
+		document.body.classList.add("scroll-blocker");
 	}
 
 	return (
 		<div className="menu">
 			<div className="menu__wrapper container">
-
-				<Link to={"/"} className="menu__logo">
-					<div className="menu__img">
-						<img src="/path/header/header-logo.png" alt="logo" />
-					</div>
-					<p className="menu__text">
-						cinema tv
-					</p>
-				</Link>
+				<Logo />
 
 				<ul className="menu__list">
 					<li className="menu__item">
@@ -48,7 +45,7 @@ const Menu = () => {
 				<button
 					onClick={handleOpenMenu}
 					className={classNames("menu__btn", {
-						"menu__btn-active": isActiveMenu
+						// "menu__btn-active": isActiveMenu,
 					})}
 				>
 					<span></span>

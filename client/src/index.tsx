@@ -11,6 +11,8 @@ import "./styles/reset.scss";
 import "./styles/base.scss";
 import "./styles/mixin.scss";
 import "./styles/index.scss";
+import BurgerMenu from "./component/model/BurgerMenu/BurgerMenu";
+import { routNav } from "./utils/routNav";
 
 const root = ReactDOM.createRoot(
 	document.getElementById('root') as HTMLElement
@@ -21,6 +23,9 @@ root.render(
 		<Provider store={store}>
 			<BrowserRouter>
 				<AppRouters />
+				<BurgerMenu
+					routes={routNav}
+				/>
 			</BrowserRouter>
 		</Provider>
 	</React.StrictMode>
