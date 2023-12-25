@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import classNames from "classnames";
 import { useState } from "react";
 import { useReducer } from "../../../../hooks/reducer.hook";
+import { routNav } from "../../../../utils/routNav";
 import Logo from "../../Logo/Logo";
 import "./Menu.scss";
 
@@ -22,24 +23,19 @@ const Menu = () => {
 				<Logo />
 
 				<ul className="menu__list">
-					<li className="menu__item">
-						<Link className="menu__link" to="/">Home</Link>
-					</li>
-					<li className="menu__item">
-						<Link className="menu__link" to="/cartoons">Cartoons</Link>
-					</li>
-					<li className="menu__item">
-						<Link className="menu__link" to="/anime">Anime</Link>
-					</li>
-					<li className="menu__item">
-						<Link className="menu__link" to="/films">Films</Link>
-					</li>
-					<li className="menu__item">
-						<Link className="menu__link" to="/serials">Serials</Link>
-					</li>
-					<li className="menu__item">
-						<Link className="menu__link" to="/random">Random</Link>
-					</li>
+					{routNav.map(item => (
+						<li
+							key={item.path}
+							className="menu__item"
+						>
+							<Link
+								className="menu__link"
+								to={item.path || ""}
+							>
+								{item.text}
+							</Link>
+						</li>
+					))}
 				</ul>
 
 				<button

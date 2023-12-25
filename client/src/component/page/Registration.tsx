@@ -1,11 +1,12 @@
-import React from 'react';
 
 const Registration = () => {
 	return (
 		<div style={{
 			display: "flex",
 			justifyContent: "center",
-			alignItems: "center"
+			alignItems: "center",
+			color: "#FFF",
+			height: "100vh",
 		}}>
 			<h1>
 				Registration

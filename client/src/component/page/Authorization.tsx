@@ -4,7 +4,9 @@ const Authorization = () => {
 		<div style={{
 			display: "flex",
 			justifyContent: "center",
-			alignItems: "center"
+			alignItems: "center",
+			color: "#FFF",
+			height: "100vh",
 		}}>
 			<h1>
 				Authorization
