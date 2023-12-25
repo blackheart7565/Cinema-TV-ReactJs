@@ -16,14 +16,16 @@ import SerialsLayout from "./SerialsLayout";
 
 const AppRouters = () => {
 	const location = useLocation();
+
 	return (
 		<>
 			<AnimatePresence>
 				<Routes location={location} key={location.pathname}>
+					<Route path={"/login"} element={<Authorization />} />
+					<Route path={"/registration"} element={<Registration />} />
+
 					<Route path={"/"} element={<Layout />}>
 						<Route index element={<Home />} />
-						<Route path={"/signin"} element={<Authorization />} />
-						<Route path={"/signup"} element={<Registration />} />
 						<Route path={"/cartoons"} element={<Cartoons />} />
 						<Route path={"/anime"} element={<Anime />} />
 						<Route path={"/films"} element={<FilmsLayout />} >
@@ -35,6 +37,7 @@ const AppRouters = () => {
 							<Route path={":mediaType/:mediaId"} element={<DetailsMedia />} />
 						</Route>
 					</Route>
+
 					<Route path="/*" element={<PageNotFound />} />
 				</Routes>
 			</AnimatePresence>
