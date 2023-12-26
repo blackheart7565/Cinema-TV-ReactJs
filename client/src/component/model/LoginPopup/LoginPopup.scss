@@ -6,26 +6,32 @@
 	width: 100%;
 	min-width: 150px;
 	height: max-content;
-	background-color: #fff;
+	background-color: #01000ce2;
+	border: 1px solid #DA0027;
 	color: #01000c;
 	position: absolute;
 	top: 50px;
 	left: 50%;
 	transform: translate(-50%, 50px);
 	border-radius: 8px;
-	transition: opacity 0.3s ease-in-out, transform 0.2s ease-in-out;
+	transition: opacity 0.3s ease-in-out, transform 0.2s ease-in-out, visibility 0.2s ease-in-out;
 	opacity: 0;
 	overflow: hidden;
+	visibility: hidden;
 
 	&-active {
 		opacity: 1;
+		visibility: visible;
 		transform: translate(-50%, 0);
 	}
 
 	&__link {
-		font-size: 20px;
-		padding: 10px;
-		color: #01000c;
+		display: flex;
+		align-items: center;
+		font-size: 17px;
+		padding: 15px;
+		color: #FFF;
+		background-color: transparent;
 
 		&:hover {
 			color: #FFF;
