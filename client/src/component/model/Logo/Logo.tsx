@@ -7,15 +7,17 @@ interface ILogoProps {
 	title?: string;
 	logoImage?: string;
 	wrapperClassName?: string;
+	path?: string | undefined;
 }
 
 export const Logo: React.FC<ILogoProps> = ({
 	title,
 	logoImage,
 	wrapperClassName,
+	path,
 }) => {
 	return (
-		<Link to={"/"} className={classNames("logo", wrapperClassName)}>
+		<Link to={path || ""} className={classNames("logo", wrapperClassName)}>
 			<div className={classNames("logo__img")}>
 				<img src={logoImage || "/path/header/header-logo.png"} alt="logo" />
 			</div>
