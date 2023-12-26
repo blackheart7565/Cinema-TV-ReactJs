@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 import { useReducer } from "../../../hooks/reducer.hook";
 import Logo from "../Logo/Logo";
+import Login from "../Login/Login";
 
 import "./BurgerMenu.scss";
 
@@ -60,6 +61,10 @@ const BurgerMenu: React.FC<iBurgerMenuProps> = ({
 				))}
 			</ul>
 
+			<Login
+				avatar="/testImage/avatar.jpg"
+				username="blackheartwefwefwefw"
+			/>
 		</div>
 	);
 };

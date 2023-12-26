@@ -3,6 +3,10 @@
 
 @import "./vars.scss";
 
+:root {
+	--index: calc(1vw + 1vh);
+}
+
 html,
 body,
 #root {

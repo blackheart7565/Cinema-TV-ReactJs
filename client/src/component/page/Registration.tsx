@@ -1,4 +1,5 @@
 
+
 const Registration = () => {
 	return (
 		<div style={{
