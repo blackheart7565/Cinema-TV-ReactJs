@@ -1,67 +1,128 @@
 //~~
 
+:root {
+	--state-color: #333333;
+	--hover-color: #E50140;
+}
+
 .authorization {
+	$main-self: &;
+
 	display: flex;
-	align-items: center;
 	justify-content: center;
-	height: 100vh;
-	color: #E50140;
+	align-items: center;
+	min-height: 100vh;
+	height: 100%;
+	position: relative;
+
+	&__bg {
+		display: flex;
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		width: 100%;
+		height: 100%;
+		z-index: -1;
+		overflow: hidden;
+		filter: contrast(107%) brightness(190%);
+	}
+
+	&__img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center;
+	}
 
 	&__wrapper {
-		padding: 15px;
-		min-width: 250px;
-		max-width: 400px;
-		width: 100%;
-		border: 5px solid #E50140;
-		border-radius: 10px;
-	}
-
-	&__header {
 		display: flex;
 		flex-direction: column;
-		align-items: center;
 		justify-content: center;
-		gap: 35px;
-	}
+		align-items: center;
+		width: 400px;
+		border: 5px solid var(--state-color);
+		margin: 20px;
+		padding: 3rem 2rem;
+		border-radius: 10px;
+		transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out, backdrop-filter 0.3s ease-in-out;
 
-	&__logo {
-		& .logo__img {
-			margin-right: 0px;
-		}
+		&:hover {
+			border: 5px solid var(--secondary-color);
+			box-shadow: 0px 0px 2px var(--secondary-color), inset 0px 0px 20px var(--secondary-color);
+			backdrop-filter: blur(5px);
 
-		& .logo__text {
-			padding-right: 10px;
-			font-size: 22px;
+			#{$main-self}__title {
+				color: var(--hover-color);
+			}
+
+			#{$main-self}__auth-btn {
+				background-color: var(--hover-color);
+			}
+
+			#{$main-self}__username,
+			#{$main-self}__email,
+			#{$main-self}__password {
+				.Input_Box__enter {
+					border: 2px solid var(--hover-color);
+					color: var(--hover-color);
+				}
+
+				.Input_Box__label {
+					color: var(--hover-color);
+				}
+			}
+
+			#{$main-self}__underline {
+				background-color: var(--hover-color);
+
+				&-inner {
+					background-color: var(--hover-color);
+				}
+			}
 		}
 	}
 
 	&__title {
-		text-transform: uppercase;
-		color: #E50140;
-		font-size: 25px;
-		font-weight: 700;
-		letter-spacing: 3px;
-	}
-
-	&__content {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 40px;
-		padding: 30px 0;
-	}
-
-	&__link {
-		color: #e4e1e1;
-		padding: 10px 20px;
 		width: 100%;
 		text-align: center;
-		background-color: #E50140;
-		border-radius: 4px;
-		font-weight: 700;
+		color: #FFF;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		text-shadow: 3px 4px 0px var(--dark);
+		transition: color 0.3s ease-in-out;
+	}
 
-		&:hover {
-			background-color: #e50142db;
+	&__form {
+		width: 100%;
+		margin-top: 1rem;
+	}
+
+	&__auth-btn {
+		margin-top: 2rem;
+	}
+
+	&__underline {
+		display: block;
+		position: relative;
+		width: 100%;
+		height: 2px;
+		background-color: #333333;
+		margin-top: 2rem;
+		transition: background-color 0.3s ease-in-out;
+
+		&-inner {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			background-color: #333333;
+			padding: 2px 10px;
+			border-radius: 4px;
+			color: #FFF;
+			font-size: 10px;
+			transition: background-color 0.3s ease-in-out;
 		}
 	}
 }
