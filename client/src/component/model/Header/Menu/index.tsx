@@ -69,8 +69,8 @@ const Menu = () => {
 
 				<LoginContainer>
 					<Login
-						avatar="/testImage/avatar.jpg"
-						username="blackheartwefwefwefw"
+						avatar=""
+						username="black_heart"
 						onClick={handlerOpenPopup}
 					/>
 					<LoginPopup isActive={isOpenLoginPopup}>

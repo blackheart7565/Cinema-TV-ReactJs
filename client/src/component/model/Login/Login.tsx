@@ -21,7 +21,7 @@ const Login: React.FC<ILoginProps> = ({
 			<div className={"login__avatar"}>
 				<img
 					className={"login__avatar-img"}
-					src={avatar || ""}
+					src={avatar || "/profile.png"}
 					alt="avatar"
 				/>
 			</div>
