@@ -1,0 +1,36 @@
+//~~
+
+:root {
+	--state-color: #333333;
+	--white: #FFF;
+	--dark: #101010;
+	--secondary-color: #E50140;
+	--gray-color: #888;
+}
+
+.AuthButton {
+	cursor: pointer;
+	width: 100%;
+	padding: 10px 0;
+	font-weight: 700;
+	letter-spacing: 1px;
+	line-height: 1.4rem;
+	border: 0;
+	border-radius: 4px;
+	background-color: var(--state-color);
+	color: var(--white);
+	transition: background-color 0.3s ease-in-out;
+
+	&:hover {
+		background-color: var(--secondary-color);
+	}
+
+	&__disabled {
+		cursor: default;
+		opacity: 0.6;
+	}
+
+	&.full-w {
+		width: 100%;
+	}
+}
