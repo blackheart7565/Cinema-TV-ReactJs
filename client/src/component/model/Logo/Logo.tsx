@@ -1,6 +1,6 @@
+import classNames from "classnames";
 import { Link } from "react-router-dom";
 
-import classNames from "classnames";
 import "./Logo.scss";
 
 interface ILogoProps {
@@ -8,6 +8,7 @@ interface ILogoProps {
 	logoImage?: string;
 	wrapperClassName?: string;
 	path?: string | undefined;
+	isCursorBlock?: boolean;
 }
 
 export const Logo: React.FC<ILogoProps> = ({
@@ -15,9 +16,15 @@ export const Logo: React.FC<ILogoProps> = ({
 	logoImage,
 	wrapperClassName,
 	path,
+	isCursorBlock = false,
 }) => {
 	return (
-		<Link to={path || ""} className={classNames("logo", wrapperClassName)}>
+		<Link
+			to={path || ""}
+			className={classNames("logo", wrapperClassName, {
+				"logo-cursor-blocker": isCursorBlock,
+			})}
+		>
 			<div className={classNames("logo__img")}>
 				<img src={logoImage || "/path/header/header-logo.png"} alt="logo" />
 			</div>
