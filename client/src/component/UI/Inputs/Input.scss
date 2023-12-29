@@ -15,6 +15,14 @@
 
 	&__wrapper {
 		margin-top: 0.5rem;
+		position: relative;
+	}
+
+	&__error-ico {
+		position: absolute;
+		top: 50%;
+		right: 15px;
+		transform: translate(0, -50%);
 	}
 
 	&__enter {
@@ -31,6 +39,14 @@
 
 		&::placeholder {
 			color: #888;
+		}
+
+		&-error {
+			border: 2px solid #e74c3c;
+
+			&::placeholder {
+				color: #e74c3c;
+			}
 		}
 	}
 }

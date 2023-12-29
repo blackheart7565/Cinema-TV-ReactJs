@@ -48,6 +48,10 @@
 		border-radius: 10px;
 		transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out, backdrop-filter 0.3s ease-in-out;
 
+		@media screen and (max-width: 480px) {
+			padding: 2rem 1rem;
+		}
+
 		&:hover {
 			border: 5px solid var(--secondary-color);
 			box-shadow: 0px 0px 2px var(--secondary-color), inset 0px 0px 20px var(--secondary-color);
@@ -66,7 +70,7 @@
 			#{$main-self}__password {
 				.Input_Box__enter {
 					border: 2px solid var(--hover-color);
-					color: var(--hover-color);
+					color: #FFF;
 				}
 
 				.Input_Box__label {
@@ -81,6 +85,15 @@
 					background-color: var(--hover-color);
 				}
 			}
+
+			#{$main-self}__google-btn {
+				background-color: var(--hover-color);
+			}
+
+			#{$main-self}__link-btn {
+				background-color: transparent;
+				color: #cfcfcf;
+			}
 		}
 	}
 
@@ -92,6 +105,11 @@
 		letter-spacing: 1px;
 		text-shadow: 3px 4px 0px var(--dark);
 		transition: color 0.3s ease-in-out;
+		font-size: 32px;
+
+		@media screen and (max-width: 480px) {
+			font-size: 25px;
+		}
 	}
 
 	&__form {
@@ -123,6 +141,90 @@
 			color: #FFF;
 			font-size: 10px;
 			transition: background-color 0.3s ease-in-out;
+		}
+	}
+
+	&__social {
+		margin-top: 2rem;
+	}
+
+	&__google {
+		&-btn {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 10px;
+		}
+
+		&-icon {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 20px;
+			height: 20px;
+
+			@media screen and (max-width: 480px) {
+				width: 15px;
+				height: 15px;
+			}
+		}
+
+		&-text {
+			font-weight: 700;
+
+			@media screen and (max-width: 480px) {
+				font-size: 10px;
+			}
+		}
+	}
+
+	&__link {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 7px;
+		margin-top: 2rem;
+
+		&-text {
+			color: #FFF;
+			font-size: 14px;
+			font-weight: 700;
+
+			@media screen and (max-width: 480px) {
+				font-size: 11px;
+			}
+		}
+
+		&-btn {
+			padding: 0;
+			color: var(--state-color);
+			background-color: transparent;
+			transition: color 0.3s ease-in-out;
+			font-weight: 700;
+			font-size: 14px;
+			position: relative;
+			overflow: hidden;
+
+			@media screen and (max-width: 480px) {
+				font-size: 11px;
+			}
+
+			&::before {
+				content: "";
+				width: 100%;
+				height: 1px;
+				background-color: #fff;
+				position: absolute;
+				bottom: 0;
+				left: -100%;
+				transform: scaleX(0);
+				transition: transform 0.3s ease-in-out, left 0.3s ease-in-out;
+			}
+
+			&:hover::before {
+				transform: scaleX(1);
+				left: 0;
+			}
 		}
 	}
 }

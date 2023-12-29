@@ -6,6 +6,7 @@ import {
 	UseFormRegister
 } from "react-hook-form";
 
+import ErrorIcon from "../../Icon/ErrorIcon";
 import "./Input.scss";
 
 interface IInputProps {
@@ -14,10 +15,11 @@ interface IInputProps {
 	label: string;
 	type?: HTMLInputTypeAttribute | undefined;
 	placeholder?: string | undefined;
-	required?: boolean;
+	required?: boolean | string | undefined;
 	disabled?: boolean | undefined;
 	register: UseFormRegister<FieldValues>;
 	errors: FieldErrors;
+	tabIndex?: number | undefined;
 }
 
 const Input: React.FC<IInputProps> = ({
@@ -30,21 +32,37 @@ const Input: React.FC<IInputProps> = ({
 	disabled,
 	register,
 	errors,
+	tabIndex,
 }) => {
 	return (
-		<div className={classNames("Input_Box", wrapperClass)}>
+		<div className={classNames("Input_Box")}>
 			<label htmlFor={id} className="Input_Box__label">
 				{label}
 			</label>
 			<div className="Input_Box__wrapper">
+				{errors[id] && (
+					<div className="Input_Box__error-ico">
+						<ErrorIcon
+							width={"20px"}
+							height={"20px"}
+						/>
+					</div>
+				)}
 				<input
-					className="Input_Box__enter"
+					className={classNames(
+						"Input_Box__enter", {
+						"Input_Box__enter-error": errors[id],
+					}
+					)}
 					type={type}
 					id={id}
 					autoComplete={id}
 					placeholder={placeholder}
+					tabIndex={tabIndex}
 					disabled={disabled}
-					{...register(id, { required })}
+					{...register(id, {
+						required: required || "Required field!" || "Обязательное поле!",
+					})}
 				/>
 			</div>
 		</div>
