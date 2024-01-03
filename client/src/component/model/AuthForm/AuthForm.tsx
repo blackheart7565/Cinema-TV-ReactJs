@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useCallback, useMemo, useState } from "react";
+import React, { Dispatch, SetStateAction, useCallback, useState } from "react";
 import {
 	FieldValues,
 	SubmitHandler,
@@ -6,6 +6,7 @@ import {
 } from "react-hook-form";
 import { toast } from "react-toastify";
 
+import { useValidErrorKeys } from "../../../hooks/errors.hook";
 import { useReducer } from "../../../hooks/reducer.hook";
 import { UserService } from "../../../services/user.service";
 import userSlice from "../../../store/reducer/user.slice";
@@ -24,10 +25,9 @@ interface IAuthFormProps {
 const AuthForm: React.FC<IAuthFormProps> = ({
 	setTitle,
 }) => {
-	const { dispatch, state } = useReducer();
+	const { dispatch } = useReducer();
 	const [variant, setVariant] = useState<IVariantType>("LOGIN");
 	const [isLoading, setIsLoading] = useState<boolean>(false);
-
 	const {
 		register,
 		handleSubmit,
@@ -59,7 +59,7 @@ const AuthForm: React.FC<IAuthFormProps> = ({
 				setTitle("Sing In");
 			}
 		}
-	}, [variant]);
+	}, [variant, resetInputValues, setTitle]);
 
 	const onSubmit: SubmitHandler<FieldValues> = async (paramsValue: FieldValues) => {
 		try {
@@ -67,10 +67,6 @@ const AuthForm: React.FC<IAuthFormProps> = ({
 
 			if (variant === "LOGIN") {
 				// Axios login user
-				const {
-					email,
-					password,
-				} = paramsValue;
 				console.log(paramsValue, "LOGIN");
 			}
 
@@ -116,11 +112,7 @@ const AuthForm: React.FC<IAuthFormProps> = ({
 		}
 	}
 
-	useMemo(() => {
-		for (const key in errors) {
-			toast.error((errors[key]?.message) as string);
-		}
-	}, [Object.keys(errors)]);
+	useValidErrorKeys(errors);
 
 	return (
 		<>
