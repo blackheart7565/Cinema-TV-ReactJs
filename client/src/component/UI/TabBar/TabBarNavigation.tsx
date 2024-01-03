@@ -1,13 +1,13 @@
 import classNames from "classnames";
 import { FC } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { INavigation, StringNumber } from "./types";
+import { INavigation } from "./types";
 
 interface ITabBarNavigationProps {
 	className?: string;
 	navigation?: INavigation[] | undefined;
-	selectId: StringNumber;
-	onClickActive?: (id: StringNumber) => void;
+	selectId: number;
+	onClickActive?: (id: number) => void;
 }
 
 const TabBarNavigation: FC<ITabBarNavigationProps> = ({
@@ -30,7 +30,7 @@ const TabBarNavigation: FC<ITabBarNavigationProps> = ({
 							onClick={() => onClickActive && onClickActive(nav.id)}
 						>
 							<div className={classNames("tab-bar__tab", {
-								"tab-bar__tab-active": selectId == nav.id
+								"tab-bar__tab-active": selectId === nav.id
 							})}>
 								<span className={classNames("tab-bar__label")}>
 									{nav.label}

@@ -1,10 +1,10 @@
 import classNames from "classnames";
 import { FC, forwardRef, useEffect, useState } from 'react';
 
-import TabBarNavigation from "./TabBarNavigation";
-import { IContent, INavigation, StringNumber } from "./types";
-
 import TabBarContent from "./TabBarContent";
+import TabBarNavigation from "./TabBarNavigation";
+import { IContent, INavigation } from "./types";
+
 import "./Tabs.scss";
 
 interface ITabBarProps {
@@ -20,9 +20,9 @@ const TabBar: FC<ITabBarProps> = forwardRef<HTMLDivElement, ITabBarProps>(({
 	content,
 	dependencies,
 }, ref) => {
-	const [selectedId, setSelectedId] = useState<StringNumber>(1);
+	const [selectedId, setSelectedId] = useState<number>(1);
 
-	const onClickActive = (id: StringNumber) => {
+	const onClickActive = (id: number) => {
 		setSelectedId(id);
 	};
 

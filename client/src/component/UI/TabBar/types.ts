@@ -1,7 +1,7 @@
 export type StringNumber = string | number;
 
 export interface INavigation {
-	id: StringNumber;
+	id: number;
 	label?: StringNumber | undefined;
 }
 

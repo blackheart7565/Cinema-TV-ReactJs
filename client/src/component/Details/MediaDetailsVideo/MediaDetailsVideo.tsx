@@ -71,17 +71,17 @@ const MediaDetailsVideo: FC<IMediaDetailsVideoProps> = ({
 					className={className}
 					navigation={[
 						{
-							id: "1",
+							id: 1,
 							label: "Watch online"
 						},
 						{
-							id: "2",
+							id: 2,
 							label: "Trailer"
 						},
 					]}
 					content={[
 						{
-							id: "1",
+							id: 1,
 							node: <CinemaPlayer
 								poster={posterVideoPath}
 								dependencies={[mediaType, mediaId]}
@@ -94,7 +94,7 @@ const MediaDetailsVideo: FC<IMediaDetailsVideoProps> = ({
 							/>,
 						},
 						{
-							id: "2",
+							id: 2,
 							node: <CinemaPlayerFrameYT url={mediaConfig.methods.youtube_path(trailerUtlKey)} />,
 						},
 					]}
