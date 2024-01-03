@@ -20,7 +20,8 @@ privateAxios.interceptors.response.use((config) => {
 	const originalRequest = err.config;
 
 	// Если ошибка равна 401 , что означает что польщователь не аторищован
-	if (err.response.status == 401) {
+	if (err.response.status == 401 && err.config && !err.config._isRetry) {
+		originalRequest._isRetry = true;
 		try {
 			// Полизводым запрос на получение accessToken-a для обновления
 			const response = await publicAxios.get<IAuthResponse>(`user/refresh`);
@@ -32,4 +33,7 @@ privateAxios.interceptors.response.use((config) => {
 			console.log('Не Авторизован');
 		}
 	}
+	throw err
 });
+
+export default privateAxios;
