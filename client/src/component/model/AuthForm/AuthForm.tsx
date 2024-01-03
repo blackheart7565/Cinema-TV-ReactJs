@@ -6,6 +6,10 @@ import {
 } from "react-hook-form";
 import { toast } from "react-toastify";
 
+import { useReducer } from "../../../hooks/reducer.hook";
+import { UserService } from "../../../services/user.service";
+import userSlice from "../../../store/reducer/user.slice";
+import { IUser } from "../../../types/user.types";
 import GoogleIcon from "../../Icon/Social/Google/GoogleIcon";
 import AuthButton from "../../UI/Button/AuthButton/AuthButton";
 import Input from "../../UI/Inputs/Input";
@@ -20,6 +24,7 @@ interface IAuthFormProps {
 const AuthForm: React.FC<IAuthFormProps> = ({
 	setTitle,
 }) => {
+	const { dispatch, state } = useReducer();
 	const [variant, setVariant] = useState<IVariantType>("LOGIN");
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -56,15 +61,48 @@ const AuthForm: React.FC<IAuthFormProps> = ({
 		}
 	}, [variant]);
 
-	const onSubmit: SubmitHandler<FieldValues> = (data: FieldValues) => {
-		setIsLoading(true);
+	const onSubmit: SubmitHandler<FieldValues> = async (paramsValue: FieldValues) => {
+		try {
+			setIsLoading(true);
 
-		if (variant === "LOGIN") {
-			console.log(data, "LOGIN");
-		}
+			if (variant === "LOGIN") {
+				// Axios login user
+				const {
+					email,
+					password,
+				} = paramsValue;
+				console.log(paramsValue, "LOGIN");
+			}
 
-		if (variant === "REGISTRATION") {
-			console.log(data, "REGISTRATION");
+			if (variant === "REGISTRATION") {
+				// Axios registration user
+				console.log(paramsValue, "REGISTRATION");
+
+				const { data } = await UserService.registration(
+					paramsValue.username,
+					paramsValue.email,
+					paramsValue.password
+				);
+
+
+				if (data) {
+					localStorage.setItem("token", data.accessToken);
+
+					dispatch(userSlice.actions.setIsAuth(false));
+					dispatch(userSlice.actions.setUser({} as IUser));
+
+					setIsLoading(false);
+
+					toast.success("User successfully created!")
+
+					resetInputValues();
+					setVariant("LOGIN");
+				}
+			}
+		} catch (error: any) {
+			const { data } = error.response
+			setIsLoading(false);
+			toast.error(data.message);
 		}
 	};
 
