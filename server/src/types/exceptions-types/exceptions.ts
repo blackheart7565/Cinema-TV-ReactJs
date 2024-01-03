@@ -1,9 +1,7 @@
 
 export interface IResponseHandlers { }
 
-export interface IResponseData {
+export interface IResponseDataType {
 	status: number;
 	message: string;
 }
-
-export type IResponseDataType = IResponseData | object | string
