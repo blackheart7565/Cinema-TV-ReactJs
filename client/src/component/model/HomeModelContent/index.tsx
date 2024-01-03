@@ -4,9 +4,10 @@ import { Link } from "react-router-dom";
 import { mediaConfig } from "../../../api/config/media.config";
 import mediaApi from "../../../api/modules/media.api";
 import { useReducer } from "../../../hooks/reducer.hook";
+import loaderSlice from "../../../store/reducer/loader.slice";
 import { IResponseMediasListResultMovie, IResponseMediasListResultSerials, IResponseMediasListValidationType } from "../../../types/media.types";
-
 import MediaCardInfo from "../MediaCardInfo";
+
 import "./HomeModelContent.scss";
 
 interface IHomeModelContent {
@@ -28,7 +29,7 @@ const HomeModelContent: FC<IHomeModelContent> = ({
 }) => {
 	const type = mediaType === "movie" ? "movie" : "tv";
 	const [mediaList, setMediaList] = useState<IResponseMediasListValidationType<typeof type>[]>([]);
-	const { dispatch, actions } = useReducer();
+	const { dispatch } = useReducer();
 
 	const titleLow = title.toLowerCase();
 	const classPrefixLow = classPrefix.toLowerCase();
@@ -36,20 +37,20 @@ const HomeModelContent: FC<IHomeModelContent> = ({
 
 	useEffect(() => {
 		const fetchData = async () => {
-			dispatch(actions.setIsLoading(true));
+			dispatch(loaderSlice.actions.setIsLoading(true));
 
 			const { data } = await mediaApi.getList<IResponseMediasListValidationType<typeof type>>({
 				mediaType,
 				mediaCategory,
 				page: page,
 			});
-			dispatch(actions.setIsLoading(false));
+			dispatch(loaderSlice.actions.setIsLoading(false));
 
 			if (data && data.results) setMediaList(data.results);
 		}
 
 		fetchData();
-	}, [mediaType, mediaCategory, page, dispatch]);
+	}, [mediaType, mediaCategory, dispatch]);
 
 	return (
 		<div className={`${className}`}>

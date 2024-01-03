@@ -4,8 +4,10 @@ import { useParams } from "react-router-dom";
 import { mediaConfig } from "../../../api/config/media.config";
 import mediaApi from "../../../api/modules/media.api";
 import { ActorDto } from "../../../dtos/actor.dto";
+import { RecommendationsDto } from "../../../dtos/recommendations.dto";
 import { MediaTopDto } from "../../../dtos/top-media.dto";
 import { useReducer } from "../../../hooks/reducer.hook";
+import loaderSlice from "../../../store/reducer/loader.slice";
 import { IMediaTop, IResponseMediaDetailsValidationRoot, IResponseMediasDetailsValidationType } from "../../../types/media-types/details.type";
 import { IResponseMediasList, IResponseMediasListResultMovie, IResponseMediasListResultSerials, IResponseMediasListValidationType } from "../../../types/media.types";
 import { IParams } from "../../../types/other.type";
@@ -15,7 +17,6 @@ import MediaDetailsRecommendation from "../../Details/MediaDetailsRecommendation
 import MediaDetailsSwiperGallery from "../../Details/MediaDetailsSwiperGallery/MediaDetailsSwiperGallery";
 import MediaDetailsSwiperListActors from "../../Details/MediaDetailsSwiperListActors/MediaDetailsSwiperListActors";
 import MediaDetailsTabsVideo from "../../Details/MediaDetailsVideo/MediaDetailsVideo";
-import { RecommendationsDto } from "../../../dtos/recommendations.dto";
 
 import "./Details.scss";
 
@@ -26,7 +27,7 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 	const type = mediaType === "movie" ? "movie" : "tv";
 	const [details, setDetails] = useState<IResponseMediaDetailsValidationRoot<typeof type>>();
 	const [topMedia, setTopMedia] = useState<IMediaTop[]>([]);
-	const { dispatch, actions } = useReducer();
+	const { dispatch } = useReducer();
 
 	useEffect(() => {
 		window.scrollTo(0, 0)
@@ -36,9 +37,9 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 		const getDetails = async () => {
 			if (!mediaType || !mediaId) return;
 
-			dispatch(actions.setIsLoading(true));
+			dispatch(loaderSlice.actions.setIsLoading(true));
 			const { data } = await mediaApi.getDetails({ mediaType, mediaId });
-			dispatch(actions.setIsLoading(false));
+			dispatch(loaderSlice.actions.setIsLoading(false));
 
 			if (data) {
 				setDetails(data);
@@ -46,7 +47,7 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 		}
 
 		getDetails();
-	}, [mediaType, mediaId]);
+	}, [mediaType, mediaId, dispatch]);
 
 	useEffect(() => {
 		if (!mediaType) return;

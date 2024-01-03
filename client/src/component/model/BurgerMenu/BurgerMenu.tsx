@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useReducer } from "../../../hooks/reducer.hook";
 import Login from "../Login/Login";
 import Logo from "../Logo/Logo";
+import burgerMenuSlice from "../../../store/reducer/burger-menu.slice";
 
 import "./BurgerMenu.scss";
 
@@ -20,10 +21,10 @@ interface iBurgerMenuProps {
 const BurgerMenu: React.FC<iBurgerMenuProps> = ({
 	routes
 }) => {
-	const { dispatch, state, actions } = useReducer();
+	const { dispatch, state } = useReducer();
 
 	function handleCloseMenu() {
-		dispatch(actions.setIsActiveMenu(false));
+		dispatch(burgerMenuSlice.actions.setIsActiveMenu(false));
 		document.body.classList.remove("scroll-blocker");
 	}
 

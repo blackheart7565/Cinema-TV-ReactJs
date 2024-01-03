@@ -8,6 +8,7 @@ import Login from "../Login/Login";
 import LoginContainer from "../LoginContainer/LoginContainer";
 import LoginPopup from "../LoginPopup/LoginPopup";
 import Logo from "../Logo/Logo";
+import burgerMenuSlice from "../../../store/reducer/burger-menu.slice";
 
 import "./Menu.scss";
 import { IPopupItem, popupItem, popupItemAuth } from "./listItemMenu";
@@ -15,11 +16,11 @@ import { IPopupItem, popupItem, popupItemAuth } from "./listItemMenu";
 const Menu = () => {
 	const [isActiveMenu, setIsActiveMenu] = useState<boolean>(false);
 	const [isOpenLoginPopup, setIsOpenLoginPopup] = useState<boolean>(false);
-	const { dispatch, actions, state } = useReducer();
+	const { dispatch, state } = useReducer();
 
 	function handleOpenMenu() {
 		setIsActiveMenu(!isActiveMenu);
-		dispatch(actions.setIsActiveMenu(true));
+		dispatch(burgerMenuSlice.actions.setIsActiveMenu(true));
 		document.body.classList.add("scroll-blocker");
 	}
 

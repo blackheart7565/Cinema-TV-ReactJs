@@ -5,6 +5,8 @@ import { useReducer } from "../../../hooks/reducer.hook";
 import { IResponseMediasListResultMovie, IResponseMediasListResultSerials, IResponseMediasListValidationType } from "../../../types/media.types";
 import LoadMore from "../LoadMore";
 import { MMediaItem } from "./MediaItem";
+import loaderSlice from "../../../store/reducer/loader.slice";
+
 import "./MediaList.scss";
 
 interface IMediaList {
@@ -23,7 +25,7 @@ const MediaList: FC<IMediaList> = ({
 	const [page, setPage] = useState<number>(1);
 	const [isMediaLoading, setIsMediaLoading] = useState<boolean>(false);
 	const [totalResults, setTotalResults] = useState<number>(0);
-	const { dispatch, actions } = useReducer();
+	const { dispatch } = useReducer();
 
 	// =========>Function<=========
 
@@ -33,7 +35,7 @@ const MediaList: FC<IMediaList> = ({
 
 	useEffect(() => {
 		const fetchMedia = async () => {
-			if (page === 1) dispatch(actions.setIsLoading(true));
+			if (page === 1) dispatch(loaderSlice.actions.setIsLoading(true));
 			setIsMediaLoading(true);
 
 			const { data } = await mediaApi.getList<IResponseMediasListValidationType<typeof type>>({
@@ -43,7 +45,7 @@ const MediaList: FC<IMediaList> = ({
 			});
 
 			setIsMediaLoading(false);
-			dispatch(actions.setIsLoading(false));
+			dispatch(loaderSlice.actions.setIsLoading(false));
 
 			if (page === 1) {
 				setMedia(data.results);

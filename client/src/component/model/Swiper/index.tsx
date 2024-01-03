@@ -5,6 +5,7 @@ import { SwiperSlide } from "swiper/react";
 import { mediaConfig } from "../../../api/config/media.config";
 import mediaApi from "../../../api/modules/media.api";
 import { useReducer } from "../../../hooks/reducer.hook";
+import loaderSlice from "../../../store/reducer/loader.slice";
 import { IResponseMediasListResult, IResponseMediasListResultMovie, IResponseMediasListResultSerials } from "../../../types/media.types";
 import SwiperModel from "./SwiperModel";
 
@@ -23,11 +24,11 @@ export const PopularMediaSwiper: FC<IPopularMediaSwiper> = ({
 	children
 }) => {
 	const [popularMedia, setPopularMedia] = useState<IResponseMediasListResult[]>([]);
-	const { dispatch, actions } = useReducer();
+	const { dispatch } = useReducer();
 
 	useEffect(() => {
 		const fetchData = async () => {
-			dispatch(actions.setIsLoading(true));
+			dispatch(loaderSlice.actions.setIsLoading(true));
 
 			const { data: responseMovie } = await mediaApi.getList<IResponseMediasListResultMovie>({
 				mediaType: mediaConfig.types.movie,
@@ -40,7 +41,7 @@ export const PopularMediaSwiper: FC<IPopularMediaSwiper> = ({
 				page: page,
 			});
 
-			dispatch(actions.setIsLoading(false));
+			dispatch(loaderSlice.actions.setIsLoading(false));
 
 			setPopularMedia([
 				...responseMovie?.results,
