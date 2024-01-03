@@ -30,7 +30,7 @@ export const useHCSM = <T extends Element>(playerRef: RefObject<T>) => {
 			player.removeEventListener("mouseleave", onLeave);
 			player.removeEventListener("mousemove", onMove);
 		};
-	}, [playerRef?.current]);
+	}, [playerRef]);
 
 	return {
 		isVisibleMenuControl,
