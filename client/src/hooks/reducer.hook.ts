@@ -3,11 +3,6 @@ import {
 	useDispatch,
 	useSelector
 } from "react-redux";
-import burgerMenuSlice from "../store/reducer/burger-menu.slice";
-import errorSlice from "../store/reducer/error.slice";
-import loaderSlice from "../store/reducer/loader.slice";
-import mediaSlice from "../store/reducer/media.slice";
-import userSlice from "../store/reducer/user.slice";
 import {
 	IDispatchType,
 	IStateType
@@ -33,13 +28,6 @@ export const useReducer = () => {
 			media,
 			burgerMenu,
 			user,
-		},
-		actions: {
-			...loaderSlice.actions,
-			...errorSlice.actions,
-			...mediaSlice.actions,
-			...burgerMenuSlice.actions,
-			...userSlice.actions,
 		},
 	};
 }

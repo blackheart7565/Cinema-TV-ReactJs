@@ -10,4 +10,5 @@ class TimeFormat {
 
 }
 
-export default new TimeFormat();
+const timeFormat = new TimeFormat();
+export default timeFormat;
