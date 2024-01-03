@@ -2,13 +2,13 @@ import classNames from "classnames";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-import { useReducer } from "../../../../hooks/reducer.hook";
-import { routNav } from "../../../../utils/routNav";
-import Login from "../../Login/Login";
-import Logo from "../../Logo/Logo";
+import { useReducer } from "../../../hooks/reducer.hook";
+import { routNav } from "../../../utils/routNav";
+import Login from "../Login/Login";
+import Logo from "../Logo/Logo";
 
-import LoginContainer from "../../LoginContainer/LoginContainer";
-import LoginPopup from "../../LoginPopup/LoginPopup";
+import LoginContainer from "../LoginContainer/LoginContainer";
+import LoginPopup from "../LoginPopup/LoginPopup";
 import "./Menu.scss";
 
 interface IPopupItem {

@@ -1,5 +1,5 @@
+import { Menu } from "../Menu";
 import "./Header.scss";
-import { Menu } from "./Menu";
 
 const Header = () => {
 	return (
