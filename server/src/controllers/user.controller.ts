@@ -16,7 +16,9 @@ class UserController {
 
 			const userExist = await userModel.findOne({ email });
 
-			if (userExist) return responseHandler.badRequest(res, "Email already using");
+			if (userExist) {
+				return responseHandler.badRequest(res, "Email already using");
+			}
 
 			const hashPass = await bcrypt.hash(password, 8);
 			const user = await userModel.create({
@@ -39,7 +41,7 @@ class UserController {
 				maxAge: 60 * 60 * 100,
 			});
 			return responseHandler.ok(res, {
-				...tokens,
+				accessToken: tokens.accessToken,
 				user: {
 					id: user.id,
 					username: user.username,
@@ -47,7 +49,9 @@ class UserController {
 				}
 			});
 		} catch (error: any) {
-			responseHandler.errors(res, error.message);
+			console.log(error.message);
+
+			return responseHandler.errors(res, error.message);
 		}
 	}
 
@@ -75,7 +79,7 @@ class UserController {
 			});
 
 			return responseHandler.ok(res, {
-				...tokens,
+				accessToken: tokens.accessToken,
 				user: {
 					id: userExist.id,
 					username: userExist.username,
@@ -92,13 +96,10 @@ class UserController {
 			const { authToken } = req.cookies;
 			if (!authToken) return responseHandler.badRequest(res, "Token not found!")
 
-			const tokens = await tokenService.removeToken(authToken);
+			await tokenService.removeToken(authToken);
 			res.clearCookie(UserController._cookiesTokenName);
 
-			return responseHandler.ok(res, {
-				...tokens,
-				message: "User logout",
-			});
+			return responseHandler.ok(res, "User logout");
 		} catch (error: any) {
 			responseHandler.errors(res, error.message);
 		}
@@ -131,7 +132,7 @@ class UserController {
 				});
 
 				return responseHandler.ok(res, {
-					...tokens,
+					accessToken: tokens.accessToken,
 					user: {
 						id: user.id,
 						username: user.username,
