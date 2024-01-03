@@ -35,7 +35,7 @@ const Input: React.FC<IInputProps> = ({
 	tabIndex,
 }) => {
 	return (
-		<div className={classNames("Input_Box")}>
+		<div className={classNames("Input_Box", wrapperClass)}>
 			<label htmlFor={id} className="Input_Box__label">
 				{label}
 			</label>
