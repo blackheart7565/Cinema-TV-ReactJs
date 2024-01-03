@@ -9,16 +9,16 @@ export default mongoose.model<IUserScheme>(
 	new mongoose.Schema<IUserScheme>({
 		username: {
 			type: String,
-			require: true
+			required: true,
 		},
 		email: {
 			type: String,
-			require: true,
-			unique: true
+			required: true,
+			unique: true,
 		},
 		password: {
 			type: String,
-			require: true,
+			required: true,
 		},
 	}, schemaConfig)
 );
