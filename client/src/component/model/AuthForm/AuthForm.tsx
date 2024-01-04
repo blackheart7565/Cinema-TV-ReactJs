@@ -6,6 +6,7 @@ import {
 } from "react-hook-form";
 import { toast } from "react-toastify";
 
+import { useNavigate } from "react-router-dom";
 import { useValidErrorKeys } from "../../../hooks/errors.hook";
 import { useReducer } from "../../../hooks/reducer.hook";
 import { UserService } from "../../../services/user.service";
@@ -26,6 +27,7 @@ const AuthForm: React.FC<IAuthFormProps> = ({
 	setTitle,
 }) => {
 	const { dispatch } = useReducer();
+	const navigation = useNavigate();
 	const [variant, setVariant] = useState<IVariantType>("LOGIN");
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const {
@@ -61,39 +63,61 @@ const AuthForm: React.FC<IAuthFormProps> = ({
 		}
 	}, [variant, resetInputValues, setTitle]);
 
+	const handleRegistration = async (paramsValue: FieldValues) => {
+		const { data } = await UserService.registration(
+			paramsValue.username,
+			paramsValue.email,
+			paramsValue.password
+		);
+
+		if (data) {
+			localStorage.setItem("token", data.accessToken);
+
+			dispatch(userSlice.actions.setIsAuth(false));
+			dispatch(userSlice.actions.setUser({} as IUser));
+
+			setIsLoading(false);
+
+			toast.success("User successfully created!")
+
+			resetInputValues();
+			setVariant("LOGIN");
+		}
+	}
+
+	const handleLogin = async (paramsValue: FieldValues) => {
+		const { data } = await UserService.login(
+			paramsValue.email,
+			paramsValue.password
+		);
+
+		if (data) {
+			localStorage.setItem("token", data.accessToken);
+
+			console.log("data", data);
+
+			dispatch(userSlice.actions.setIsAuth(true));
+			dispatch(userSlice.actions.setUser(data.user));
+
+			setIsLoading(false);
+
+			toast.success("User successfully login!");
+
+			resetInputValues();
+			navigation(-1);
+		}
+	}
+
 	const onSubmit: SubmitHandler<FieldValues> = async (paramsValue: FieldValues) => {
 		try {
 			setIsLoading(true);
 
 			if (variant === "LOGIN") {
-				// Axios login user
-				console.log(paramsValue, "LOGIN");
+				await handleLogin(paramsValue);
 			}
 
 			if (variant === "REGISTRATION") {
-				// Axios registration user
-				console.log(paramsValue, "REGISTRATION");
-
-				const { data } = await UserService.registration(
-					paramsValue.username,
-					paramsValue.email,
-					paramsValue.password
-				);
-
-
-				if (data) {
-					localStorage.setItem("token", data.accessToken);
-
-					dispatch(userSlice.actions.setIsAuth(false));
-					dispatch(userSlice.actions.setUser({} as IUser));
-
-					setIsLoading(false);
-
-					toast.success("User successfully created!")
-
-					resetInputValues();
-					setVariant("LOGIN");
-				}
+				await handleRegistration(paramsValue);
 			}
 		} catch (error: any) {
 			const { data } = error.response
