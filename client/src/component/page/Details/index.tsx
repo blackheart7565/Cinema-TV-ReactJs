@@ -74,11 +74,6 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 		fetchData();
 	}, [mediaType]);
 
-	if (details) {
-		console.log(details);
-		console.log(topMedia, "top");
-	}
-
 	return (
 		<>
 			{details
