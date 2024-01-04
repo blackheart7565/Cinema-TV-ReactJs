@@ -44,6 +44,7 @@ export const UserService: IUserService = {
 	},
 
 	logout: async (): Promise<void> => {
+		await privateAxios.post(userEndpoints.logout);
 	},
 
 	checkAuth: async (): Promise<IUserResponse | IError> => {
