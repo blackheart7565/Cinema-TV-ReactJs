@@ -7,7 +7,7 @@ interface IInitialState {
 }
 
 const initialState: IInitialState = {
-	user: undefined,
+	user: {} as IUser,
 	isAuth: false,
 }
 
