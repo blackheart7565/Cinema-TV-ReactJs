@@ -10,8 +10,9 @@ import LoginContainer from "../LoginContainer/LoginContainer";
 import LoginPopup from "../LoginPopup/LoginPopup";
 import Logo from "../Logo/Logo";
 
+import AuthButton from "../../UI/Button/AuthButton/AuthButton";
 import "./Menu.scss";
-import { IPopupItem, popupItem, popupItemAuth } from "./listItemMenu";
+import { IPopupItem, popupItem } from "./listItemMenu";
 
 const Menu = () => {
 	const [isActiveMenu, setIsActiveMenu] = useState<boolean>(false);
@@ -49,45 +50,36 @@ const Menu = () => {
 					))}
 				</ul>
 
-				<LoginContainer>
-					<Login
-						avatar=""
-						username="black_heart"
-						onClick={handlerOpenPopup}
-					/>
-					<LoginPopup isActive={isOpenLoginPopup}>
-						{state.user.isAuth
-							? (
-								<>
-									{popupItem.map((item: IPopupItem) => (
-										<Link
-											key={item.id}
-											to={""}
-											className="login-popup__link"
-											onClick={() => item.onClick && item.onClick(dispatch)}
-										>
-											{item.body}
-										</Link>
-									))}
-								</>
-							)
-							: (
-								<>
-									{popupItemAuth.map(item => (
-										item.path && (
-											<Link
-												key={item.id || item.path}
-												to={item.path}
-												className="login-popup__link"
-											>
-												{item.body}
-											</Link>
-										)
-									))}
-								</>
-							)}
-					</LoginPopup>
-				</LoginContainer>
+				{state.user.isAuth
+					? (
+						<LoginContainer>
+							<Login
+								avatar=""
+								username={state.user.user?.username || "username"}
+								onClick={handlerOpenPopup}
+							/>
+							<LoginPopup isActive={isOpenLoginPopup}>
+								{popupItem.map((item: IPopupItem) => (
+									<Link
+										key={item.id}
+										to={""}
+										className="login-popup__link"
+										onClick={() => item.onClick && item.onClick(dispatch)}
+									>
+										{item.body}
+									</Link>
+								))}
+							</LoginPopup>
+						</LoginContainer>
+					)
+					: (
+						<AuthButton
+							isLink
+							pathLink={"/auth"}
+						>
+							Login
+						</AuthButton>
+					)}
 
 				<button
 					onClick={handleOpenMenu}

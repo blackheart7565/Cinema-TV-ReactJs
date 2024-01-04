@@ -11,7 +11,7 @@
 .AuthButton {
 	cursor: pointer;
 	padding: 10px;
-	font-weight: 700;
+	font-weight: 400;
 	letter-spacing: 1px;
 	line-height: 1.4rem;
 	border: 0;
@@ -31,5 +31,9 @@
 
 	&.full-w {
 		width: 100%;
+	}
+
+	&.bold {
+		font-weight: 700;
 	}
 }

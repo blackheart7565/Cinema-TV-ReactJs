@@ -32,11 +32,3 @@ export const popupItem: Array<IPopupItem> = [
 		onClick: handleLogout,
 	},
 ]
-
-export const popupItemAuth: Array<IPopupItem> = [
-	{
-		id: 1,
-		path: "/auth",
-		body: "Login",
-	}
-]

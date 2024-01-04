@@ -180,6 +180,7 @@ const AuthForm: React.FC<IAuthFormProps> = ({
 				<AuthButton
 					wrapperClass="authorization__auth-btn"
 					fullWidth
+					fontBold
 					disabled={isLoading}
 					type="submit"
 				>
@@ -216,6 +217,7 @@ const AuthForm: React.FC<IAuthFormProps> = ({
 					</div>
 					<AuthButton
 						wrapperClass="authorization__link-btn"
+						fontBold
 						onClick={toggleVariant}
 					>
 						{variant === "LOGIN"

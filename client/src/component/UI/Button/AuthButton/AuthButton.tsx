@@ -25,6 +25,8 @@ interface IAuthButtonProps {
 	pathLink?: string | undefined;
 
 	onClick?: () => void;
+
+	fontBold?: boolean | undefined;
 }
 
 const AuthButton: React.FC<IAuthButtonProps> = ({
@@ -36,6 +38,7 @@ const AuthButton: React.FC<IAuthButtonProps> = ({
 	isLink,
 	pathLink,
 	onClick,
+	fontBold,
 }) => {
 	return (
 		<>
@@ -48,7 +51,8 @@ const AuthButton: React.FC<IAuthButtonProps> = ({
 						className={classNames(
 							"AuthButton",
 							wrapperClass, {
-							"full-w": fullWidth
+							"full-w": fullWidth,
+							"bold": fontBold,
 						})}
 					>
 						{children}
@@ -63,7 +67,8 @@ const AuthButton: React.FC<IAuthButtonProps> = ({
 							"AuthButton",
 							wrapperClass, {
 							"AuthButton__disabled": disabled,
-							"full-w": fullWidth
+							"full-w": fullWidth,
+							"bold": fontBold,
 						})}
 					>
 						{children}
