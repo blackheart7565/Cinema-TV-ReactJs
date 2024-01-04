@@ -28,10 +28,7 @@ class ResponseHandlers implements IResponseHandlers {
 
 	// OK
 	ok = (res: Response, data?: object | string): Response<IResponseDataType> => {
-		return res.status(200).json({
-			status: 200,
-			message: data || "",
-		});
+		return res.status(200).json(data || "");
 	}
 
 	/**
