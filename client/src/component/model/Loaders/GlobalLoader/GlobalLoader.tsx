@@ -1,6 +1,6 @@
 import { ThreeCircles } from "react-loader-spinner";
 
-import { useGlobalLoader } from "../../../hooks/loader.hook";
+import { useGlobalLoader } from "../../../../hooks/loader.hook";
 
 import "./GlobalLoader.scss";
 

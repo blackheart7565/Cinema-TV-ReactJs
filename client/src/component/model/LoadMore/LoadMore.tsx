@@ -1,6 +1,6 @@
 import { Dispatch, FC, SetStateAction } from 'react';
 import Button from "../../UI/Button";
-import MediaLoader from "../MediaLoader/MediaLoader";
+import MediaLoader from "../Loaders/MediaLoader/MediaLoader";
 
 interface ILoadMoreProps {
 	currentLengthMedia: number;
