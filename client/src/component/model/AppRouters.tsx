@@ -8,10 +8,10 @@ import DetailsMedia from "../page/Details";
 import Films from "../page/Films";
 import Home from "../page/Home";
 import Serials from "../page/Serials";
-import FilmsLayout from "./FilmsLayout";
-import Layout from "./Layout";
+import FilmsLayout from "./Layout/FilmsLayout";
+import Layout from "./Layout/Layout";
 import PageNotFound from "./PageNotFound";
-import SerialsLayout from "./SerialsLayout";
+import SerialsLayout from "./Layout/SerialsLayout";
 
 const AppRouters = () => {
 	const location = useLocation();
