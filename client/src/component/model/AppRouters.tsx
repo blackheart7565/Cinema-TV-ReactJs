@@ -6,7 +6,7 @@ import Authorization from "../page/Authorization/Authorization";
 import Cartoons from "../page/Cartoons";
 import DetailsMedia from "../page/Details";
 import Films from "../page/Films";
-import Home from "../page/Home";
+import Home from "../page/Home/Home";
 import Serials from "../page/Serials";
 import FilmsLayout from "./Layout/FilmsLayout";
 import Layout from "./Layout/Layout";

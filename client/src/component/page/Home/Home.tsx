@@ -1,7 +1,7 @@
 
 import { mediaConfig } from "../../../api/config/media.config";
 import HomeModelContent from "../../model/HomeModelContent/HomeModelContent";
-import { PopularMediaSwiper } from "../../model/Swiper/Swiper";
+import { PopularMediaSwiper } from "../../model/PopularMediaSwiper/PopularMediaSwiper";
 
 import "./Home.scss";
 
