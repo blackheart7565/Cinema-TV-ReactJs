@@ -1,49 +1,50 @@
 import { useState } from "react";
 
+import FooterCard from "../FooterCard/FooterCard";
+import FooterHeader from "../FooterHeader/FooterHeader";
+
 import "./Footer.scss";
-import FooterModel from "./FooterModel";
-import HeaderSection from "./HeaderSection";
 
 const Footer = () => {
 	const [pages] = useState([
 		{
 			path: "/",
-			text: "Home"
+			body: "Home"
 		},
 		{
 			path: "/cartoons",
-			text: "Cartoons"
+			body: "Cartoons"
 		},
 		{
 			path: "/anime",
-			text: "Anime"
+			body: "Anime"
 		},
 		{
 			path: "/films",
-			text: "Films"
+			body: "Films"
 		},
 		{
 			path: "/serials",
-			text: "Serials"
+			body: "Serials"
 		},
 		{
 			path: "/co-viewing",
-			text: "Co-Viewing"
+			body: "Co-Viewing"
 		},
 	]);
 
 	const [information] = useState([
 		{
 			path: "/developers",
-			text: "Developers",
+			body: "Developers",
 		}
 	]);
 
 	return (
 		<footer className="footer">
-			<HeaderSection />
-			<FooterModel list={pages} title={"Pages"} />
-			<FooterModel list={information} title={"Information"} />
+			<FooterHeader />
+			<FooterCard list={pages} title={"Pages"} />
+			<FooterCard list={information} title={"Information"} />
 		</footer>
 	);
 };
