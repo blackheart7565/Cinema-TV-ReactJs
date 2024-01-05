@@ -10,7 +10,7 @@ import Home from "../page/Home";
 import Serials from "../page/Serials";
 import FilmsLayout from "./Layout/FilmsLayout";
 import Layout from "./Layout/Layout";
-import PageNotFound from "./PageNotFound";
+import PageNotFound from "../page/PageNotFound/PageNotFound";
 import SerialsLayout from "./Layout/SerialsLayout";
 
 const AppRouters = () => {
