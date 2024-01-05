@@ -1,6 +1,6 @@
-
+import { useEffect } from "react";
 import { mediaConfig } from "../../../api/config/media.config";
-import HomeModelContent from "../../model/HomeModelContent/HomeModelContent";
+import HomeContent from "../../model/HomeContent/HomeContent";
 import { PopularMediaSwiper } from "../../model/PopularMediaSwiper/PopularMediaSwiper";
 
 import "./Home.scss";
@@ -19,26 +19,27 @@ const Home = () => {
 		'/path/home/serials_2.png'
 	];
 
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, []);
+
 	return (
 		<div className="home">
 			<PopularMediaSwiper />
-			<HomeModelContent
+			<HomeContent
 				title="Anime"
-				classPrefix="home"
 				posters={postersAnime}
 				mediaType={mediaConfig.types.movie}
 				mediaCategory={mediaConfig.category.now_playing_movie}
 			/>
-			<HomeModelContent
+			<HomeContent
 				title="Films"
-				classPrefix="home"
 				posters={postersFilms}
 				mediaType={mediaConfig.types.movie}
 				mediaCategory={mediaConfig.category.now_playing_movie}
 			/>
-			<HomeModelContent
+			<HomeContent
 				title="Serials"
-				classPrefix="home"
 				posters={postersSerials}
 				mediaType={mediaConfig.types.tv}
 				mediaCategory={mediaConfig.category.airing_today_tv}
