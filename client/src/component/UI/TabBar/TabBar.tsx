@@ -28,7 +28,7 @@ const TabBar: FC<ITabBarProps> = forwardRef<HTMLDivElement, ITabBarProps>(({
 
 	useEffect(() => {
 		setSelectedId(1);
-	}, dependencies || []);
+	}, [dependencies]);
 
 	return (
 		<>
