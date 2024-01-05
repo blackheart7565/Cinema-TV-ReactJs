@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 import { mediaConfig } from "../../../api/config/media.config";
-import MediaList from "../../model/MediaList";
+import MediaList from "../../model/MediaList/MediaList";
 
 import "./Serials.scss";
 

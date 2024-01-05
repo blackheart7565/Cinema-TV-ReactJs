@@ -7,7 +7,7 @@ import mediaApi from "../../../api/modules/media.api";
 import { useReducer } from "../../../hooks/reducer.hook";
 import loaderSlice from "../../../store/reducer/loader.slice";
 import { IResponseMediasListResult, IResponseMediasListResultMovie, IResponseMediasListResultSerials } from "../../../types/media.types";
-import SwiperModel from "./SwiperModel";
+import SwiperModel from "./SwiperModel/SwiperModel";
 
 import 'swiper/css';
 import 'swiper/css/navigation';

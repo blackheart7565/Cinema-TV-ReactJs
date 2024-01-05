@@ -6,7 +6,7 @@ import mediaApi from "../../../api/modules/media.api";
 import { useReducer } from "../../../hooks/reducer.hook";
 import loaderSlice from "../../../store/reducer/loader.slice";
 import { IResponseMediasListResultMovie, IResponseMediasListResultSerials, IResponseMediasListValidationType } from "../../../types/media.types";
-import MediaCardInfo from "../MediaCardInfo";
+import MediaCardInfo from "../MediaCardInfo/MediaCardInfo";
 
 import "./HomeModelContent.scss";
 

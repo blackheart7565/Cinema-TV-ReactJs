@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { motion } from "framer-motion";
 import { mediaConfig } from "../../../../api/config/media.config";
-import MediaCardInfo from "../../MediaCardInfo";
+import MediaCardInfo from "../../MediaCardInfo/MediaCardInfo";
 
 interface IMediaItem {
 	posterImage: string | undefined;

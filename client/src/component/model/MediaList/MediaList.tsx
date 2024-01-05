@@ -3,8 +3,8 @@ import { FC, ReactNode, useEffect, useState } from "react";
 import mediaApi from "../../../api/modules/media.api";
 import { useReducer } from "../../../hooks/reducer.hook";
 import { IResponseMediasListResultMovie, IResponseMediasListResultSerials, IResponseMediasListValidationType } from "../../../types/media.types";
-import LoadMore from "../LoadMore";
-import { MMediaItem } from "./MediaItem";
+import LoadMore from "../LoadMore/LoadMore";
+import { MMediaItem } from "./MediaItem/MediaItem";
 import loaderSlice from "../../../store/reducer/loader.slice";
 
 import "./MediaList.scss";

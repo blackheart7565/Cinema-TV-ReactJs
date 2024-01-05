@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import Rating from "../Rating";
+import Rating from "../Rating/Rating";
 
 import "./MediaCardInfo.scss";
 
