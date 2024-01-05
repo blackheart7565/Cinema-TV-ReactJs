@@ -2,26 +2,26 @@
 export const routNav = [
 	{
 		path: "/",
-		text: "Home",
+		body: "Home",
 	},
 	{
 		path: "/cartoons",
-		text: "Cartoons",
+		body: "Cartoons",
 	},
 	{
 		path: "/anime",
-		text: "Anime",
+		body: "Anime",
 	},
 	{
 		path: "/films",
-		text: "Films",
+		body: "Films",
 	},
 	{
 		path: "/serials",
-		text: "Serials",
+		body: "Serials",
 	},
 	{
 		path: "/random",
-		text: "Random",
+		body: "Random",
 	},
 ];

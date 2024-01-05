@@ -3,15 +3,15 @@ import React from 'react';
 import { Link } from "react-router-dom";
 
 import { useReducer } from "../../../hooks/reducer.hook";
+import burgerMenuSlice from "../../../store/reducer/burger-menu.slice";
 import Login from "../Login/Login";
 import Logo from "../Logo/Logo";
-import burgerMenuSlice from "../../../store/reducer/burger-menu.slice";
 
 import "./BurgerMenu.scss";
 
 interface IRoutes {
 	path: string;
-	text: string;
+	body: string;
 }
 
 interface iBurgerMenuProps {
@@ -56,7 +56,7 @@ const BurgerMenu: React.FC<iBurgerMenuProps> = ({
 							to={item.path || ""}
 							className="burger-menu__link"
 						>
-							{item.text || ""}
+							{item.body || ""}
 						</Link>
 					</li>
 				))}

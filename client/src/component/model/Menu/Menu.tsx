@@ -5,14 +5,15 @@ import { Link } from "react-router-dom";
 import { useReducer } from "../../../hooks/reducer.hook";
 import burgerMenuSlice from "../../../store/reducer/burger-menu.slice";
 import { routNav } from "../../../utils/routNav";
+import AuthButton from "../../UI/Button/AuthButton/AuthButton";
 import Login from "../Login/Login";
 import LoginContainer from "../LoginContainer/LoginContainer";
 import LoginPopup from "../LoginPopup/LoginPopup";
 import Logo from "../Logo/Logo";
-
-import AuthButton from "../../UI/Button/AuthButton/AuthButton";
-import "./Menu.scss";
 import { IPopupItem, popupItem } from "./listItemMenu";
+
+import MenuList from "../MenuList/MenuList";
+import "./Menu.scss";
 
 const Menu = () => {
 	const [isActiveMenu, setIsActiveMenu] = useState<boolean>(false);
@@ -34,21 +35,9 @@ const Menu = () => {
 			<div className="menu__wrapper container">
 				<Logo />
 
-				<ul className="menu__list">
-					{routNav.map(item => (
-						<li
-							key={item.path}
-							className="menu__item"
-						>
-							<Link
-								className="menu__link"
-								to={item.path || ""}
-							>
-								{item.text}
-							</Link>
-						</li>
-					))}
-				</ul>
+				<MenuList
+					list={routNav}
+				/>
 
 				{state.user.isAuth
 					? (
