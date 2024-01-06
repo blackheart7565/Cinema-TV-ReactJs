@@ -4,7 +4,7 @@ import { IDispatchType } from "../../../types/store.types";
 export interface IPopupItem {
 	id: string | number;
 	icon?: React.ReactNode;
-	path?: string | undefined;
+	path?: ((name: string) => string) | string | undefined;
 	body?: string;
 	onClick?: (dispatch: IDispatchType) => Promise<void>;
 }
@@ -16,10 +16,12 @@ const handleLogout = async (dispatch: IDispatchType): Promise<void> => {
 export const popupItem: Array<IPopupItem> = [
 	{
 		id: 1,
+		path: (name: string) => `/profile?name=${name}`,
 		body: "Profile",
 	},
 	{
 		id: 2,
+		path: "/settings",
 		body: "Settings",
 	},
 	{

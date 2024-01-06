@@ -26,7 +26,8 @@ const Menu = () => {
 		document.body.classList.add("scroll-blocker");
 	}
 
-	const handlerOpenPopup = () => {
+	const handlerOpenPopup = (e: React.MouseEvent<HTMLAnchorElement>) => {
+		e.preventDefault();
 		setIsOpenLoginPopup(!isOpenLoginPopup);
 	}
 
@@ -44,6 +45,7 @@ const Menu = () => {
 						<LoginContainer>
 							<Login
 								avatar=""
+								path={""}
 								username={state.user.user?.username || "username"}
 								onClick={handlerOpenPopup}
 							/>
@@ -51,7 +53,13 @@ const Menu = () => {
 								{popupItem.map((item: IPopupItem) => (
 									<Link
 										key={item.id}
-										to={""}
+										to={(
+											typeof item.path === "string"
+												? item.path
+												: typeof item.path === "function"
+													? item.path(state.user.user?.username || "anonymous")
+													: ""
+										)}
 										className="login-popup__link"
 										onClick={() => item.onClick && item.onClick(dispatch)}
 									>
