@@ -12,7 +12,7 @@ const AnimeIconV13: React.FC<IAnimeIconProps> = ({
 			<svg
 				fill="currentColor"
 				stroke="currentColor"
-				stroke-width="0"
+				strokeWidth={"0"}
 				version="1.1"
 				width={size || "20px"}
 				height={size || "20px"}

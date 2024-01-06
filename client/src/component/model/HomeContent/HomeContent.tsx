@@ -59,13 +59,13 @@ const HomeContent: React.FC<IHomeContentProps> = ({
 
 				<HomeContentSection
 					mediaType={mediaType}
-					list={mediaList}
+					list={mediaList.slice(0, 6)}
 					poster={posters[0]}
 				/>
 
 				<HomeContentSection
 					mediaType={mediaType}
-					list={mediaList}
+					list={mediaList.slice(6, 12)}
 					isRight
 					poster={posters[1]}
 				/>
