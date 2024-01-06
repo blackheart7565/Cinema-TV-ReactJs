@@ -10,9 +10,9 @@ import Login from "../Login/Login";
 import LoginContainer from "../LoginContainer/LoginContainer";
 import LoginPopup from "../LoginPopup/LoginPopup";
 import Logo from "../Logo/Logo";
+import MenuList from "../MenuList/MenuList";
 import { IPopupItem, popupItem } from "./listItemMenu";
 
-import MenuList from "../MenuList/MenuList";
 import "./Menu.scss";
 
 const Menu = () => {
@@ -63,6 +63,7 @@ const Menu = () => {
 					)
 					: (
 						<AuthButton
+							wrapperClass="menu__login-btn"
 							isLink
 							pathLink={"/auth"}
 						>

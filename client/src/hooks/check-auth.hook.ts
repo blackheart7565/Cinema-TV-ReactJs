@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 import { UserService } from "../services/user.service";
-import userSlice from "../store/reducer/user.slice";
+import userSlice from "../store/reducer/user-slice/user.slice";
 import { useReducer } from "./reducer.hook";
 
 export const useCheckAuth = () => {

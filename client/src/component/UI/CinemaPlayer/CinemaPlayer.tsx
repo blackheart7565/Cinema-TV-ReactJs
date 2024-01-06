@@ -66,7 +66,7 @@ export const CinemaPlayer: FC<ICinemaPlayer> = ({
 		} catch (error: any) {
 			toast.error(error.message);
 		}
-	}, [videoRef.current])
+	}, [videoRef])
 
 	const onVideoPlayHandler = (): void => {
 		const video = videoRef.current
@@ -177,7 +177,7 @@ export const CinemaPlayer: FC<ICinemaPlayer> = ({
 			video.removeEventListener("enterpictureinpicture", onEnterPIP);
 			video.removeEventListener("leavepictureinpicture", onLeavePIP);
 		};
-	}, [videoRef?.current]);
+	}, [videoRef]);
 
 	useEffect(() => {
 		const video = videoRef.current;
@@ -185,7 +185,7 @@ export const CinemaPlayer: FC<ICinemaPlayer> = ({
 
 		if (!dependencies) return;
 		defaultProperties(video);
-	}, dependencies || []);
+	}, [dependencies]);
 
 	return (
 		<>

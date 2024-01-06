@@ -77,6 +77,12 @@
 		}
 	}
 
+	&__login-btn {
+		@media screen and (max-width: 1200px) {
+			display: none;
+		}
+	}
+
 	&__wrapper {
 		display: flex;
 		justify-content: space-between;

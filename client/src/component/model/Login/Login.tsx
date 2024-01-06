@@ -1,20 +1,24 @@
 import React from "react";
 
+import { Link } from "react-router-dom";
 import "./Login.scss";
 
 interface ILoginProps {
 	username?: string;
 	avatar?: string;
+	path?: string;
 	onClick?: () => void;
 }
 
 const Login: React.FC<ILoginProps> = ({
 	username,
 	avatar,
+	path,
 	onClick,
 }) => {
 	return (
-		<div
+		<Link
+			to={path || ""}
 			className={"login"}
 			onClick={onClick}
 		>
@@ -29,7 +33,7 @@ const Login: React.FC<ILoginProps> = ({
 				<div className={"login__username"}>{username || ""}</div>
 				<div className={"login__role"}>User</div>
 			</div>
-		</div>
+		</Link>
 	);
 };
 

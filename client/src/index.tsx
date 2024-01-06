@@ -7,7 +7,7 @@ import { ToastContainer } from "react-toastify";
 import AppRouters from "./component/model/AppRouters";
 import BurgerMenu from "./component/model/BurgerMenu/BurgerMenu";
 import store from "./store";
-import { routNav } from "./utils/routNav";
+import { routNavBurgerMenu } from "./utils/routNav";
 
 import 'react-toastify/dist/ReactToastify.css';
 import "./styles/base.scss";
@@ -38,7 +38,7 @@ root.render(
 			<BrowserRouter>
 				<AppRouters />
 				<BurgerMenu
-					routes={routNav}
+					routes={routNavBurgerMenu}
 				/>
 			</BrowserRouter>
 		</Provider>

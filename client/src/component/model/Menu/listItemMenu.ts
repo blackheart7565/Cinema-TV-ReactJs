@@ -1,7 +1,5 @@
-import { UserService } from "../../../services/user.service";
-import userSlice from "../../../store/reducer/user.slice";
+import { userLogout } from "../../../store/reducer/user-slice/thunk/user.slice.thunk";
 import { IDispatchType } from "../../../types/store.types";
-import { IUser } from "../../../types/user.types";
 
 export interface IPopupItem {
 	id: string | number;
@@ -12,9 +10,7 @@ export interface IPopupItem {
 }
 
 const handleLogout = async (dispatch: IDispatchType): Promise<void> => {
-	await UserService.logout();
-	dispatch(userSlice.actions.setIsAuth(false));
-	dispatch(userSlice.actions.setUser({} as IUser));
+	dispatch(userLogout());
 }
 
 export const popupItem: Array<IPopupItem> = [

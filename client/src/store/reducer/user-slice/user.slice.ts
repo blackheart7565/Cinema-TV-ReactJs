@@ -1,5 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { IUser } from "../../types/user.types";
+import { IUser } from "../../../types/user.types";
+import { userLogout } from "./thunk/user.slice.thunk";
 
 interface IInitialState {
 	user: IUser | undefined;
@@ -20,7 +21,13 @@ const userSlice = createSlice({
 		},
 		setIsAuth: (state, action: PayloadAction<boolean>) => {
 			state.isAuth = action.payload;
-		}
+		},
+	},
+	extraReducers: (builder) => {
+		builder.addCase(userLogout.fulfilled, (state, action): void => {
+			state.isAuth = false;
+			state.user = {} as IUser;
+		})
 	},
 });
 

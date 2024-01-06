@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { useValidErrorKeys } from "../../../hooks/errors.hook";
 import { useReducer } from "../../../hooks/reducer.hook";
 import { UserService } from "../../../services/user.service";
-import userSlice from "../../../store/reducer/user.slice";
+import userSlice from "../../../store/reducer/user-slice/user.slice";
 import { IUser } from "../../../types/user.types";
 import GoogleIcon from "../../Icon/Social/Google/GoogleIcon";
 import AuthButton from "../../UI/Button/AuthButton/AuthButton";
