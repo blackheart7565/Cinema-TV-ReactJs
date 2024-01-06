@@ -7,10 +7,11 @@ import Cartoons from "../page/Cartoons";
 import DetailsMedia from "../page/Details";
 import Films from "../page/Films";
 import Home from "../page/Home/Home";
+import PageNotFound from "../page/PageNotFound/PageNotFound";
+import Profile from "../page/Profile/Profile";
 import Serials from "../page/Serials";
 import FilmsLayout from "./Layout/FilmsLayout";
 import Layout from "./Layout/Layout";
-import PageNotFound from "../page/PageNotFound/PageNotFound";
 import SerialsLayout from "./Layout/SerialsLayout";
 
 const AppRouters = () => {
@@ -26,6 +27,7 @@ const AppRouters = () => {
 						<Route index element={<Home />} />
 						<Route path={"/cartoons"} element={<Cartoons />} />
 						<Route path={"/anime"} element={<Anime />} />
+						<Route path={"/profile"} element={<Profile />} />
 						<Route path={"/films"} element={<FilmsLayout />} >
 							<Route index element={<Films />} />
 							<Route path={":mediaType/:mediaId"} element={<DetailsMedia />} />

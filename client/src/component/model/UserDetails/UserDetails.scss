@@ -1,0 +1,56 @@
+//~~
+
+@import "../../../styles/vars";
+
+.user-details {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	color: #FFF;
+
+	&__username,
+	&__role {
+		padding: 5px 0;
+	}
+
+	&__username {
+		font-size: 3rem;
+		color: #3333FF;
+	}
+
+	&__role {
+		font-size: 2rem;
+		color: #0bdadb;
+	}
+
+	&__count-favorite {
+		padding: 5px 0;
+		line-height: 2rem;
+
+		&-title {
+			color: #33d3ff;
+			font-size: 18px;
+			font-weight: 700;
+			letter-spacing: 2px;
+			text-shadow: 0 0 60px #33d3ff;
+			animation: animTextRainbow 2s ease-in-out infinite;
+		}
+
+		&-text {
+			font-size: 18px;
+			letter-spacing: 1px;
+			font-weight: 700;
+		}
+	}
+}
+
+
+@keyframes animTextRainbow {
+	0% {
+		filter: hue-rotate(0deg);
+	}
+
+	100% {
+		filter: hue-rotate(360deg);
+	}
+}
