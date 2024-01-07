@@ -6,11 +6,23 @@ import tokenService from "../services/token.service";
 
 class UserController {
 
-	private static _cookiesTokenName: string = "authToken";
+	private static _cookiesTokenName: string = "refreshToken";
+	private static _maxAgeRefreshTokenCookie: number = 30 * 24 * 60 * 60 * 1000;
 
 	constructor() { }
 
-	async registration(req: Request, res: Response) {
+	private static saveRefreshTokenToCookie(res: Response, refreshToken: string): void {
+		res.cookie(UserController._cookiesTokenName, refreshToken, {
+			httpOnly: true,
+			maxAge: UserController._maxAgeRefreshTokenCookie,
+		});
+	}
+	private static removingTokenFromCookie(res: Response, nameToken?: string): void {
+		res.clearCookie(nameToken || UserController._cookiesTokenName);
+	}
+
+
+	public async registration(req: Request, res: Response) {
 		try {
 			const { username, email, password } = req.body;
 
@@ -35,11 +47,8 @@ class UserController {
 				email: user.email,
 			});
 			const saveToken = await tokenService.saveToken(user.id, tokens.refreshToken);
+			UserController.saveRefreshTokenToCookie(res, saveToken.refreshToken);
 
-			res.cookie(UserController._cookiesTokenName, saveToken.refreshToken, {
-				httpOnly: true,
-				maxAge: 60 * 60 * 100,
-			});
 			return responseHandler.ok(res, {
 				accessToken: tokens.accessToken,
 				user: {
@@ -49,13 +58,13 @@ class UserController {
 				}
 			});
 		} catch (error: any) {
-			console.log(error.message);
+			console.log(error);
 
 			return responseHandler.errors(res, error.message);
 		}
 	}
 
-	async login(req: Request, res: Response) {
+	public async login(req: Request, res: Response) {
 		try {
 			const { email, password } = req.body;
 
@@ -72,11 +81,7 @@ class UserController {
 			});
 
 			const saveToken = await tokenService.saveToken(userExist.id, tokens.refreshToken);
-
-			res.cookie(UserController._cookiesTokenName, saveToken.refreshToken, {
-				httpOnly: true,
-				maxAge: 60 * 60 * 100,
-			});
+			UserController.saveRefreshTokenToCookie(res, saveToken.refreshToken);
 
 			return responseHandler.ok(res, {
 				accessToken: tokens.accessToken,
@@ -91,13 +96,13 @@ class UserController {
 		}
 	}
 
-	async logout(req: Request, res: Response) {
+	public async logout(req: Request, res: Response) {
 		try {
-			const { authToken } = req.cookies;
-			if (!authToken) return responseHandler.badRequest(res, "Token not found!")
+			const { refreshToken } = req.cookies;
+			if (!refreshToken) return responseHandler.badRequest(res, "Token not found!")
 
-			await tokenService.removeToken(authToken);
-			res.clearCookie(UserController._cookiesTokenName);
+			await tokenService.removeToken(refreshToken);
+			UserController.removingTokenFromCookie(res);
 
 			return responseHandler.ok(res, "User logout");
 		} catch (error: any) {
@@ -105,13 +110,13 @@ class UserController {
 		}
 	}
 
-	async refresh(req: Request, res: Response) {
+	public async refresh(req: Request, res: Response) {
 		try {
-			const { authToken } = req.cookies;
-			if (!authToken) return responseHandler.unauthorized(res);
+			const { refreshToken } = req.cookies;
+			if (!refreshToken) return responseHandler.unauthorized(res);
 
-			const tokenData = tokenService.validateRefreshToken(authToken);
-			const findToken = tokenService.findToken(authToken);
+			const tokenData = tokenService.validateRefreshToken(refreshToken);
+			const findToken = tokenService.findToken(refreshToken);
 
 			if (!tokenData || !findToken) return responseHandler.unauthorized(res);
 
@@ -125,11 +130,7 @@ class UserController {
 				});
 
 				const saveToken = await tokenService.saveToken(user.id, tokens.refreshToken);
-
-				res.cookie(UserController._cookiesTokenName, saveToken.refreshToken, {
-					httpOnly: true,
-					maxAge: 60 * 60 * 100,
-				});
+				UserController.saveRefreshTokenToCookie(res, saveToken.refreshToken);
 
 				return responseHandler.ok(res, {
 					accessToken: tokens.accessToken,
@@ -145,7 +146,7 @@ class UserController {
 		}
 	}
 
-	async delete(req: Request, res: Response) {
+	public async delete(req: Request, res: Response) {
 		try {
 			const { email } = req.body;
 

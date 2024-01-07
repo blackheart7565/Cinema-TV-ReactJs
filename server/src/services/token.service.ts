@@ -70,6 +70,8 @@ class TokenService {
 		const data = await tokenModule.findOne({ refreshToken: token });
 		return data;
 	}
+
+	
 }
 
 export default new TokenService();
