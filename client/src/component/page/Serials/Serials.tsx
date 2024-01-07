@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React from "react";
 
 import { mediaConfig } from "../../../api/config/media.config";
 import MediaList from "../../model/MediaList/MediaList";
@@ -7,7 +7,7 @@ import "./Serials.scss";
 
 interface ISerials { }
 
-const Serials: FC<ISerials> = () => {
+const Serials: React.FC<ISerials> = () => {
 	return (
 		<div className="serials">
 			<MediaList

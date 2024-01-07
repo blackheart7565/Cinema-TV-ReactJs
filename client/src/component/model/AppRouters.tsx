@@ -4,7 +4,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import Anime from "../page/Anime";
 import Authorization from "../page/Authorization/Authorization";
 import Cartoons from "../page/Cartoons";
-import DetailsMedia from "../page/Details";
+import DetailsMedia from "../page/Details/Details";
 import Films from "../page/Films";
 import Home from "../page/Home/Home";
 import PageNotFound from "../page/PageNotFound/PageNotFound";

@@ -29,19 +29,25 @@
 	}
 
 	&__wrapper {
-		margin: 0 auto;
 		width: 100%;
+		margin: 0 auto;
 		max-width: 1200px;
 		margin-top: -5rem;
 		position: relative;
 		padding: 0 10px;
-
 	}
 
 	&__user-info {
 		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		align-items: center;
 		gap: 3rem;
 		width: 100%;
+
+		@media screen and (max-width: 780px) {
+			flex-direction: column;
+		}
 	}
 
 	&__avatar {}
@@ -49,5 +55,78 @@
 	&__user-details {
 		flex-grow: 1;
 
+		@media screen and (max-width: 780px) {
+			align-items: center;
+		}
+	}
+
+	&__user-data {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(20rem, auto));
+		gap: 7px;
+		width: 100%;
+		padding: 15px;
+		border-radius: 8px;
+		border: 1px solid #1f1f21;
+		box-shadow: 0 0 10px #1f1f21;
+		font-size: 14px;
+		color: #FFF;
+		margin: 44px 0;
+
+		@media screen and (max-width: 780px) {
+			justify-content: center;
+		}
+
+		@media screen and (max-width: 480px) {
+			grid-template-columns: repeat(auto-fill, minmax(15rem, auto));
+			font-size: 10px;
+		}
+
+		&-id,
+		&-email {
+			line-height: 1.5rem;
+
+			&-title {
+				color: #33d3ff;
+				margin-right: 0.5rem;
+				font-weight: 700;
+				letter-spacing: 1.5px;
+				text-shadow: 0 0 60px #33d3ff;
+				animation: animTextRainbow 2s ease-in-out infinite;
+			}
+
+			&-text {
+				letter-spacing: 1.5px;
+			}
+		}
+
+		&-id {
+			&-title {}
+
+			&-text {}
+		}
+
+		&-email {
+			// margin-left: 2rem;
+
+			&-title {}
+
+			&-text {}
+		}
+	}
+
+	&__registration-date {
+		line-height: 1.5rem;
+		grid-column: 1;
+	}
+}
+
+@keyframes animTextRainbow {
+	0% {
+		filter: hue-rotate(0deg);
+	}
+
+	100% {
+		filter: hue-rotate(360deg);
 	}
 }
