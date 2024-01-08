@@ -7,13 +7,9 @@ import ProfileBackground from "../../model/ProfileBackground/ProfileBackground";
 import UserDetails from "../../model/UserDetails/UserDetails";
 import "./Profile.scss";
 
-interface IProfileProps {
+interface IProfileProps { }
 
-}
-
-const Profile: React.FC<IProfileProps> = ({
-
-}) => {
+const Profile: React.FC<IProfileProps> = () => {
 	const { state } = useReducer();
 	const date: string = "2023-11-17T13:58:35.974+00:00";
 

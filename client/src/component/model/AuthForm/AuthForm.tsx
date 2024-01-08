@@ -12,6 +12,7 @@ import { useReducer } from "../../../hooks/reducer.hook";
 import { UserService } from "../../../services/user.service";
 import userSlice from "../../../store/reducer/user-slice/user.slice";
 import { IUser } from "../../../types/user.types";
+import RegExpValidator from "../../../utils/RegExpValidator";
 import GoogleIcon from "../../Icon/Social/Google/GoogleIcon";
 import AuthButton from "../../UI/Button/AuthButton/AuthButton";
 import Input from "../../UI/Inputs/Input";
@@ -28,6 +29,7 @@ const AuthForm: React.FC<IAuthFormProps> = ({
 }) => {
 	const { dispatch } = useReducer();
 	const navigation = useNavigate();
+	const regExpValid = new RegExpValidator();
 	const [variant, setVariant] = useState<IVariantType>("LOGIN");
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const {
@@ -106,7 +108,45 @@ const AuthForm: React.FC<IAuthFormProps> = ({
 		}
 	}
 
+	const validationValueInput = (paramsValue: FieldValues): boolean => {
+		const validUsername = regExpValid.validateUsernameRegexp(paramsValue.username);
+		const validEmail = regExpValid.validateEmailRegexp(paramsValue.email);
+		const validPassword = regExpValid.validatePasswordRegexp(paramsValue.password);
+
+		if (!validUsername) {
+			toast.error("The maximum length of username should be no more than 20 characters");
+			return false;
+		}
+
+		if (!validEmail) {
+			toast.error("Emails do not meet the specified format");
+			return false;
+		}
+
+		if (!validPassword) {
+			toast.error((
+				<ul style={{
+					fontSize: "14px",
+					display: "flex",
+					flexDirection: "column",
+					gap: "10px",
+				}}>
+					<li>Пароль должен:</li>
+					<li>1) Содержать хотя бы 1 буквенный символ нижнего регистра.</li>
+					<li>2) Содержать хотя бы 1 буквенный символ верхнего регистра.</li>
+					<li>3) Содержать хотя бы 1 цифровой символ.</li>
+					<li>4) Содержать хотя бы один специальный символ.</li>
+					<li>5) Состоять из 8 символов или длиннее.</li>
+				</ul>
+			));
+			return false;
+		}
+		return true;
+	}
+
 	const onSubmit: SubmitHandler<FieldValues> = async (paramsValue: FieldValues) => {
+		if (!validationValueInput(paramsValue)) return;
+
 		try {
 			setIsLoading(true);
 
@@ -150,6 +190,9 @@ const AuthForm: React.FC<IAuthFormProps> = ({
 						type="text"
 						tabIndex={1}
 						placeholder="Username"
+						title={(
+							""
+						)}
 						register={register}
 						required={"Username required field!"}
 						errors={errors}
