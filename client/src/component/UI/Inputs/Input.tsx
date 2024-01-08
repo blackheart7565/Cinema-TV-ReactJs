@@ -16,6 +16,8 @@ interface IInputProps {
 	type?: HTMLInputTypeAttribute | undefined;
 	placeholder?: string | undefined;
 	required?: boolean | string | undefined;
+	pattern?: string | undefined;
+	title?: string | undefined;
 	disabled?: boolean | undefined;
 	register: UseFormRegister<FieldValues>;
 	errors: FieldErrors;
@@ -27,9 +29,11 @@ const Input: React.FC<IInputProps> = ({
 	id,
 	label,
 	type,
+	title,
 	placeholder,
 	required,
 	disabled,
+	pattern,
 	register,
 	errors,
 	tabIndex,
@@ -56,6 +60,8 @@ const Input: React.FC<IInputProps> = ({
 					)}
 					type={type}
 					id={id}
+					pattern={pattern}
+					title={title}
 					autoComplete={id}
 					placeholder={placeholder}
 					tabIndex={tabIndex}
