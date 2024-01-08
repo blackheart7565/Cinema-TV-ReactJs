@@ -102,9 +102,6 @@ class DateServices implements IDateServices {
 		const month = date.getMonth();
 		const year = date.getFullYear();
 
-		console.log(this.monthName[month].genitive_rus);
-
-
 		const fullDate = `${day} ${(this.monthName[month].genitive_rus).toLowerCase()} ${year}`;
 		return `На сайте с ${fullDate}`;
 	}

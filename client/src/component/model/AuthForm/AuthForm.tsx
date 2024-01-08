@@ -113,7 +113,7 @@ const AuthForm: React.FC<IAuthFormProps> = ({
 		const validEmail = regExpValid.validateEmailRegexp(paramsValue.email);
 		const validPassword = regExpValid.validatePasswordRegexp(paramsValue.password);
 
-		if (!validUsername) {
+		if (!validUsername && variant === "REGISTRATION") {
 			toast.error("The maximum length of username should be no more than 20 characters");
 			return false;
 		}
