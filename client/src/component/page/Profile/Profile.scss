@@ -29,6 +29,7 @@
 
 	&__wrapper {
 		width: 100%;
+		min-height: 800px;
 		margin: 0 auto;
 		max-width: 1200px;
 		margin-top: -5rem;
@@ -46,6 +47,34 @@
 
 		@media screen and (max-width: 780px) {
 			flex-direction: column;
+		}
+	}
+
+	&__navigation {
+		&-list {
+			display: flex;
+			align-items: center;
+			flex-wrap: wrap;
+			gap: 10px;
+		}
+
+		&-item {
+			cursor: pointer;
+			font-size: 16px;
+			letter-spacing: 1px;
+			padding: 7px 15px;
+			border-radius: 8px;
+			transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+
+			&-active {
+				color: #FFF;
+				background-color: #3333FF;
+			}
+
+			&:hover {
+				color: #FFF;
+				background-color: #3333FF;
+			}
 		}
 	}
 
@@ -124,8 +153,11 @@
 			padding: 5px;
 
 			&-title {
-				font-size: 20px;
-				letter-spacing: 1px;
+				font-size: 18px;
+				color: #FFF;
+				background: #3333FF;
+				padding: 7px 10px;
+				border-radius: 8px;
 			}
 
 			&-btn-edit {
@@ -156,7 +188,7 @@
 		&-text {
 			font-weight: 400;
 			font-size: 16px;
-			padding: 0px 5px;
+			padding: 10px 5px;
 			text-wrap: wrap;
 			word-wrap: break-word;
 			word-break: break-all;
