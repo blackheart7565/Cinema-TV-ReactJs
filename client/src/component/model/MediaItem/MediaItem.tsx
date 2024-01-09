@@ -7,6 +7,7 @@ import MediaCardInfo from "../MediaCardInfo/MediaCardInfo";
 
 interface IMediaItem {
 	posterImage: string | undefined;
+	defaultPathPosterImage?: boolean | undefined;
 	name?: string | undefined | null;
 	year?: string | number | undefined | null;
 	rating?: string | number | undefined | null;
@@ -17,6 +18,7 @@ interface IMediaItem {
 
 export const MediaItem: FC<IMediaItem> = forwardRef<HTMLAnchorElement, IMediaItem>(({
 	posterImage,
+	defaultPathPosterImage,
 	name,
 	year,
 	rating,
@@ -32,7 +34,7 @@ export const MediaItem: FC<IMediaItem> = forwardRef<HTMLAnchorElement, IMediaIte
 		>
 			<img
 				className="media-list__link-img"
-				src={mediaConfig.methods.poster_path(posterImage)}
+				src={defaultPathPosterImage ? posterImage : mediaConfig.methods.poster_path(posterImage)}
 				alt="media-list-poster"
 			/>
 			{/* <FavoriteIcon /> */}
