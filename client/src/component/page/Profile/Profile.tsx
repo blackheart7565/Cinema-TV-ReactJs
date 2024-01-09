@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Key, useEffect, useState } from 'react';
 
 import { useReducer } from "../../../hooks/reducer.hook";
 import Avatar from "../../model/Avatar/Avatar";
@@ -29,11 +29,11 @@ const Profile: React.FC<IProfileProps> = () => {
 	const content = [
 		{
 			id: 1,
-			node: <SectionProfile />,
+			node: (key?: Key) => <SectionProfile key={key} />,
 		},
 		{
 			id: 2,
-			node: <FavoriteSection />,
+			node: (key?: Key) => <FavoriteSection key={key} />,
 		}
 	]
 
@@ -50,7 +50,7 @@ const Profile: React.FC<IProfileProps> = () => {
 			className={"profile"}
 		>
 			<ProfileBackground
-			// image="https://s1.picswalls.com/wallpapers/2015/09/20/anime-background-hd_061544702_272.jpg"
+				image="https://s1.picswalls.com/wallpapers/2015/09/20/anime-background-hd_061544702_272.jpg"
 			/>
 
 			<div className="profile__wrapper">
@@ -86,7 +86,7 @@ const Profile: React.FC<IProfileProps> = () => {
 				<div className="profile__content">
 					{content.map(item => (
 						item.id === selectId && (
-							item.node
+							item.node(item.id)
 						)
 					))}
 				</div>

@@ -45,6 +45,7 @@ const FavoriteSection: React.FC<IFavoriteSectionProps> = () => {
 			releaseDate: "2023",
 		},
 	]
+	// const favorite: Array<IFavoriteItem> = [];
 
 	return (
 		<>

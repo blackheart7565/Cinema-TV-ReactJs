@@ -17,16 +17,27 @@ const FavoriteList: React.FC<IFavoriteListProps> = ({
 		<div
 			className={classNames("favorite-list", wrapperClass)}
 		>
-			{list && list.map((item: IFavoriteItem) => (
-				<FavoriteItem
-					key={item.id}
-					id={item.id}
-					poster={item.poster || ""}
-					name={item.name || ""}
-					rating={item.rating || ""}
-					releaseDate={item.releaseDate || ""}
-				/>
-			))}
+			{list && list.length > 0
+				? (
+					list.map((item: IFavoriteItem) => (
+						<FavoriteItem
+							key={item.id}
+							id={item.id}
+							poster={item.poster || ""}
+							name={item.name || ""}
+							rating={item.rating || ""}
+							releaseDate={item.releaseDate || ""}
+						/>
+					))
+				)
+				: (
+					<h2 style={{
+						textAlign: "center",
+						padding: "5px"
+					}}>
+						Favorites list is empty
+					</h2>
+				)}
 		</div>
 	);
 };
