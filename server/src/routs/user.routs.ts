@@ -37,7 +37,11 @@ userRouts.post(
 	userController.login
 );
 
-userRouts.post("/logout", userController.logout);
+userRouts.post(
+	"/logout",
+	requestHandler.authMiddleware,
+	userController.logout
+);
 userRouts.get("/refresh", userController.refresh);
 
 userRouts.delete(
