@@ -1,4 +1,4 @@
-import mongoose, { HydratedDocument } from "mongoose";
+import mongoose from "mongoose";
 
 export type IObjectIdType = typeof mongoose.Types.ObjectId;
 
@@ -7,6 +7,8 @@ export interface DocumentResult<T> {
 }
 
 export interface IUserScheme extends DocumentResult<IUserScheme> {
+	avatar: string;
+	poster: string;
 	email: string;
 	username: string;
 	password: string;

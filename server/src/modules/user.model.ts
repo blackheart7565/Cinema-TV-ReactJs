@@ -7,6 +7,11 @@ import {
 export default mongoose.model<IUserScheme>(
 	"User",
 	new mongoose.Schema<IUserScheme>({
+		avatar: {
+			type: String,
+			required: false,
+			default: "",
+		},
 		username: {
 			type: String,
 			required: true,
@@ -20,5 +25,10 @@ export default mongoose.model<IUserScheme>(
 			type: String,
 			required: true,
 		},
+		poster: {
+			type: String,
+			required: false,
+			default: "",
+		}
 	}, schemaConfig)
 );
