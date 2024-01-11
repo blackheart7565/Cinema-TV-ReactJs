@@ -9,8 +9,6 @@ class RegExpValidator implements IRegExpValidator {
 
 	private _passwordRegexpLine = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[\\W_]).{8,}$", "");
 
-	constructor() { }
-
 	public get getUsernameRegexpLine(): string {
 		return this._usernameRegexpLine.source;
 	}

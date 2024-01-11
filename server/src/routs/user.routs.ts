@@ -50,4 +50,15 @@ userRouts.delete(
 	userController.delete
 );
 
+userRouts.put(
+	"/update",
+	requestHandler.authMiddleware,
+	body("email")
+		.exists().withMessage("email is required")
+		.notEmpty().withMessage("email is empty!")
+		.isEmail().withMessage("input value is not email"),
+	requestHandler.validate,
+	userController.updateData
+);
+
 export default userRouts;

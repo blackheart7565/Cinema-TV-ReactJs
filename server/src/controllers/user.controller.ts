@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import { Request, Response } from "express";
 import fileUpload, { UploadedFile } from "express-fileupload";
+import fs from "fs";
 import path from "path";
 import { v4 } from "uuid";
 import responseHandler from "../handlers/response.handler";
@@ -24,18 +25,21 @@ class UserController {
 		res.clearCookie(nameToken || UserController._cookiesTokenName);
 	}
 
-	private static moveFileToStatic(image: UploadedFile) {
+	private static moveFileToStatic(image: UploadedFile): string | void {
+		if (!image) return;
+
 		const fileExtension: string = `.${image.name.split(".")[1]}`;
+		console.log("fileExtension", fileExtension);
+
 		let fileName: string = v4() + fileExtension;
 		image.mv(path.resolve(__dirname, "..", "static", fileName));
+
+		return fileName;
 	}
 
 	public async registration(req: Request, res: Response) {
 		try {
 			const { username, email, password } = req.body;
-			const { avatar } = req.files as fileUpload.FileArray;
-
-			UserController.moveFileToStatic(avatar as UploadedFile);
 
 			const userExist = await userModel.findOne({ email });
 
@@ -69,8 +73,6 @@ class UserController {
 				}
 			});
 		} catch (error: any) {
-			console.log(error);
-
 			return responseHandler.errors(res, error.message);
 		}
 	}
@@ -168,6 +170,42 @@ class UserController {
 			await userModel.deleteOne({ email });
 
 			return responseHandler.ok(res, "Deleted successfully user!");
+		} catch (error: any) {
+			responseHandler.errors(res, error.message);
+		}
+	}
+
+	public async updateData(req: Request, res: Response) {
+		try {
+			const { username, email } = req.body;
+			const { avatar, poster } = req.files as fileUpload.FileArray;
+
+			const userExist = await userModel.findOne({ email });
+
+			if (!userExist) responseHandler.badRequest(res, "User not found");
+
+			if (avatar) {
+				const filePathAvatar = path.resolve(__dirname, "..", "static", userExist?.avatar as string);
+
+				if (fs.existsSync(filePathAvatar)) {
+					fs.unlink(filePathAvatar, (err) => { });
+				}
+			}
+			if (poster) {
+				const filePathPoster = path.resolve(__dirname, "..", "static", userExist?.poster as string);
+
+				if (fs.existsSync(filePathPoster)) {
+					fs.unlink(filePathPoster, (err) => { });
+				}
+			}
+
+			await userExist?.updateOne({
+				avatar: UserController.moveFileToStatic(avatar as UploadedFile),
+				username,
+				poster: UserController.moveFileToStatic(poster as UploadedFile),
+			});
+
+			responseHandler.ok(res, "User successfully update!");
 		} catch (error: any) {
 			responseHandler.errors(res, error.message);
 		}

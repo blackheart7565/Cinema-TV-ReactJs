@@ -15,6 +15,7 @@ const validate = (req: Request, res: Response, next: NextFunction) => {
 const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
 	try {
 		const authorizationHeader = req.headers.authorization;
+
 		if (!authorizationHeader) return responseHandler.unauthorized(res);
 
 		const accessToken = authorizationHeader.split(" ")[1];
