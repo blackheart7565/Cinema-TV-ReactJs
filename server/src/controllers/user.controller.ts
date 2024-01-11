@@ -1,5 +1,8 @@
 import bcrypt from "bcrypt";
 import { Request, Response } from "express";
+import fileUpload, { UploadedFile } from "express-fileupload";
+import path from "path";
+import { v4 } from "uuid";
 import responseHandler from "../handlers/response.handler";
 import userModel from "../modules/user.model";
 import tokenService from "../services/token.service";
@@ -21,10 +24,18 @@ class UserController {
 		res.clearCookie(nameToken || UserController._cookiesTokenName);
 	}
 
+	private static moveFileToStatic(image: UploadedFile) {
+		const fileExtension: string = `.${image.name.split(".")[1]}`;
+		let fileName: string = v4() + fileExtension;
+		image.mv(path.resolve(__dirname, "..", "static", fileName));
+	}
 
 	public async registration(req: Request, res: Response) {
 		try {
 			const { username, email, password } = req.body;
+			const { avatar } = req.files as fileUpload.FileArray;
+
+			UserController.moveFileToStatic(avatar as UploadedFile);
 
 			const userExist = await userModel.findOne({ email });
 

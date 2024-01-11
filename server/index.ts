@@ -2,8 +2,10 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import "dotenv/config";
 import express from "express";
+import fileUpload from "express-fileupload";
 import http from "http";
 import mongoose from "mongoose";
+import path from "path";
 import router from "./src/routs";
 import { IDtoUser } from "./src/types/token/dto.use.type";
 
@@ -23,6 +25,8 @@ app.use(cors({
 	credentials: true,
 	origin: process.env.CLIENT_URL
 }));
+app.use(fileUpload({}));
+app.use(express.static(path.resolve(__dirname, "src", "static")));
 app.use(cookieParser());
 app.use("/api/v1", router);
 
