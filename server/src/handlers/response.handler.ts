@@ -15,6 +15,7 @@ class ResponseHandlers implements IResponseHandlers {
 		return res.status(500).json({
 			status: 500,
 			message: "Oops! Something wrong, Internal Server Error",
+			details: data,
 		});
 	}
 

@@ -47,9 +47,10 @@ userRouts.get("/refresh", userController.refresh);
 userRouts.delete(
 	"/delete",
 	requestHandler.authMiddleware,
-	body("userId")
-		.exists().withMessage("userId is required")
-		.notEmpty().withMessage("userId is empty!"),
+	body("email")
+		.exists().withMessage("email is required")
+		.notEmpty().withMessage("email is empty!")
+		.isEmail().withMessage("input value is not email"),
 	requestHandler.validate,
 	userController.delete
 );
@@ -63,6 +64,21 @@ userRouts.put(
 		.isEmail().withMessage("input value is not email"),
 	requestHandler.validate,
 	userController.updateData
+);
+
+userRouts.put(
+	"/update-password",
+	requestHandler.authMiddleware,
+	body("password")
+		.exists().withMessage("password is required")
+		.notEmpty().withMessage("password is empty!")
+		.isLength({ min: 8 }).withMessage("the password must be at least 8 characters long"),
+	body("newPassword")
+		.exists().withMessage("password is required")
+		.notEmpty().withMessage("password is empty!")
+		.isLength({ min: 8 }).withMessage("the password must be at least 8 characters long"),
+	requestHandler.validate,
+	userController.updatePassword
 );
 
 export default userRouts;

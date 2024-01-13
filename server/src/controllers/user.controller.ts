@@ -29,8 +29,6 @@ class UserController {
 		if (!image) return;
 
 		const fileExtension: string = `.${image.name.split(".")[1]}`;
-		console.log("fileExtension", fileExtension);
-
 		let fileName: string = v4() + fileExtension;
 		image.mv(path.resolve(__dirname, "..", "static", fileName));
 
@@ -162,10 +160,24 @@ class UserController {
 	public async delete(req: Request, res: Response) {
 		try {
 			const { email } = req.body;
+			const { refreshToken } = req.cookies;
 
 			const userExist = await userModel.findOne({ email });
+			if (!userExist) return responseHandler.badRequest(res, "User not found");
 
-			if (!userExist) responseHandler.badRequest(res, "User not found");
+			if (!refreshToken) return responseHandler.badRequest(res, "Token not found!");
+
+			await tokenService.removeToken(refreshToken);
+			UserController.removingTokenFromCookie(res);
+
+			const filePathAvatar = path.resolve(__dirname, "..", "static", userExist?.avatar as string);
+			if (fs.existsSync(filePathAvatar)) {
+				fs.unlink(filePathAvatar, (err) => { });
+			}
+			const filePathPoster = path.resolve(__dirname, "..", "static", userExist?.poster as string);
+			if (fs.existsSync(filePathPoster)) {
+				fs.unlink(filePathPoster, (err) => { });
+			}
 
 			await userModel.deleteOne({ email });
 
@@ -178,11 +190,10 @@ class UserController {
 	public async updateData(req: Request, res: Response) {
 		try {
 			const { username, email } = req.body;
-			const { avatar, poster } = req.files as fileUpload.FileArray;
+			const { avatar, poster } = req?.files as fileUpload.FileArray;
 
 			const userExist = await userModel.findOne({ email });
-
-			if (!userExist) responseHandler.badRequest(res, "User not found");
+			if (!userExist) return responseHandler.badRequest(res, "User not found");
 
 			if (avatar) {
 				const filePathAvatar = path.resolve(__dirname, "..", "static", userExist?.avatar as string);
@@ -205,7 +216,28 @@ class UserController {
 				poster: UserController.moveFileToStatic(poster as UploadedFile),
 			});
 
-			responseHandler.ok(res, "User successfully update!");
+			return responseHandler.ok(res, "User successfully update!");
+		} catch (error: any) {
+			responseHandler.errors(res, error.message);
+		}
+	}
+
+	public async updatePassword(req: Request, res: Response) {
+		try {
+			const { email, password, newPassword } = req.body;
+
+			const userExist = await userModel.findOne({ email });
+			if (!userExist) return responseHandler.badRequest(res, "User not found");
+
+			const comparePassword = await bcrypt.compare(password, userExist.password);
+			if (!comparePassword) return responseHandler.badRequest(res, "Wrong password");
+
+			const hashNewPassword = await bcrypt.hash(newPassword, 8);
+			await userModel.updateOne({
+				password: hashNewPassword
+			});
+
+			return responseHandler.ok(res, "Password successfully update!");
 		} catch (error: any) {
 			responseHandler.errors(res, error.message);
 		}
