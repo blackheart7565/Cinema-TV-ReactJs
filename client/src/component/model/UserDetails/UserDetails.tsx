@@ -20,9 +20,11 @@ const UserDetails: React.FC<IUserDetailsProps> = ({
 		<div className={classNames("user-details", wrapperClass)}>
 			<h1 className="user-details__username">{username || "Anonymous"}</h1>
 			<h2 className="user-details__role">{userRole || "User"}</h2>
-			<div className="user-details__count-favorite">
-				<span className="user-details__count-favorite-text">{countFavorite || 0}</span>
-				<span className="user-details__count-favorite-title"> count favorite</span>
+			<div className="user-details__container">
+				<div className="user-details__count-favorite">
+					<span className="user-details__count-favorite-text">{countFavorite || 0}</span>
+					<span className="user-details__count-favorite-title"> count favorite</span>
+				</div>
 			</div>
 		</div>
 	);

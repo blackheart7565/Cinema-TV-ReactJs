@@ -10,6 +10,7 @@ import Home from "../page/Home/Home";
 import PageNotFound from "../page/PageNotFound/PageNotFound";
 import Profile from "../page/Profile/Profile";
 import Serials from "../page/Serials/Serials";
+import Settings from "../page/Settings/Settings";
 import FilmsLayout from "./Layout/FilmsLayout";
 import Layout from "./Layout/Layout";
 import SerialsLayout from "./Layout/SerialsLayout";
@@ -28,6 +29,7 @@ const AppRouters = () => {
 						<Route path={"/cartoons"} element={<Cartoons />} />
 						<Route path={"/anime"} element={<Anime />} />
 						<Route path={"/profile"} element={<Profile />} />
+						<Route path={"/settings"} element={<Settings />} />
 						<Route path={"/films"} element={<FilmsLayout />} >
 							<Route index element={<Films />} />
 							<Route path={":mediaType/:mediaId"} element={<DetailsMedia />} />

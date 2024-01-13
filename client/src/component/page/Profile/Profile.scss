@@ -85,7 +85,7 @@
 	&__avatar {}
 
 	&__user-details {
-		flex-grow: 1;
+		flex: 1;
 
 		@media screen and (max-width: 780px) {
 			align-items: center;
