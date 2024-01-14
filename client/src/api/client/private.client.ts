@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import { IAuthResponse } from "../../types/axios.types";
-import { axiosConfig } from "./client.config";
+import { axiosConfig } from "../config/client.config";
 import publicAxios from "./public.client";
 
 const privateAxios = axios.create({

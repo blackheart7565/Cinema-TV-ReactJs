@@ -1,4 +1,5 @@
 import { AxiosResponse } from "axios";
+import { toast } from "react-toastify";
 import privateAxios from "../api/client/private.client";
 import publicAxios from "../api/client/public.client";
 import { IUser } from "../types/user.types";
@@ -16,6 +17,7 @@ interface IUserService {
 		Promise<AxiosResponse<IUserResponse>>;
 	logout: () => Promise<void>;
 	checkAuth: () => Promise<IUserResponse | IError>;
+	update: (data: FormData) => Promise<void | IError>;
 }
 
 const userEndpoints = {
@@ -23,6 +25,7 @@ const userEndpoints = {
 	registration: "user/registration",
 	logout: "user/logout",
 	refresh: "user/refresh",
+	update: "user/update",
 }
 
 export const UserService: IUserService = {
@@ -55,4 +58,23 @@ export const UserService: IUserService = {
 			return error.data;
 		}
 	},
+
+	update: async (data: FormData): Promise<void | IError> => {
+		try {
+			const { data: response } = await privateAxios.put(userEndpoints.update, data);
+			return response;
+		} catch (error: IError) {
+			toast.error((
+				<div>
+					<div>
+						{error.response.data.message}
+					</div>
+					<div>
+						{error.response.data.details}
+					</div>
+				</div>
+			))
+			return;
+		}
+	}
 }

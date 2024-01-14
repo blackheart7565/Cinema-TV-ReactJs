@@ -94,7 +94,7 @@ const AuthForm: React.FC<IAuthFormProps> = ({
 		);
 
 		if (data) {
-			localStorage.setItem("token", data.accessToken);
+			localStorage.setItem("token", data.accessToken);	
 
 			dispatch(userSlice.actions.setIsAuth(true));
 			dispatch(userSlice.actions.setUser(data.user));

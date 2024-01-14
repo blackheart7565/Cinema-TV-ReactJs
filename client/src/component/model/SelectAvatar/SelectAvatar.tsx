@@ -4,14 +4,16 @@ import { IoCameraOutline } from "react-icons/io5";
 import "./SelectAvatar.scss";
 
 interface ISelectAvatarProps {
+	id: string;
 	size?: string | number | undefined;
 	width?: string | number | undefined;
 	height?: string | number | undefined;
 
-	valueCacheCallback?: (value: string) => void
+	valueCacheCallback?: (value: File) => void
 }
 
 const SelectAvatar: React.FC<ISelectAvatarProps> = ({
+	id,
 	size,
 	width,
 	height,
@@ -30,13 +32,13 @@ const SelectAvatar: React.FC<ISelectAvatarProps> = ({
 			return;
 		}
 
+		if (valueCacheCallback) {
+			valueCacheCallback(target.files[0]);
+		}
+
 		const fileReader = new FileReader();
 		fileReader.onload = () => {
 			setAvatarSource(fileReader.result as string);
-
-			if (valueCacheCallback) {
-				valueCacheCallback(fileReader.result as string);
-			}
 		}
 		fileReader.readAsDataURL(target.files[0]);
 	}
@@ -50,12 +52,12 @@ const SelectAvatar: React.FC<ISelectAvatarProps> = ({
 			}}
 		>
 			<label
-				htmlFor="open-file"
+				htmlFor={id}
 				className="select-avatar__label"
 			>
 				<input
 					type="file"
-					id="open-file"
+					id={id}
 					className="select-avatar__file"
 					onChange={openFilesChange}
 				/>

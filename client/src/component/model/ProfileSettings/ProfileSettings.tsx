@@ -1,37 +1,40 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
+import { toast } from "react-toastify";
+import { useReducer } from "../../../hooks/reducer.hook";
+import { UserService } from "../../../services/user.service";
 import Button from "../../UI/Button";
 import InformationUserContainer from "../InformationUserContainer/InformationUserContainer";
 import SelectAvatar from "../SelectAvatar/SelectAvatar";
 import SelectHeaderBackground from "../SelectHeaderBackground/SelectHeaderBackground";
 
 const ProfileSettings = () => {
+	const { state } = useReducer();
 	const [username, setUsername] = useState<string>("");
-	const [posterUser, setPosterUser] = useState<string>("");
-	const [avatarUser, setAvatarUser] = useState<string>("");
-	const [isSave, setIsSave] = useState<boolean>(false);
+	const [posterUser, setPosterUser] = useState<File>({} as File);
+	const [avatarUser, setAvatarUser] = useState<File>({} as File);
 
 	const setValueUsername = (e: ChangeEvent<HTMLInputElement>): void => {
 		setUsername(e.target.value);
 	}
 
-	const valueCacheCallbackPoster = (value: string) => {
+	const valueCacheCallbackPoster = (value: File) => {
 		setPosterUser(value);
 	}
 
-	const valueCacheCallbackAvatar = (value: string) => {
+	const valueCacheCallbackAvatar = (value: File) => {
 		setAvatarUser(value);
 	}
 
-	const handleSave = (): void => {
-		setIsSave(true);
+	const handleSave = async (): Promise<void> => {
+		const formData = new FormData();
+		formData.append("username", username);
+		formData.append("email", state.user.user?.email as string);
+		formData.append("avatar", avatarUser as File);
+		formData.append("poster", posterUser as File);
+		const response = await UserService.update(formData);
+
+		toast.success(response)
 	}
-
-	useEffect(() => {
-		if (isSave) {
-
-		}
-	}, [isSave]);
-
 	return (
 		<div
 			className="settings__content-profile"
@@ -77,13 +80,16 @@ const ProfileSettings = () => {
 				<div className="settings__content-change-title">Сменить аватарку профиля: </div>
 				<div className="settings__content-change-avatar-profile">
 					<SelectAvatar
+						id="open-avatar-file"
 						size={"70px"}
 						valueCacheCallback={valueCacheCallbackAvatar}
 					/>
 				</div>
 			</InformationUserContainer>
 
-			<InformationUserContainer>
+			<InformationUserContainer
+				wrapperClass="settings__content-change-password-container"
+			>
 				<div className="settings__content-change-title">Сменить пароль: </div>
 				<div className="settings__content-change-password">
 					<label
@@ -101,18 +107,24 @@ const ProfileSettings = () => {
 				</div>
 				<div className="settings__content-change-newpassword">
 					<label
-						htmlFor="enter-password-change"
+						htmlFor="enter-new-password-change"
 						className="settings__content-change-label"
 					>
 						Новый пароль:
 						<input
 							type="text"
-							id="enter-password-change"
+							id="enter-new-password-change"
 							placeholder="New password"
 							className="settings__content-change-enter"
 						/>
 					</label>
 				</div>
+				<Button
+					className="settings__content-btn-save"
+					onClick={handleSave}
+				>
+					Save
+				</Button>
 			</InformationUserContainer>
 
 			<InformationUserContainer isEnd isRow>

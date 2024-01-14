@@ -1,5 +1,6 @@
 import { useState } from "react";
 import AuthForm from "../../model/AuthForm/AuthForm";
+
 import "./Authorization.scss";
 
 export type ITitleType = "Sing In" | "Registration";

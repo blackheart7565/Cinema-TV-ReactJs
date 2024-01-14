@@ -7,6 +7,7 @@ import ProfileBackground from "../../model/ProfileBackground/ProfileBackground";
 import UserDetails from "../../model/UserDetails/UserDetails";
 
 import classNames from "classnames";
+import { BASE_URL_SERVER } from "../../../api/config/client.config";
 import FavoriteSection from "../../model/FavoriteSection/FavoriteSection";
 import SectionProfile from "../../model/SectionProfile/SectionProfile";
 import "./Profile.scss";
@@ -50,12 +51,13 @@ const Profile: React.FC<IProfileProps> = () => {
 			className={"profile"}
 		>
 			<ProfileBackground
-				image="https://s1.picswalls.com/wallpapers/2015/09/20/anime-background-hd_061544702_272.jpg"
+				image={`${BASE_URL_SERVER}/${state.user.user?.poster}`}
 			/>
 
 			<div className="profile__wrapper">
 				<div className="profile__user-info">
 					<Avatar
+						avatarPath={`${BASE_URL_SERVER}/${state.user.user?.avatar}`}
 						wrapperClass="profile__avatar"
 						size={"13rem"}
 					/>

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { axiosConfig } from "./client.config";
+import { axiosConfig } from "../config/client.config";
 
 const publicAxios = axios.create({
 	...axiosConfig,

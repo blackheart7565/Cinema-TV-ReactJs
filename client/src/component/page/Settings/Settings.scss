@@ -100,6 +100,12 @@
 				text-wrap: nowrap;
 			}
 
+			&-password-container {
+				display: flex;
+				flex-direction: column;
+				gap: 20px;
+			}
+
 			&-name {
 				height: 100%;
 				width: 100%;

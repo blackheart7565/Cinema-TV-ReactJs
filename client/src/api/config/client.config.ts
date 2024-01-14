@@ -1,10 +1,11 @@
 import queryString from "query-string";
 
-const PORT = 8000;
+const PORT: number = 8000;
+export const BASE_URL_SERVER = `http://localhost:${PORT}/api/v1`;
 
 export const axiosConfig = {
 	withCredentials: true,
-	baseURL: `http://localhost:${PORT}/api/v1`,
+	baseURL: BASE_URL_SERVER,
 	paramsSerializer: {
 		encode: (params: any) => queryString.stringify(params),
 	},

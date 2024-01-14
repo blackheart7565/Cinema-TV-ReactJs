@@ -58,6 +58,8 @@ class UserController {
 				id: user.id,
 				username: user.username,
 				email: user.email,
+				avatar: user.avatar,
+				poster: user.poster,
 			});
 			const saveToken = await tokenService.saveToken(user.id, tokens.refreshToken);
 			UserController.saveRefreshTokenToCookie(res, saveToken.refreshToken);
@@ -68,6 +70,8 @@ class UserController {
 					id: user.id,
 					username: user.username,
 					email: user.email,
+					avatar: user.avatar,
+					poster: user.poster,
 				}
 			});
 		} catch (error: any) {
@@ -89,6 +93,8 @@ class UserController {
 				id: userExist.id,
 				username: userExist.username,
 				email: userExist.email,
+				avatar: userExist.avatar,
+				poster: userExist.poster,
 			});
 
 			const saveToken = await tokenService.saveToken(userExist.id, tokens.refreshToken);
@@ -100,6 +106,8 @@ class UserController {
 					id: userExist.id,
 					username: userExist.username,
 					email: userExist.email,
+					avatar: userExist.avatar,
+					poster: userExist.poster,
 				}
 			});
 		} catch (error: any) {
@@ -138,6 +146,8 @@ class UserController {
 					id: user.id,
 					username: user.username,
 					email: user.email,
+					avatar: user.avatar,
+					poster: user.poster,
 				});
 
 				const saveToken = await tokenService.saveToken(user.id, tokens.refreshToken);
@@ -149,6 +159,8 @@ class UserController {
 						id: user.id,
 						username: user.username,
 						email: user.email,
+						avatar: user.avatar,
+						poster: user.poster,
 					}
 				});
 			}
@@ -189,8 +201,10 @@ class UserController {
 
 	public async updateData(req: Request, res: Response) {
 		try {
+
 			const { username, email } = req.body;
-			const { avatar, poster } = req?.files as fileUpload.FileArray;
+			const { avatar, poster } = (req?.files || {}) as fileUpload.FileArray;
+			console.log(req);
 
 			const userExist = await userModel.findOne({ email });
 			if (!userExist) return responseHandler.badRequest(res, "User not found");

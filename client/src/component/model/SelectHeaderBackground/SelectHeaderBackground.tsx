@@ -9,7 +9,7 @@ interface ISelectHeaderBackgroundProps {
 	width?: string | number | undefined;
 	height?: string | number | undefined;
 
-	valueCacheCallback?: (value: string) => void
+	valueCacheCallback?: (value: File) => void
 }
 
 const SelectHeaderBackground: React.FC<ISelectHeaderBackgroundProps> = ({
@@ -32,13 +32,13 @@ const SelectHeaderBackground: React.FC<ISelectHeaderBackgroundProps> = ({
 			return;
 		}
 
+		if (valueCacheCallback) {
+			valueCacheCallback(target.files[0]);
+		}
+
 		const fileReader = new FileReader();
 		fileReader.onload = () => {
 			setAvatarSource(fileReader.result as string);
-
-			if (valueCacheCallback) {
-				valueCacheCallback(fileReader.result as string);
-			}
 		}
 		fileReader.readAsDataURL(target.files[0]);
 	}

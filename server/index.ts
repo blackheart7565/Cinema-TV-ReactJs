@@ -26,7 +26,7 @@ app.use(cors({
 	origin: process.env.CLIENT_URL
 }));
 app.use(fileUpload({}));
-app.use(express.static(path.resolve(__dirname, "src", "static")));
+app.use("/api/v1", express.static(path.resolve(__dirname, "src", "static")));
 app.use(cookieParser());
 app.use("/api/v1", router);
 
