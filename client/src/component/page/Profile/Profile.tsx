@@ -57,7 +57,7 @@ const Profile: React.FC<IProfileProps> = () => {
 			<div className="profile__wrapper">
 				<div className="profile__user-info">
 					<Avatar
-						avatarPath={`${BASE_URL_SERVER}/${state.user.user?.avatar}`}
+						avatarPath={state.user.user?.avatar ? `${BASE_URL_SERVER}/${state.user.user?.avatar}` : undefined}
 						wrapperClass="profile__avatar"
 						size={"13rem"}
 					/>

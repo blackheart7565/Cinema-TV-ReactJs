@@ -13,6 +13,7 @@ import Logo from "../Logo/Logo";
 import MenuList from "../MenuList/MenuList";
 import { IPopupItem, popupItem } from "./listItemMenu";
 
+import { BASE_URL_SERVER } from "../../../api/config/client.config";
 import "./Menu.scss";
 
 const Menu = () => {
@@ -44,7 +45,7 @@ const Menu = () => {
 					? (
 						<LoginContainer>
 							<Login
-								avatar=""
+								avatar={state.user.user?.avatar ? `${BASE_URL_SERVER}/${state.user.user?.avatar}` : undefined}
 								path={""}
 								username={state.user.user?.username || "username"}
 								onClick={handlerOpenPopup}

@@ -10,6 +10,7 @@ import AuthButton from "../../UI/Button/AuthButton/AuthButton";
 import Login from "../Login/Login";
 import Logo from "../Logo/Logo";
 
+import { BASE_URL_SERVER } from "../../../api/config/client.config";
 import { userLogout } from "../../../store/reducer/user-slice/thunk/user.slice.thunk";
 import "./BurgerMenu.scss";
 
@@ -86,7 +87,7 @@ const BurgerMenu: React.FC<iBurgerMenuProps> = ({
 						className="burger-menu__login-container"
 					>
 						<Login
-							avatar=""
+							avatar={state.user.user?.avatar ? `${BASE_URL_SERVER}/${state.user.user?.avatar}` : undefined}
 							path={`/profile?name=${state.user.user?.username}`}
 							username={state.user.user?.username || "Anonymous"}
 							onClick={handleCloseMenu}

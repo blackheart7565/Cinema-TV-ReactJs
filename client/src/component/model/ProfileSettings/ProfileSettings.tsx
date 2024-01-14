@@ -25,15 +25,23 @@ const ProfileSettings = () => {
 		setAvatarUser(value);
 	}
 
+	const clearState = () => {
+		setUsername("");
+		setPosterUser({} as File);
+		setAvatarUser({} as File);
+	}
+
 	const handleSave = async (): Promise<void> => {
 		const formData = new FormData();
-		formData.append("username", username);
-		formData.append("email", state.user.user?.email as string);
-		formData.append("avatar", avatarUser as File);
-		formData.append("poster", posterUser as File);
-		const response = await UserService.update(formData);
 
+		formData.append("username", username || state.user.user?.username as string);
+		formData.append("email", state.user.user?.email as string);
+		formData.append("avatar", avatarUser as File || state.user.user?.avatar);
+		formData.append("poster", posterUser as File || state.user.user?.poster);
+
+		const response = await UserService.update(formData);
 		toast.success(response)
+		clearState();
 	}
 	return (
 		<div
