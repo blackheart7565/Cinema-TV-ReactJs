@@ -3,7 +3,6 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 100%;
 	max-width: 20rem;
 	height: 2.3rem;
 	background-color: transparent;
@@ -12,6 +11,12 @@
 	color: #FFF;
 	transition: background-color 0.3s ease-in-out;
 	letter-spacing: 0.2rem;
+	padding: 0 20px;
+
+	&.full-w {
+		width: 100%;
+		padding: 0;
+	}
 
 	@media screen and (max-width: 960px) {
 		max-width: 15rem;

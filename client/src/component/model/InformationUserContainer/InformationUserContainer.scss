@@ -11,5 +11,17 @@
 	font-size: 14px;
 	color: #FFF;
 	margin: 44px 0;
+	font-weight: 400;
+	letter-spacing: 0;
 	width: 100%;
+}
+
+.flex-row-r {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.flex-end {
+	justify-content: flex-end;
 }

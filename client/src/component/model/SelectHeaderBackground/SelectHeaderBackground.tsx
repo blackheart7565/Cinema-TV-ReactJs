@@ -1,9 +1,10 @@
 import React, { ChangeEvent, useState } from 'react';
+
 import { IoCameraOutline } from "react-icons/io5";
+import "./SelectHeaderBackground.scss";
 
-import "./SelectAvatar.scss";
-
-interface ISelectAvatarProps {
+interface ISelectHeaderBackgroundProps {
+	id: string;
 	size?: string | number | undefined;
 	width?: string | number | undefined;
 	height?: string | number | undefined;
@@ -11,7 +12,8 @@ interface ISelectAvatarProps {
 	valueCacheCallback?: (value: string) => void
 }
 
-const SelectAvatar: React.FC<ISelectAvatarProps> = ({
+const SelectHeaderBackground: React.FC<ISelectHeaderBackgroundProps> = ({
+	id,
 	size,
 	width,
 	height,
@@ -43,32 +45,32 @@ const SelectAvatar: React.FC<ISelectAvatarProps> = ({
 
 	return (
 		<div
-			className={"select-avatar"}
+			className={"select-background"}
 			style={{
 				height: height || size || "50px",
 				width: width || size || "50px",
 			}}
 		>
 			<label
-				htmlFor="open-file"
-				className="select-avatar__label"
+				htmlFor={id}
+				className="select-background__label"
 			>
 				<input
 					type="file"
-					id="open-file"
-					className="select-avatar__file"
+					id={id}
+					className="select-background__file"
 					onChange={openFilesChange}
 				/>
 				<div
-					className="select-avatar__icon"
+					className="select-background__icon"
 				>
 					<IoCameraOutline
 						size={"100%"}
 					/>
 				</div>
 				<img
-					className={"select-avatar__img"}
-					src={avatarSource || "/profile.png"}
+					className={"select-background__img"}
+					src={avatarSource || "/profile_poster.jpg"}
 					alt="channel-avatar"
 				/>
 			</label>
@@ -76,4 +78,4 @@ const SelectAvatar: React.FC<ISelectAvatarProps> = ({
 	);
 };
 
-export default SelectAvatar;
+export default SelectHeaderBackground;
