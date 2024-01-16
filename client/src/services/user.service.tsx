@@ -18,6 +18,7 @@ interface IUserService {
 	logout: () => Promise<void>;
 	checkAuth: () => Promise<IUserResponse | IError>;
 	update: (data: FormData) => Promise<void | IError>;
+	updatePassword: (email: string, password: string, newPassword: string) => Promise<void | IError>;
 }
 
 const userEndpoints = {
@@ -26,6 +27,7 @@ const userEndpoints = {
 	logout: "user/logout",
 	refresh: "user/refresh",
 	update: "user/update",
+	update_password: "user/update-password",
 }
 
 export const UserService: IUserService = {
@@ -63,6 +65,29 @@ export const UserService: IUserService = {
 		try {
 			const { data: response } = await privateAxios.put(userEndpoints.update, data);
 			return response;
+		} catch (error: IError) {
+			toast.error((
+				<div>
+					<div>
+						{error.response.data.message}
+					</div>
+					<div>
+						{error.response.data.details}
+					</div>
+				</div>
+			))
+			return;
+		}
+	},
+
+	updatePassword: async (email: string, password: string, newPassword: string): Promise<void | IError> => {
+		try {
+			const { data } = await privateAxios.put(userEndpoints.update_password, {
+				email,
+				password,
+				newPassword
+			});
+			return data;
 		} catch (error: IError) {
 			toast.error((
 				<div>

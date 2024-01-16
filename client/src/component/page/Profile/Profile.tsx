@@ -1,15 +1,15 @@
 import React, { Key, useEffect, useState } from 'react';
+import classNames from "classnames";
 
 import { useReducer } from "../../../hooks/reducer.hook";
 import Avatar from "../../model/Avatar/Avatar";
 import InformationUserContainer from "../../model/InformationUserContainer/InformationUserContainer";
 import ProfileBackground from "../../model/ProfileBackground/ProfileBackground";
 import UserDetails from "../../model/UserDetails/UserDetails";
-
-import classNames from "classnames";
 import { BASE_URL_SERVER } from "../../../api/config/client.config";
 import FavoriteSection from "../../model/FavoriteSection/FavoriteSection";
 import SectionProfile from "../../model/SectionProfile/SectionProfile";
+
 import "./Profile.scss";
 
 interface IProfileProps { }

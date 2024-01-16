@@ -199,6 +199,10 @@
 				padding: 10px 20px;
 				background: transparent;
 
+				&:invalid {
+					border-bottom: 0.5px solid #DA0027;
+				}
+
 				&::placeholder {
 					letter-spacing: 1px;
 				}
