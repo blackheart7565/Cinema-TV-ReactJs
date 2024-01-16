@@ -16,6 +16,12 @@
 		width: 100%;
 		min-height: 800px;
 		position: relative;
+		padding: 0 10px;
+
+
+		@media screen and (max-width: 660px) {
+			flex-direction: column;
+		}
 	}
 
 	&__sidebar {
@@ -28,6 +34,18 @@
 		padding-bottom: 20px;
 		overflow-y: auto;
 		background-color: #0a0826;
+
+		@media screen and (max-width: 660px) {
+			width: 100%;
+			overflow-x: auto;
+			padding: 0;
+			gap: 0;
+			flex-direction: row;
+
+			&::-webkit-scrollbar {
+				height: 1px;
+			}
+		}
 
 		&-item {
 			$self-item: &;
@@ -42,6 +60,11 @@
 			transition: background-color 0.2s ease-in-out;
 			border-top-left-radius: 8px;
 			border-bottom-left-radius: 8px;
+
+			@media screen and (max-width: 660px) {
+				width: fit-content;
+				border-radius: 0;
+			}
 
 			&:hover {
 				background-color: #110c3d;
@@ -98,6 +121,10 @@
 				padding: 10px;
 				margin-right: 20px;
 				text-wrap: nowrap;
+
+				@media screen and (max-width: 480px) {
+					font-size: 14px;
+				}
 			}
 
 			&-password-container {
@@ -111,10 +138,44 @@
 				width: 100%;
 			}
 
+			&-name-container {
+				display: flex;
+				align-items: center;
+
+				@media screen and (max-width: 480px) {
+					display: block;
+				}
+			}
+
+			&-header-profile-container {
+				display: flex;
+				align-items: center;
+
+				@media screen and (max-width: 960px) {
+					display: block;
+				}
+			}
+
+			&-avatar-profile-container {
+				display: flex;
+				align-items: center;
+
+				@media screen and (max-width: 960px) {
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+				}
+			}
+
 			&-header-profile {
 				display: flex;
 				align-items: center;
 				width: 100%;
+				height: 120px;
+
+				@media screen and (max-width: 480px) {
+					height: 90px;
+				}
 			}
 
 			&-avatar-profile {}

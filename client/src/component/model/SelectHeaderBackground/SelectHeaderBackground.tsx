@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useState } from 'react';
-
 import { IoCameraOutline } from "react-icons/io5";
+
 import "./SelectHeaderBackground.scss";
 
 interface ISelectHeaderBackgroundProps {

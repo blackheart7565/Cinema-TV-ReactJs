@@ -25,6 +25,16 @@ const Settings: React.FC<ISettingsProps> = ({
 			text: "Profile",
 			icon: <FaUser size={"25px"} />
 		},
+		{
+			id: 2,
+			text: "Profile",
+			icon: <FaUser size={"25px"} />
+		},
+		{
+			id: 3,
+			text: "Profile",
+			icon: <FaUser size={"25px"} />
+		},
 	]
 
 	const listContents = [

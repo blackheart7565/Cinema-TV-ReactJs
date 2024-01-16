@@ -53,7 +53,9 @@ const ProfileSettings = () => {
 				Profile settings
 			</h1>
 
-			<InformationUserContainer isRow>
+			<InformationUserContainer
+				wrapperClass="settings__content-change-name-container"
+			>
 				<div className="settings__content-change-title">Сменить имя: </div>
 				<div className="settings__content-change-name">
 					<label
@@ -72,19 +74,23 @@ const ProfileSettings = () => {
 				</div>
 			</InformationUserContainer>
 
-			<InformationUserContainer isRow>
+			<InformationUserContainer
+				wrapperClass="settings__content-change-header-profile-container"
+			>
 				<div className="settings__content-change-title">Сменить шапку профиля: </div>
 				<div className="settings__content-change-header-profile">
 					<SelectHeaderBackground
 						valueCacheCallback={valueCacheCallbackPoster}
 						id="open-bg-file"
 						width={"100%"}
-						height={"120px"}
+						height={"100%"}
 					/>
 				</div>
 			</InformationUserContainer>
 
-			<InformationUserContainer isRow>
+			<InformationUserContainer
+				wrapperClass="settings__content-change-avatar-profile-container"
+			>
 				<div className="settings__content-change-title">Сменить аватарку профиля: </div>
 				<div className="settings__content-change-avatar-profile">
 					<SelectAvatar
