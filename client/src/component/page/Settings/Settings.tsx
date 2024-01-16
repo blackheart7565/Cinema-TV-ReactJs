@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import React from 'react';
+import React, { useState } from 'react';
 import { FaUser } from "react-icons/fa6";
 
 import SettingsContent from "../../model/SettingsContent/SettingsContent";
@@ -19,6 +19,8 @@ const headerBg: string = "https://www.desktopbackground.org/download/2048x1152/2
 const Settings: React.FC<ISettingsProps> = ({
 	wrapperClass,
 }) => {
+	const [selectId, setSelectId] = useState<number>(1);
+
 	const listNavigation = [
 		{
 			id: 1,
@@ -56,11 +58,12 @@ const Settings: React.FC<ISettingsProps> = ({
 			<div className="settings__wrapper">
 				<SettingsSideBar
 					navigation={listNavigation}
-					selectId={1}
+					selectId={selectId}
+					setSelectId={setSelectId}
 				/>
 				<SettingsContent
 					contents={listContents}
-					selectId={1}
+					selectId={selectId}
 				/>
 			</div>
 		</div >

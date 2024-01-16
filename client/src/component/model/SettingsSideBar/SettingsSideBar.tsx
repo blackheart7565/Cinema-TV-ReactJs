@@ -10,11 +10,13 @@ interface INavigation {
 interface ISettingsSideBarProps {
 	navigation: INavigation[];
 	selectId?: number | undefined;
+	setSelectId?: (id: number) => void;
 }
 
 const SettingsSideBar: React.FC<ISettingsSideBarProps> = ({
 	navigation,
 	selectId,
+	setSelectId,
 }) => {
 	return (
 		<div
@@ -26,6 +28,7 @@ const SettingsSideBar: React.FC<ISettingsSideBarProps> = ({
 					className={classNames("settings__sidebar-item", {
 						"settings__sidebar-item-active": nav.id === selectId
 					})}
+					onClick={() => setSelectId && setSelectId(nav.id)}
 				>
 					<div className="settings__sidebar-item-icon">
 						{nav.icon}

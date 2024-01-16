@@ -204,7 +204,6 @@ class UserController {
 
 			const { username, email } = req.body;
 			const { avatar, poster } = (req?.files || {}) as fileUpload.FileArray;
-			console.log(req);
 
 			const userExist = await userModel.findOne({ email });
 			if (!userExist) return responseHandler.badRequest(res, "User not found");
