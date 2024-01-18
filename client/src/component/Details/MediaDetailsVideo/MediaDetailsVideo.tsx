@@ -8,8 +8,7 @@ import concatClasses from "../../../utils/ClassNames";
 import { CinemaPlayer } from "../../UI/CinemaPlayer/CinemaPlayer";
 import CinemaPlayerFrameYT from "../../UI/CinemaPlayerFrameYT/CinemaPlayerFrameYT";
 import { MDiv, MMediaDetailsTop, MTabBar } from "../../motion/motion.component";
-
-type IMediaTypeEnums = "movie" | "tv" | "";
+import { IMediaTypeEnums } from "../../page/Details/Details";
 
 interface IMediaDetailsVideoProps {
 	className?: string | undefined;

@@ -2,7 +2,9 @@ import { FC, forwardRef } from "react";
 import { Link } from "react-router-dom";
 
 import { motion } from "framer-motion";
+import { title } from "process";
 import { mediaConfig } from "../../../api/config/media.config";
+import FavoriteIcon from "../../Icon/FavoriteIcon/FavoriteIcon";
 import MediaCardInfo from "../MediaCardInfo/MediaCardInfo";
 
 interface IMediaItem {
@@ -13,7 +15,8 @@ interface IMediaItem {
 	rating?: string | number | undefined | null;
 	season?: string | number | undefined | null;
 	episode?: string | number | undefined | null;
-	path?: string | undefined
+	path?: string | undefined;
+	isFavorite?: boolean | undefined;
 }
 
 export const MediaItem: FC<IMediaItem> = forwardRef<HTMLAnchorElement, IMediaItem>(({
@@ -24,8 +27,11 @@ export const MediaItem: FC<IMediaItem> = forwardRef<HTMLAnchorElement, IMediaIte
 	rating,
 	season,
 	episode,
-	path
+	path,
+	isFavorite,
 }, ref) => {
+	console.log(title, isFavorite);
+
 	return (
 		<Link
 			className="media-list__link"
@@ -37,7 +43,11 @@ export const MediaItem: FC<IMediaItem> = forwardRef<HTMLAnchorElement, IMediaIte
 				src={defaultPathPosterImage ? posterImage : mediaConfig.methods.poster_path(posterImage)}
 				alt="media-list-poster"
 			/>
-			{/* <FavoriteIcon /> */}
+			{isFavorite && (
+				<FavoriteIcon
+					wrapperClass="media-list__link-favorite"
+				/>
+			)}
 			<MediaCardInfo
 				isIconPlay
 				name={name}

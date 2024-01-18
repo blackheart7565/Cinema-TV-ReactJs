@@ -1,23 +1,27 @@
 import { Request, Response } from "express";
 import responseHandler from "../handlers/response.handler";
-import favoriteModule from "../modules/favorite.model";
+import favoriteModel from "../modules/favorite.model";
+import favoriteService from "../services/favorite.service";
 
 class FavoriteController {
 
 	async addFavorite(req: Request, res: Response) {
 		try {
-			const { userId, mediaId } = req.body;
+			const { userId, mediaId, mediaType, mediaPosterPath, mediaTitle, mediaRating, mediaReleaseDate } = req.body;
 
-			const favoriteExist = favoriteModule.findOne({ userId, mediaId });
+			const favoriteExist = await favoriteModel.findOne({ userId, mediaId });
 
 			if (favoriteExist) return responseHandler.ok(res, favoriteExist);
 
-			const favorite = new favoriteModule({
+			const favorite = await favoriteModel.create({
 				userId,
-				...req.body,
+				mediaId,
+				mediaType,
+				mediaPosterPath,
+				mediaTitle,
+				mediaRating,
+				mediaReleaseDate,
 			});
-
-			await favorite.save();
 
 			return responseHandler.created(res, favorite);
 		} catch (error) {
@@ -30,14 +34,7 @@ class FavoriteController {
 			const { favoriteId } = req.params;
 			const { userId } = req.body;
 
-			const favorite = await favoriteModule.findOne({
-				_id: favoriteId,
-				userId,
-			});
-
-			if (!favorite) return responseHandler.notFound(res);
-
-			await favorite.deleteOne();
+			favoriteService.removeFavorite(res, userId, favoriteId);
 
 			return responseHandler.ok(res);
 		} catch (error) {
@@ -49,9 +46,7 @@ class FavoriteController {
 		try {
 			const { userId } = req.body;
 
-			const favorite = await favoriteModule
-				.find({ userId })
-				.sort("-createdAt");
+			const favorite = favoriteService.getFavoriteToUser(userId);
 
 			return responseHandler.ok(res, favorite);
 		} catch (error) {

@@ -1,3 +1,4 @@
+import { IFavorite } from "../db-module/favorite.type";
 import { IObjectIdType } from "../db-module/user.types";
 
 export interface IDtoUser {
@@ -6,4 +7,5 @@ export interface IDtoUser {
 	username: string;
 	email: string;
 	poster?: string;
+	favorite?: IFavorite[];
 }

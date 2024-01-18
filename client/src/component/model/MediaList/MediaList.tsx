@@ -7,6 +7,7 @@ import { IResponseMediasListResultMovie, IResponseMediasListResultSerials, IResp
 import LoadMore from "../LoadMore/LoadMore";
 import { MMediaItem } from "../MediaItem/MediaItem";
 
+import favoriteUtils from "../../../utils/FavoriteUrils";
 import "./MediaList.scss";
 
 interface IMediaList {
@@ -25,7 +26,7 @@ const MediaList: FC<IMediaList> = ({
 	const [page, setPage] = useState<number>(1);
 	const [isMediaLoading, setIsMediaLoading] = useState<boolean>(false);
 	const [totalResults, setTotalResults] = useState<number>(0);
-	const { dispatch } = useReducer();
+	const { dispatch, state } = useReducer();
 
 	// =========>Function<=========
 
@@ -77,7 +78,7 @@ const MediaList: FC<IMediaList> = ({
 								)
 						)}`}
 						posterImage={item.poster_path || item.backdrop_path}
-						name={
+						name={(
 							mediaType === 'movie'
 								? (
 									(item as IResponseMediasListResultMovie).title
@@ -89,8 +90,8 @@ const MediaList: FC<IMediaList> = ({
 										|| (item as IResponseMediasListResultSerials).original_name
 									)
 									: null
-						}
-						year={
+						)}
+						year={(
 							mediaType === "movie"
 								? (
 									(item as IResponseMediasListResultMovie).release_date.split("-")[0]
@@ -100,7 +101,13 @@ const MediaList: FC<IMediaList> = ({
 										(item as IResponseMediasListResultSerials).first_air_date.split("-")[0]
 									)
 									: null
-						}
+						)}
+						isFavorite={(
+							state.user.user && state.user.user.favorite && favoriteUtils.check({
+								listFavorites: state.user.user.favorite,
+								mediaId: item.id.toString(),
+							})
+						)}
 						rating={item.vote_average}
 					/>
 				))}

@@ -20,6 +20,9 @@ import MediaDetailsTabsVideo from "../../Details/MediaDetailsVideo/MediaDetailsV
 
 import "./Details.scss";
 
+
+export type IMediaTypeEnums = "movie" | "tv" | "";
+
 interface IDetailsMediaProps { }
 
 const DetailsMedia: FC<IDetailsMediaProps> = () => {
@@ -90,6 +93,8 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 								rating={details.vote_average}
 								voteCount={details.vote_count}
 								status={details.status}
+								mediaId={mediaId}
+								mediaType={mediaType === "movie" ? "movie" : "tv"}
 								description={details.overview}
 								moveToVideoSectionRef={moveToVideoSectionRef}
 								title={(
@@ -188,15 +193,17 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 								)}
 							/>
 
-							<MediaDetailsSwiperGallery
-								className={"media-details__gallery"}
-								titleBlock="Gallery:"
-								images={(
-									[
-										...details.images.backdrops.map((item) => mediaConfig.methods.poster_path(item.file_path))
-									]
-								)}
-							/>
+							<div className="hidden-container">
+								<MediaDetailsSwiperGallery
+									className={"media-details__gallery"}
+									titleBlock="Gallery:"
+									images={(
+										[
+											...details.images.backdrops.map((item) => mediaConfig.methods.poster_path(item.file_path))
+										]
+									)}
+								/>
+							</div>
 
 							<MediaDetailsRecommendation
 								titleBlock={"Recommendations:"}

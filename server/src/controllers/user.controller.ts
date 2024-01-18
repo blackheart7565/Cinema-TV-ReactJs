@@ -5,7 +5,9 @@ import fs from "fs";
 import path from "path";
 import { v4 } from "uuid";
 import responseHandler from "../handlers/response.handler";
+import favoriteModel from "../modules/favorite.model";
 import userModel from "../modules/user.model";
+import favoriteService from "../services/favorite.service";
 import tokenService from "../services/token.service";
 
 class UserController {
@@ -60,6 +62,7 @@ class UserController {
 				email: user.email,
 				avatar: user.avatar,
 				poster: user.poster,
+				favorite: [],
 			});
 			const saveToken = await tokenService.saveToken(user.id, tokens.refreshToken);
 			UserController.saveRefreshTokenToCookie(res, saveToken.refreshToken);
@@ -72,6 +75,7 @@ class UserController {
 					email: user.email,
 					avatar: user.avatar,
 					poster: user.poster,
+					favorite: [],
 				}
 			});
 		} catch (error: any) {
@@ -89,12 +93,15 @@ class UserController {
 			const isPassword = await bcrypt.compare(password, userExist.password);
 			if (!isPassword) return responseHandler.badRequest(res, "Wrong password");
 
+			const favorite = await favoriteService.getFavoriteToUser(userExist.id);
+
 			const tokens = tokenService.generateToken({
 				id: userExist.id,
 				username: userExist.username,
 				email: userExist.email,
 				avatar: userExist.avatar,
 				poster: userExist.poster,
+				favorite,
 			});
 
 			const saveToken = await tokenService.saveToken(userExist.id, tokens.refreshToken);
@@ -108,6 +115,7 @@ class UserController {
 					email: userExist.email,
 					avatar: userExist.avatar,
 					poster: userExist.poster,
+					favorite,
 				}
 			});
 		} catch (error: any) {
@@ -142,12 +150,15 @@ class UserController {
 			const user = await userModel.findById(tokenData.id);
 
 			if (user) {
+				const favorite = await favoriteService.getFavoriteToUser(user.id);
+
 				const tokens = tokenService.generateToken({
 					id: user.id,
 					username: user.username,
 					email: user.email,
 					avatar: user.avatar,
 					poster: user.poster,
+					favorite,
 				});
 
 				const saveToken = await tokenService.saveToken(user.id, tokens.refreshToken);
@@ -161,6 +172,7 @@ class UserController {
 						email: user.email,
 						avatar: user.avatar,
 						poster: user.poster,
+						favorite,
 					}
 				});
 			}
@@ -191,6 +203,9 @@ class UserController {
 				fs.unlink(filePathPoster, (err) => { });
 			}
 
+			await favoriteModel.deleteMany({
+				userId: userExist.id
+			});
 			await userModel.deleteOne({ email });
 
 			return responseHandler.ok(res, "Deleted successfully user!");

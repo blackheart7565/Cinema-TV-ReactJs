@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import { schemaConfig } from "../configs/scheme.config";
 import { IFavorite } from "../types/db-module/favorite.type";
 
@@ -6,16 +6,17 @@ export default mongoose.model<IFavorite>(
 	"Favorite",
 	new mongoose.Schema<IFavorite>({
 		userId: {
-			type: mongoose.Types.ObjectId,
+			type: Schema.Types.ObjectId,
 			ref: "User",
 			require: true,
 		},
 		mediaId: {
-			type: mongoose.Types.ObjectId,
+			type: String,
 			require: true,
 		},
 		mediaType: {
 			type: String,
+			enum: ["movie", "tv"],
 			require: true,
 		},
 		mediaPosterPath: {

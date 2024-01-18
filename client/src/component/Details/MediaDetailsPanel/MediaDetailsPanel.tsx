@@ -1,14 +1,18 @@
 import { motion } from "framer-motion";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
 
+import { toast } from "react-toastify";
+import privateAxios from "../../../api/client/private.client";
 import { useLoadingMotion } from "../../../hooks/motion.hook";
 import { useReducer } from "../../../hooks/reducer.hook";
 import { motionOption, variantMediaDetailsPanelOriginTitle, variantMediaDetailsPanelTitle, variantsMediaDetailsRatingNumber } from "../../../motion/details.motion";
+import favoriteUtils from "../../../utils/FavoriteUrils";
 import TimeFormat from "../../../utils/TimeFormat";
 import Button from "../../UI/Button";
 import Rating from "../../model/Rating/Rating";
 import { MDiv } from "../../motion/motion.component";
+import { IMediaTypeEnums } from "../../page/Details/Details";
 import MediaDetailsInfoRow from "../MediaDetailsInfoRow/MediaDetailsInfoRow";
 import MediaDetailsPost from "../MediaDetailsPost/MediaDetailsPost";
 
@@ -23,6 +27,10 @@ interface IMediaDetailsPanelProps {
 	duration?: number | number[] | undefined | null;
 	voteCount?: number | undefined | null;
 	description?: string | undefined | null;
+
+	mediaType?: IMediaTypeEnums | undefined | null;
+	mediaId?: string | undefined | null;
+
 	status?: string | undefined | null;
 	genres?: string[] | undefined | null;
 	moveToVideoSectionRef?: React.RefObject<HTMLDivElement> | undefined;
@@ -42,6 +50,8 @@ const MediaDetailsPanel: FC<IMediaDetailsPanelProps> = ({
 	duration,
 	voteCount,
 	description,
+	mediaId,
+	mediaType,
 	status,
 	genres,
 	moveToVideoSectionRef,
@@ -62,9 +72,38 @@ const MediaDetailsPanel: FC<IMediaDetailsPanelProps> = ({
 		}
 	}
 
-	function handleToggleFavorite(): void {
+	const handleToggleFavorite = async (): Promise<void> => {
 		setIsFavorite(!isFavorite);
 	}
+
+	const addFavorite = async () => {
+		if (state.user.user) {
+			await privateAxios.post(
+				"/favorite",
+				{
+					userId: state.user.user?.id,
+					mediaId,
+					mediaType,
+					mediaPosterPath: src,
+					mediaTitle: title,
+					mediaRating: rating,
+					mediaReleaseDate: released
+				}
+			);
+		}
+	}
+
+	useEffect(() => {
+		try {
+			if (isFavorite) {
+				addFavorite();
+			} else {
+
+			}
+		} catch (error: any) {
+			toast.error(error.response.data)
+		}
+	}, [isFavorite]);
 
 	return (
 		<>
@@ -181,7 +220,10 @@ const MediaDetailsPanel: FC<IMediaDetailsPanelProps> = ({
 									className="media-details__btns-favorite"
 									onClick={handleToggleFavorite}
 								>
-									{isFavorite
+									{state.user.user && state.user.user.favorite && mediaId && favoriteUtils.check({
+										listFavorites: state.user.user?.favorite,
+										mediaId,
+									})
 										? (
 											<MdFavorite size={"30px"} color="#DA0027" />
 										)
