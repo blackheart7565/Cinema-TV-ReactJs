@@ -24,7 +24,7 @@ const Settings: React.FC<ISettingsProps> = ({
 	const listNavigation = [
 		{
 			id: 1,
-			text: "Profile",
+			text: "General",
 			icon: <FaUser size={"25px"} />
 		},
 		{
@@ -32,16 +32,11 @@ const Settings: React.FC<ISettingsProps> = ({
 			text: "Profile",
 			icon: <FaUser size={"25px"} />
 		},
-		{
-			id: 3,
-			text: "Profile",
-			icon: <FaUser size={"25px"} />
-		},
 	]
 
 	const listContents = [
 		{
-			id: 1,
+			id: 2,
 			node: (
 				<ProfileSettings />
 			)

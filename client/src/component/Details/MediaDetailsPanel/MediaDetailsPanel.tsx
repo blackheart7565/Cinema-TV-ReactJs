@@ -1,14 +1,16 @@
-import { FC } from "react"
+import { motion } from "framer-motion";
+import { FC, useState } from "react";
+import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
 
-import { motion } from "framer-motion"
-import { useLoadingMotion } from "../../../hooks/motion.hook"
-import { useReducer } from "../../../hooks/reducer.hook"
-import { motionOption, variantMediaDetailsPanelOriginTitle, variantMediaDetailsPanelTitle, variantsMediaDetailsRatingNumber } from "../../../motion/details.motion"
-import TimeFormat from "../../../utils/TimeFormat"
-import Rating from "../../model/Rating/Rating"
-import { MDiv } from "../../motion/motion.component"
-import MediaDetailsInfoRow from "../MediaDetailsInfoRow/MediaDetailsInfoRow"
-import MediaDetailsPost from "../MediaDetailsPost/MediaDetailsPost"
+import { useLoadingMotion } from "../../../hooks/motion.hook";
+import { useReducer } from "../../../hooks/reducer.hook";
+import { motionOption, variantMediaDetailsPanelOriginTitle, variantMediaDetailsPanelTitle, variantsMediaDetailsRatingNumber } from "../../../motion/details.motion";
+import TimeFormat from "../../../utils/TimeFormat";
+import Button from "../../UI/Button";
+import Rating from "../../model/Rating/Rating";
+import { MDiv } from "../../motion/motion.component";
+import MediaDetailsInfoRow from "../MediaDetailsInfoRow/MediaDetailsInfoRow";
+import MediaDetailsPost from "../MediaDetailsPost/MediaDetailsPost";
 
 interface IMediaDetailsPanelProps {
 	src: string;
@@ -23,6 +25,7 @@ interface IMediaDetailsPanelProps {
 	description?: string | undefined | null;
 	status?: string | undefined | null;
 	genres?: string[] | undefined | null;
+	moveToVideoSectionRef?: React.RefObject<HTMLDivElement> | undefined;
 }
 
 const isOnce: boolean = true;
@@ -41,16 +44,32 @@ const MediaDetailsPanel: FC<IMediaDetailsPanelProps> = ({
 	description,
 	status,
 	genres,
+	moveToVideoSectionRef,
 }) => {
 	const { state } = useReducer();
+	const [isFavorite, setIsFavorite] = useState<boolean>(false);
 	const propsMotionOption = useLoadingMotion({
 		isLoading: state.loader.isLoading,
 		isViewport: isViewport,
 	});
 
+	const handelScrollToWatchOnline = (): void => {
+		if (moveToVideoSectionRef?.current) {
+			moveToVideoSectionRef.current.scrollIntoView({
+				behavior: 'auto'
+				, block: "start"
+			})
+		}
+	}
+
+	function handleToggleFavorite(): void {
+		setIsFavorite(!isFavorite);
+	}
+
 	return (
 		<>
-			<div className="media-details__film-panel">
+			<div className="media-details__film-panel"
+			>
 				<MediaDetailsPost src={src} />
 				<section className="media-details__info">
 					<motion.h2
@@ -155,13 +174,32 @@ const MediaDetailsPanel: FC<IMediaDetailsPanelProps> = ({
 								className={"media-details__released"}
 								value={released}
 								title={"Released"} />
+
+							<div className="media-details__btns">
+
+								<div
+									className="media-details__btns-favorite"
+									onClick={handleToggleFavorite}
+								>
+									{isFavorite
+										? (
+											<MdFavorite size={"30px"} color="#DA0027" />
+										)
+										: (
+											<MdFavoriteBorder size={"30px"} color="#DA0027" />
+										)}
+								</div>
+								<div className="media-details__btns-watch-online">
+									<Button onClick={handelScrollToWatchOnline}> Watch online </Button>
+								</div>
+							</div>
+
 						</div>
 					</div>
-
 				</section>
 			</div>
 		</>
 	)
-}
+};
 
 export default MediaDetailsPanel;

@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, forwardRef } from "react";
 import { mediaConfig } from "../../../api/config/media.config";
 import { useLoadingMotion } from "../../../hooks/motion.hook";
 import { useReducer } from "../../../hooks/reducer.hook";
@@ -19,6 +19,7 @@ interface IMediaDetailsVideoProps {
 	trailerUtlKey?: string | undefined;
 	topMedia?: IMediaTop[];
 	posterVideoPath?: string | undefined;
+	ref?: React.ForwardedRef<HTMLDivElement> | undefined;
 }
 
 const isOnce: boolean = true;
@@ -30,7 +31,7 @@ const isViewport: boolean = true;
  *  @n if the amount of content is greater than the number of navigation buttons, then the menu tab will not be displayed.
  * @n (если объем контента превышает количество кнопок навигации, то вкладка меню отображаться не будет.)
  */
-const MediaDetailsVideo: FC<IMediaDetailsVideoProps> = ({
+const MediaDetailsVideo: FC<IMediaDetailsVideoProps> = forwardRef<HTMLDivElement, IMediaDetailsVideoProps>(({
 	className,
 	mediaType,
 	mediaId,
@@ -38,7 +39,7 @@ const MediaDetailsVideo: FC<IMediaDetailsVideoProps> = ({
 	trailerUtlKey,
 	posterVideoPath,
 	topMedia,
-}) => {
+}, ref) => {
 	const { state } = useReducer();
 	const propsMotionOption = useLoadingMotion({
 		isLoading: state.loader.isLoading,
@@ -48,7 +49,9 @@ const MediaDetailsVideo: FC<IMediaDetailsVideoProps> = ({
 	return (
 		<div className={className} style={{
 			color: "#DDd"
-		}}>
+		}}
+			ref={ref}
+		>
 			<MDiv
 				{...propsMotionOption}
 				viewport={motionOption.viewport({
@@ -125,7 +128,7 @@ const MediaDetailsVideo: FC<IMediaDetailsVideoProps> = ({
 			</div>
 		</div>
 	);
-}
+});
 
 MediaDetailsVideo.defaultProps = {
 	mediaType: "",

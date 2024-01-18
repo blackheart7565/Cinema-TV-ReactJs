@@ -120,6 +120,24 @@
 		}
 	}
 
+	&__btns {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 20px;
+
+		&-favorite {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			cursor: pointer;
+		}
+
+		&-watch-online {
+			display: inline-block;
+		}
+	}
+
 	&__content {
 		display: flex;
 		padding-top: 3vw;

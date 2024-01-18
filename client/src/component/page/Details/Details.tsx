@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import { mediaConfig } from "../../../api/config/media.config";
@@ -28,6 +28,7 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 	const [details, setDetails] = useState<IResponseMediaDetailsValidationRoot<typeof type>>();
 	const [topMedia, setTopMedia] = useState<IMediaTop[]>([]);
 	const { dispatch } = useReducer();
+	const moveToVideoSectionRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
 		window.scrollTo(0, 0)
@@ -90,6 +91,7 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 								voteCount={details.vote_count}
 								status={details.status}
 								description={details.overview}
+								moveToVideoSectionRef={moveToVideoSectionRef}
 								title={(
 									mediaType === "movie"
 										? (
@@ -146,6 +148,7 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 								mediaType={mediaType === "movie" ? "movie" : "tv"}
 								posterVideoPath={mediaConfig.methods.poster_path(details.poster_path || details.backdrop_path)}
 								mediaId={mediaId}
+								ref={moveToVideoSectionRef}
 								trailerUtlKey={(
 									details.videos.results.filter(video => video.type === "Trailer"
 										|| video.type === "Opening Credits"
