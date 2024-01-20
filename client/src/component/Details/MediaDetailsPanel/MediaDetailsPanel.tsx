@@ -2,11 +2,11 @@ import { motion } from "framer-motion";
 import { FC, useState } from "react";
 import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
 
-import { toast } from "react-toastify";
-import privateAxios from "../../../api/client/private.client";
+import { useFavorite } from "../../../hooks/favorite.hook";
 import { useLoadingMotion } from "../../../hooks/motion.hook";
 import { useReducer } from "../../../hooks/reducer.hook";
 import { motionOption, variantMediaDetailsPanelOriginTitle, variantMediaDetailsPanelTitle, variantsMediaDetailsRatingNumber } from "../../../motion/details.motion";
+import { IFavorite } from "../../../types/user.types";
 import favoriteUtils from "../../../utils/FavoriteUtils";
 import TimeFormat from "../../../utils/TimeFormat";
 import Button from "../../UI/Button";
@@ -18,10 +18,10 @@ import MediaDetailsPost from "../MediaDetailsPost/MediaDetailsPost";
 
 interface IMediaDetailsPanelProps {
 	src: string;
-	title: string | null;
-	originalTitle: string | null;
+	title?: string | undefined;
+	originalTitle?: string | undefined;
 	directors?: string[] | undefined | null;
-	released?: string | undefined | null;
+	released?: string | undefined;
 	countries?: string[] | undefined | null;
 	rating?: string | number | undefined | null;
 	duration?: number | number[] | undefined | null;
@@ -57,10 +57,12 @@ const MediaDetailsPanel: FC<IMediaDetailsPanelProps> = ({
 	moveToVideoSectionRef,
 }) => {
 	const { state } = useReducer();
+	const { onAddFavorite, onRemoveFavorite } = useFavorite();
 
 	const favoriteCheck = favoriteUtils.check({
 		listFavorites: state.user.user?.favorite,
 		mediaId,
+		mediaType,
 	});
 	const [isFavorite, setIsFavorite] = useState<boolean>(favoriteCheck || false);
 
@@ -79,7 +81,27 @@ const MediaDetailsPanel: FC<IMediaDetailsPanelProps> = ({
 	}
 
 	const handleToggleFavorite = async (): Promise<void> => {
-		
+		if (!state.user.user) return;
+
+		if (isFavorite && mediaId) {
+			onRemoveFavorite(mediaId);
+			setIsFavorite(false);
+			return;
+		}
+
+		if (!isFavorite && mediaId && released && title && originalTitle && mediaType) {
+			const favorite: IFavorite = {
+				userId: state.user.user.id,
+				mediaId,
+				mediaPosterPath: src,
+				mediaRating: Number(rating),
+				mediaReleaseDate: released,
+				mediaTitle: title || originalTitle,
+				mediaType,
+			}
+			onAddFavorite(favorite);
+			setIsFavorite(true);
+		}
 	}
 
 	return (

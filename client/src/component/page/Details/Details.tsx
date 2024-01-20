@@ -108,7 +108,7 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 												(details as IResponseMediaDetailsValidationRoot<"tv">).name
 												|| (details as IResponseMediaDetailsValidationRoot<"tv">).original_name
 											)
-											: null
+											: undefined
 								)}
 								originalTitle={(
 									mediaType === "movie"
@@ -119,7 +119,7 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 											? (
 												(details as IResponseMediaDetailsValidationRoot<"tv">).original_name
 											)
-											: null
+											: undefined
 								)}
 								directors={(
 									details?.credits.crew.filter(item => item.job === "Director").map(item => item.name || item.original_name)
@@ -133,7 +133,7 @@ const DetailsMedia: FC<IDetailsMediaProps> = () => {
 											? (
 												(details as IResponseMediaDetailsValidationRoot<"tv">).first_air_date.split("-")[0]
 											)
-											: null
+											: undefined
 								)}
 								duration={(
 									mediaType === "movie"

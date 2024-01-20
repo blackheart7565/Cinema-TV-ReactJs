@@ -1,11 +1,11 @@
 import { AxiosResponse } from "axios";
 import privateAxios from "../api/client/private.client";
-import { IFavorite } from "../types/user.types";
+import { IFavorite, IResponseFavorite } from "../types/user.types";
 import { useReducer } from "./reducer.hook";
 
 interface IUseFavorite {
 	onAddFavorite: (favorite: IFavorite) => Promise<AxiosResponse<IFavorite>>;
-	onRemoveFavorite: (mediaId: number) => Promise<AxiosResponse<IFavorite> | void>;
+	onRemoveFavorite: (mediaId: string) => Promise<AxiosResponse<IFavorite> | void>;
 }
 
 const favoriteEndpoints = {
@@ -21,13 +21,13 @@ export const useFavorite = (): IUseFavorite => {
 		return response;
 	}
 
-	async function onRemoveFavorite(mediaId: number): Promise<AxiosResponse<IFavorite> | void> {
+	async function onRemoveFavorite(mediaId: string): Promise<AxiosResponse<IResponseFavorite> | void> {
 		const favoriteId = state.user.user?.favorite
 			.find(fav => fav.mediaId.toString() === mediaId.toString())?.id
 
 		if (!favoriteId) return;
 
-		const response = await privateAxios.post(favoriteEndpoints.remove(favoriteId))
+		const response = await privateAxios.post<IResponseFavorite>(favoriteEndpoints.remove(favoriteId))
 
 		return response;
 	}

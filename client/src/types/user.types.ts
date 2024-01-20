@@ -1,13 +1,16 @@
 
 export interface IFavorite {
-	id: number;
 	userId: number;
-	mediaId: number;
+	mediaId: number | string;
 	mediaType: string,
 	mediaPosterPath: string,
 	mediaTitle: string,
 	mediaRating: number,
 	mediaReleaseDate: string,
+}
+
+export interface IResponseFavorite extends IFavorite {
+	id: number;
 }
 
 export interface IUser {
@@ -16,5 +19,5 @@ export interface IUser {
 	username: string;
 	email: string;
 	poster: string;
-	favorite: IFavorite[]
+	favorite: IResponseFavorite[];
 }

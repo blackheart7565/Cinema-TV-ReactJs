@@ -106,6 +106,7 @@ const MediaList: FC<IMediaList> = ({
 							favoriteUtils.check({
 								listFavorites: state.user.user?.favorite,
 								mediaId: item.id.toString(),
+								mediaType,
 							})
 						)}
 						rating={item.vote_average}
