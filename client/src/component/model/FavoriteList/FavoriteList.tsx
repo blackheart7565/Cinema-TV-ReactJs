@@ -1,32 +1,37 @@
 import classNames from "classnames";
 import React from 'react';
-import FavoriteItem, { IFavoriteItem } from "./FavoriteItem";
+
+import FavoriteItem from "./FavoriteItem";
+import { IResponseFavorite } from "../../../types/user.types";
 
 import "./FavoriteList.scss";
 
 interface IFavoriteListProps {
 	wrapperClass?: string | undefined;
-	list: IFavoriteItem[];
+	list: IResponseFavorite[];
 }
 
 const FavoriteList: React.FC<IFavoriteListProps> = ({
 	wrapperClass,
 	list,
 }) => {
+
+	console.log("list", list);
+
 	return (
 		<div
 			className={classNames("favorite-list", wrapperClass)}
 		>
 			{list && list.length > 0
 				? (
-					list.map((item: IFavoriteItem) => (
+					list.map((item: IResponseFavorite) => (
 						<FavoriteItem
 							key={item.id}
 							id={item.id}
-							poster={item.poster || ""}
-							name={item.name || ""}
-							rating={item.rating || ""}
-							releaseDate={item.releaseDate || ""}
+							poster={item.mediaPosterPath || ""}
+							name={item.mediaTitle || ""}
+							rating={item.mediaRating.toString() || ""}
+							releaseDate={item.mediaReleaseDate || ""}
 						/>
 					))
 				)
