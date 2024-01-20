@@ -1,8 +1,8 @@
 import classNames from "classnames";
 import React from 'react';
 
-import FavoriteItem from "./FavoriteItem";
 import { IResponseFavorite } from "../../../types/user.types";
+import FavoriteItem from "./FavoriteItem";
 
 import "./FavoriteList.scss";
 
@@ -15,9 +15,6 @@ const FavoriteList: React.FC<IFavoriteListProps> = ({
 	wrapperClass,
 	list,
 }) => {
-
-	console.log("list", list);
-
 	return (
 		<div
 			className={classNames("favorite-list", wrapperClass)}
@@ -28,6 +25,7 @@ const FavoriteList: React.FC<IFavoriteListProps> = ({
 						<FavoriteItem
 							key={item.id}
 							id={item.id}
+							path={`/${item.mediaType === "movie" ? "films" : "serials"}/${item.mediaType}/${item.mediaId}?name=${item.mediaTitle}`}
 							poster={item.mediaPosterPath || ""}
 							name={item.mediaTitle || ""}
 							rating={item.mediaRating.toString() || ""}

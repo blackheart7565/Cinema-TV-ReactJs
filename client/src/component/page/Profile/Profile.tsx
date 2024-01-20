@@ -64,6 +64,7 @@ const Profile: React.FC<IProfileProps> = () => {
 					<UserDetails
 						username={state.user.user?.username}
 						wrapperClass="profile__user-details"
+						countFavorite={state.user.user.favorite.length}
 					/>
 				</div>
 
