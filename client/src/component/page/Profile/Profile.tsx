@@ -1,14 +1,14 @@
-import React, { Key, useEffect, useState } from 'react';
 import classNames from "classnames";
+import React, { Key, useEffect, useState } from 'react';
 
+import { BASE_URL_SERVER } from "../../../api/config/client.config";
 import { useReducer } from "../../../hooks/reducer.hook";
 import Avatar from "../../model/Avatar/Avatar";
+import FavoriteSection from "../../model/FavoriteSection/FavoriteSection";
 import InformationUserContainer from "../../model/InformationUserContainer/InformationUserContainer";
 import ProfileBackground from "../../model/ProfileBackground/ProfileBackground";
-import UserDetails from "../../model/UserDetails/UserDetails";
-import { BASE_URL_SERVER } from "../../../api/config/client.config";
-import FavoriteSection from "../../model/FavoriteSection/FavoriteSection";
 import SectionProfile from "../../model/SectionProfile/SectionProfile";
+import UserDetails from "../../model/UserDetails/UserDetails";
 
 import "./Profile.scss";
 
@@ -51,7 +51,7 @@ const Profile: React.FC<IProfileProps> = () => {
 			className={"profile"}
 		>
 			<ProfileBackground
-				image={`${BASE_URL_SERVER}/${state.user.user?.poster}`}
+				image={state.user.user?.poster ? `${BASE_URL_SERVER}/${state.user.user?.poster}` : undefined}
 			/>
 
 			<div className="profile__wrapper">

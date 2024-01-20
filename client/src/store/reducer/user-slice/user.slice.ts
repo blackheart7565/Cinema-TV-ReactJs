@@ -3,7 +3,7 @@ import { IUser } from "../../../types/user.types";
 import { userLogout } from "./thunk/user.slice.thunk";
 
 interface IInitialState {
-	user: IUser | undefined;
+	user: IUser;
 	isAuth: boolean;
 }
 

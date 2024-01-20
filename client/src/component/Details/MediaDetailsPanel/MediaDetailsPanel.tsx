@@ -1,7 +1,9 @@
 import { motion } from "framer-motion";
 import { FC, useState } from "react";
 import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
+import { toast } from "react-toastify";
 
+import { useNavigate } from "react-router-dom";
 import { useFavorite } from "../../../hooks/favorite.hook";
 import { useLoadingMotion } from "../../../hooks/motion.hook";
 import { useReducer } from "../../../hooks/reducer.hook";
@@ -56,6 +58,7 @@ const MediaDetailsPanel: FC<IMediaDetailsPanelProps> = ({
 	genres,
 	moveToVideoSectionRef,
 }) => {
+	const navigate = useNavigate();
 	const { state } = useReducer();
 	const { onAddFavorite, onRemoveFavorite } = useFavorite();
 
@@ -80,27 +83,38 @@ const MediaDetailsPanel: FC<IMediaDetailsPanelProps> = ({
 		}
 	}
 
-	const handleToggleFavorite = async (): Promise<void> => {
-		if (!state.user.user) return;
-
-		if (isFavorite && mediaId) {
-			onRemoveFavorite(mediaId);
-			setIsFavorite(false);
-			return;
-		}
-
-		if (!isFavorite && mediaId && released && title && originalTitle && mediaType) {
-			const favorite: IFavorite = {
-				userId: state.user.user.id,
-				mediaId,
-				mediaPosterPath: src,
-				mediaRating: Number(rating),
-				mediaReleaseDate: released,
-				mediaTitle: title || originalTitle,
-				mediaType,
+	const handleToggleFavorite = async () => {
+		try {
+			if (Object.keys(state.user.user).length < 1) {
+				return navigate("/auth");
 			}
-			onAddFavorite(favorite);
-			setIsFavorite(true);
+
+
+			if (isFavorite && mediaId) {
+				onRemoveFavorite(mediaId);
+				setIsFavorite(false);
+
+				toast.success("Successfully removed from favorites!");
+				return;
+			}
+
+			if (!isFavorite && mediaId && released && title && originalTitle && mediaType) {
+				const favorite: IFavorite = {
+					userId: state.user.user.id,
+					mediaId,
+					mediaPosterPath: src,
+					mediaRating: Number(rating),
+					mediaReleaseDate: released,
+					mediaTitle: title || originalTitle,
+					mediaType,
+				}
+				onAddFavorite(favorite);
+				setIsFavorite(true);
+
+				toast.success("Successfully added to favorites!");
+			}
+		} catch (error: any) {
+			toast.error(error);
 		}
 	}
 
