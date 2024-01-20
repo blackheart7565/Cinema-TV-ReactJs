@@ -31,14 +31,4 @@ favoriteRouts.post(
 	favoriteController.removeFavorite
 );
 
-favoriteRouts.get(
-	"/",
-	requestHandler.authMiddleware,
-	body("userId")
-		.exists().withMessage("userId is required")
-		.notEmpty().withMessage("favoriteId is empty!"),
-	requestHandler.validate,
-	favoriteController.getFavoriteToUser
-);
-
 export default favoriteRouts;

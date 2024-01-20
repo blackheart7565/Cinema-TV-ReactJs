@@ -2,7 +2,6 @@ import { FC, forwardRef } from "react";
 import { Link } from "react-router-dom";
 
 import { motion } from "framer-motion";
-import { title } from "process";
 import { mediaConfig } from "../../../api/config/media.config";
 import FavoriteIcon from "../../Icon/FavoriteIcon/FavoriteIcon";
 import MediaCardInfo from "../MediaCardInfo/MediaCardInfo";
@@ -30,8 +29,6 @@ export const MediaItem: FC<IMediaItem> = forwardRef<HTMLAnchorElement, IMediaIte
 	path,
 	isFavorite,
 }, ref) => {
-	console.log(title, isFavorite);
-
 	return (
 		<Link
 			className="media-list__link"

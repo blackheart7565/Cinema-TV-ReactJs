@@ -7,7 +7,7 @@ import { IResponseMediasListResultMovie, IResponseMediasListResultSerials, IResp
 import LoadMore from "../LoadMore/LoadMore";
 import { MMediaItem } from "../MediaItem/MediaItem";
 
-import favoriteUtils from "../../../utils/FavoriteUrils";
+import favoriteUtils from "../../../utils/FavoriteUtils";
 import "./MediaList.scss";
 
 interface IMediaList {
@@ -103,8 +103,8 @@ const MediaList: FC<IMediaList> = ({
 									: null
 						)}
 						isFavorite={(
-							state.user.user && state.user.user.favorite && favoriteUtils.check({
-								listFavorites: state.user.user.favorite,
+							favoriteUtils.check({
+								listFavorites: state.user.user?.favorite,
 								mediaId: item.id.toString(),
 							})
 						)}

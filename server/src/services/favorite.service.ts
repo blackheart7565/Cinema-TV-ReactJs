@@ -2,11 +2,12 @@ import { Response } from "express";
 import responseHandler from "../handlers/response.handler";
 import favoriteModule from "../modules/favorite.model";
 import { IFavorite } from "../types/db-module/favorite.type";
+import { IObjectIdType } from "../types/db-module/user.types";
 import { IResponseDataType } from "../types/exceptions-types/exceptions";
 
 class FavoriteService {
 
-	async removeFavorite(res: Response, userId: any, favoriteId: any): Promise<void | Response<IResponseDataType, Record<string, any>>> {
+	async removeFavorite(res: Response, userId: IObjectIdType, favoriteId: any): Promise<void | Response<IResponseDataType, Record<string, any>>> {
 		const favorite = await favoriteModule.findOne({
 			_id: favoriteId,
 			userId,

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
 
 import { toast } from "react-toastify";
@@ -7,7 +7,7 @@ import privateAxios from "../../../api/client/private.client";
 import { useLoadingMotion } from "../../../hooks/motion.hook";
 import { useReducer } from "../../../hooks/reducer.hook";
 import { motionOption, variantMediaDetailsPanelOriginTitle, variantMediaDetailsPanelTitle, variantsMediaDetailsRatingNumber } from "../../../motion/details.motion";
-import favoriteUtils from "../../../utils/FavoriteUrils";
+import favoriteUtils from "../../../utils/FavoriteUtils";
 import TimeFormat from "../../../utils/TimeFormat";
 import Button from "../../UI/Button";
 import Rating from "../../model/Rating/Rating";
@@ -28,8 +28,8 @@ interface IMediaDetailsPanelProps {
 	voteCount?: number | undefined | null;
 	description?: string | undefined | null;
 
-	mediaType?: IMediaTypeEnums | undefined | null;
-	mediaId?: string | undefined | null;
+	mediaType?: IMediaTypeEnums | undefined;
+	mediaId?: string | undefined;
 
 	status?: string | undefined | null;
 	genres?: string[] | undefined | null;
@@ -57,7 +57,13 @@ const MediaDetailsPanel: FC<IMediaDetailsPanelProps> = ({
 	moveToVideoSectionRef,
 }) => {
 	const { state } = useReducer();
-	const [isFavorite, setIsFavorite] = useState<boolean>(false);
+
+	const favoriteCheck = favoriteUtils.check({
+		listFavorites: state.user.user?.favorite,
+		mediaId,
+	});
+	const [isFavorite, setIsFavorite] = useState<boolean>(favoriteCheck || false);
+
 	const propsMotionOption = useLoadingMotion({
 		isLoading: state.loader.isLoading,
 		isViewport: isViewport,
@@ -73,37 +79,8 @@ const MediaDetailsPanel: FC<IMediaDetailsPanelProps> = ({
 	}
 
 	const handleToggleFavorite = async (): Promise<void> => {
-		setIsFavorite(!isFavorite);
+		
 	}
-
-	const addFavorite = async () => {
-		if (state.user.user) {
-			await privateAxios.post(
-				"/favorite",
-				{
-					userId: state.user.user?.id,
-					mediaId,
-					mediaType,
-					mediaPosterPath: src,
-					mediaTitle: title,
-					mediaRating: rating,
-					mediaReleaseDate: released
-				}
-			);
-		}
-	}
-
-	useEffect(() => {
-		try {
-			if (isFavorite) {
-				addFavorite();
-			} else {
-
-			}
-		} catch (error: any) {
-			toast.error(error.response.data)
-		}
-	}, [isFavorite]);
 
 	return (
 		<>
@@ -125,6 +102,7 @@ const MediaDetailsPanel: FC<IMediaDetailsPanelProps> = ({
 					<motion.h3
 						custom={2.3}
 						{...propsMotionOption}
+
 						viewport={motionOption.viewport({
 							isOnce: isOnce,
 						})}
@@ -220,10 +198,7 @@ const MediaDetailsPanel: FC<IMediaDetailsPanelProps> = ({
 									className="media-details__btns-favorite"
 									onClick={handleToggleFavorite}
 								>
-									{state.user.user && state.user.user.favorite && mediaId && favoriteUtils.check({
-										listFavorites: state.user.user?.favorite,
-										mediaId,
-									})
+									{isFavorite
 										? (
 											<MdFavorite size={"30px"} color="#DA0027" />
 										)

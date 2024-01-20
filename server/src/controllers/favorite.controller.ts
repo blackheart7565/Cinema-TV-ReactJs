@@ -11,7 +11,7 @@ class FavoriteController {
 
 			const favoriteExist = await favoriteModel.findOne({ userId, mediaId });
 
-			if (favoriteExist) return responseHandler.ok(res, favoriteExist);
+			if (favoriteExist) return responseHandler.ok(res, "Already in favorites.");
 
 			const favorite = await favoriteModel.create({
 				userId,
@@ -23,7 +23,7 @@ class FavoriteController {
 				mediaReleaseDate,
 			});
 
-			return responseHandler.created(res, favorite);
+			return responseHandler.ok(res, "Successfully added to favorites!");
 		} catch (error) {
 			responseHandler.errors(res);
 		}
@@ -32,23 +32,12 @@ class FavoriteController {
 	async removeFavorite(req: Request, res: Response) {
 		try {
 			const { favoriteId } = req.params;
-			const { userId } = req.body;
 
-			favoriteService.removeFavorite(res, userId, favoriteId);
+			if (!req.users) return responseHandler.unauthorized(res);
 
-			return responseHandler.ok(res);
-		} catch (error) {
-			responseHandler.errors(res);
-		}
-	}
+			favoriteService.removeFavorite(res, req.users.id, favoriteId);
 
-	async getFavoriteToUser(req: Request, res: Response) {
-		try {
-			const { userId } = req.body;
-
-			const favorite = favoriteService.getFavoriteToUser(userId);
-
-			return responseHandler.ok(res, favorite);
+			return responseHandler.ok(res, "Successfully removed from favorites");
 		} catch (error) {
 			responseHandler.errors(res);
 		}

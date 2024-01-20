@@ -1,7 +1,8 @@
 
 export interface IFavorite {
-	userId: any;
-	mediaId: any;
+	id: number;
+	userId: number;
+	mediaId: number;
 	mediaType: string,
 	mediaPosterPath: string,
 	mediaTitle: string,
